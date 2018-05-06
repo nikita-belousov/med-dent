@@ -1,0 +1,40 @@
+@value primary from './../../libs/colors.css';
+
+.wrapper {
+  padding-top: 5em;
+}
+
+.top-bar {
+  height: 85px;
+  border: 3px solid primary;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  left: 30px;
+  top: -25px;
+  bottom: -25px;
+  width: 150px;
+  background: url(./../../../assets/images/logo.png) no-repeat;
+}
+
+.navigation {
+  position: relative;
+  top: -2px;
+  left: 150px;
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+    padding: 0 1.2em;
+    line-height: 0;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,63 @@
+@value light-grey, primary from './../libs/colors.css';
+@value border-radius-big from './../libs/effects.css';
+
+.feedback, .response {
+  border-radius: border-radius-big;
+  padding: 20px;
+  padding-right: 40px;
+
+  > p {
+    margin: 0;
+  }
+}
+
+.feedback {
+  background: light-grey;
+}
+
+.response {
+  margin-top: 20px;
+  color: #fff;
+  background: primary;
+  cursor: pointer;
+
+  > p {
+    padding-top: 20px;
+  }
+}
+
+.toggle-feedback {
+  display: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+@value triangle-size: 6px;
+.toggle-response {
+  position: relative;
+  text-indent: 16px;
+  font-weight: bold;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: triangle-size solid #fff;
+    border-bottom: triangle-size solid transparent;
+    border-top: triangle-size solid transparent;
+    transition: transform .2s ease-in-out;
+  }
+}
+
+.response--shown {
+  composes: response;
+  cursor: default;
+
+  .toggle-response::before {
+    transform: rotate(90deg);
+  }
+}

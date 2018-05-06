@@ -1,0 +1,119 @@
+@value light-grey-gradient, primary-gradient from './../../libs/colors.css';
+@value border-radius-big, shadow-primary from './../../libs/effects.css';
+
+.wrapper {
+  padding-top: 80px;
+}
+
+.bg {
+  background: light-grey-gradient;
+}
+
+.inner {
+  display: flex;
+  height: 520px;
+  overflow: hidden;
+}
+
+.about-us, .head-doctor {
+  width: 50%;
+}
+
+.about-us {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.p-heading h2 {
+  margin: 0;
+}
+
+.p-wrapper {
+  flex-grow: 1;
+  height: 100%;
+  padding-top: 40px;
+  width: 400px;
+  position: relative;
+  margin-bottom: -100px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(to bottom, transparent 0%, #2faacc 100%);
+  }
+}
+
+.p-background {
+  background: primary-gradient;
+  border-top-left-radius: border-radius-big;
+  border-top-right-radius: border-radius-big;
+  height: 100%;
+  padding: 9px;
+  box-shadow: shadow-primary;
+  padding-left: 0;
+}
+
+.p-inner {
+  overflow-y: scroll;
+  height: 100%;
+
+  p {
+    margin: 0;
+    padding: 1.2em 1.6em;
+    padding-bottom: 200px;
+    color: #fff;
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-track {
+  	border-radius: 10px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+  	border-radius: 10px;
+  	background-color: color(white a(40%));
+  }
+}
+
+.head-doctor {
+  height: 100%;
+  background-image: url(./../../../assets/images/head-doc.png);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  position: relative;
+
+  .label {
+    width: 300px;
+    text-align: center;
+    position: absolute;
+    right: 45px;
+    top: 30px;
+
+    &::after {
+      content: '';
+      margin-top: -16px;
+      display: block;
+      width:75px;
+      height: 75px;
+      background: url(./../../../assets/images/dec-arrow.png);
+      background-repeat: no-repeat;
+    }
+  }
+
+  .post {
+    background: primary-gradient;
+    display: inline-block;
+    padding: .2em .9em;
+    border-radius: 50vh;
+    color: #fff;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,9 @@
+@value grey from './colors.css';
+
+@value family: Helvetica, Arial, sans-serif;
+@value family-bold: Helvetica, Arial, sans-serif;
+
+.small-grey {
+  font-size: 10pt;
+  color: grey;
+}

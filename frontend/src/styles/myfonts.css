@@ -1,0 +1,30 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3521404, 2018-02-04T20:19:21-0500
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: HelveticaNeueWorld-55Roman by Linotype
+ * URL: https://www.myfonts.com/fonts/linotype/neue-helvetica-world/55-roman/
+ *
+ * Webfont: HelveticaNeueWorld-75Bold by Linotype
+ * URL: https://www.myfonts.com/fonts/linotype/neue-helvetica-world/75-bold/
+ *
+ *
+ * License: https://www.myfonts.com/viewlicense?type=web&buildid=3521404
+ * Licensed pageviews: 250,000
+ * Webfonts copyright: Copyright &#x00A9; 2017 Monotype Imaging Inc. All rights reserved.
+ *
+ * © 2018 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("/count/35bb7c");
+
+@font-face {font-family: 'HelveticaNeueWorld-55Roman';src: url('../assets/fonts/35BB7C_0_0.eot');src: url('../assets/fonts/35BB7C_0_0.eot?#iefix') format('embedded-opentype'),url('../assets/fonts/35BB7C_0_0.woff2') format('woff2'),url('../assets/fonts/35BB7C_0_0.woff') format('woff'),url('../assets/fonts/35BB7C_0_0.ttf') format('truetype');}
+@font-face {font-family: 'HelveticaNeueWorld-75Bold';src: url('../assets/fonts/35BB7C_1_0.eot');src: url('../assets/fonts/35BB7C_1_0.eot?#iefix') format('embedded-opentype'),url('../assets/fonts/35BB7C_1_0.woff2') format('woff2'),url('../assets/fonts/35BB7C_1_0.woff') format('woff'),url('../assets/fonts/35BB7C_1_0.ttf') format('truetype');}

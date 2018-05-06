@@ -1,0 +1,67 @@
+@value border-radius-big from './../../libs/effects.css';
+
+.wrapper {
+  padding: 40px 0 20px;
+  display: block;
+}
+
+@value height: 56px;
+.footer {
+  height: height;
+  background: linear-gradient(to bottom, #c6c6c6, #9e9e9e);
+  border-radius: border-radius-big;
+}
+
+.inner {
+  display: flex;
+  padding: 0 40px;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-right: 2em;
+    line-height: height;
+    position: relative;
+    top: -1px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+      font-weight: normal;
+    }
+  }
+}
+
+.socials {
+
+  > a {
+    line-height: height;
+    margin-right: 20px;
+    border: 0;
+    font-size: 2em;
+    opacity: .7;
+    transition: opacity .2s ease-out;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.copyright {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 11pt;
+}

@@ -1,0 +1,36 @@
+@value primary from './libs/colors.css';
+@value family from './libs/typography.css';
+
+* {
+  box-sizing: border-box;
+  min-height: 0;
+  min-width: 0;
+}
+
+body {
+  font-family: family;
+  font-size: 12pt;
+  line-height: 1.6;
+  position: relative;
+}
+
+p {
+  line-height: 1.8;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'fira-sans', Helvetica, sans-serif;
+}
+
+h2 {
+  font-size: 29pt;
+}
+
+h3 {
+  font-size: 21pt;
+}
+
+h4 {
+  font-size: 14pt;
+  margin-bottom: .4em;
+}

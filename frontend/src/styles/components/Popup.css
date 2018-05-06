@@ -1,0 +1,23 @@
+@value alt-gradient from './../libs/colors.css';
+@value shadow-primary from './../libs/effects.css';
+
+.popup {
+  border-radius: 10px;
+  background: alt-gradient;
+  width: 100%;
+  color: #fff;
+  position: relative;
+  z-index: 9999;
+  box-shadow: shadow-primary;
+}
+
+.inner {
+  padding: 15px;
+
+  button {
+    position: relative;
+    top: 15px;
+    left: -15px;
+    width: calc(100% + 30px);
+  }
+}

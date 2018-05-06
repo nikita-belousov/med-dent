@@ -1,0 +1,16 @@
+.caption {
+  margin-top: -32px;
+  display: flex;
+}
+
+.views {
+  margin-left: 25px;
+}
+
+.eye-icon {
+  padding-right: 6px;
+}
+
+.text {
+  padding-top: 32px;
+}

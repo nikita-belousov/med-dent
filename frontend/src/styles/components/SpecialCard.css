@@ -1,0 +1,88 @@
+.wrapper {
+  display: flex;
+
+  &:last-child .card {
+    margin-right: 0;
+  }
+
+  > a {
+    border: 0;
+    text-decoration: 0;
+    font-weight: normal;
+  }
+}
+
+.card {
+  width: 256px;
+  height: 350px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: auto, 140% auto;
+  background-position: center, top center;
+  transition: background-size .2s ease-out;
+  color: #fff;
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: rgba(0,0,0, .2);
+  opacity: 0;
+  transition: opacity .1s ease-in-out;
+}
+
+.card:hover {
+  background-size: auto, 150% auto;
+
+  &::before {
+    opacity: 1;
+  }
+}
+
+.inner {
+  padding: 20px;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.card--big {
+  composes: card;
+  width: 500px;
+
+  .inner {
+    padding-right: 260px;
+    justify-content: flex-start;
+  }
+}
+
+.caption {
+  font-size: 16pt;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: .4em;
+}
+
+.description {
+
+  > * {
+    margin: 0;
+  }
+}
+
+.more {
+  flex-grow: 1;
+  position: relative;
+
+  a {
+    position: absolute;
+    bottom: 0;
+  }
+}

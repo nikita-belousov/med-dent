@@ -1,0 +1,7 @@
+node_modules/
+build/
+*.log
+
+db.json
+secretKey.json
+smpt.json

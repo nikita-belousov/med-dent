@@ -1,0 +1,143 @@
+@value secondary from './../libs/colors.css';
+@value primary-gradient from './../libs/colors.css';
+@value alt-gradient from './../libs/colors.css';
+@value shadow-primary from './../libs/effects.css';
+
+.wrapper  {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: 99999;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wrapper-main, .wrapper-call {
+  position: fixed;
+}
+
+.wrapper-main {
+  width: 260px;
+}
+
+.wrapper-call {
+
+  > * {
+    position: relative;
+    top: 20px;
+    right: 280px;
+  }
+}
+
+.floating-section--collapsed .nav-arrow {
+  background: url(../../assets/images/nav-elements/nav-arrow-down.png) no-repeat center center;
+}
+
+.floating-section {
+  margin-top: 0;
+  background: primary-gradient;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  box-shadow: shadow-primary;
+  color: #fff;
+  transition: margin-top ease-out .4s;
+}
+
+.floating-section--collapsed {
+  composes: floating-section;
+
+  margin-top: -220px;
+}
+
+.container {
+  padding: 1em;
+}
+
+.calling {
+  text-align: center;
+}
+
+.phone-number {
+  font-family: 'fira-sans', Helvetica, sans-serif;
+  font-size: 16pt;
+  font-weight: 800;
+}
+
+.callback {
+  font-weight: 600;
+  border-bottom: 1px dashed rgba(255,255,255,.5);
+  display: inline-block;
+  cursor: pointer;
+  transition: border-bottom ease-in-out .2s;
+
+  &:hover {
+    border-bottom: 1px dashed #fff;
+  }
+}
+
+.callback--active {
+  composes: callback;
+  transition: none;
+  cursor: default;
+
+  border-bottom-color: transparent;
+  color: secondary;
+
+  &:hover {
+    border-bottom-color: transparent;
+  }
+}
+
+.middle-section {
+  background: alt-gradient;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.address, .schedule {
+  display: flex;
+
+  p {
+    margin: 0;
+  }
+}
+
+.address {
+  padding-bottom: 1em;
+  border-bottom: 1px solid rgba(255,255,255,.6);
+}
+
+.schedule {
+  padding-top: 1em;
+}
+
+.address-icon, .schedule-icon {
+  width: 14px;
+  height: 14px;
+  display: block;
+  margin: .2em .4em 0 0;
+}
+
+.address-icon {
+  background: url(../../assets/images/icons/marker.png) no-repeat center center;
+}
+
+.schedule-icon {
+  background: url(../../assets/images/icons/clock.png) no-repeat center center;
+}
+
+.btn-wrapper {
+  padding-top: .6em;
+}
+
+.registration-btn {
+  width: 100%;
+}
+
+.nav-arrow {
+  width: 100%;
+  height: 25px;
+  cursor: pointer;
+  position: relative;
+  top: 6px;
+  background: url(../../assets/images/nav-elements/nav-arrow-up.png) no-repeat center center;
+}

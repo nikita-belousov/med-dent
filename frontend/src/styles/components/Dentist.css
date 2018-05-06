@@ -1,0 +1,55 @@
+.dentist {
+  margin-bottom: 50px;
+  display: flex;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.aside {
+  width: 162px;
+  margin-right: 25px;
+}
+
+.content {
+  width: 520px;
+}
+
+.photo {
+  width: 162px;
+  height: 162px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  border-radius: 100vh;
+}
+
+.name {
+  font-size: 18pt;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.positions-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 7px;
+}
+
+.label-wrapper {
+  margin: 5px 12px 5px 0;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.experience {
+  font-style: italic;
+  font-size: 11pt;
+}
+
+.description {
+  margin-top: 30px;
+}

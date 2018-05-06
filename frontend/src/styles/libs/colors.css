@@ -1,0 +1,13 @@
+@value primary: #2ac4ff;
+@value secondary: #ffba00;
+@value grey: #c1c1c1;
+@value light-grey: #eaf2ed;
+@value alt-bg: #4d8b9a;
+@value success: #5ef24b;
+@value yellow: #ffba00;
+
+@value primary-gradient: linear-gradient(to bottom, #6acfea 0%,#2faacc 100%);
+@value alt-gradient: linear-gradient(#2f9fbd 0%,#257288 100%);
+@value alt-reversed: linear-gradient(to top, #2f9fbd 0%,#257288 100%);
+@value light-grey-gradient: linear-gradient(to bottom, #f8f6ee 0%,#c1c6c1 100%);
+@value special-card-gradient: linear-gradient(to bottom, rgba(125,185,232,0) 0%,rgba(79,191,245,1) 56%,rgba(42,196,255,1) 100%);

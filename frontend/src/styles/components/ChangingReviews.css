@@ -1,0 +1,61 @@
+@value alt-bg, light-grey, primary from './../libs/colors.css';
+@value border-radius-small, shadow-primary, shadow-big from './../libs/effects.css';
+
+.wrapper-full {
+  &::before {
+    content: '';
+    background-color: rgba(0,0,0,.8);
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+@value triangle-size: 15px;
+.review-bg {
+  width: 440px;
+  border-radius: border-radius-small;
+  background: primary;
+  padding: 1.2em 2.2em 1.2em 1.6em;
+  position: relative;
+  margin-bottom: 1.2em;
+  transition: height .2s ease-out;
+
+  &::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: triangle-size solid transparent;
+    border-right: triangle-size solid transparent;
+    border-top: triangle-size solid primary;
+    position: absolute;
+    bottom: -1 * triangle-size;
+    left: 50%;
+    margin-left: triangle-size * -0.5;
+  }
+
+  p {
+    margin-top: 0;
+  }
+}
+
+.author {
+  width: 100%;
+  text-align: center;
+  position: relative;
+
+  .name {
+    font-weight: 600;
+    font-size: 13pt;
+  }
+
+  .rating {
+    position: relative;
+    top: -2px;
+  }
+}
+
+.more-link {
+  text-align: center;
+}

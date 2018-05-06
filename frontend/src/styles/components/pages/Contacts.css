@@ -1,0 +1,34 @@
+.method {
+  margin-bottom: 45px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.method {
+
+  .capture {
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .phones, .email, .address, .time {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  .schedule .addition > * {
+    margin: 0;
+  }
+}
+
+.map-frame {
+
+  iframe {
+    width: 100%;
+    height: 540px;
+    border: 0;
+  }
+}
