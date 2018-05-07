@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import validate from 'validate.js'
 import utils from 'utils'
 import _ from 'lodash'
+import { Appointment as api } from '../agent'
 import styles from './../styles/components/AppointmentModal.css'
 
 import Form from './containers/Form'
@@ -62,19 +63,14 @@ class AppointmentModal extends Component {
     this.props.onUnload()
   }
 
-  onFormSubmit = ({ name, phone, problem, doctor }) => {
-    const emailData = {
-      name: _.capitalize(name),
-      phone,
-      problem,
-      doctor: doctor || 'не указано'
-    }
-
-    this.userName = name
+  onFormSubmit = data => {
+    this.userName = data.name
 
     setTimeout(() =>
       this.setState({ contentState: 'success' })
     , LOADING_TIME)
+
+    api.register(data)
   }
 
   toSelectOptions(data) {

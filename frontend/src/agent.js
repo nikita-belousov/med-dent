@@ -91,6 +91,11 @@ export const Services = {
     requests.get(`/services/?category=${id}&_sort=order`)
 }
 
+export const Appointment = {
+  register: data =>
+    requests.post('/appointment/register', data)
+}
+
 export default {
   Reviews,
   Staff,
@@ -98,5 +103,6 @@ export default {
   News,
   Specials,
   ServiceCategories,
-  Services
+  Services,
+  Appointment
 }
