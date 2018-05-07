@@ -4,4 +4,4 @@ build/
 
 db.json
 secretKey.json
-smpt.json
+smtp.json

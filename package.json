@@ -6,7 +6,8 @@
   "scripts": {
     "start": "concurrently \"yarn run server\" \"yarn run frontend\"",
     "server": "node server.js",
-    "frontend": "node scripts/start-frontend.js"
+    "frontend": "node scripts/start-frontend.js",
+    "build": "node scripts/build-frontend.js"
   },
   "dependencies": {
     "body-parser": "1.15.0",

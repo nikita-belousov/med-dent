@@ -90,13 +90,11 @@ class ChangingReviews extends Component {
   renderText(text) {
     const { maxChars } = this.props
 
-    const words = _.words(text)
-
-    if (words.length > maxChars && !this.state.fullMode) {
+    if (text.length > maxChars && !this.state.fullMode) {
       return (
         <div>
           <Paragraph>
-            {_.trucate(words, {
+            {_.truncate(text, {
               length: maxChars,
               separator: ' '
             })}
