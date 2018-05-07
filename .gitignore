@@ -1,7 +1,5 @@
+*.log
 node_modules/
 build/
-*.log
-
+/config
 db.json
-secretKey.json
-smtp.json

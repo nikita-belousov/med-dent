@@ -83,37 +83,12 @@
   }
 }
 
-.head-doctor {
+.picture {
   height: 100%;
-  background-image: url(./../../../assets/images/head-doc.png);
+  width: 600px;
+  background-image: url(./../../../assets/images/smiling-girl.png);
   background-repeat: no-repeat;
+  background-size: auto 100%;
   background-position: bottom left;
   position: relative;
-
-  .label {
-    width: 300px;
-    text-align: center;
-    position: absolute;
-    right: 45px;
-    top: 30px;
-
-    &::after {
-      content: '';
-      margin-top: -16px;
-      display: block;
-      width:75px;
-      height: 75px;
-      background: url(./../../../assets/images/dec-arrow.png);
-      background-repeat: no-repeat;
-    }
-  }
-
-  .post {
-    background: primary-gradient;
-    display: inline-block;
-    padding: .2em .9em;
-    border-radius: 50vh;
-    color: #fff;
-    font-weight: 600;
-  }
 }

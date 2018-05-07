@@ -40,16 +40,7 @@ const About = (props) => (
               </div>
             </div>
           </div>
-          <div className={styles['head-doctor']}>
-            <div className={styles['label']}>
-              <div className={styles['name']}>
-                <h4>Юров Руслан Викторович</h4>
-              </div>
-                <PositionLabel>
-                  главный врач
-                </PositionLabel>
-            </div>
-          </div>
+          <div className={styles['picture']}></div>
         </div>
       </Container>
     </div>
