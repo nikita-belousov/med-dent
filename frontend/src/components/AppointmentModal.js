@@ -32,7 +32,8 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const LOADING_TIME = 2500
-const SUCCESS_TEXT = 'Спасибо, %username%! Через несколько минут с вами свяжется администратор клиники для уточнения деталей приема.'
+const SUCCESS_TEXT = `Спасибо, %username%! Через несколько минут с вами
+  свяжется администратор клиники для уточнения деталей приема.`
 
 class AppointmentModal extends Component {
   static propTypes = {
@@ -69,10 +70,6 @@ class AppointmentModal extends Component {
       doctor: doctor || 'не указано'
     }
 
-    // emailjs
-    //   .send(process.env.REACT_APP_MAIL_SERVICE, '_appointment', emailData)
-    //   .catch(console.log)
-
     this.userName = name
 
     setTimeout(() =>
@@ -108,14 +105,14 @@ class AppointmentModal extends Component {
     )
   }
 
-  renderForm() {
+  renderForm = () => {
     return (
       <div className={styles['form']}>
         <div className={styles['input-group']}>
           <div className={styles['input-row']}>
             <div className={styles['label']}>
               <div className={styles['label-text']}>
-                Имя
+                * Имя
               </div>
             </div>
             <div className={styles['field']}>
@@ -127,7 +124,7 @@ class AppointmentModal extends Component {
           <div className={styles['input-row']}>
             <div className={styles['label']}>
               <div className={styles['label-text']}>
-                Номер телефона
+                * Номер телефона
               </div>
             </div>
             <div className={styles['field']}>
@@ -147,23 +144,20 @@ class AppointmentModal extends Component {
             <div className={styles['label-text']}>
               Врач
             </div>
-            <div className={styles['label-caption']}>
-              опционально
-            </div>
           </div>
           <div className={styles['field']}>
             <div className={styles['tiny-wrapper']}>
-              {/* <Select
+              <Select
                 name='doctor'
                 options={this.toSelectOptions(this.props.staff)}
-              /> */}
+              />
             </div>
           </div>
         </div>
         <div className={styles['input-row']}>
           <div className={styles['label']}>
             <div className={styles['label-text']}>
-              Опишите в чем состоит ваша проблема
+              * Опишите вашу проблему
             </div>
           </div>
           <div className={styles['field']}>
@@ -174,6 +168,9 @@ class AppointmentModal extends Component {
             />
           </div>
         </div>
+        <p className={styles['note']}>
+          * — обязательно для заполнения
+        </p>
       </div>
     )
   }
@@ -182,9 +179,9 @@ class AppointmentModal extends Component {
     const { staff, onClose } = this.props
     const { contentState } = this.state
 
-    // if (!staff || staff.length === 0) {
-    //   return null
-    // }
+    if (!staff || staff.length === 0) {
+      return null
+    }
 
     const constraints = {
       name: {

@@ -1,5 +1,4 @@
 .form {
-
   .input-group {
     padding-bottom: 52px;
 
@@ -24,8 +23,6 @@
     font-size: 11pt;
     line-height: 1.4;
     position: relative;
-    /* align-items: center; */
-    /* top: -4px; */
 
     .label-caption {
       font-style: italic;
@@ -42,14 +39,16 @@
   }
 }
 
+.note {
+  font-size: 10pt;
+  text-align: center;
+}
+
 .footer-wrapper {
   display: flex;
   justify-content: center;
 }
 
-.success-text {
-  
-  > * {
+.success-text > * {
     margin: 0;
-  }
 }
