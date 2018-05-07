@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Route, Redirect } from 'react-router-dom'
+
 import ReviewsPage from './../pages/ReviewsPage'
 import Review from './../Review'
 import { Pagination } from './../pagination'
 import { Reviews as api } from './../../agent'
 
 const Reviews = () => (
-  <div>
+  <Fragment>
     <Route
       exact
       path='/reviews'
@@ -25,7 +26,7 @@ const Reviews = () => (
           />
         </ReviewsPage>}
     />
-  </div>
+  </Fragment>
 )
 
 export default Reviews

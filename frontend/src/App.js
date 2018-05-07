@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import agent from './agent'
 
 import 'normalize-css'
 import './styles/global.css'
@@ -49,29 +50,93 @@ class App extends Component {
     return (
       <Switch>
         <Route
-          exact path='/'
+          exact
+          path='/'
           component={pages.HomePage}
         />
         <Route
-          exact path='/about-us'
+          exact
+          path='/about-us'
           component={pages.AboutUsPage}
         />
         <Route
-          exact path='/pricelist'
+          exact
+          path='/pricelist'
           component={pages.PricelistPage}
         />
         <Route
-          exact path='/contacts'
+          exact
+          path='/contacts'
           component={pages.Contacts}
         />
 
-        <routes.Specials />
-        <routes.News />
-        <routes.Reviews />
-        <routes.Questions />
-        <routes.Staff />
+        <Route
+          path='/reviews'
+          component={routes.Reviews}
+        />
+        <Route
+          path='/questions'
+          component={routes.Questions}
+        />
+        <Route
+          path='/staff'
+          component={routes.Staff}
+        />
 
-        <routes.ServiceCategories />
+        <Route
+          path='/news'
+          render={() =>
+            <routes.Articles
+              path='news'
+              api={agent.News}
+              title='Новости'
+            />}
+        />
+        <Route
+          path='/specials'
+          render={() =>
+            <routes.Articles
+              path='specials'
+              api={agent.Specials}
+              title='Акции'
+            />}
+        />
+
+        <Route
+          exact
+          path='/implantaciya'
+          component={pages.Implantology}
+        />
+        <Route
+          exact
+          path='/ortopediya'
+          component={pages.Orthopedics}
+        />
+        <Route
+          exact
+          path='/terapiya'
+          component={pages.Therapy}
+        />
+        <Route
+          exact
+          path='/gigiena'
+          component={pages.Hygiene}
+        />
+        <Route
+          exact
+          path='/ortodontiya'
+          component={pages.Orthodontics}
+        />
+        <Route
+          exact
+          path='/hirurgiya'
+          component={pages.Surgery}
+        />
+        <Route
+          exact
+          path='/detskaya-stomatologiya'
+          component={pages.ChildStomatology}
+        />
 
         <Route component={pages.NotFound} />
       </Switch>

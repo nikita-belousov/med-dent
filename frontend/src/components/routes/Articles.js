@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { Fragment }  from 'react'
 import { Route, Redirect } from 'react-router-dom'
+
 import { NarrowPage } from './../pages'
 import ArticlePage from './../pages/ArticlePage'
 import { Pagination } from './../pagination'
 import { Preview } from './../article'
 
 const Articles = ({ path, title, api }) => (
-  <div>
+  <Fragment>
     <Route
       exact
       path={`/${path}`}
@@ -31,13 +32,14 @@ const Articles = ({ path, title, api }) => (
             api={api}
             path={path}
             itemComponent={Preview}
+
             pageToShow={parseInt(match.params.num)}
             sort='datePublished'
           />
         </NarrowPage>
       }
     />
-  </div>
+  </Fragment>
 )
 
 export default Articles
