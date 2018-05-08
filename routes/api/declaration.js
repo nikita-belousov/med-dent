@@ -4,8 +4,6 @@ const passport = require('./../passport')
 const notification = require('./../../emails/notification')
 const { formatPhoneInternational } = require('./../../utils')
 
-console.log(formatPhoneInternational('+7 (977) 295-71-27'))
-
 const questionsApi = createApi(
   mongoose.model('Question'),
   [
@@ -235,6 +233,7 @@ const appointment = createApi(
   mongoose.model('Appointment'),
   {
     method: 'post',
+    createDoc: false,
     send: (req, res, next) =>
       notification.send({
         template: 'templates/appointment',
