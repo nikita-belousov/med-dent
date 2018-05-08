@@ -13,6 +13,10 @@ div(class='container')
   div(class='box') 
     a(href=`tel:${internationalPhone}`) #{phone}
   
+  if dentist
+    div(class='label') Врач 
+    div(class='box') #{dentist}
+  
   if email
     div(class='label') E-mail 
     div(class='box')
