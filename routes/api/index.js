@@ -11,9 +11,6 @@ router.use('/services', apis.servicesApi)
 router.use('/users', apis.usersApi)
 router.use('/appointment', apis.appointment)
 
-// TODO: remove
-router.use('/check_site', require('./checkSite'))
-
 router.use((err, req, res, next) => {
   if (err.name === 'ValidationError') {
     return res.status(422).json({
