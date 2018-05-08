@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 const createApi = require('./createApi')
 const passport = require('./../passport')
+const notification = require('./../../emails/notification')
+const { formatPhoneInternational } = require('./../../utils')
+
+console.log(formatPhoneInternational('+7 (977) 295-71-27'))
 
 const questionsApi = createApi(
   mongoose.model('Question'),
@@ -227,17 +231,35 @@ const usersApi = createApi(
   ]
 )
 
-const notification = require('./../../emails/notification')
-
 const appointment = createApi(
   mongoose.model('Appointment'),
   {
     method: 'post',
-    beforeSave: body =>
+    send: (req, res, next) =>
       notification.send({
         template: 'templates/appointment',
-        message: { to: 'med-dent.dom@mail.ru' },
-        locals: { ...body }
+        message: { to: 'seriouscat1001@gmail.com' },
+        locals: {
+          ...req.body,
+          internationalPhone: formatPhoneInternational(req.body.phone)
+        }
+      })
+  }
+)
+
+const countCost = createApi(
+  null,
+  {
+    method: 'post',
+    createDoc: false,
+    send: (req, res, next) =>
+      notification.send({
+        template: 'templates/countCost',
+        message: { to: 'seriouscat1001@gmail.com' },
+        locals: {
+          ...req.body,
+          internationalPhone: formatPhoneInternational(req.body.phone)
+        }
       })
   }
 )
@@ -251,5 +273,6 @@ module.exports = {
   servicesApi,
   staffApi,
   usersApi,
-  appointment
+  appointment,
+  countCost
 }

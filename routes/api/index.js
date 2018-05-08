@@ -10,6 +10,7 @@ router.use('/service_categories', apis.serviceCategoriesApi)
 router.use('/services', apis.servicesApi)
 router.use('/users', apis.usersApi)
 router.use('/appointment', apis.appointment)
+router.use('/count_cost', apis.countCost)
 
 router.use((err, req, res, next) => {
   if (err.name === 'ValidationError') {

@@ -10,7 +10,7 @@ const notification = new Email({
   juiceResources: {
     preserveImportant: true,
     webResources: {
-      relativeTo: path.resolve('emails/templates/appointment')
+      relativeTo: path.resolve('emails/templates')
     }
   }
 })
