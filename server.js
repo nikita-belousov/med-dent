@@ -11,6 +11,7 @@ require('./models/Service')
 require('./models/Question')
 require('./models/User')
 require('./models/Role')
+require('./models/Appointment')
 
 const app = require('./utils/createApp')()
 

@@ -9,6 +9,7 @@ router.use('/questions', apis.questionsApi)
 router.use('/service_categories', apis.serviceCategoriesApi)
 router.use('/services', apis.servicesApi)
 router.use('/users', apis.usersApi)
+router.use('/appointment', apis.appointment)
 
 router.use('/check_site', require('./checkSite'))
 router.use('/mail/appointment', require('./appointment'))
