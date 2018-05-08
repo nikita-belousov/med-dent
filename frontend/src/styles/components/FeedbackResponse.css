@@ -21,6 +21,10 @@
   background: primary;
   cursor: pointer;
 
+  &:hover {
+    background: color(#2ac4ff shade(10%));
+  }
+
   > p {
     padding-top: 20px;
   }
@@ -56,6 +60,10 @@
 .response--shown {
   composes: response;
   cursor: default;
+
+  &:hover {
+    background: primary;
+  }
 
   .toggle-response::before {
     transform: rotate(90deg);

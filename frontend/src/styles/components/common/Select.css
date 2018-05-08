@@ -25,6 +25,10 @@
   position: relative;
   cursor: pointer;
 
+  &:hover {
+    background: color(#2ac4ff shade(10%));
+  }
+
   .current-name {
     white-space: nowrap;
     overflow: hidden;
