@@ -12,12 +12,6 @@
   .angle-wrapper > * {
     transform: rotate(180deg);
   }
-
-  /* .options-list {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-  } */
 }
 
 .current, .options-list {
@@ -54,7 +48,7 @@
 .options-list {
   /* width: 100%; */
   position: absolute;
-  top: 60%;
+  top: 53%;
   margin-bottom: 40px;
   z-index: 10000;
   background: #fff;

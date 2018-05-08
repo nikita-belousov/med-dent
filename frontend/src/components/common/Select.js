@@ -13,13 +13,6 @@ class Select extends Component {
     current: null
   }
 
-  componentDidMount() {
-    this.setState(prev => ({
-      ...prev,
-      current: this.props.options[0].value
-    }))
-  }
-
   componentWillReceiveProps(nextProps) {
     this.setState(prev => ({
       ...prev,
@@ -41,13 +34,13 @@ class Select extends Component {
     }))
   }
 
-  changeCurrent = (value) => {
-    const e = {}
-    e.target = {
-      name: this.props.name,
-      value: value
-    }
-    this.props.onChange(e)
+  changeCurrent = value => {
+    this.props.onChange({
+      target: {
+        name: this.props.name,
+        value: value
+      }
+    })
   }
 
   handleOptionClick = (e, value) => {
@@ -58,6 +51,10 @@ class Select extends Component {
   }
 
   renderOptions(options) {
+    if (!options || options.length === 0) {
+      return null
+    }
+
     return (
       <AppearAnimation>
         <div className={styles['options-list']}>
@@ -79,16 +76,15 @@ class Select extends Component {
   }
 
   render() {
-    const { options } = this.props
+    const { options, placeholder } = this.props
     const { current, selecting } = this.state
 
     let currentName
-
     if (current) {
       currentName = options
         .find(option => option.value === current)
         .name
-    } else currentName = options[0].name
+    } else currentName = placeholder || 'Выберите из списка...'
 
     return (
       <div className={styles['select' + (selecting ? '--selecting' : '')]}>
@@ -103,7 +99,7 @@ class Select extends Component {
             <FontAwesome name='angle-down' />
           </div>
         </div>
-        {this.state.selecting && this.renderOptions(options)}
+        {selecting && this.renderOptions(options)}
       </div>
     )
   }

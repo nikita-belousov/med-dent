@@ -102,6 +102,8 @@ class AppointmentModal extends Component {
   }
 
   renderForm = () => {
+    const { staff } = this.props
+
     return (
       <div className={styles['form']}>
         <div className={styles['input-group']}>
@@ -144,8 +146,8 @@ class AppointmentModal extends Component {
           <div className={styles['field']}>
             <div className={styles['tiny-wrapper']}>
               <Select
-                name='doctor'
-                options={this.toSelectOptions(this.props.staff)}
+                name='dentist'
+                options={staff && this.toSelectOptions(staff)}
               />
             </div>
           </div>
@@ -174,10 +176,6 @@ class AppointmentModal extends Component {
   render() {
     const { staff, onClose } = this.props
     const { contentState } = this.state
-
-    if (!staff || staff.length === 0) {
-      return null
-    }
 
     const constraints = {
       name: {
