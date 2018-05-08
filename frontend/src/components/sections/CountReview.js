@@ -10,13 +10,14 @@ import Container from './../Container'
 import CallbackPopup from './../CallbackPopup'
 import ChangingReviews from './../ChangingReviews'
 
-class CountReview extends Component {
-  state = {
-    callbackForm: false
-  }
+import { countCost as api } from './../../agent'
 
-  onCountFormSubmit = (data) => {
+class CountReview extends Component {
+  state = { callbackForm: false }
+
+  onCountFormSubmit = data => {
     this.problemValue = data.problem
+
     this.setState(prev => ({
       ...prev,
       callbackForm: true
@@ -42,18 +43,11 @@ class CountReview extends Component {
     }))
   }
 
-  onCallbackSubmit = (data) => {
-    // emailjs.send(
-    //   process.env.REACT_APP_MAIL_SERVICE,
-    //   '_count_price',
-    //   {
-    //     problem: this.problemValue,
-    //     name: _.capitalize(data.name),
-    //     phone: data.phone
-    //   }
-    // )
-    // .then(console.log)
-    // .catch(console.log)
+  onCallbackSubmit = data => {
+    api.post({
+      ...data,
+      problem: this.problemValue
+    })
   }
 
   renderPopupForm() {

@@ -92,8 +92,13 @@ export const Services = {
 }
 
 export const Appointment = {
-  register: data =>
+  post: data =>
     requests.post('/appointment', data)
+}
+
+export const countCost = {
+  post: data =>
+    requests.post('/count_cost', data)
 }
 
 export default {
@@ -104,5 +109,6 @@ export default {
   Specials,
   ServiceCategories,
   Services,
-  Appointment
+  Appointment,
+  countCost
 }

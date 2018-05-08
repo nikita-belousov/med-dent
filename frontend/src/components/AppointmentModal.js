@@ -70,7 +70,7 @@ class AppointmentModal extends Component {
       this.setState({ contentState: 'success' })
     , LOADING_TIME)
 
-    api.register(data)
+    api.post(data)
   }
 
   toSelectOptions(data) {
