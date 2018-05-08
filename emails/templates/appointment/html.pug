@@ -1,0 +1,20 @@
+link(rel="stylesheet", href="styles.css", data-inline)
+
+div(class='container')
+  div(class='header')
+    div(class='logo')
+      img(src='https://doc-10-5g-docs.googleusercontent.com/docs/securesc/t0njomst5vu7sjbkfa8mi2nsbt7oebm2/qrb1du68vb4gk13nm7qvq2b97u529a10/1525780800000/04240043993807153077/04240043993807153077/1CN6LkmCAoOy-CIgeTPt6f1L42b6t2DsX?e=view&nonce=6s40vdcgd492u&user=04240043993807153077&hash=no14kh47c7gald2u6v9uc3g1apv9qnbt')
+    p(class='heading') Запись на прием
+      
+  div(class='label') Имя 
+  div(class='box') #{name}
+
+  div(class='label') Телефон 
+  div(class='box') #{phone}
+  
+  if email
+    div(class='label') E-mail 
+    div(class='box') #{email}
+
+  div(class='label') Проблема 
+  div(class='box') #{problem}

@@ -227,6 +227,21 @@ const usersApi = createApi(
   ]
 )
 
+const notification = require('./../../emails/notification')
+
+const appointment = createApi(
+  mongoose.model('Appointment'),
+  {
+    method: 'post',
+    beforeSave: body =>
+      notification.send({
+        template: 'templates/appointment',
+        message: { to: 'med-dent.dom@mail.ru' },
+        locals: { ...body }
+      })
+  }
+)
+
 module.exports = {
   questionsApi,
   reviewsApi,
@@ -235,5 +250,6 @@ module.exports = {
   serviceCategoriesApi,
   servicesApi,
   staffApi,
-  usersApi
+  usersApi,
+  appointment
 }

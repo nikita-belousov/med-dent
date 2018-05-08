@@ -93,7 +93,7 @@ export const Services = {
 
 export const Appointment = {
   register: data =>
-    requests.post('/appointment/register', data)
+    requests.post('/appointment', data)
 }
 
 export default {

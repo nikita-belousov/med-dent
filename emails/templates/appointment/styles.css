@@ -1,0 +1,36 @@
+p {
+  margin: 0;
+}
+
+.container {
+  padding-bottom: 25px;
+  width: 400px;
+  margin: auto;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.logo {
+  text-align: center;
+}
+
+.heading {
+  text-align: center;
+  margin: 10px 0 60px 0;
+  font-weight: normal;
+  color: #000;
+}
+
+.label {
+  margin: 20px 0 6px 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+}
+
+.box {
+  background: #eaeaea;
+  padding: 12px 20px;
+  border-radius: 6px;
+  color: #000;
+}
