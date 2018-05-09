@@ -4,7 +4,7 @@ const passport = require('./../passport')
 const notification = require('./../../emails/notification')
 const { formatPhoneInternational } = require('./../../utils')
 
-const questionsApi = createApi(
+const questions = createApi(
   mongoose.model('Question'),
   [
     {
@@ -36,7 +36,7 @@ const questionsApi = createApi(
   ]
 )
 
-const reviewsApi = createApi(
+const reviews= createApi(
   mongoose.model('Review'),
   [
     {
@@ -63,7 +63,7 @@ const reviewsApi = createApi(
   ]
 )
 
-const newsApi = createApi(
+const news = createApi(
   require('./../../models/NewsEntity'),
   [
     {
@@ -90,7 +90,7 @@ const newsApi = createApi(
   true
 )
 
-const specialsApi = createApi(
+const specials = createApi(
   require('./../../models/Special'),
   [
     {
@@ -125,7 +125,7 @@ const specialsApi = createApi(
   true
 )
 
-const serviceCategoriesApi = createApi(
+const serviceCategories = createApi(
   mongoose.model('ServiceCategory'),
   [
     'get',
@@ -144,7 +144,7 @@ const serviceCategoriesApi = createApi(
   ]
 )
 
-const servicesApi = createApi(
+const services = createApi(
   mongoose.model('Service'),
   [
     {
@@ -166,7 +166,7 @@ const servicesApi = createApi(
   ]
 )
 
-const staffApi = createApi(
+const staff = createApi(
   mongoose.model('Dentist'),
   [
     {
@@ -196,7 +196,7 @@ const staffApi = createApi(
   ]
 )
 
-const usersApi = createApi(
+const users = createApi(
   mongoose.model('User'),
   [
     {
@@ -299,14 +299,15 @@ const callback = createApi(
 )
 
 module.exports = {
-  questionsApi,
-  reviewsApi,
-  newsApi,
-  specialsApi,
-  serviceCategoriesApi,
-  servicesApi,
-  staffApi,
-  usersApi,
+  questions,
+  reviews,
+  news,
+  specials,
+  serviceCategories,
+  services,
+  staff,
+  users,
   appointment,
-  countCost
+  countCost,
+  callback
 }
