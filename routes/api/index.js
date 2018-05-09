@@ -11,6 +11,7 @@ router.use('/services', apis.servicesApi)
 router.use('/users', apis.usersApi)
 router.use('/appointment', apis.appointment)
 router.use('/count_cost', apis.countCost)
+router.use('/callback', apis.callback)
 
 router.use((err, req, res, next) => {
   if (err.name === 'ValidationError') {

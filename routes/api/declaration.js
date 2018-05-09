@@ -281,6 +281,23 @@ const countCost = createApi(
   }
 )
 
+const callback = createApi(
+  null,
+  {
+    method: 'post',
+    createDoc: false,
+    send: (req, res, next) =>
+      notification.send({
+        template: 'templates/callback',
+        message: { to: 'seriouscat1001@gmail.com' },
+        locals: {
+          ...req.body,
+          internationalPhone: formatPhoneInternational(req.body.phone)
+        }
+      })
+  }
+)
+
 module.exports = {
   questionsApi,
   reviewsApi,
