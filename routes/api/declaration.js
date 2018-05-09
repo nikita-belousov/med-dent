@@ -1,8 +1,13 @@
+const fs = require('fs')
 const mongoose = require('mongoose')
 const createApi = require('./createApi')
 const passport = require('./../passport')
 const notification = require('./../../emails/notification')
 const { formatPhoneInternational } = require('./../../utils')
+
+const notificationEmail = JSON.parse(
+  fs.readFileSync('./config/notificationEmail.json', 'utf-8')
+)[process.env.NODE_ENV || 'development']
 
 const questions = createApi(
   mongoose.model('Question'),
@@ -13,7 +18,7 @@ const questions = createApi(
         console.log('notification')
         notification.send({
           template: 'templates/questionPosted',
-          message: { to: 'seriouscat1001@gmail.com' },
+          message: { to: notificationEmail },
           locals: values
         })
       }
@@ -44,7 +49,7 @@ const reviews= createApi(
       beforeSave: values =>
         notification.send({
           template: 'templates/reviewPosted',
-          message: { to: 'seriouscat1001@gmail.com' },
+          message: { to: notificationEmail },
           locals: values
         })
     },
@@ -255,7 +260,7 @@ const appointment = createApi(
     send: (req, res, next) =>
       notification.send({
         template: 'templates/appointment',
-        message: { to: 'seriouscat1001@gmail.com' },
+        message: { to: notificationEmail },
         locals: {
           ...req.body,
           internationalPhone: formatPhoneInternational(req.body.phone)
@@ -272,7 +277,7 @@ const countCost = createApi(
     send: (req, res, next) =>
       notification.send({
         template: 'templates/countCost',
-        message: { to: 'seriouscat1001@gmail.com' },
+        message: { to: notificationEmail },
         locals: {
           ...req.body,
           internationalPhone: formatPhoneInternational(req.body.phone)
@@ -289,7 +294,7 @@ const callback = createApi(
     send: (req, res, next) =>
       notification.send({
         template: 'templates/callback',
-        message: { to: 'seriouscat1001@gmail.com' },
+        message: { to: notificationEmail },
         locals: {
           ...req.body,
           internationalPhone: formatPhoneInternational(req.body.phone)
