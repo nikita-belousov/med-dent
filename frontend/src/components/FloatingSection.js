@@ -1,11 +1,14 @@
 import React from 'react'
 import _ from 'lodash'
+
 import styles from './../styles/components/FloatingSection.css'
 import Button from './common/Button'
 import Link from './common/Link'
 import Paragraph from './common/Paragraph'
 import TextInput from './common/TextInput'
 import CallbackPopup from './CallbackPopup'
+
+import { callback } from './../agent'
 
 class FloatingSection extends React.Component {
   state = {
@@ -53,16 +56,7 @@ class FloatingSection extends React.Component {
   }
 
   onCallbackSubmit(data) {
-    // emailjs.send(
-    //   process.env.REACT_APP_MAIL_SERVICE,
-    //   '_callback',
-    //   {
-    //     name: _.capitalize(data.name),
-    //     phone: data.phone
-    //   }
-    // )
-    // .then(console.log)
-    // .catch(console.log)
+    callback(data)
   }
 
   renderPopupForm() {

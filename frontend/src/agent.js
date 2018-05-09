@@ -98,10 +98,11 @@ export const Appointment = {
     requests.post('/appointment', data)
 }
 
-export const countCost = {
-  post: data =>
-    requests.post('/count_cost', data)
-}
+export const countCost = data =>
+  requests.post('/count_cost', data)
+
+export const callback = data =>
+  requests.post('/callback', data)
 
 export default {
   Reviews,
@@ -112,5 +113,6 @@ export default {
   ServiceCategories,
   Services,
   Appointment,
-  countCost
+  countCost,
+  callback
 }
