@@ -9,11 +9,6 @@ import Button from './common/Button'
 import Paragraph from './common/Paragraph'
 
 class Popup extends Component {
-  static PropTypes = {
-    onClose: PropTypes.func,
-    hint: PropTypes.string
-  }
-
   renderLoader() {
     return (
       <div className={styles['loader-wrapper']}>

@@ -10,7 +10,7 @@ import Container from './../Container'
 import CallbackPopup from './../CallbackPopup'
 import ChangingReviews from './../ChangingReviews'
 
-import { countCost as api } from './../../agent'
+import { countCost } from './../../agent'
 
 class CountReview extends Component {
   state = { callbackForm: false }
@@ -24,7 +24,7 @@ class CountReview extends Component {
     }))
   }
 
-  handleBtnCLick = (e) => {
+  handleBtnCLick = e => {
     e.nativeEvent.preventDefault()
     e.nativeEvent.stopImmediatePropagation()
 
@@ -44,10 +44,7 @@ class CountReview extends Component {
   }
 
   onCallbackSubmit = data => {
-    api.post({
-      ...data,
-      problem: this.problemValue
-    })
+    countCost({ ...data, problem: this.problemValue })
   }
 
   renderPopupForm() {

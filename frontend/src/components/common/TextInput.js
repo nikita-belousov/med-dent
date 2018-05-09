@@ -39,7 +39,7 @@ class TextInput extends Component {
   }
 
   renderInput() {
-    let { type, error, label, appearance, ...restProps } = this.props
+    let { type, error, label, appearance, alt, ...restProps } = this.props
     if (!type) type = 'text'
 
     const classNames = {
