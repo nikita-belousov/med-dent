@@ -10,17 +10,11 @@ import Button from './common/Button'
 import RatingInput from './common/RatingInput'
 import Popup from './Popup'
 
+import { Reviews as api } from './../agent'
+
 class LeaveFeedbackPopup extends Component {
-  onFormSubmit = (data) => {
-    fetch(
-      `${process.env.REACT_APP_API_ROOT}/reviews`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          ...data,
-          isPublished: false
-        })
-      })
+  onSubmit = data => {
+    api.post(data)
   }
 
   render() {
@@ -42,7 +36,7 @@ class LeaveFeedbackPopup extends Component {
           <Form
             withLoading
             loadingTime={2500}
-            onSubmit={this.onFormSubmit}
+            onSubmit={this.onSubmit}
             constraints={constraints}
           >
             <div className={styles['name-input']}>

@@ -13,8 +13,8 @@ import Popup from './Popup'
 import { Questions as api } from './../agent'
 
 class AskQuestionPopup extends Component {
-  onFormSubmit = data => {
-    api.create(data)
+  onSubmit = data => {
+    api.post(data)
   }
 
   render() {
@@ -33,7 +33,7 @@ class AskQuestionPopup extends Component {
           <Form
             withLoading
             loadingTime={2500}
-            onSubmit={this.onFormSubmit}
+            onSubmit={this.onSubmit}
             constraints={constraints}
           >
             <div className={styles['name-input']}>

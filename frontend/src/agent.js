@@ -35,7 +35,9 @@ export const Reviews = {
   all: () =>
     requests.get('/reviews'),
   page: (itemsOnPage, page) =>
-    requests.get(`/reviews/?${pageQuery(itemsOnPage, page)}&isPublished=true&_sort=createdAt:desc`)
+    requests.get(`/reviews/?${pageQuery(itemsOnPage, page)}&isPublished=true&_sort=createdAt:desc`),
+  post: body =>
+    requests.post('/reviews', body)
 }
 
 export const Staff = {
@@ -50,12 +52,12 @@ export const Staff = {
 }
 
 export const Questions = {
-  create: data =>
-    requests.post('/questions', data),
   all: () =>
     requests.get('/questions'),
   page: (itemsOnPage, page) =>
-    requests.get(`/questions/?${pageQuery(itemsOnPage, page)}&_sort=createdAt:desc`)
+    requests.get(`/questions/?${pageQuery(itemsOnPage, page)}&_sort=createdAt:desc`),
+  post: body =>
+    requests.post('/questions', body)
 }
 
 export const Specials = {
