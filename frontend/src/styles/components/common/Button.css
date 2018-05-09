@@ -93,10 +93,6 @@
   color: #fff;
   padding: .4em .8em;
 
-  &:active {
-    background: linear-gradient(to top, #ffdc63 0%, #f6a422 68%, #e8aa48 87%, #e59d2d 97%);
-  }
-
   &::after {
     content: '';
     position: absolute;
@@ -105,8 +101,9 @@
     right: -1px;
     bottom: -1px;
     border-radius: border-radius;
-    background: color(black a(95%));
+    background: color(#fff a(40%));
     opacity: 0;
+    transition: background .1s ease-out;
   }
 
   &:hover::after {

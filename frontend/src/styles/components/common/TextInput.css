@@ -27,7 +27,7 @@
   border: 0;
   outline: 0;
   width: 100%;
-  padding: .8em 1.2em;
+  padding: .8em;
   margin-bottom: .4em;
   transition: box-shadow .2s ease-out;
 
@@ -49,6 +49,7 @@
 .text-area {
   composes: text-input;
   resize: none;
+  line-height: 1.6;
 }
 
 /* -------- appearance -------- */
