@@ -34,3 +34,9 @@ p {
   border-radius: 6px;
   color: #000;
 }
+
+.box--review {
+  background: #2ac4ff;
+  color: #fff;
+  line-height: 1.6;
+}

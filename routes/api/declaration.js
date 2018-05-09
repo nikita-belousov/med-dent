@@ -29,7 +29,15 @@ const questionsApi = createApi(
 const reviewsApi = createApi(
   mongoose.model('Review'),
   [
-    'post',
+    {
+      method: 'post',
+      beforeSave: values =>
+        notification.send({
+          template: 'templates/reviewPosted',
+          message: { to: 'seriouscat1001@gmail.com' },
+          locals: values
+        })
+    },
     {
       method: 'get',
       count: true
