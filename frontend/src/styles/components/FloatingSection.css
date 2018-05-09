@@ -40,13 +40,17 @@
   border-bottom-right-radius: 12px;
   box-shadow: shadow-primary;
   color: #fff;
-  transition: margin-top ease-out .4s;
+  transition: margin-top .4s ease-out,
+              transform .1s ease-out;
 }
 
 .floating-section--collapsed {
   composes: floating-section;
-
   margin-top: -220px;
+
+  &:hover {
+    transform: translateY(20px);
+  }
 }
 
 .container {
