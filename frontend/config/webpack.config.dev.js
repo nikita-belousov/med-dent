@@ -13,6 +13,7 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const sass = require('@csstools/postcss-sass');
 const modulesValues = require('postcss-modules-values');
+const postcssImport = require('postcss-import');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -164,6 +165,7 @@ module.exports = {
                   // https://github.com/facebookincubator/create-react-app/issues/2677
                   ident: 'postcss',
                   plugins: () => [
+                    require('postcss-import'),
                     require('postcss-nested'),
                     require('postcss-modules-values'),
                     require('postcss-color-function'),

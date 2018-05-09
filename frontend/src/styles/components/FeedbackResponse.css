@@ -20,9 +20,10 @@
   color: #fff;
   background: primary;
   cursor: pointer;
+  transition: background .1s ease-out;
 
   &:hover {
-    background: color(#2ac4ff shade(10%));
+    background: color(#2ac4ff tint(15%));
   }
 
   > p {

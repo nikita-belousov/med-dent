@@ -24,9 +24,10 @@
   padding: 5px 40px 5px 15px;
   position: relative;
   cursor: pointer;
+  transition: background .1s ease-out;
 
   &:hover {
-    background: color(#2ac4ff shade(10%));
+    background: color(#2ac4ff tint(15%));
   }
 
   .current-name {

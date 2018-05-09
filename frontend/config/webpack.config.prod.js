@@ -195,6 +195,7 @@ module.exports = {
                         // https://github.com/facebookincubator/create-react-app/issues/2677
                         ident: 'postcss',
                         plugins: () => [
+                          require('postcss-import'),
                           require('postcss-nested'),
                           require('postcss-modules-values'),
                           require('postcss-color-function'),
