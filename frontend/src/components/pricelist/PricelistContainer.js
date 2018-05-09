@@ -268,7 +268,7 @@ class PricelistContainer extends Component {
     const { navbarActive, filter } = this.state
 
     const sidebarLinks = this.data
-      .reduce((res, { title, id }) => [...res, { title, id }], [])
+      .reduce((res, { title, id }) => [ ...res, { title, id } ], [])
 
     const data = this.applyFilters(this.data)
 
