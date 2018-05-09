@@ -7,7 +7,17 @@ const { formatPhoneInternational } = require('./../../utils')
 const questionsApi = createApi(
   mongoose.model('Question'),
   [
-    'post',
+    {
+      method: 'post',
+      beforeSave: values => {
+        console.log('notification')
+        notification.send({
+          template: 'templates/questionPosted',
+          message: { to: 'seriouscat1001@gmail.com' },
+          locals: values
+        })
+      }
+    },
     {
       method: 'get',
       count: true,
