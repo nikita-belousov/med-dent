@@ -66,7 +66,7 @@ class PricelistContainer extends Component {
     }
   }
 
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(nextProps, nextState) {
     const { scrollable, categories } = this.state
 
     if (this.data &&
@@ -78,7 +78,7 @@ class PricelistContainer extends Component {
   }
 
   initScrolling() {
-    const { scrollable, categories, navbarActive } = this.state
+    const { scrollable, categories } = this.state
 
     this.isInitialRender = false
 
@@ -91,7 +91,7 @@ class PricelistContainer extends Component {
         return null
       }
 
-      const current = categories.find(el => el.id === navbarActive)
+      const current = categories.find(el => el.id === this.state.navbarActive)
 
       const currentTop = utils.getAbsoluteCoords(current.node).top
         - this.pricesTop
@@ -119,17 +119,15 @@ class PricelistContainer extends Component {
   prettify(data) {
     return data
       .reduce((res, serv) => {
-        const { title, order } = serv.category
-        const exists = res.find(e => e.title === title)
+        if (serv.category) {
+          const { title, order } = serv.category
+          const exists = res.find(e => e.title === title)
 
-        if (exists) {
-          exists.services.push(serv)
-        } else {
-          res.push({
-            id: order,
-            title,
-            services: [serv]
-          })
+          if (exists) {
+            exists.services.push(serv)
+          } else {
+            res.push({ id: order, title, services: [serv] })
+          }
         }
 
         return res

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import uuid from 'small-uuid'
 import _ from 'lodash'
 import styles from './../../styles/components/pages/Pricelist.css'
 import { Paragraph, TextInput, Checkbox } from './../common'
@@ -34,7 +35,7 @@ class PricelistTable extends Component {
   renderService = ({ title, price }) => {
     return (
       <div
-        key={title}
+        key={uuid.create()}
         className={styles['service']}
       >
         <div className={styles['title']}>
