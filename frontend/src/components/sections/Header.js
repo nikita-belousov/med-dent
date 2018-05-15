@@ -38,11 +38,14 @@ const navLinks = [
 ]
 
 class Header extends Component {
-  renderNavLink(link) {
+  renderNavLink({ title, path }) {
     return (
-      <li key={link.title}>
-        <NavLink to={link.path}>
-          {link.title}
+      <li
+        key={title}
+        onClick={() => location.reload()}
+      >
+        <NavLink to={path}>
+          {title}
         </NavLink>
       </li>
     )

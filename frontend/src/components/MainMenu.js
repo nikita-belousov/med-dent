@@ -28,28 +28,12 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class MainMenu extends Component {
-  state = { activeLink: null }
-
   componentWillMount() {
     this.props.onLoad(api.all())
   }
 
   componentWillUnount() {
     this.props.onUnload()
-  }
-
-  handleItemClick(e, i, category) {
-    if (!category.subcategories.length) return
-
-    e.preventDefault()
-    e.nativeEvent.stopImmediatePropagation()
-    this.setState(prevState => ({ activeLink: i }))
-  }
-
-  resetActiveItem = () => {
-    this.setState({
-      activeLink: null
-    })
   }
 
   renderPopupButton = (text) => {
@@ -60,53 +44,17 @@ class MainMenu extends Component {
     )
   }
 
-  renderDropdown(category) {
-    return (
-      <div className={styles['dropdown-wrapper']}>
-        <Popup
-          renderButton={() => this.renderPopupButton(category['btnTitle'])}
-          onClose={this.resetActiveItem}
-        >
-          <ul className={styles['dropdown']}>
-            <li>
-              <a
-                href={category['mainPath']}
-                className={styles['main']}
-              >
-                {category['mainTitle']}
-              </a>
-            </li>
-            {category.subcategories.map(sub =>
-              <li key={sub.id}>
-                <Link
-                  href={sub.url}
-                  className={styles['sub-link']}
-                >
-                  {sub.title}
-                </Link>
-              </li>)}
-          </ul>
-        </Popup>
-      </div>
-    )
-  }
-
-  renderLink = (category, i) => {
-    const isActive = this.state.activeLink === i
-
-    return (
-      <li key={category.slug}>
-        <NavLink
-          to={`/${category.slug}`}
-          activeClassName={styles['category-link--active']}
-          className={styles['category-link']}
-          onClick={e => this.handleItemClick(e, i, category)}
-        >
-          {_.capitalize(category.title)}
-        </NavLink>
-      </li>
-    )
-  }
+  renderLink = ({ slug, title }, i) =>
+    <li key={slug}>
+      <NavLink
+        to={`/${slug}`}
+        activeClassName={styles['category-link--active']}
+        className={styles['category-link']}
+        onClick={() => location.reload()}
+      >
+        {_.capitalize(title)}
+      </NavLink>
+    </li>
 
   render() {
     let { links } = this.props
