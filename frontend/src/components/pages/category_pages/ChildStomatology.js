@@ -53,7 +53,7 @@ const ChildStomatology = props => {
     <CategoryPage
       title='Детская стоматология'
       categoryId='5aa0113e0c8d66733cd75252'
-      doctors={['5aa2f69c91ce0038c42499d2']}
+      dentistsIds={['5aa2f69c91ce0038c42499d2']}
       renderContent={renderContent}
       renderAside={renderAside}
     />

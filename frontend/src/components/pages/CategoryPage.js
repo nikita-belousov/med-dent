@@ -34,12 +34,12 @@ class CategoryPage extends Component {
   }
 
   componentWillMount() {
-    const { categoryId, doctors } = this.props
+    const { categoryId, dentistsIds } = this.props
 
     this.props.onLoad(
       Promise.all([
         agent.Services.byCategory(categoryId),
-        Promise.all(doctors.map(agent.Staff.byId))
+        Promise.all(dentistsIds.map(agent.Staff.byId))
       ])
     )
   }
