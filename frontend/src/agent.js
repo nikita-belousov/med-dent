@@ -88,7 +88,7 @@ export const ServiceCategories = {
 
 export const Services = {
   all: () =>
-    requests.get('/services'),
+    requests.get('/services/?_sort=order'),
   byCategory: id =>
     requests.get(`/services/?category=${id}&_sort=order`)
 }
