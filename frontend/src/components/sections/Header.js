@@ -42,7 +42,7 @@ class Header extends Component {
     return (
       <li
         key={title}
-        onClick={() => location.reload()}
+        onClick={() => window.location.reload()}
       >
         <NavLink to={path}>
           {title}
