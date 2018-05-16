@@ -2,7 +2,6 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 const express = require('express')
 const path = require('path')
-const favicon = require('serve-favicon')
 
 require('./models/Article')
 require('./models/Dentist')
@@ -20,7 +19,6 @@ app.use(require('./routes'))
 
 if (isProduction) {
   app.use('/static', express.static(path.join(__dirname, '/frontend/build/static')))
-  app.use(favicon(path.join(__dirname, 'frontend/build/static/favicon.ico')))
 
   app.get('/*', (req, res, next) => {
     res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
