@@ -26,6 +26,7 @@ class CallbackPopup extends Component {
       <div className={styles['wrapper']}>
         <Form
           withLoading
+          submitOnEnter
           onSubmit={this.props.onSubmit}
           loadingTime={2500}
           constraints={constraints}

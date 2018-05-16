@@ -15,6 +15,7 @@ const INPUT_TYPES = [TextInput, Checkbox, Select, RatingInput]
 class Form extends Component {
   static propTypes = {
     withLoading: PropTypes.bool,
+    submitOnEnter: PropTypes.bool,
     onSubmit: PropTypes.func,
     loadingTime: PropTypes.number,
     constraints: PropTypes.object
@@ -22,6 +23,7 @@ class Form extends Component {
 
   static defaultProps = {
     withLoading: false,
+    submitOnEnter: false,
     loadingTime: 3000
   }
 
@@ -33,6 +35,19 @@ class Form extends Component {
 
   componentDidMount() {
     this.validate()
+
+    if (this.props.submitOnEnter) {
+      this.onKeyPress = this.node.addEventListener('keypress', e => {
+        if (e.keyCode === 13) {
+          e.preventDefault()
+          this.trySubmit()
+        }
+      })
+    }
+  }
+
+  componentWillUnmount() {
+    this.node.removeEventListener('keypress', this.onKeyPress)
   }
 
   getInitalState() {
@@ -173,7 +188,7 @@ class Form extends Component {
 
   render() {
     return (
-      <div>
+      <div ref={e => this.node = e}>
         {this.renderChildren()}
       </div>
     )
