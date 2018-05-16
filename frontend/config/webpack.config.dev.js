@@ -242,7 +242,7 @@ module.exports = {
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new FaviconsWebpackPlugin({
-      logo: 'favicon.png',
+      logo: './src/assets/images/favicon.png',
       inject: true,
       background: '#fff',
       title: 'Мед-Дент',

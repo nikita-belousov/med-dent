@@ -266,6 +266,22 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+    new FaviconsWebpackPlugin({
+      logo: './src/assets/images/favicon.png',
+      inject: true,
+      background: '#fff',
+      title: 'Мед-Дент',
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        favicons: true,
+        firefox: true,
+        twitter: true,
+        yandex: true,
+        windows: true
+      }
+    }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
@@ -338,22 +354,6 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new FaviconsWebpackPlugin({
-      logo: 'favicon.png',
-      inject: true,
-      background: '#fff',
-      title: 'Мед-Дент',
-      icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: true,
-        favicons: true,
-        firefox: true,
-        twitter: true,
-        yandex: true,
-        windows: true
-      }
-    }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
