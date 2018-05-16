@@ -243,7 +243,7 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new FaviconsWebpackPlugin({
       logo: './src/assets/images/favicon.png',
-      inject: true,
+      prefix: 'static/favicons/',
       background: '#fff',
       title: 'Мед-Дент',
       icons: {
