@@ -149,8 +149,10 @@ const serviceCategories = createApi(
   ]
 )
 
+const Model = mongoose.model('Service')
+
 const services = createApi(
-  mongoose.model('Service'),
+  Model,
   [
     {
       method: 'get',
@@ -158,7 +160,14 @@ const services = createApi(
     },
     {
       method: 'post',
-      auth: 'admin'
+      auth: 'admin',
+      beforeSave: (values, doc) => {
+        if (!('order' in values)) {
+          return Model
+            .getNextOrder(values.category)
+            .then(value => doc.set('order', value))
+        }
+      }
     },
     {
       method: 'update',

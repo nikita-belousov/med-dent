@@ -41,21 +41,23 @@ const post = (Model, options) => (req, res, next) => {
         if (onCreateDoc) {
           values = _.merge(values, options.onCreateDoc(values, doc))
         }
-        if (beforeSave) {
-          beforeSave(values, doc)
-        }
 
-        doc
-          .set(values)
-          .save()
-          .then(doc => {
-            if (send) {
-              return send(req, res, next, doc)
-            } else {
-              return res.json({ doc })
-            }
+        Promise.resolve(beforeSave ? beforeSave(values, doc) : null)
+          .then(result => {
+            const resDoc = result || doc
+
+            resDoc
+              .set(values)
+              .save()
+              .then(doc => {
+                if (send) {
+                  return send(req, res, next, doc)
+                } else {
+                  return res.json({ doc })
+                }
+              })
+              .catch(next)
           })
-          .catch(next)
       } else if (send) {
         return send(req, res, next)
       } else {

@@ -9,7 +9,6 @@ const ServiceSchema = Schema({
     type: String
   },
   order: {
-    required: true,
     type: Number
   },
   price: {
@@ -26,5 +25,13 @@ const ServiceSchema = Schema({
     ref: 'ServiceCategory'
   }
 })
+
+ServiceSchema.statics.getNextOrder = function(categoryId) {
+  return this
+    .findOne({ category: categoryId })
+    .sort({ order: -1 })
+    .exec()
+    .then(doc => doc.order + 1)
+}
 
 mongoose.model('Service', ServiceSchema)
