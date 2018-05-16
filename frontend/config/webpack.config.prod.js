@@ -337,6 +337,22 @@ module.exports = {
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new FaviconsWebpackPlugin({
+      logo: 'favicon.png',
+      inject: true,
+      background: '#fff',
+      title: 'Мед-Дент',
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        favicons: true,
+        firefox: true,
+        twitter: true,
+        yandex: true,
+        windows: true
+      }
+    }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
