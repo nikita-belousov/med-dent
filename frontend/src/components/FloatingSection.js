@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { withRouter, Route, HashRouter, NavLink } from 'react-router-dom'
 import _ from 'lodash'
 
 import styles from './../styles/components/FloatingSection.css'
@@ -7,13 +9,27 @@ import Link from './common/Link'
 import Paragraph from './common/Paragraph'
 import TextInput from './common/TextInput'
 import CallbackPopup from './CallbackPopup'
+import AppointmentModal from './AppointmentModal'
 
 import { callback } from './../agent'
+
+import { APPOINTMENT_SHOW } from './../constants/actionTypes'
+
+const mapDispatchToProps = dispatch => ({
+  showAppointmentModal: () => dispatch({ type: APPOINTMENT_SHOW })
+})
 
 class FloatingSection extends React.Component {
   state = {
     collapsed: false,
-    callbackForm: false
+    callbackForm: false,
+    appointmentModal: false
+  }
+
+  componentWillMount() {
+    if (this.props.location.hash === '#appointment') {
+      this.props.showAppointmentModal()
+    }
   }
 
   componentDidMount() {
@@ -21,8 +37,31 @@ class FloatingSection extends React.Component {
     window.addEventListener('scroll', this.handleScroll)
   }
 
+  componentWillReceiveProps({ location }) {
+    if (this.props.location !== location) {
+      if (location.hash === '#appointment') {
+        this.props.showAppointmentModal()
+      }
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll)
+  }
+
+  openAppointmentModal = () => {
+    this.setState(prev => ({
+      ...prev,
+      appointmentModal: true
+    }))
+  }
+
+  closeAppointmentModal = () => {
+    this.props.history.push(this.props.location.pathname)
+    this.setState(prev => ({
+      ...prev,
+     appointmentModal: false
+    }))
   }
 
   handleScroll = () => {
@@ -36,12 +75,11 @@ class FloatingSection extends React.Component {
     }))
   }
 
-  handleCallbackCLick = (e) => {
+  handleCallbackCLick = e => {
     e.nativeEvent.preventDefault()
     e.nativeEvent.stopImmediatePropagation()
 
-    if (this.state.callbackForm)
-      return
+    if (this.state.callbackForm) return
 
     this.setState(prevState => ({
       callbackForm: true
@@ -71,9 +109,11 @@ class FloatingSection extends React.Component {
   }
 
   render() {
+    const { appointmentModal, callbackForm } = this.state
+
     return (
       <div className={styles['wrapper']}>
-        {this.state.callbackForm && this.renderPopupForm()}
+        {callbackForm && this.renderPopupForm()}
         <div className={styles['wrapper-main']}>
           <div className={this.state.collapsed
             ? styles['floating-section--collapsed']
@@ -82,7 +122,7 @@ class FloatingSection extends React.Component {
             <div className={styles['container']}>
               <div className={styles['calling']}>
                 <div className={styles['phone-number']}>
-                  8 (496) 797 83 06
+                  8 (495) 135-37-50
                 </div>
                 <Link
                   type={'alt-dashed'}
@@ -111,12 +151,13 @@ class FloatingSection extends React.Component {
             </div>
             <div className={styles['container']}>
               <div className={styles['btn-wrapper']}>
-                <Button
-                  type='primary'
-                  onClick={this.props.onBtnClick}
-                >
-                  Записаться на прием
-                </Button>
+                <HashRouter hashType='noslash'>
+                  <NavLink to="appointment">
+                    <Button type='primary'>
+                      Записаться на прием
+                    </Button>
+                  </NavLink>
+                </HashRouter>
               </div>
               <div
                 className={styles['nav-arrow']}
@@ -130,4 +171,4 @@ class FloatingSection extends React.Component {
   }
 }
 
-export default FloatingSection
+export default withRouter(connect(() => ({}), mapDispatchToProps)(FloatingSection))

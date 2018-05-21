@@ -11,14 +11,11 @@ class Contacts extends Component {
         <div className={styles['contact-group']}>
           <div className={styles['method']}>
             <div className={styles['capture']}>
-              Телефоны
+              Телефон
             </div>
             <div className={styles['phones']}>
               <div className={styles['number']}>
-                8 496 797 83 06
-              </div>
-              <div className={styles['number']}>
-                8 916 019 38 22
+                8 (495) 135-37-50
               </div>
             </div>
           </div>

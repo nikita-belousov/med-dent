@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import validate from 'validate.js'
@@ -7,6 +8,7 @@ import _ from 'lodash'
 import { Appointment as api } from '../agent'
 import styles from './../styles/components/AppointmentModal.css'
 
+import ClosesOnExternalClick from './ClosesOnExternalClick'
 import Form from './containers/Form'
 import Modal from './Modal'
 import Button from './common/Button'
