@@ -272,15 +272,22 @@ const appointment = createApi(
   {
     method: 'post',
     createDoc: false,
-    send: (req, res, next) =>
-      notification.send({
-        template: 'templates/appointment',
-        message: { to: notificationEmail },
-        locals: {
-          ...req.body,
-          internationalPhone: formatPhoneInternational(req.body.phone)
-        }
-      })
+    send: (req, res, next) => {
+      mongoose
+        .model('Dentist')
+        .findOne({ id: req.body.dentist })
+        .then(dentist => {
+          notification.send({
+            template: 'templates/appointment',
+            message: { to: notificationEmail },
+            locals: {
+              ...req.body,
+              dentist: dentist.name,
+              internationalPhone: formatPhoneInternational(req.body.phone)
+            }
+          })
+        })
+    }
   }
 )
 
