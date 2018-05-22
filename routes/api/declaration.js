@@ -185,11 +185,17 @@ const staff = createApi(
   [
     {
       method: 'get',
-      count: true
+      count: true,
+      generateResponse: (req, res, docs) => ({
+        docs: docs.map(doc => Object.assign(
+          doc.toObject(),
+          doc.toSelectOptionJSON()
+        ))
+      })
     },
     {
       method: 'get',
-      path: '/selectOptions',
+      path: '/select_options',
       generateResponse: (req, res, docs) => ({
         docs: docs.map(doc => doc.toSelectOptionJSON())
       })

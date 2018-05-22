@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const slug = require('slug')
+const { fullNameToInitials } = require('./utils')
 
 const moment = require('moment')
 moment.locale('ru')
@@ -36,10 +36,11 @@ const DentistSchema = mongoose.Schema({
 }, { timestamps: true })
 
 DentistSchema.methods.toSelectOptionJSON = function() {
+  const initials = fullNameToInitials(this.name)
+
   return {
-    id: this._id,
-    name: this.name,
-    positions: this.positions
+    optionName: `${initials} (${this.positions.slice(0, 2).join(', ')})`,
+    optionValue: this._id
   }
 }
 

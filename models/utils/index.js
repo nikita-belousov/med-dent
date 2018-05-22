@@ -6,5 +6,12 @@ module.exports = {
       this.slug = slug(this.title)
     }
     next()
+  },
+
+  fullNameToInitials(name) {
+    return name
+      .split(' ')
+      .map((word, i) => i === 0 ? word : `${word[0]}.`)
+      .join(' ')
   }
 }
