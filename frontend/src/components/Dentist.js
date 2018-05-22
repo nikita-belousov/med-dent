@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, HashRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
 
-import { Paragraph, Link } from './common'
+import { Paragraph, NavLink } from './common'
 import PositionLabel from './common/PositionLabel'
 import styles from './../styles/components/Dentist.css'
 
@@ -17,9 +17,8 @@ const mapDispatchToProps = dispatch => ({
 
 class Dentist extends Component {
   onAppointmentClick = () => {
-    const { optionValue, optionName, history, setDefaultDentist } = this.props
+    const { optionValue, optionName, setDefaultDentist } = this.props
 
-    history.push('#appointment')
     setDefaultDentist(optionValue, optionName)
   }
 
@@ -64,14 +63,19 @@ class Dentist extends Component {
             <Paragraph>
               {about}
             </Paragraph>
-            <Link
-              onClick={this.onAppointmentClick}
-              type='dashed'
-            >
-              <FontAwesome name='edit' />
-              {' '}
-              Записаться к этому врачу
-            </Link>
+            <HashRouter hashType='noslash'>
+                <span onClick={this.onAppointmentClick}>
+                  <NavLink
+                    to='appointment'
+                    type='dashed'
+                    isActive={() => false}
+                  >
+                    <FontAwesome name='edit' />
+                    {' '}
+                    Записаться к этому врачу
+                  </NavLink>
+                </span>
+            </HashRouter>
           </div>
         </div>
       </div>

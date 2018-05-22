@@ -5,7 +5,7 @@ class YaShare extends Component {
   componentDidMount() {
     const { contentUrl, title, description } = this.props
 
-    const share = Ya.share2(this.node, {
+    const share = global.Ya.share2(this.node, {
       content: {
         url: contentUrl,
         title: title,

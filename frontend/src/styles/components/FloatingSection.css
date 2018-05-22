@@ -41,7 +41,7 @@
   box-shadow: shadow-primary;
   color: #fff;
   transition: margin-top .4s ease-out,
-              transform .1s ease-out;
+              transform .2s ease-out;
 }
 
 .floating-section--collapsed {
@@ -49,7 +49,7 @@
   margin-top: -220px;
 
   &:hover {
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
 }
 

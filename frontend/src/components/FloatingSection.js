@@ -152,7 +152,7 @@ class FloatingSection extends React.Component {
             <div className={styles['container']}>
               <div className={styles['btn-wrapper']}>
                 <HashRouter hashType='noslash'>
-                  <NavLink to="appointment">
+                  <NavLink to='appointment'>
                     <Button type='primary'>
                       Записаться на прием
                     </Button>

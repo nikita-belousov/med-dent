@@ -266,22 +266,6 @@ module.exports = {
         minifyURLs: true,
       },
     }),
-    new FaviconsWebpackPlugin({
-      logo: './src/assets/images/favicon.png',
-      prefix: 'static/favicons/',
-      background: '#fff',
-      title: 'Мед-Дент',
-      icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: true,
-        favicons: true,
-        firefox: true,
-        twitter: true,
-        yandex: true,
-        windows: true
-      }
-    }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
