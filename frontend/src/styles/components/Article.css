@@ -14,3 +14,11 @@
 .text {
   padding-top: 32px;
 }
+
+.share-buttons {
+  padding-top: 20px;
+
+  .share-label {
+    margin-bottom: 10px;
+  }
+}

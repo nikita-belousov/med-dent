@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import utils from 'utils'
 import { connect } from 'react-redux'
+
 import styles from './../../styles/components/Article.css'
 import { Paragraph } from './../common'
 import FontAwesome from 'react-fontawesome'
+import YaShare from './../YaShare'
 
 import {
   ARTICLE_PAGE_LOADED,
@@ -64,6 +66,16 @@ class Article extends Component {
           <Paragraph>
             {text}
           </Paragraph>
+        </div>
+        <div className={styles['share-buttons']}>
+          <div className={styles['share-label']}>
+            Поделиться в соцсетях:
+          </div>
+          <YaShare
+            contentUrl={window.location.href}
+            title={title}
+            description={text}
+          />
         </div>
       </div>
     )
