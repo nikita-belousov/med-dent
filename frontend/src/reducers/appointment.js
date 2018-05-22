@@ -2,7 +2,8 @@ import {
   APPOINTMENT_SHOW,
   APPOINTMENT_CLOSE,
   APPOINTMENT_LOADED,
-  APPOINTMENT_UNLOADED
+  APPOINTMENT_UNLOADED,
+  SET_DEFAULT_DENTIST
 } from './../constants/actionTypes'
 
 const defaultState = { isActive: false }
@@ -23,6 +24,14 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         staff: action.payload.docs || []
+      }
+    case SET_DEFAULT_DENTIST:
+      return {
+        ...state,
+        defaultDentist: {
+          value: action.payload.value,
+          name: action.payload.name
+        }
       }
     case APPOINTMENT_UNLOADED:
       return {}

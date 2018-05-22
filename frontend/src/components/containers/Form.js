@@ -174,7 +174,8 @@ class Form extends Component {
         }
         return React.cloneElement(child, inputProps)
       }
-      if(child.props.formSubmit) {
+
+      if (child.props.formSubmit) {
         const btnProps = {
           onClick: this.trySubmit,
           getState: this.getBtnState

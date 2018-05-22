@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import validate from 'validate.js'
 import utils from 'utils'
 import _ from 'lodash'
+
 import { Appointment as api } from '../agent'
 import styles from './../styles/components/AppointmentModal.css'
-
 import ClosesOnExternalClick from './ClosesOnExternalClick'
 import Form from './containers/Form'
 import Modal from './Modal'
@@ -76,16 +76,10 @@ class AppointmentModal extends Component {
   }
 
   toSelectOptions(data) {
-    return data.reduce((res, { name, positions }) => {
-      const initials = utils.cutName(name)
-      return [
-        ...res,
-        {
-          name: `${initials} (${positions.slice(0, 2).join(', ')})`,
-          value: initials
-        }
-      ]
-    }, [])
+    return data.map(doc => ({
+      value: doc.optionValue,
+      name: doc.optionName
+    }))
   }
 
   renderSuccess = () => {
@@ -104,7 +98,7 @@ class AppointmentModal extends Component {
   }
 
   renderForm = () => {
-    const { staff } = this.props
+    const { staff, defaultDentist } = this.props
 
     return (
       <div className={styles['form']}>
@@ -149,6 +143,7 @@ class AppointmentModal extends Component {
             <div className={styles['tiny-wrapper']}>
               <Select
                 name='dentist'
+                defaultOption={defaultDentist || ''}
                 options={staff && this.toSelectOptions(staff)}
               />
             </div>

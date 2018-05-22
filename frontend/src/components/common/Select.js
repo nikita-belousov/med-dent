@@ -8,16 +8,12 @@ import FontAwesome from 'react-fontawesome'
 import ClosesOnExternalClick from './../ClosesOnExternalClick'
 
 class Select extends Component {
-  state = {
-    selecting: false,
-    current: null
-  }
+  state = { selecting: false }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState(prev => ({
-      ...prev,
-      current: nextProps.value
-    }))
+  componentWillMount() {
+    if (this.props.defaultOption) {
+      this.changeCurrent(this.props.defaultOption.value)
+    }
   }
 
   startSelecting = () => {
@@ -76,15 +72,20 @@ class Select extends Component {
   }
 
   render() {
-    const { options, placeholder } = this.props
-    const { current, selecting } = this.state
+    const { options, placeholder, defaultOption, value } = this.props
+    const { selecting } = this.state
 
     let currentName
-    if (current) {
+
+    if (!options && value) {
+      currentName = defaultOption.name
+    } else if (value) {
       currentName = options
-        .find(option => option.value === current)
+        .find(option => option.value === value)
         .name
-    } else currentName = placeholder || 'Выберите из списка...'
+    } else {
+      currentName = placeholder || 'Выберите из списка...'
+    }
 
     return (
       <div className={styles['select' + (selecting ? '--selecting' : '')]}>
