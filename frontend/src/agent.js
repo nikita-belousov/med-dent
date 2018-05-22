@@ -73,7 +73,7 @@ export const Specials = {
 
 export const News = {
   all: () =>
-    requests.get('/news'),
+    requests.get('/news/?_sort=createdAt:desc'),
   page: (itemsOnPage, page) =>
     requests.get(`/news/?${pageQuery(itemsOnPage, page)}&_sort=createdAt:desc`),
   article: slug =>
