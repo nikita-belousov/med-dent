@@ -18,6 +18,7 @@ const Staff = () => (
       render={({ match }) =>
         <NarrowPage heading='Наши врачи'>
           <Pagination
+            itemsOnPage={999}
             api={api}
             path='staff'
             itemComponent={Dentist}

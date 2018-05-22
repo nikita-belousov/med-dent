@@ -48,7 +48,7 @@ export const Staff = {
   byId: id =>
     requests.get(`/staff/${id}`),
   options: () =>
-    requests.get('/staff/selectOptions')
+    requests.get('/staff/select_options')
 }
 
 export const Questions = {
