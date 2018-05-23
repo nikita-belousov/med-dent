@@ -43,7 +43,7 @@ const Footer = (props) => (
             ))}
           </ul>
           <div className={styles['socials']}>
-            <Link type='alt' href="https://vk.com/id397334329">
+            <Link type='alt' href="https://vk.com/meddent_dmd">
               <FontAwesome name='vk' />
             </Link>
             <Link type='alt' href="https://www.instagram.com/meddentdmd/">

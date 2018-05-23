@@ -120,17 +120,18 @@ class FloatingSection extends React.Component {
             : styles['floating-section']}
           >
             <div className={styles['container']}>
-              <div className={styles['calling']}>
-                <div className={styles['phone-number']}>
-                  8 (495) 135-37-50
-                </div>
-                <Link
-                  type={'alt-dashed'}
-                  isActive={this.state.callbackForm}
-                  onClick={this.handleCallbackCLick}
-                >
-                  Перезвонить мне
-                </Link>
+              <div
+                className={styles['nav-arrow']}
+                onClick={this.toggleCollapsed}
+              />
+              <div className={styles['btn-wrapper']}>
+                <HashRouter hashType='noslash'>
+                  <NavLink to='appointment'>
+                    <Button type='primary'>
+                      Записаться на прием
+                    </Button>
+                  </NavLink>
+                </HashRouter>
               </div>
             </div>
             <div className={styles['middle-section']}>
@@ -150,19 +151,18 @@ class FloatingSection extends React.Component {
               </div>
             </div>
             <div className={styles['container']}>
-              <div className={styles['btn-wrapper']}>
-                <HashRouter hashType='noslash'>
-                  <NavLink to='appointment'>
-                    <Button type='primary'>
-                      Записаться на прием
-                    </Button>
-                  </NavLink>
-                </HashRouter>
+              <div className={styles['calling']}>
+                <div className={styles['phone-number']}>
+                  8 (495) 135-37-50
+                </div>
+                <Link
+                  type={'alt-dashed'}
+                  isActive={this.state.callbackForm}
+                  onClick={this.handleCallbackCLick}
+                >
+                  Перезвонить мне
+                </Link>
               </div>
-              <div
-                className={styles['nav-arrow']}
-                onClick={this.toggleCollapsed}
-              />
             </div>
           </div>
         </div>
