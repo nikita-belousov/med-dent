@@ -13,11 +13,6 @@
 .nav-link {
   margin: 0 .6em;
   font-size: 16pt;
-
-  a {
-    border: 0;
-    text-decoration: 0;
-  }
 }
 
 .prev, .next {

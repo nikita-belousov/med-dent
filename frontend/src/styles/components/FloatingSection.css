@@ -1,5 +1,5 @@
 @value secondary from './../libs/colors.css';
-@value primary-gradient from './../libs/colors.css';
+@value primary-gradient, primary from './../libs/colors.css';
 @value alt-gradient from './../libs/colors.css';
 @value shadow-primary from './../libs/effects.css';
 
@@ -34,20 +34,19 @@
 
 .floating-section {
   width: 260px;
-  position: relative;
-  top: 0;
+  margin-bottom: 0;
   background: primary-gradient;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   box-shadow: shadow-primary;
   color: #fff;
-  transition: top .4s ease-out,
+  transition: margin-bottom .4s ease-out,
               transform .2s ease-out;
 }
 
 .floating-section--collapsed {
   composes: floating-section;
-  top: 220px;
+  margin-bottom: -220px;
 
   &:hover {
     transform: translateY(-10px);

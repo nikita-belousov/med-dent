@@ -2,12 +2,12 @@ import React from 'react'
 import { NavLink as RouteLink } from 'react-router-dom'
 import styles from './../../styles/components/common/Link.css'
 
-const NavLink = (props) => (
+const NavLink = ({ to, children }) => (
   <RouteLink
-    to={props.to}
+    to={to}
     activeClassName={styles['active']}
   >
-    {props.children}
+    {children}
   </RouteLink>
 )
 

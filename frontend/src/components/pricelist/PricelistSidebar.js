@@ -28,6 +28,7 @@ class PricelistSidebar extends Component {
                 <a href="#" onClick={e => onLinkClick(e, id)}>
                   {_.capitalize(title)}
                 </a>
+                <div className={styles['arrow-tale']} />
               </li>
             )
           })}

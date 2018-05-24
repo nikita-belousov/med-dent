@@ -44,19 +44,10 @@
     text-decoration: none;
     line-height: 26px;
   }
-}
-.nav-bar-link--active {
-  composes: nav-bar-link;
-
-  &:hover {
-
-    &::before, &::after {
-      opacity: 1 !important;
-    }
-  }
 
   &::before {
     content: '';
+    opacity: 0;
     display: block;
     position: absolute;
     left: -40px;
@@ -67,15 +58,32 @@
     border-bottom-left-radius: border-radius-small;
   }
 
-  &::after {
-    content: '';
-    display: block;
+  .arrow-tale {
     position: absolute;
     top: 0;
-    right: -42px;
-    width: 16px;
-    height: 41px;
-    background: url(../../../assets/images/nav-elements/navbar-active-arrow.png) no-repeat;
+    bottom: 0;
+    right: -46px;
+    width: 20px;
+    background: primary-gradient;
+    opacity: 0;
+
+    &::before {
+      content: '';
+      display: block;
+      left: 0;
+      position: absolute;
+      border-left: 20px solid transparent;
+      border-top: 20px solid white;
+      border-bottom: 20px solid white;
+    }
+  }
+}
+
+.nav-bar-link--active {
+  composes: nav-bar-link;
+
+  &::before, .arrow-tale {
+    opacity: 1 !important;
   }
 
   a {
@@ -86,32 +94,11 @@
     transition: all .1s ease-in-out;
   }
 }
+
 .nav-bar-link:hover {
-  &:before, &:after {
+
+  &:before, .arrow-tale {
     opacity: .5;
-  }
-
-  &::before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: -40px;
-    right: -26px;
-    top: 0; bottom: 0;
-    background: primary-gradient;
-    border-top-left-radius: border-radius-small;
-    border-bottom-left-radius: border-radius-small;
-  }
-
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    right: -42px;
-    width: 16px;
-    height: 41px;
-    background: url(../../../assets/images/nav-elements/navbar-active-arrow.png) no-repeat;
   }
 }
 

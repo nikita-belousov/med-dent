@@ -59,6 +59,12 @@
   color: #fff;
   box-shadow: 0 2px 12px 0 color(black a(10%));
   transition: none;
+  padding-left: 1.2em;
+  transition: background-color .1s ease-out;
+
+  &:hover {
+    background-color: color(white a(30%));
+  }
 
   &:focus {
     background: linear-gradient(to top, #2f9fbd 0%, #257288 100%);

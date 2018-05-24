@@ -15,7 +15,6 @@ import {
 import 'normalize-css'
 import './styles/global.css'
 import './styles/myfonts.css'
-import styles from './styles/components/App.css'
 
 import * as pages from './components/pages'
 import * as routes from './components/routes'

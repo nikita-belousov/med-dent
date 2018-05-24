@@ -3,6 +3,8 @@ import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+import styles from './../../styles/components/pages/Layout.css'
+
 import AppointmentModal from './../AppointmentModal'
 import FloatingSection from './../FloatingSection'
 import Container from './../Container'
@@ -38,7 +40,7 @@ const Layout = ({
   }
 
   return (
-    <div>
+    <div className={styles['layout']}>
       <MuiThemeProvider>
         <div>
           {isAppointmentActive &&
