@@ -19,9 +19,9 @@ import {
 
 
 class HeaderContainer extends Component {
-  ATTACHED_BREAKPOINT = 165
-
   state = { attached: false }
+
+  ATTACHED_BREAKPOINT = 165
 
   componentDidMount() {
     const scrollStream = fromEvent(window, 'scroll')
@@ -30,13 +30,13 @@ class HeaderContainer extends Component {
         map(() => window.pageYOffset)
       )
 
-    const attachStream = scrollStream
+    this.attachStream = scrollStream
       .pipe(
         filter(() => !this.state.attached),
         filter(val => val >= this.ATTACHED_BREAKPOINT),
       ).subscribe(() => this.setState({ attached: true }))
 
-    const dettachStream = scrollStream
+    this.dettachStream = scrollStream
       .pipe(
         filter(() => this.state.attached),
         filter(val => val < this.ATTACHED_BREAKPOINT),
@@ -44,8 +44,8 @@ class HeaderContainer extends Component {
   }
 
   componentWillUnmount() {
-    attachStream.unsubscribe()
-    dettachStream.unsubscribe()
+    this.attachStream.unsubscribe()
+    this.dettachStream.unsubscribe()
   }
 
   render() {
