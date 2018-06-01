@@ -14,7 +14,6 @@ const paths = require('./paths');
 const sass = require('@csstools/postcss-sass');
 const modulesValues = require('postcss-modules-values');
 const postcssImport = require('postcss-import');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -121,6 +120,10 @@ module.exports = {
           // "url" loader works like "file" loader except that it embeds assets
           // smaller than specified limit in bytes as data URLs to avoid requests.
           // A missing `test` is equivalent to a match.
+          {
+            test: /\.svg$/,
+            loader: require.resolve('svg-inline-loader')
+          },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: require.resolve('url-loader'),

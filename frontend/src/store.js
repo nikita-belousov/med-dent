@@ -9,8 +9,8 @@ const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
     return applyMiddleware(promiseMiddleware)
   } else {
-    // return applyMiddleware(promiseMiddleware)
-    return applyMiddleware(promiseMiddleware, createLogger())
+    return applyMiddleware(promiseMiddleware)
+    // return applyMiddleware(promiseMiddleware, createLogger())
   }
 }
 

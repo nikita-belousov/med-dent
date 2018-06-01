@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
 import styles from '../../styles/components/common/Link.css'
 
-const Link = (props) => {
-  let linkStyle
-  switch (props.type) {
-    case 'alt':
-      linkStyle = 'link--alt'
-      break
-    case 'dashed':
-      linkStyle = 'dashed-link'
-      break
-    case 'dashed-alt':
-    case 'alt-dashed':
-      linkStyle = 'dashed-link--alt'
-      break
-    default:
-      linkStyle = 'link'
-  }
+const Link = ({
+  children,
+  type,
+  isActive,
+  href,
+  onClick,
+  target
+}) => {
+  let cls = classNames({
+    'link--alt': type === 'alt',
+    'link-dashed': type === 'dashed',
+    'dashed-link--alt': type === 'dashed-alt' || type === 'alt-dashed',
+    'link': typeof type === 'undefined'
+  })
 
   return (
     <a
-      className={props.isActive ? styles['active'] : styles[linkStyle]}
-      href={props.href || '#'}
-      onClick={props.onClick}
+      className={isActive ? styles['active'] : styles[cls]}
+      href={href || '#'}
+      onClick={onClick || null}
+      target={target || '_self'}
     >
-      {props.children}
+      {children}
     </a>
   )
 }
