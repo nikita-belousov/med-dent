@@ -35,7 +35,9 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
     "react": "^16.3.2",
+    "react-transition-group": "^2.3.1",
     "request": "2.69.0",
+    "rxjs": "^6.2.0",
     "serve-favicon": "^2.5.0",
     "slug": "0.9.1",
     "superagent": "^3.8.3",
@@ -52,6 +54,7 @@
     "postcss-automath": "^1.0.1",
     "postcss-import": "^11.1.0",
     "postcss-mixins": "^6.2.0",
+    "svg-inline-loader": "^0.8.0",
     "webpack": "3.8.1"
   },
   "keywords": [],

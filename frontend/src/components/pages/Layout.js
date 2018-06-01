@@ -47,8 +47,8 @@ const Layout = ({
             <AppointmentModal onClose={onAppointmentClose} />}
           <Container>
             <FloatingSection state='collapsed' />
-            <Header />
           </Container>
+          <Header />
           <MainMenu api='category?_sort=order' />
           <div className='current-page'>
             {children}

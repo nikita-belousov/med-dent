@@ -2,10 +2,6 @@
 @value family, family-bold from './../libs/typography.css';
 @value border-radius-small from './../libs/effects.css';
 
-.wrapper {
-  padding-top: 4em;
-}
-
 .bg {
   background: primary-gradient;
   padding: 3px 0;

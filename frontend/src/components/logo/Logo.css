@@ -1,0 +1,38 @@
+@value primary from './../../styles/libs/colors.css';
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sign svg {
+    width: 90px;
+}
+
+.title {
+  background: white;
+  padding-left: 7px;
+  padding-right: 6px;
+
+  svg {
+    width: 120px;
+  }
+}
+
+.minified {
+  composes: logo;
+  position: relative;
+
+  .sign svg {
+    width: 35px;
+    position: relative;
+    top: 3px;
+    transform: scale(1) rotate(0deg);
+    transition: transform .1s, transform .5s;
+    
+    &:hover {
+      transform: scale(1.2) rotate(360deg);
+    }
+  }
+}
