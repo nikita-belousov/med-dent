@@ -1,0 +1,33 @@
+@value dark-grey from '../../styles/libs/colors.css';
+
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.capture {
+  color: dark-grey;
+  margin-bottom: .8em;
+  text-align: center;
+}
+
+.methods {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li:last-child .methodIcon {
+    margin-right: 0;
+  }
+}
+
+.methodIcon {
+  width: 50px;
+  height: 35px;
+  margin-right: 14px;
+  background-repeat: no-repeat;
+  background-size: 50px auto;
+}

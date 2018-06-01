@@ -1,0 +1,24 @@
+@value grey from '../../styles/libs/colors.css';
+
+
+.license {
+  font-size: 11pt;
+  display: flex;
+}
+
+.icon {
+  width: 45px;
+  font-size: 16pt;
+
+  a {
+    display: block;
+    border: 0;
+    text-decoration: 0;
+  }
+}
+
+.size {
+  color: grey;
+  position: relative;
+  top: 5px;
+}
