@@ -5,11 +5,11 @@ import { CSSTransition } from 'react-transition-group'
 import { fromEvent, empty } from 'rxjs'
 import { map, startWith, filter } from 'rxjs/operators'
 
-import style from './../../styles/components/sections/Header.css'
+import style from '../../styles/components/sections/Header.css'
 import { NavLink } from '../common'
-import { WarningBanner } from './../WarningBanner'
+import { WarningBanner } from '../WarningBanner'
 import Container from '../Container'
-import Logo from '../logo/Logo'
+import { Logo } from '../logo'
 
 import {
   WARNING_TEXT,

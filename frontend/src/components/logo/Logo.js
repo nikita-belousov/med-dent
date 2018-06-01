@@ -7,7 +7,7 @@ import sign from './svg/logo-sign.svg'
 import title from './svg/logo-title.svg'
 
 
-const Logo = ({ minified }) => {
+export const Logo = ({ minified }) => {
   const cls = classNames({
     'logo': !minified,
     'minified': minified
@@ -25,6 +25,3 @@ const Logo = ({ minified }) => {
     </div>
   )
 }
-
-
-export default Logo

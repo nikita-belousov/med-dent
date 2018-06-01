@@ -3,8 +3,6 @@ import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import styles from './../../styles/components/pages/Layout.css'
-
 import AppointmentModal from './../AppointmentModal'
 import FloatingSection from './../FloatingSection'
 import Container from './../Container'
@@ -40,25 +38,23 @@ const Layout = ({
   }
 
   return (
-    <div className={styles['layout']}>
-      <MuiThemeProvider>
-        <div>
-          {isAppointmentActive &&
-            <AppointmentModal onClose={onAppointmentClose} />}
-          <Container>
-            <FloatingSection state='collapsed' />
-          </Container>
-          <Header />
-          <MainMenu api='category?_sort=order' />
-          <div className='current-page'>
-            {children}
-          </div>
-          <CountReview reviewsToShow={10} />
-          <NewsSlider api='news?_sort=published:desc' />
-          <Footer />
+    <MuiThemeProvider>
+      <div>
+        {isAppointmentActive &&
+          <AppointmentModal onClose={onAppointmentClose} />}
+        <Container>
+          <FloatingSection state='collapsed' />
+        </Container>
+        <Header />
+        <MainMenu api='category?_sort=order' />
+        <div className='current-page'>
+          {children}
         </div>
-      </MuiThemeProvider>
-    </div>
+        <CountReview reviewsToShow={10} />
+        <NewsSlider api='news?_sort=published:desc' />
+        <Footer />
+      </div>
+    </MuiThemeProvider>
   )
 }
 
