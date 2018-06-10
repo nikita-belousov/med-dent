@@ -5,6 +5,7 @@ export const WARNING_TEXT =
    <a href="http://meddent.su" target="_blank">meddent.su</a>.`
 
 export const ITEMS_ON_PAGE = 10
+export const LOADING_TIME = 3000
 
 export const NAVIGATION_LINKS = [
   {
@@ -51,6 +52,11 @@ export const SOCIAL_LINKS = [
     title: 'Instagram',
     href: 'https://www.instagram.com/meddentdmd/',
     icon: 'instagram'
+  },
+  {
+    title: 'Facebook',
+    href: 'https://www.facebook.com/profile.php?id=100026186041386',
+    icon: 'facebook-square'
   }
 ]
 

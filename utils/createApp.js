@@ -34,7 +34,7 @@ const createApp = () => {
     app.use(errorhandler())
   }
 
-  const DB_DATA = JSON.parse(fs.readFileSync('./db.json', 'utf-8'))
+  const DB_DATA = JSON.parse(fs.readFileSync('./config/db.json', 'utf-8'))
   const { host, port, name, user, password } = DB_DATA[env]
 
   mongoose.connect(`mongodb://${user}:${password}@${host}:${port}/${name}`)

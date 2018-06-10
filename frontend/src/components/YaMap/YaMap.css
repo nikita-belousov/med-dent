@@ -1,0 +1,17 @@
+$mapHeight: 680px;
+
+
+.wrapper {
+  width: 100vw;
+  position: relative;
+  left: calc((100vw - 100%) / -2);
+  position: relative;
+  height: $mapHeight;
+}
+
+.map {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}

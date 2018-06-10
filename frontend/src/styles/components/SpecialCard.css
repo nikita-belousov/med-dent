@@ -17,8 +17,8 @@
   height: 350px;
   border-radius: 10px;
   background-repeat: no-repeat;
-  background-size: auto, 140% auto;
-  background-position: center, top center;
+  background-size: 100% auto;
+  background-position: center;
   transition: background-size .2s ease-out;
   color: #fff;
   position: relative;
@@ -37,7 +37,7 @@
 }
 
 .card:hover {
-  background-size: auto, 150% auto;
+  background-size: 105% auto;
 
   &::before {
     opacity: 1;
@@ -53,36 +53,14 @@
   justify-content: flex-end;
 }
 
-.card--big {
-  composes: card;
-  width: 500px;
-
-  .inner {
-    padding-right: 260px;
-    justify-content: flex-start;
-  }
-}
-
 .caption {
   font-size: 16pt;
   font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: .4em;
+  line-height: 1.4;
+  margin-bottom: 10px;
 }
 
-.description {
-
-  > * {
-    margin: 0;
-  }
-}
-
-.more {
-  flex-grow: 1;
-  position: relative;
-
-  a {
-    position: absolute;
-    bottom: 0;
-  }
+.description p {
+  margin-bottom: 0;
+  line-height: 1.5;
 }

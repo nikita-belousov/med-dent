@@ -6,7 +6,7 @@ import { formatDate } from 'utils'
 
 import FontAwesome from 'react-fontawesome'
 import Container from './../Container'
-import Slider from 'react-slick'
+import { Slider } from '../Slider'
 import NavArrow from './../common/NavArrow'
 import Paragraph from './../common/Paragraph'
 import Link from './../common/Link'
@@ -34,17 +34,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class NewsSlider extends Component {
-  settings = {
-    slidesToShow: 3,
-    infinite: true,
-    speed: 500,
-    draggable: false,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    nextArrow: <NavArrow wrapperClass={styles['next-arrow-wrapper']} type="next" />,
-    prevArrow: <NavArrow wrapperClass={styles['prev-arrow-wrapper']} type="prev" />
-  }
-
   componentWillMount() {
     this.props.onLoad(api.all())
   }
@@ -55,25 +44,23 @@ class NewsSlider extends Component {
 
   renderSlider(news) {
     return (
-      <Slider {...this.settings}>
+      <Slider autoplay={false} slidesToShow={3}>
         {news.map(doc => (
-          <div key={doc.slug}>
-            <div className={styles['news-entity']}>
-              <div className={styles['preview']}>
-                <Link href={`/news/${doc.slug}`}>
-                  <PreviewPicture
-                    src={require('./../../assets/images/' + doc.thumbnail)}
-                  />
-                </Link>
-              </div>
-              <div className={styles['content']}>
-                <Link href={`/news/${doc.slug}`}>
-                  {doc.title}
-                </Link>
-                <div className={styles['bottom-line']}>
-                  <div className={styles['data']}>
-                    {formatDate(doc.createdAt)}
-                  </div>
+          <div key={doc.slug} className={styles['news-entity']}>
+            <div className={styles['preview']}>
+              <Link href={`/news/${doc.slug}`}>
+                <PreviewPicture
+                  src={require('./../../assets/images/' + doc.thumbnail)}
+                />
+              </Link>
+            </div>
+            <div className={styles['content']}>
+              <Link href={`/news/${doc.slug}`}>
+                {doc.title}
+              </Link>
+              <div className={styles['bottom-line']}>
+                <div className={styles['data']}>
+                  {formatDate(doc.createdAt)}
                 </div>
               </div>
             </div>
@@ -93,8 +80,10 @@ class NewsSlider extends Component {
     return (
       <div className={styles['section-wrapper']}>
         <Container>
-          <h3>Новости</h3>
-          {this.renderSlider(news)}
+          <div>
+            <h3>Новости</h3>
+            {this.renderSlider(news)}
+          </div>
         </Container>
       </div>
     )

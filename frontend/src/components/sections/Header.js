@@ -24,6 +24,8 @@ class HeaderContainer extends Component {
   ATTACHED_BREAKPOINT = 165
 
   componentDidMount() {
+    const initial = window.pageYOffset
+
     const scrollStream = fromEvent(window, 'scroll')
       .pipe(
         startWith(0),
@@ -73,8 +75,8 @@ const Header = ({ attached }) => {
           </header>
         </Container>
 
-        {(attached && WARNING_TEXT.length > 0)
-          && <WarningBanner text={WARNING_TEXT} />}
+        {/* {(attached && WARNING_TEXT.length > 0)
+          && <WarningBanner text={WARNING_TEXT} />} */}
       </div>
     </Fragment>
   )
@@ -82,19 +84,16 @@ const Header = ({ attached }) => {
 
 const HeaderContent = ({ navLinks, attached }) =>
   <div className={style.content}>
-    <a className={style.logoLink} href="/">
-      <div className={style['logo']}>
+    <div className={style['logo']}>
+      <NavLink to="/">
         <Logo minified={attached} />
-      </div>
-    </a>
+      </NavLink>
+    </div>
 
     <div className={style['navigation']}>
       <ul>
         {navLinks.map(({ title, path }) =>
-          <li
-            key={title}
-            onClick={() => window.location.reload()}
-          >
+          <li key={title}>
             <NavLink to={path}>{title}</NavLink>
           </li>
         )}
@@ -110,7 +109,7 @@ const HeaderContent = ({ navLinks, attached }) =>
 const SocialLinks = () =>
   <div className={style.social}>
     {SOCIAL_LINKS.map(({ title, href, icon }) =>
-      <div className={style.socialLink}>
+      <div key={title} className={style.socialLink}>
         <a
           href={href}
           title={title}

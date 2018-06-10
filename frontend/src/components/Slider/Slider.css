@@ -1,0 +1,171 @@
+@value primary from '../../styles/libs/colors.css';
+
+$timingFunction: cubic-bezier(0.215, 0.61, 0.355, 1);
+$fadeInOffset: 25px;
+$fadeInDuration: .65s;
+$stepDuration: .6s;
+$controlsDuration: .8s;
+$controlSize: 40px;
+
+
+.container {
+  position: relative;
+}
+
+.wrapper {
+  width: 100%;
+  overflow-x: hidden;
+  padding: 25px 0;
+
+  &.ready {
+    opacity: 1 !important;
+  }
+
+  &.controlsInside {
+    position: relative;
+  }
+}
+
+.slides {
+  width: 9999%;
+  display: flex;
+  position: relative;
+}
+
+.slide {
+  transform: translateX(0);
+  opacity: 1;
+  transition: opacity $fadeInDuration $timingFunction,
+              transform $fadeInDuration $timingFunction;
+}
+
+.slideFadeIn {
+  composes: slide;
+  transform: translateY($fadeInOffset);
+  opacity: 0;
+}
+
+.targetGroup {
+  animation-duration: $stepDuration;
+  animation-timing-function: $timingFunction;
+}
+
+.removeGroup {
+  composes: targetGroup;
+  animation-name: remove;
+}
+
+.addGroup {
+  composes: targetGroup;
+  animation-name: add;
+}
+
+@keyframes add {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes remove {
+  to {
+    width: 0;
+  }
+}
+
+.previous, .next {
+  border: 0;
+  outline: 0;
+  background: 0;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px;
+  padding: 0;
+
+  &:hover .arrow {
+    color: primary;
+  }
+
+  .controlsInside & {
+    margin-top: -$controlSize;
+    width: $controlSize;
+    height: $controlSize * 2;
+    background: rgba(255,255,255,.35);
+    opacity: 1;
+    box-shadow: 0 0 15px rgba(0,0,0,.2);
+    border-top-left-radius: 100vw;
+    border-bottom-left-radius: 100vw;
+    transition: left $controlsDuration $timingFunction,
+                right $controlsDuration $timingFunction;
+    transition-delay: $fadeInDuration;
+
+    .ready & {
+      animation-duration: $controlsDuration;
+      animation-timing-function: $timingFunction;
+      animation-delay: $fadeInDuration;
+    }
+  }
+}
+
+.arrow {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19pt;
+  color: rgba(0,0,0,.35);
+
+  & .controlsInside {
+    opacity: .35;
+  }
+}
+
+.previousArrow, .nextArrow {
+  composes: arrow;
+}
+
+.controlsInside .previous:hover, .next:hover {
+  background: rgba(255,255,255,.45);
+}
+
+.previous {
+  left: -65px;
+  transform: rotate(180deg);
+
+  .controlsInside & {
+    left: -$controlSize;
+
+    .previousArrow > span {
+      position: relative;
+      left: 3px;
+    }
+  }
+
+  .ready.controlsInside & {
+    left: 0;
+  }
+}
+
+.next {
+  right: -65px;
+
+  .controlsInside & {
+    right: -$controlSize;
+
+    .nextArrow > span {
+      position: relative;
+      left: 3px;
+    }
+  }
+
+  .ready.controlsInside & {
+    right: 0;
+  }
+}

@@ -5,11 +5,15 @@ import {
   SERVICE_CATEGORIES_UNLOADED
 } from './../constants/actionTypes'
 
-export default (state = {}, action) => {
+
+const defaultState = { isLoading: true }
+
+export default (state = defaultState, action) => {
   switch (action.type) {
     case APP_LOADED:
       return {
         ...state,
+        isLoading: false,
         onPageNotFound: action.onPageNotFound
       }
     case APP_UNLOADED:

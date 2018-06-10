@@ -171,6 +171,7 @@ module.exports = {
                   plugins: () => [
                     require('postcss-import'),
                     require('postcss-nested'),
+                    require('postcss-simple-vars'),
                     require('postcss-modules-values'),
                     require('postcss-color-function'),
                     require('postcss-flexbugs-fixes'),

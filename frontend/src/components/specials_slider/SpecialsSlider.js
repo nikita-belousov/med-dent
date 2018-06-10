@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuid from 'small-uuid'
-import Slider from 'react-slick'
 
 import styles from './../../styles/components/sections/SpecialsSlider.css'
+import { Slider } from '../Slider'
 import Section from './../Section'
 import Container from './../Container'
 import { SpecialCard } from './index'
 import { NavArrow, Link } from './../common'
-
 import { Specials as api } from './../../agent'
 
 import {
@@ -31,17 +30,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class SpecialsSlider extends Component {
-  settings = {
-    slidesToShow: 4,
-    infinite: true,
-    speed: 500,
-    draggable: false,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    prevArrow: <NavArrow wrapperClass={styles['prev-arrow-wrapper']} type="prev" />,
-    nextArrow: <NavArrow wrapperClass={styles['next-arrow-wrapper']} type="next" />
-  }
-
   componentWillMount() {
     this.props.onLoad(api.cards())
   }
@@ -52,10 +40,14 @@ class SpecialsSlider extends Component {
 
   renderSlider(card) {
     return (
-      <Slider {...this.settings}>
+      <Slider
+        slidesToShow={4}
+        autoplay={true}
+        controlsInside={true}
+      >
         {card.map(card => (
           <div key={card.slug}>
-            <SpecialCard {...card} />
+            <SpecialCard key={card.slug} {...card} />
           </div>
         ))}
       </Slider>

@@ -87,7 +87,7 @@
   height: 90px;
   display: flex;
   align-items: center;
-  font-family: 'Oswald';
+  font-family: 'Oswald', sans-serif;
   color: grey;
   text-align: center;
   font-size: 22pt;

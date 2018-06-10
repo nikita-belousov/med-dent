@@ -14,6 +14,7 @@ import Footer from './../sections/Footer'
 
 import { APPOINTMENT_CLOSE } from './../../constants/actionTypes'
 
+
 const mapStateToProps = ({ appointment }) => ({
   isAppointmentActive: appointment.isActive
 })
@@ -21,6 +22,7 @@ const mapStateToProps = ({ appointment }) => ({
 const mapDispatchToProps = dispatch => ({
   closeAppointmentModal: () => dispatch({ type: APPOINTMENT_CLOSE })
 })
+
 
 const Layout = ({
   children,
@@ -46,16 +48,18 @@ const Layout = ({
           <FloatingSection state='collapsed' />
         </Container>
         <Header />
-        <MainMenu api='category?_sort=order' />
+        <MainMenu />
         <div className='current-page'>
           {children}
         </div>
         <CountReview reviewsToShow={10} />
-        <NewsSlider api='news?_sort=published:desc' />
+        <NewsSlider />
         <Footer />
       </div>
     </MuiThemeProvider>
   )
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout))
+
+const connected = connect(mapStateToProps, mapDispatchToProps)(Layout)
+export default withRouter(connected)

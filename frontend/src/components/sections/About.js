@@ -31,7 +31,6 @@ class About extends Component {
   }
 
   onReached = () => {
-    console.log('reached')
     this.setState({ scrollReached: true })
     this.scrollStream.unsubscribe()
   }

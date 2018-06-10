@@ -1,13 +1,14 @@
 import superagentPromise from 'superagent-promise'
 import _superagent from 'superagent'
 
+
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const ROOT = process.env.NODE_ENV === 'production'
-  ? '188.166.23.34'
+const host = process.env.NODE_ENV === 'production'
+  ? '139.59.152.152'
   : 'localhost:8080'
 
-const API_ROOT = `http://${ROOT}/api`
+const API_ROOT = `http://${host}/api`
 
 const getBody = res => res.body
 

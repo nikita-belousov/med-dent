@@ -1,7 +1,7 @@
 @value secondary from './../libs/colors.css';
 @value primary-gradient, primary from './../libs/colors.css';
 @value alt-gradient from './../libs/colors.css';
-@value shadow-primary from './../libs/effects.css';
+@value shadow-primary, is-out-cubic from './../libs/effects.css';
 
 .wrapper  {
   position: absolute;
@@ -40,8 +40,8 @@
   border-top-right-radius: 12px;
   box-shadow: shadow-primary;
   color: #fff;
-  transition: margin-bottom .4s ease-out,
-              transform .2s ease-out;
+  transition: margin-bottom .6s is-out-cubic,
+              transform .3s is-out-cubic;
 }
 
 .floating-section--collapsed {

@@ -50,7 +50,6 @@ class MainMenu extends Component {
         to={`/${slug}`}
         activeClassName={styles['category-link--active']}
         className={styles['category-link']}
-        onClick={() => window.location.reload()}
       >
         {_.capitalize(title)}
       </NavLink>
