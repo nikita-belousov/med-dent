@@ -1,0 +1,1 @@
+export { ArticlesRoutes } from './ArticlesRoutes'

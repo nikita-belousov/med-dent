@@ -1,0 +1,73 @@
+@value light-grey, primary from '../../styles/libs/colors.css';
+@value border-radius-big from '../../styles/libs/effects.css';
+@value triangle-size: 6px;
+
+
+.feedback, .response {
+  border-radius: border-radius-big;
+  padding: 20px;
+  padding-right: 40px;
+
+  > p {
+    margin: 0;
+  }
+}
+
+.feedback {
+  background: light-grey;
+}
+
+.response {
+  margin-top: 20px;
+  color: #fff;
+  background: primary;
+  cursor: pointer;
+  transition: background .1s ease-out;
+
+  &:hover {
+    background: color(#2ac4ff tint(15%));
+  }
+
+  > p {
+    padding-top: 20px;
+  }
+}
+
+.toggleFeedback {
+  display: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.toggleResponse {
+  position: relative;
+  text-indent: 16px;
+  font-weight: bold;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: triangle-size solid #fff;
+    border-bottom: triangle-size solid transparent;
+    border-top: triangle-size solid transparent;
+    transition: transform .2s ease-in-out;
+  }
+}
+
+.responseShown {
+  composes: response;
+  cursor: default;
+
+  &:hover {
+    background: primary;
+  }
+
+  .toggleResponse::before {
+    transform: rotate(90deg);
+  }
+}

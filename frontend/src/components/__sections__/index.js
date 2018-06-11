@@ -1,0 +1,7 @@
+export { About } from './About'
+export { CountReview } from './CountReview'
+export { Header } from './Header'
+export { NewsSlider } from './NewsSlider'
+export { ServicesMenu } from './ServicesMenu'
+export { SpecialsSlider } from './SpecialsSlider'
+export { Footer } from './Footer'

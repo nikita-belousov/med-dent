@@ -1,0 +1,42 @@
+@value family-bold from '../../../styles/libs/typography.css';
+
+
+.wrapper {
+  padding-top: 20px;
+}
+
+.caption {
+  font-family: 'fira-sans', Helvetica, sans-serif;
+  font-size: 29pt;
+}
+
+.sliderWrapper {
+  display: flex;
+  overflow-x: visible;
+}
+
+.nextArrowWrapper, .prevArrowWrapper {
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+}
+
+.nextArrowWrapper {
+  right: -40px;
+}
+
+.prevArrowWrapper {
+  left: -40px;
+}
+
+.moreAbout {
+  font-family: family-bold;
+  text-align: center;
+  padding-top: 40px;
+  font-size: 14pt;
+}
+
+.slider {
+  display: flex;
+  width: 10000px;
+}

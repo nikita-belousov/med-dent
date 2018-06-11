@@ -1,7 +1,7 @@
 import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import style from './WarningBanner.css'
-import Container from './../Container'
+import { Container } from '../__basic__'
 
 
 export const WarningBanner = ({ text }) =>

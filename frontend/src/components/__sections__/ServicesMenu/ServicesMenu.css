@@ -1,0 +1,80 @@
+@value primary-gradient, secondary, alt-reversed, yellow from '../../../styles/libs/colors.css';
+@value family, family-bold from '../../../styles/libs/typography.css';
+@value border-radius-small from '../../../styles/libs/effects.css';
+
+
+.bg {
+  background: primary-gradient;
+  padding: 3px 0;
+  color: #fff;
+
+  a {
+    color: #fff;
+    border-bottom-color: rgba(255,255,255, .4);
+
+    &:hover {
+      border-bottom-color: white;
+    }
+  }
+}
+
+ul.navigation {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  padding-left: 0;
+
+  li {
+    margin-right: 2.5em;
+  }
+}
+
+.categoryLink {
+  position: relative;
+}
+
+.categoryLinkActive {
+  composes: categoryLink;
+  z-index: 2;
+  border: 0;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    z-index: 1;
+    display: block;
+    width: calc(100% + 26px);
+    height: 28px;
+    position: relative;
+    margin-top: -26px;
+    left: -12px;
+    border-radius: 100vh;
+    background: alt-reversed;
+  }
+}
+
+.dropdownWrapper {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: -15px;
+  width: 260px;
+}
+
+.dropdown {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    margin: .6em 0;
+  }
+
+  a {
+    font-family: family;
+    font-weight: normal;
+  }
+
+  a.main {
+    font-family: family-bold;
+    font-weight: 600;
+  }
+}

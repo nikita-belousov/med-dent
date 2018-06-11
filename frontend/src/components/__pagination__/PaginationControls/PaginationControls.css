@@ -1,0 +1,29 @@
+.nav {
+  padding-top: 3.6em;
+  display: flex;
+  justify-content: center;
+}
+
+.linksInner {
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
+
+.navLink {
+  margin: 0 .6em;
+  font-size: 16pt;
+}
+
+.prev, .next {
+  composes: navLink;
+  position: absolute;
+}
+
+.prev {
+  left: -2.2em;
+}
+
+.next {
+  right: -2.2em;
+}

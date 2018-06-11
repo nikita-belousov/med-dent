@@ -6,8 +6,8 @@ import classNames from 'classnames'
 import times from 'lodash/times'
 import { fromEvent, interval } from 'rxjs'
 import { throttleTime, startWith, map, filter, withLatestFrom, take, tap } from 'rxjs/operators'
-
 import style from './Slider.css'
+
 
 export class Slider extends Component {
   static propTypes = {

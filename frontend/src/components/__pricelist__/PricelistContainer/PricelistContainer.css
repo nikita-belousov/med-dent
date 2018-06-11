@@ -1,0 +1,11 @@
+.columns {
+  display: flex;
+
+  .side {
+    width: 360px;
+  }
+
+  .main {
+    width: 100%;
+  }
+}

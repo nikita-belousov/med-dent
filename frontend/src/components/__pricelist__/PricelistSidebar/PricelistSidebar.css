@@ -1,0 +1,92 @@
+@value primary, primary-gradient from '../../../styles/libs/colors.css';
+@value border-radius-small from '../../../styles/libs/effects.css';
+
+
+.navbar {
+  background: linear-gradient(to bottom, #fbdf8d, #f8c25a);
+  padding: 26px;
+  border-radius: border-radius-small;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      position: relative;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.navbarLink {
+
+  a {
+    position: relative;
+    display: block;
+    padding: 7px 0;
+    color: #000;
+    border: 0;
+    text-decoration: none;
+    line-height: 26px;
+  }
+
+  &::before {
+    content: '';
+    opacity: 0;
+    display: block;
+    position: absolute;
+    left: -40px;
+    right: -26px;
+    top: 0; bottom: 0;
+    background: primary-gradient;
+    border-top-left-radius: border-radius-small;
+    border-bottom-left-radius: border-radius-small;
+  }
+
+  .arrow-tale {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -46px;
+    width: 20px;
+    background: primary-gradient;
+    opacity: 0;
+
+    &::before {
+      content: '';
+      display: block;
+      left: 0;
+      position: absolute;
+      border-left: 20px solid transparent;
+      border-top: 20px solid white;
+      border-bottom: 20px solid white;
+    }
+  }
+}
+
+.navbarLinkActive {
+  composes: navbarLink;
+
+  &::before, .arrowTale {
+    opacity: 1 !important;
+  }
+
+  a {
+    top: -1px;
+    color: #fff;
+    font-size: 15pt;
+    line-height: 26px;
+    transition: all .1s ease-in-out;
+  }
+}
+
+.navbarLink:hover {
+
+  &:before, .arrowTale {
+    opacity: .5;
+  }
+}

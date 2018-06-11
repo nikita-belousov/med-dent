@@ -1,0 +1,1 @@
+export { NewsRoutes } from './NewsRoutes'

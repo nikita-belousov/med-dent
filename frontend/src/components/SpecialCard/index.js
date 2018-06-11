@@ -1,0 +1,1 @@
+export { SpecialCard } from './SpecialCard'

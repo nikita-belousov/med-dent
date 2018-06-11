@@ -1,0 +1,119 @@
+@value primary from '../../../styles/libs/colors.css';
+@value attachedHeight: 50px;
+
+
+.spaceFiller {
+  height: 200px;
+}
+
+.wrapper {
+  height: 200px;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.wrapperAttached {
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99999;
+  display: block;
+  box-shadow: 0px 5px 50px 0px rgba(0,0,0,0.25);
+  background: #fff;
+
+  animation-name: attachedAppear;
+  animation-duration: .2s;
+  animation-timing-function: ease-out;
+
+  .header {
+    width: 100%;
+    height: attachedHeight;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .navigation {
+    padding-left: 40px;
+    flex-grow: 1;
+    top: 0;
+  }
+}
+
+.header {
+  width: 100%;
+  height: 85px;
+  border: 3px solid primary;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo {
+  padding-left: 20px;
+
+  a {
+    display: block;
+    border: 0;
+    text-decoration: 0;
+    cursor: pointer;
+  }
+}
+
+.navigation {
+  ul {
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+    padding: 0 1.2em;
+    line-height: 0;
+    font-weight: 600;
+  }
+}
+
+.socialWrapper {
+  padding-left: 40px;
+}
+
+.social {
+  display: flex;
+}
+
+.socialLink {
+  margin-left: 18px;
+  font-size: 20pt;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  a {
+    border: 0;
+    text-decoration: 0;
+  }
+}
+
+
+@keyframes attachedAppear {
+  from {
+    top: -1 * attachedHeight;
+  }
+
+  to {
+    top: 0;
+  }
+}

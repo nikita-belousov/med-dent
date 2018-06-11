@@ -1,0 +1,13 @@
+.giveFeedback {
+  display: flex;
+  justify-content: center;
+}
+
+.feedbackPopup {
+  position: absolute;
+  margin-top: 35px;
+}
+
+.reviews {
+  padding-top: 40px;
+}

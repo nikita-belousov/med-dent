@@ -1,0 +1,76 @@
+@value primary, primary-gradient from '../../styles/libs/colors.css';
+@value shadow-primary, is-out-cubic from '../../styles/libs/effects.css';
+$photoSize: 160px;
+
+
+.dentist {
+  margin-bottom: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:hover .photo {
+    transform: scale(1.05);
+    box-shadow: shadow-primary;
+  }
+}
+
+.photo {
+  position: relative;
+  z-index: 10;
+  width: $photoSize;
+  height: $photoSize;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: auto 90%;
+  background-color: #fff;
+  box-shadow: 0;
+  transform: scale(1);
+  transition: box-shadow .1s ease-out,
+              transform .1s ease-out;
+}
+
+.about {
+  position: relative;
+  width: 100%;
+  padding: 1em;
+  padding-top: $photoSize / 2;
+  margin-top: -$photoSize / 2;
+  background: primary-gradient;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  height: $photoSize + 15px;
+}
+
+.name {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.positionsList {
+  font-weight: normal;
+}
+
+.labelWrapper {
+  margin: 5px 12px 5px 0;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.experience {
+  font-style: italic;
+  font-size: 11pt;
+}
+
+.description {
+  margin-top: 30px;
+}

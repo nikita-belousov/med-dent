@@ -1,0 +1,6 @@
+export { ArticlesRoutes } from './ArticlesRoutes'
+export { ReviewsRoutes } from './ReviewsRoutes'
+export { QuestionsRoutes } from './QuestionsRoutes'
+export { StaffRoutes } from './StaffRoutes'
+export { NewsRoutes } from './NewsRoutes'
+export { SpecialsRoutes } from './SpecialsRoutes'

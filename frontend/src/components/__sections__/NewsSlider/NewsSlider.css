@@ -1,0 +1,48 @@
+@value small-grey from '../../../styles/libs/typography.css';
+
+
+.sectionWrapper {
+  padding: 40px 0;
+  position: relative;
+}
+
+.newsEntity {
+  display: flex;
+  width: 360px;
+
+  .preview {
+    width: 100px;
+    position: relative;
+    left: 1px;
+  }
+
+  .content {
+    padding-left: 40px;
+    width: 100%;
+  }
+}
+
+.bottomLine {
+  display: flex;
+  margin-top: 8px;
+}
+
+.data {
+  composes: small-grey;
+
+  margin-top: -5px;
+  margin-right: 20px;
+}
+
+.nextArrowWrapper, .prevArrowWrapper {
+  position: absolute;
+  top: 25px;
+}
+
+.nextArrowWrapper {
+  right: -40px;
+}
+
+.prevArrowWrapper {
+  left: -40px;
+}

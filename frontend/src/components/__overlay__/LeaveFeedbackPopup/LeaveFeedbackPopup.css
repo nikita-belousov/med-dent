@@ -1,0 +1,22 @@
+@value small-input-width from '../../../styles/libs/sizes.css';
+
+
+.wrapper {
+  width: 400px;
+}
+
+.nameInput {
+  width: small-input-width;
+}
+
+.ratingInput {
+  margin: 10px 0;
+}
+
+.hint {
+  padding: 1em 1em 1em 0;
+
+  > * {
+    margin: 0;
+  }
+}

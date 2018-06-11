@@ -1,0 +1,10 @@
+@value primary-gradient from '../../../styles/libs/colors.css';
+
+
+.positionLabel {
+  display: inline-block;
+  border-radius: 100vh;
+  background: primary-gradient;
+  color: #fff;
+  padding: 0 .8em;
+}

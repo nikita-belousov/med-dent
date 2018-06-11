@@ -1,0 +1,7 @@
+export { ChildStomatology } from './ChildStomatology'
+export { Hygiene } from './Hygiene'
+export { Implantology } from './Implantology'
+export { Orthodontics } from './Orthodontics'
+export { Orthopedics } from './Orthopedics'
+export { Surgery } from './Surgery'
+export { Therapy } from './Therapy'

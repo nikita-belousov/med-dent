@@ -1,0 +1,96 @@
+@value primary, primary-gradient from '../../../styles/libs/colors.css';
+@value border-radius-small from '../../../styles/libs/effects.css';
+
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+
+  .bySocial {
+    position: relative;
+    top: 8px;
+  }
+
+  .byTitle {
+    width: 300px;
+    position: relative;
+
+    .placeholder {
+      position: absolute;
+      top: 9px;
+      left: 19px;
+    }
+  }
+}
+
+.prices {
+  width: 700px;
+  margin: auto;
+  border-radius: border-radius-small;
+  color: #fff;
+  background: #4fadbf;
+
+  .inner {
+    padding: 26px 40px;
+  }
+}
+
+.pricesInteractive {
+  composes: prices;
+  height: 800px;
+
+  .inner {
+    overflow-y: scroll;
+    height: calc(100% - 100px); /* вычитаем высоту .top-bar'а */
+    padding-bottom: 80px;
+  }
+
+  .topBar {
+    padding: 26px 40px;
+  }
+}
+
+.sectionHeading {
+  font-size: 26pt;
+  font-weight: 600;
+  text-align: center;
+}
+
+.categoryTitle {
+  font-size: 26pt;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 40px;
+}
+
+.category:first-child .categoryTitle {
+  padding-top: 14px;
+}
+
+.service {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0;
+
+  .title, .price {
+    font-size: 14pt;
+  }
+
+  .title {
+    max-width: 500px;
+  }
+
+  .line {
+    flex-grow: 1;
+    height: 1px;
+    background: #fff;
+    position: relative;
+    top: 15px;
+    margin: 0 16px;
+    opacity: .4;
+  }
+}
+
+.noResults {
+  text-align: center;
+}

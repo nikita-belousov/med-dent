@@ -1,0 +1,26 @@
+.columns {
+  display: flex;
+
+  .side {
+    width: 100px;
+  }
+
+  .content {
+    margin-left: 20px;
+    width: 580px;
+  }
+}
+
+.headlineLink {
+  font-size: 18pt;
+}
+
+.caption {
+  position: relative;
+  top: -10px;
+  margin-bottom: 10px;
+}
+
+.date {
+  composes: small-grey from '../../../styles/libs/typography.css';
+}

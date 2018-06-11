@@ -1,7 +1,0 @@
-.pagination-item {
-  margin-bottom: 80px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}

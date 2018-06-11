@@ -1,0 +1,21 @@
+@value yellow, light-grey from '../../styles/libs/colors.css';
+
+
+.starWrapper {
+  display: inline-block;
+  margin: 0 1px;
+
+  svg {
+    width: 18px;
+    height: auto;
+
+    &.empty {
+      fill: light-grey;
+      stroke-width: 20;
+    }
+
+    &.full {
+      fill: yellow;
+    }
+  }
+}

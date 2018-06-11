@@ -1,0 +1,24 @@
+@value primary, grey from '../../../styles/libs/colors.css';
+
+
+.arrowPrev {
+  width: 20px;
+  height: 32px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.arrowNext {
+  composes: arrowPrev;
+  transform: rotate(180deg);
+}
+
+.arrowNext, .arrowPrev {
+  svg {
+    fill: grey;
+
+    &:hover {
+      fill: primary;
+    }
+  }
+}

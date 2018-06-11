@@ -1,0 +1,1 @@
+export { YaShare } from './YaShare'

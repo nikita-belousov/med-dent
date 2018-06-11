@@ -1,0 +1,1 @@
+export { PageCaption } from './PageCaption'

@@ -1,0 +1,79 @@
+@value primary, light-grey from '../../../styles/libs/colors.css';
+@value border-radius-small, shadow-primary from '../../../styles/libs/effects.css';
+
+
+.select {
+  border: 0;
+}
+
+.selectSelecting {
+  composes: select;
+
+  .angleWrapper > * {
+    transform: rotate(180deg);
+  }
+}
+
+.current, .optionsList {
+  border-radius: border-radius-small;
+}
+
+.current {
+  background: primary;
+  color: #fff;
+  padding: 5px 40px 5px 15px;
+  position: relative;
+  cursor: pointer;
+  transition: background .1s ease-out;
+
+  &:hover {
+    background: color(#2ac4ff tint(15%));
+  }
+
+  .currentName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .angleWrapper {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 15px;
+    height: 15px;
+    font-size: 16pt;
+
+    > * {
+      transition: transform .2s ease-out;
+    }
+  }
+}
+
+.optionsList {
+  position: absolute;
+  top: 53%;
+  margin-bottom: 40px;
+  z-index: 10000;
+  background: #fff;
+  box-shadow: shadow-primary;
+}
+
+.option {
+  padding: 10px 15px;
+  cursor: pointer;
+
+  &:first-child {
+    border-top-left-radius: border-radius-small;
+    border-top-right-radius: border-radius-small;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: border-radius-small;
+    border-bottom-right-radius: border-radius-small;
+  }
+
+  &:hover {
+    background-color: light-grey;
+  }
+}

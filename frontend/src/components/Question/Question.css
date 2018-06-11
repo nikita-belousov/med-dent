@@ -1,0 +1,8 @@
+.questionWrapper {
+  width: 700px;
+  margin-bottom: 100px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

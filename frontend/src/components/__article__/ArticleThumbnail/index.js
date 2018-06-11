@@ -1,0 +1,1 @@
+export { ArticleThumbnail } from './ArticleThumbnail'

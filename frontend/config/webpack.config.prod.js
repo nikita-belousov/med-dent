@@ -95,6 +95,14 @@ module.exports = {
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
       'utils': path.resolve('./src/utils'),
+      'med-dent': path.resolve('./src/components'),
+      'med-dent/article': path.resolve('./src/components/__article__'),
+      'med-dent/basic': path.resolve('./src/components/__basic__'),
+      'med-dent/containers': path.resolve('./src/components/__containers__'),
+      'med-dent/overlay': path.resolve('./src/components/__overlay__'),
+      'med-dent/pages': path.resolve('./src/components/__pages__'),
+      'med-dent/routes': path.resolve('./src/components/__routes__'),
+      'med-dent/sections': path.resolve('./src/components/__sections__')
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
