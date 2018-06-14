@@ -1,20 +1,19 @@
-import {
-  CATEGORY_PAGE_LOADED,
-  CATEGORY_PAGE_UNLOADED
-} from './../constants/actionTypes'
+import { DATA_RECEIVED } from '../actions'
+import { CATEGORY_PAGE_CONTENT } from '../constants'
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case CATEGORY_PAGE_LOADED:
-      return {
-        ...state,
-        services: action.payload[0].docs,
-        doctors: action.payload[1]
-          .reduce((res, el) => [...res, el.doc], []),
-        loaded: true
+    case DATA_RECEIVED:
+      const content = action.payload.data[CATEGORY_PAGE_CONTENT]
+      if (content && content.dentists && content.services) {
+        return {
+          ...state,
+          services: content.services.docs,
+          dentists: content.dentists
+            .reduce((res, { doc }) => [ ...res, doc ], []),
+        }
       }
-    case CATEGORY_PAGE_UNLOADED:
-      return {}
+      return state
     default:
       return state
   }

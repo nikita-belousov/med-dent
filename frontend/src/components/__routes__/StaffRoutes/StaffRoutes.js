@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { Staff as api } from '../../../agent'
+
+import { fetchDentistsPage } from '../../../actions'
 import { NarrowPage } from '../../__pages__'
 import { Pagination } from '../../__pagination__'
 import { Dentist }  from '../../Dentist'
@@ -17,16 +18,14 @@ export const StaffRoutes = () => (
       exact
       path='/staff/pages/:num'
       render={({ match }) =>
-        <NarrowPage
-          breadcrumps={[{ 'главная': '/' }]}
-          heading='Наши врачи'
-        >
+        <NarrowPage heading='Наши врачи'>
           <Pagination
             itemsOnPage={999}
-            api={api}
+            fetchData={fetchDentistsPage}
             path='staff'
             itemComponent={Dentist}
             pageToShow={parseInt(match.params.num)}
+            gridView={true}
           />
         </NarrowPage>}
     />

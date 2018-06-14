@@ -72,7 +72,7 @@ export class Slider extends Component {
   }
 
   init() {
-    this.initAppearance()
+    // this.initAppearance()
     this.initSlides()
     this.initMargins()
     this.initControls()
@@ -98,7 +98,8 @@ export class Slider extends Component {
         map(() => this.sliderNode.getBoundingClientRect().top),
         filter(val => val < breakpoint),
         take(1)
-      ).subscribe(onReady)
+      )
+      .subscribe(onReady)
   }
 
   initSlides() {
@@ -195,7 +196,7 @@ export class Slider extends Component {
     } = this.state
 
     if (ready ||
-        !(slidesReady && marginsReady && controlsReady && appearanceReady)) {
+        !(slidesReady && marginsReady && controlsReady)) {
       return
     }
 
@@ -207,7 +208,7 @@ export class Slider extends Component {
 
   onReady() {
     this.initialRender = false
-    this.scroll$.unsubscribe()
+    // this.scroll$.unsubscribe()
 
     if (this.props.autoplay) this.initAutoplay()
   }

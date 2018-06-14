@@ -1,11 +1,12 @@
 const getAll = (Model, options) => (req, res, next) => {
-  let count, generateResponse, populate, query
+  let count, generateResponse, populate, query, collection
 
   if (options) {
     count = options.count
     populate = options.populate
     generateResponse = options.generateResponse
     query = options.query
+    collection = options.collection
   }
 
   populate = populate || ''
@@ -45,6 +46,7 @@ const getAll = (Model, options) => (req, res, next) => {
         : { docs }
 
       if (count) response.count = count
+      if (collection) response.collection = collection
 
       res.json(response)
     })

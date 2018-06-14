@@ -4,21 +4,21 @@ import { NarrowPage } from '../index'
 import { Article } from '../../__article__'
 
 
-const mapStateToProps = state => ({
-  title: state.articlePage.title
-})
+const mapStateToProps = state => ({ title: state.articlePage.title })
 
-let ArticlePage = ({ api, slug, title }) => (
+
+let ArticlePage = ({ api, slug, title, fetchData }) =>
   <NarrowPage
     squeeze={true}
     heading={title}
   >
     <Article
-      api={api}
+      fetchData={fetchData}
       slug={slug}
     />
   </NarrowPage>
-)
+
 
 ArticlePage = connect(mapStateToProps, null)(ArticlePage)
+
 export { ArticlePage }

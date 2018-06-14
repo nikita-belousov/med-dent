@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
+import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 
 import { LOADING_TIME } from '../../constants/config'
 import { APP_LOADED, APP_UNLOADED } from '../../constants/actionTypes'
 import agent from '../../agent'
+import style from './App.css'
 import { Layout, AppLoading } from '../index'
 import * as routes from '../__routes__'
 import * as pages from '../__pages__'
@@ -32,8 +34,7 @@ let App = class extends Component {
   state = { pageNotFound: false }
 
   componentWillMount() {
-    // setTimeout(() => this.props.onLoad(this.onPageNotFound), LOADING_TIME)
-    setTimeout(() => this.props.onLoad(this.onPageNotFound))
+    // setTimeout(() => this.props.onLoad(this.onPageNotFound))
   }
 
   getChildContext() {
@@ -47,18 +48,24 @@ let App = class extends Component {
   }
 
   render() {
-    const appContent =
-      <BrowserRouter>
-        <Layout>
-          {this.state.pageNotFound
-            ? <pages.NotFoundPage />
-            : <Routes />}
-        </Layout>
-      </BrowserRouter>
+    const className = classNames({
+      [style.isLoading]: this.props.isLoading,
+      [style.ready]: !this.props.isLoading
+    })
 
-    const appLoading = <AppLoading />
+    return (
+      <div className={className}>
+        <BrowserRouter>
+          <Fragment>
+            {this.props.isLoading && <AppLoading />}
 
-    return this.props.isLoading ? appLoading : appContent
+            <Layout>
+              {this.state.pageNotFound ? <pages.NotFoundPage /> : <Routes />}
+            </Layout>
+          </Fragment>
+        </BrowserRouter>
+      </div>
+    )
   }
 }
 
@@ -100,21 +107,11 @@ const Routes = () =>
 
     <Route
       path='/news'
-      render={() =>
-        <routes.ArticlesRoutes
-          path='news'
-          api={agent.News}
-          title='Новости'
-        />}
+      render={routes.NewsRoutes}
     />
     <Route
       path='/specials'
-      render={() =>
-        <routes.ArticlesRoutes
-          path='specials'
-          api={agent.Specials}
-          title='Акции'
-        />}
+      render={routes.SpecialsRoutes}
     />
 
     <Route

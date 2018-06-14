@@ -1,17 +1,18 @@
-import {
-  NEWS_SLIDER_LOADED,
-  NEWS_SLIDER_UNLOADED
-} from './../constants/actionTypes'
+import { NEWS_SLIDES_COLLECTION } from '../constants'
+import { DATA_RECEIVED } from '../actions'
+
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case NEWS_SLIDER_LOADED:
-      return {
-        ...state,
-        news: action.payload.docs || []
+    case DATA_RECEIVED:
+      const news = action.payload.data[NEWS_SLIDES_COLLECTION]
+      if (news) {
+        return {
+          ...state,
+          news: news.docs
+        }
       }
-    case NEWS_SLIDER_UNLOADED:
-      return {}
+      return state
     default:
       return state
   }

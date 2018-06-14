@@ -1,12 +1,11 @@
 import React from 'react'
 import { ArticlesRoutes } from '../index'
-import { News as api } from '../../../agent'
+import { fetchNewsPage, fetchNewsArticle } from '../../../actions'
 
-
-export const NewsRoutes = () => (
+export const NewsRoutes = () =>
   <ArticlesRoutes
     path='news'
-    api={api}
+    fetchArticle={fetchNewsArticle}
+    fetchPage={fetchNewsPage}
     title='Новости'
   />
-)

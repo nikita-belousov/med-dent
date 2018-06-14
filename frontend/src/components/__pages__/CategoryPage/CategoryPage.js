@@ -1,55 +1,35 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
-import {
-  CATEGORY_PAGE_LOADED,
-  CATEGORY_PAGE_UNLOADED
-} from '../../../constants/actionTypes'
-
-import agent from '../../../agent'
 import { connect } from 'react-redux'
+
+import { fetchCategoryPage } from '../../../actions'
 import style from './CategoryPage.css'
 import { NarrowPage } from '../index'
 import { PricelistTable } from '../../__pricelist__'
 import { PositionLabel } from '../../__basic__'
 
 
-const mapStateToProps = state => ({
-  ...state.categoryPage
-})
+const mapStateToProps = state => ({ ...state.categoryPage })
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload =>
-    dispatch({ type: CATEGORY_PAGE_LOADED, payload }),
-  onUnload: () =>
-    dispatch({ type: CATEGORY_PAGE_UNLOADED })
-})
+const mapDispatchToProps = { fetchCategoryPage }
 
 
 let CategoryPage = class extends Component {
   static propTypes = {
-    categoryId: PropTypes.string,
-    doctors: PropTypes.array,
+    categoryId: PropTypes.string.isRequired,
+    dentistsIds: PropTypes.array.isRequired,
+    dentists: PropTypes.array,
+    services: PropTypes.array,
     renderContent: PropTypes.func,
-    renderAside: PropTypes.func,
+    renderAside: PropTypes.func
   }
 
   componentWillMount() {
-    const { categoryId, dentistsIds } = this.props
-
-    this.props.onLoad(
-      Promise.all([
-        agent.Services.byCategory(categoryId),
-        Promise.all(dentistsIds.map(agent.Staff.byId))
-      ])
-    )
+    const { categoryId, dentistsIds, fetchCategoryPage } = this.props
+    fetchCategoryPage(categoryId, dentistsIds)
   }
 
-  componentWillUnmount() {
-    this.props.onUnload()
-  }
-
-  renderDoctor({ imageFolder, _id, name, positions }) {
+  renderDentist({ imageFolder, _id, name, positions }) {
     let fullSrc
     if (imageFolder) {
       fullSrc = require(`../../../assets/images/staff/${imageFolder}/full.png`)
@@ -77,9 +57,9 @@ let CategoryPage = class extends Component {
   }
 
   render() {
-    const { title, loaded, doctors, services } = this.props
+    const { title, dentists, services } = this.props
 
-    if (!loaded) {
+    if (!dentists || !services) {
       return null
     }
 
@@ -91,7 +71,7 @@ let CategoryPage = class extends Component {
               {this.props.renderContent()}
             </div>
             <div className={style.aside}>
-              {doctors && doctors.map(this.renderDoctor)}
+              {dentists && dentists.map(this.renderDentist)}
             </div>
           </div>
           <div className={style.pricelist}>
@@ -105,4 +85,5 @@ let CategoryPage = class extends Component {
 
 
 CategoryPage = connect(mapStateToProps, mapDispatchToProps)(CategoryPage)
+
 export { CategoryPage }

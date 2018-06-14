@@ -1,4 +1,4 @@
-@value is-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+@value ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
 @value shadow-primary: 0px 8px 30px 0px rgba(0,0,0,0.2);
 @value shadow-big: 0px 8px 60px 0px rgba(0,0,0,0.2);
 @value border-radius-small: 10px;

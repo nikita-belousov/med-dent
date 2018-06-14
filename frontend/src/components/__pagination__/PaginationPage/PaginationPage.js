@@ -9,24 +9,22 @@ export const PaginationPage = ({
   pageToShow,
   itemComponent,
   path,
-  docs
+  docs,
+  gridView
 }) =>
   <div>
-    <div>
-      <PaginationItems
-        docs={docs}
-        path={path}
-        itemComponent={itemComponent}
-      />
-    </div>
+    <PaginationItems
+      gridView={gridView}
+      docs={docs}
+      path={path}
+      itemComponent={itemComponent}
+    />
 
     {(totalPages > 1) &&
-      <div>
-        <PaginationControls
-          path={path}
-          pager={pager}
-          totalPages={totalPages}
-          pageToShow={pageToShow}
-        />
-      </div>}
+      <PaginationControls
+        path={path}
+        pager={pager}
+        totalPages={totalPages}
+        pageToShow={pageToShow}
+      />}
   </div>

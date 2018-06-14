@@ -7,6 +7,10 @@
   min-width: 0;
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 body {
   font-family: family;
   font-size: 12pt;

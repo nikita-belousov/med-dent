@@ -1,11 +1,11 @@
 import React from 'react'
 import { ArticlesRoutes } from '../index'
-import { Specials as api } from '../../../agent'
+import { fetchSpecialsPage, fetchSpecialArticle } from '../../../actions'
 
-export const SpecialsRoutes = () => (
+export const SpecialsRoutes = () =>
   <ArticlesRoutes
     path='specials'
-    api={api}
+    fetchArticle={fetchSpecialArticle}
+    fetchPage={fetchSpecialsPage}
     title='Акции'
   />
-)

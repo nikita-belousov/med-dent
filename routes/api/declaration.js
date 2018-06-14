@@ -5,9 +5,11 @@ const passport = require('./../passport')
 const notification = require('./../../emails/notification')
 const { formatPhoneInternational } = require('./../../utils')
 
+
 const notificationEmail = JSON.parse(
   fs.readFileSync('./config/notificationEmail.json', 'utf-8')
 )[process.env.NODE_ENV || 'development']
+
 
 const questions = createApi(
   mongoose.model('Question'),
@@ -133,7 +135,9 @@ const specials = createApi(
 const serviceCategories = createApi(
   mongoose.model('ServiceCategory'),
   [
-    'get',
+    {
+      method: 'get'
+    },
     {
       method: 'post',
       auth: 'admin'

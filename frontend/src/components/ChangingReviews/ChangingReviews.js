@@ -3,28 +3,16 @@ import PropTypes from 'prop-types'
 import truncate from 'lodash/truncate'
 import { connect } from 'react-redux'
 
-import {
-  CHANGING_REVIEWS_LOADED,
-  CHANGING_REVIEWS_UNLOADED
-} from '../../constants/actionTypes'
-
-import { Reviews as api } from '../../agent'
+import { fetchReviewsSlides } from '../../actions'
 import style from './ChangingReviews.css'
 import { Link, Paragraph } from '../__basic__'
 import { StaticRating }  from '../StaticRating'
 import { ClosesOnExternalClick }  from '../ClosesOnExternalClick'
 
 
-const mapStateToProps = state => ({
-  reviews: state.changingReviews.reviews
-})
+const mapStateToProps = state => ({ reviews: state.changingReviews.reviews })
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload =>
-    dispatch({ type: CHANGING_REVIEWS_LOADED, payload }),
-  onUnload: () =>
-    dispatch({ type: CHANGING_REVIEWS_UNLOADED })
-})
+const mapDispatchToProps = ({ fetchReviewsSlides })
 
 
 let ChangingReviews = class extends Component {
@@ -34,7 +22,6 @@ let ChangingReviews = class extends Component {
   }
 
   static propTypes = {
-    onLoad: PropTypes.func.isRequired,
     quantity: PropTypes.number,
     interval: PropTypes.number,
     maxLength: PropTypes.number
@@ -47,8 +34,7 @@ let ChangingReviews = class extends Component {
   }
 
   componentWillMount() {
-    const { onLoad, quantity } = this.props
-    onLoad(api.page(quantity, 1))
+    this.props.fetchReviewsSlides()
   }
 
   componentDidMount() {
@@ -64,11 +50,6 @@ let ChangingReviews = class extends Component {
           }))
       }
     }, interval)
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload()
-    clearInterval(this.interval)
   }
 
   onFullClick = e => {
@@ -96,6 +77,7 @@ let ChangingReviews = class extends Component {
           <Paragraph>
             {truncate(text, { length: maxChars, separator: ' ' })}
           </Paragraph>
+
           <div className={style.moreLink}>
             <Link
               onClick={this.onFullClick}

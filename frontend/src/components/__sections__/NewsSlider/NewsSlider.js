@@ -4,40 +4,21 @@ import { connect } from 'react-redux'
 import { formatDate } from 'utils'
 import FontAwesome from 'react-fontawesome'
 
-import { News as api } from '../../../agent'
+import { fetchNewsSlides } from '../../../actions'
 import styles from './NewsSlider.css'
 import { Container, NavArrow, Paragraph, Link } from '../../__basic__'
 import { ArticleThumbnail } from '../../__article__'
 import { Slider } from '../../Slider'
 
 
-import {
-  NEWS_SLIDER_LOADED,
-  NEWS_SLIDER_UNLOADED
-} from '../../../constants/actionTypes'
+const mapStateToProps = state => ({ news: state.newsSlider.news })
 
-const Dummy = ({ children }) => <div>{children}</div>
-
-const mapStateToProps = state => ({
-  news: state.newsSlider.news
-})
-
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload =>
-    dispatch({ type: NEWS_SLIDER_LOADED, payload }),
-  onUnload: () => {
-    dispatch({ type: NEWS_SLIDER_UNLOADED })
-  }
-})
+const mapDispatchToProps = { fetchNewsSlides }
 
 
 let NewsSlider = class extends Component {
   componentWillMount() {
-    this.props.onLoad(api.all())
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload()
+    this.props.fetchNewsSlides()
   }
 
   renderSlider(news) {

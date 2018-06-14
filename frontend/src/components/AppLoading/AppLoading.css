@@ -1,12 +1,17 @@
 @value loader-size: 100px;
 @value animation-speed: 2s;
 
+
 .wrapper {
-  width: 100vw;
-  height: 100vh;
+  z-index: 99999999;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: white;
 }
 
 .loader {
@@ -32,7 +37,7 @@
   border-radius: 50%;
   background: color(#2ac4ff a(20%));
 
-  animation-name: circle-animation;
+  animation-name: circleAnimation;
   animation-duration: animation-speed;
   animation-iteration-count: infinite;
   animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -46,7 +51,7 @@
   }
 }
 
-@keyframes circle-animation {
+@keyframes circleAnimation {
   0% {
     width: 0;
     height: 0;

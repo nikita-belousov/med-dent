@@ -3,12 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuid from 'small-uuid'
 
-import {
-  SPECIALS_SLIDER_LOADED,
-  SPECIALS_SLIDER_UNLOADED
-} from '../../../constants/actionTypes'
-
-import { Specials as api } from '../../../agent'
+import { fetchSpecialsSlides } from '../../../actions'
 import styles from './SpecialsSlider.css'
 import { Slider } from '../../Slider'
 import { Section }  from '../../Section'
@@ -16,27 +11,15 @@ import { SpecialCard } from '../../SpecialCard'
 import { NavArrow, Link, Container } from '../../__basic__'
 
 
-const mapStateToProps = state => ({
-  cards: state.specialsSlider.cards
-})
+const mapStateToProps = state =>
+  ({ cards: state.specialsSlider.specialsCards })
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload => {
-    dispatch({ type: SPECIALS_SLIDER_LOADED, payload })
-  },
-  onUnload: () => {
-    dispatch({ type: SPECIALS_SLIDER_UNLOADED })
-  }
-})
+const mapDispatchToProps = { fetchSpecialsSlides }
 
 
 let SpecialsSlider = class extends Component {
   componentWillMount() {
-    this.props.onLoad(api.cards())
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload()
+    this.props.fetchSpecialsSlides()
   }
 
   renderSlider(card) {

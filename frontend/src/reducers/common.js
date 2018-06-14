@@ -1,35 +1,26 @@
-import {
-  APP_LOADED,
-  APP_UNLOADED,
-  SERVICE_CATEGORIES_LOADED,
-  SERVICE_CATEGORIES_UNLOADED
-} from './../constants/actionTypes'
+import { SERVICES_CATEGORIES_COLLECTION } from '../constants'
+import { PAGE_LOADING_START, DATA_RECEIVED } from '../actions'
 
 
-const defaultState = { isLoading: true }
-
-export default (state = defaultState, action) => {
+export default (state = { isLoading: true }, action) => {
   switch (action.type) {
-    case APP_LOADED:
+    case PAGE_LOADING_START:
       return {
         ...state,
-        isLoading: false,
-        onPageNotFound: action.onPageNotFound
+        isLoading: true
       }
-    case APP_UNLOADED:
-      return {
-        ...state,
-        onPageNotFound: null
+    case DATA_RECEIVED:
+      const servicesCategories = action.payload.data[SERVICES_CATEGORIES_COLLECTION]
+      if (servicesCategories) {
+        return {
+          ...state,
+          menuLinks: servicesCategories.docs,
+          isLoading: false
+        }
       }
-    case SERVICE_CATEGORIES_LOADED:
       return {
         ...state,
-        serviceCategories: action.payload.docs || []
-      }
-    case SERVICE_CATEGORIES_UNLOADED:
-      return {
-        ...state,
-        serviceCategories: []
+        isLoading: false
       }
     default:
       return state

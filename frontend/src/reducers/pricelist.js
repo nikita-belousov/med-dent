@@ -1,17 +1,17 @@
-import {
-  PRICELIST_LOADED,
-  PRICELIST_UNLOADED
-} from './../constants/actionTypes'
+import { SERVICES_COLLECTION } from '../constants'
+import { DATA_RECEIVED } from '../actions'
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case PRICELIST_LOADED:
-      return {
-        ...state,
-        services: action.payload.docs || []
+    case DATA_RECEIVED:
+      const services = action.payload.data[SERVICES_COLLECTION]
+      if (services) {
+        return {
+          ...state,
+          services: services.docs
+        }
       }
-    case PRICELIST_UNLOADED:
-      return {}
+      return state
     default:
       return state
   }

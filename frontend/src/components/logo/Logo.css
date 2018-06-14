@@ -1,4 +1,6 @@
-@value primary from './../../styles/libs/colors.css';
+@value primary from '../../styles/libs/colors.css';
+@value ease-out-cubic from '../../styles/libs/effects.css';
+
 
 .logo {
   display: flex;
@@ -6,8 +8,15 @@
   align-items: center;
 }
 
-.sign svg {
+.sign {
+  svg {
     width: 90px;
+    transition: transform .3s ease-out-cubic;
+  }
+
+  &:hover svg {
+    transform: scale(1.05);
+  }
 }
 
 .title {
@@ -30,7 +39,7 @@
     top: 3px;
     transform: scale(1) rotate(0deg);
     transition: transform .1s, transform .5s;
-    
+
     &:hover {
       transform: scale(1.2) rotate(360deg);
     }

@@ -1,5 +1,5 @@
 @value primary, primary-gradient from '../../styles/libs/colors.css';
-@value shadow-primary, is-out-cubic from '../../styles/libs/effects.css';
+@value shadow-primary, ease-out-cubic from '../../styles/libs/effects.css';
 $photoSize: 160px;
 
 

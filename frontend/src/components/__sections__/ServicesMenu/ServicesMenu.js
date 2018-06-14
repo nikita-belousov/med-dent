@@ -3,35 +3,20 @@ import capitalize from 'lodash/capitalize'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import {
-  SERVICE_CATEGORIES_LOADED,
-  SERVICE_CATEGORIES_UNLOADED
-} from '../../../constants/actionTypes'
-
-import { ServiceCategories as api } from '../../../agent'
+import { fetchServicesCategories } from '../../../actions'
 import style from './ServicesMenu.css'
 import { Button, Link, Container } from '../../__basic__'
 import { Popup }  from '../../__overlay__'
 
-const mapStateToProps = state => ({
-  links: state.common.serviceCategories
-})
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload =>
-    dispatch({ type: SERVICE_CATEGORIES_LOADED, payload }),
-  onUnload: () =>
-    dispatch({ type: SERVICE_CATEGORIES_UNLOADED })
-})
+const mapStateToProps = state => ({ links: state.common.menuLinks })
+
+const mapDispatchToProps = { fetchServicesCategories }
 
 
 let ServicesMenu = class extends Component {
   componentWillMount() {
-    this.props.onLoad(api.all())
-  }
-
-  componentWillUnount() {
-    this.props.onUnload()
+    this.props.fetchServicesCategories()
   }
 
   renderPopupButton = (text) => {

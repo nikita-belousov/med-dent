@@ -7,39 +7,14 @@ import style from './Article.css'
 import { Paragraph } from '../../__basic__'
 import { YaShare } from '../../YaShare'
 
-import {
-  ARTICLE_PAGE_LOADED,
-  ARTICLE_PAGE_UNLOADED
-} from '../../../constants/actionTypes'
 
-const mapStateToProps = state => ({
-  ...state.articlePage
-})
+const mapStateToProps = state => ({ ...state.articlePage })
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload => {
-    dispatch({ type: ARTICLE_PAGE_LOADED, payload })
-  },
-  onUnload: () => {
-    dispatch({ type: ARTICLE_PAGE_UNLOADED })
-  }
-})
 
 let Article = class extends Component {
   componentWillMount() {
-    const { slug, api, onLoad } = this.props
-    onLoad(api.article(slug))
-  }
-
-  componentWillUpdate(nextProps) {
-    const { slug, api, onLoad } = this.props
-    if (nextProps.slug !== slug) {
-      onLoad(api.article(nextProps.slug))
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload()
+    const { dispatch, fetchData, slug  } = this.props
+    dispatch(fetchData(slug))
   }
 
   render() {
@@ -82,5 +57,7 @@ let Article = class extends Component {
   }
 }
 
-Article = connect(mapStateToProps, mapDispatchToProps)(Article)
+
+Article = connect(mapStateToProps)(Article)
+
 export { Article }

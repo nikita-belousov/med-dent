@@ -3,40 +3,24 @@ import times from 'lodash/times'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { PaginationPage } from '../index'
+import { ITEMS_ON_PAGE } from '../../../constants'
 
-import {
-  PAGINATED_PAGE_LOADED,
-  PAGINATED_PAGE_UNLOADED
-} from '../../../constants/actionTypes'
-
-
-const mapStateToProps = state => ({
-  ...state.paginatedPage
-})
-
-const mapDispatchToProps = dispatch => ({
-  onLoad: (pager, payload, path) => {
-    dispatch({ type: 'PAGINATED_PAGE_LOADED', payload, path })
-  },
-  onUnload: () => {
-    dispatch({ type: 'PAGINATED_PAGE_UNLOADED' })
-  }
-})
+const mapStateToProps = state => ({ ...state.paginatedPage })
 
 
 let Pagination = class extends Component {
   static propTypes = {
-    api: PropTypes.object.isRequired,
     path: PropTypes.string.isRequired,
     pageToShow: PropTypes.number.isRequired,
+    itemsOnPage: PropTypes.number.isRequired,
+    gridView: PropTypes.bool,
     itemsComponent: PropTypes.func,
     itemComponent: PropTypes.func,
-    itemsOnPage: PropTypes.number,
     sort: PropTypes.string
   }
 
   static defaultProps = {
-    itemsOnPage: 8
+    itemsOnPage: ITEMS_ON_PAGE
   }
 
   static contextTypes = {
@@ -44,29 +28,8 @@ let Pagination = class extends Component {
   }
 
   componentWillMount() {
-    const { api, path, onLoad, pageToShow, itemsOnPage } = this.props
-
-    onLoad(
-      api.page,
-      api.page(itemsOnPage, pageToShow),
-      path
-    )
-  }
-
-  componentWillUpdate(nextProps) {
-    if (nextProps.pageToShow !== this.props.pageToShow) {
-
-      const { api, path, onLoad, itemsOnPage } = this.props
-      onLoad(
-        api.page,
-        api.page(itemsOnPage, nextProps.pageToShow),
-        path
-      )
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload()
+    const { dispatch, fetchData, pageToShow } = this.props
+    dispatch(fetchData(pageToShow))
   }
 
   render() {
@@ -74,10 +37,11 @@ let Pagination = class extends Component {
       count,
       docs,
       pageToShow,
-      itemsOnPage,
       pager,
       itemComponent,
-      path
+      path,
+      itemsOnPage,
+      gridView
     } = this.props
 
     if (!count || !docs) {
@@ -87,12 +51,14 @@ let Pagination = class extends Component {
     const totalPages = Math.ceil(count / itemsOnPage)
 
     if (!times(totalPages).includes(pageToShow - 1)) {
+      // TODO: избавиться от контекста (в других местах тоже)
       this.context.onPageNotFound()
       return null
     }
 
     return (
       <PaginationPage
+        gridView={gridView}
         count={count}
         docs={docs}
         pager={pager}
@@ -106,5 +72,6 @@ let Pagination = class extends Component {
 }
 
 
-Pagination = connect(mapStateToProps, mapDispatchToProps)(Pagination)
+Pagination = connect(mapStateToProps)(Pagination)
+
 export { Pagination }

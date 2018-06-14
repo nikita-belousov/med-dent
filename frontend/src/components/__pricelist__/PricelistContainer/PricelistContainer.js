@@ -5,26 +5,12 @@ import utils from 'utils'
 import { connect } from 'react-redux'
 import scrollToWithAnimation from 'scrollto-with-animation'
 
-import {
-  PRICELIST_LOADED,
-  PRICELIST_UNLOADED
-} from '../../../constants/actionTypes'
-
-import { Services as api } from '../../../agent'
+import { fetchServices } from '../../../actions'
 import style from './PricelistContainer.css'
 import { PricelistSidebar, PricelistTable } from '../index'
 
 
-const mapStateToProps = state => ({
-  ...state.pricelist
-})
-
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload =>
-    dispatch({ type: PRICELIST_LOADED, payload }),
-  onUnload: () =>
-    dispatch({ type: PRICELIST_UNLOADED })
-})
+const mapStateToProps = state => ({ ...state.pricelist })
 
 
 let PricelistContainer = class extends Component {
@@ -47,7 +33,7 @@ let PricelistContainer = class extends Component {
   }
 
   componentWillMount() {
-    this.props.onLoad(api.all())
+    this.props.dispatch(fetchServices())
   }
 
   componentWillReceiveProps(nextProps) {
@@ -298,5 +284,7 @@ let PricelistContainer = class extends Component {
   }
 }
 
-PricelistContainer = connect(mapStateToProps, mapDispatchToProps)(PricelistContainer)
+
+PricelistContainer = connect(mapStateToProps)(PricelistContainer)
+
 export { PricelistContainer }

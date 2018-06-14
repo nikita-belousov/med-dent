@@ -1,14 +1,22 @@
 .items {
+
+  .item {
+    margin-bottom: 80px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.itemsGrid {
+  composes: items;
+
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-}
 
-.paginationItem {
-  width: 30%;
-  margin-bottom: 80px;
-
-  &:last-child {
-    margin-bottom: 0;
+  .item {
+    width: 30%;
   }
 }

@@ -1,11 +1,12 @@
 import React, { Fragment }  from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import { ITEMS_ON_PAGE } from '../../../constants'
 import { ArticlePage, NarrowPage } from '../../__pages__'
 import { Pagination } from '../../__pagination__'
 import { ArticlePreview } from '../../__article__'
 
 
-export const ArticlesRoutes = ({ path, title, api }) => (
+export const ArticlesRoutes = ({ path, title, fetchPage, fetchArticle }) =>
   <Fragment>
     <Route
       exact
@@ -17,7 +18,7 @@ export const ArticlesRoutes = ({ path, title, api }) => (
       path={`/${path}/:slug`}
       render={({ match }) =>
         <ArticlePage
-          api={api}
+          fetchData={fetchArticle}
           slug={match.params.slug}
         />
       }
@@ -28,8 +29,9 @@ export const ArticlesRoutes = ({ path, title, api }) => (
       render={({ match }) =>
         <NarrowPage heading={title}>
           <Pagination
-            api={api}
+            fetchData={fetchPage}
             path={path}
+            itemsOnPage={ITEMS_ON_PAGE}
             itemComponent={ArticlePreview}
             pageToShow={parseInt(match.params.num)}
             sort='datePublished'
@@ -38,4 +40,3 @@ export const ArticlesRoutes = ({ path, title, api }) => (
       }
     />
   </Fragment>
-)

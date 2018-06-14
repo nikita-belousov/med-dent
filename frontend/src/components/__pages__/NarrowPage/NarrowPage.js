@@ -30,7 +30,7 @@ export const NarrowPage = ({
 }
 
 const Heading = ({ breadcrumps, heading }) =>
-  <head className={style.heading}>
+  <header className={style.heading}>
     {(breadcrumps && breadcrumps.length > 0) &&
       <div className={style.breadcrumps}>
         {breadcrumps.join(' / ')}
@@ -38,4 +38,4 @@ const Heading = ({ breadcrumps, heading }) =>
     <div className={style.heading}>
       {heading}
     </div>
-  </head>
+  </header>

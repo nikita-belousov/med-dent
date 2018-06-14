@@ -1,5 +1,7 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
+
+import { fetchQuestionsPage } from '../../../actions'
 import { QuestionsPage } from '../../__pages__'
 import { Pagination } from '../../__pagination__'
 import { Question }  from '../../Question'
@@ -19,7 +21,7 @@ export const QuestionsRoutes = () => (
       render={({ match }) =>
         <QuestionsPage>
           <Pagination
-            api={api}
+            fetchData={fetchQuestionsPage}
             path='questions'
             itemComponent={Question}
             pageToShow={parseInt(match.params.num)}
