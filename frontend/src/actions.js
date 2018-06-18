@@ -228,17 +228,31 @@ export const fetchDentistsAsOptions = id => ({
 //  Side effects
 //-------------------------------------
 
-export const PAGE_LOADING_START = 'PAGE_LOADING_START'
 export const DATA_RECEIVED = 'DATA_RECEIVED'
+export const PAGE_LOADING_START = 'PAGE_LOADING_START'
+export const INIT_LOADER = 'INIT_LOADER'
+export const UPDATE_LOADER = 'UPDATE_LOADER'
 
 export const dataReceived = data => ({
   type: DATA_RECEIVED,
   payload: { data }
 })
 
-export const pageLoadingStart = () => ({
+export const pageLoadingStart = requestsCount => ({
   type: PAGE_LOADING_START,
+  payload: { requestsCount }
 })
+
+export const updateLoader = () => ({
+  type: UPDATE_LOADER
+})
+
+
+//=====================================
+//  Other
+//-------------------------------------
+
+
 
 
 export const pageReloadingActions = [

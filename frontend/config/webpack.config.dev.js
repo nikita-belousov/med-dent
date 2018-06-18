@@ -182,6 +182,7 @@ module.exports = {
                     require('postcss-simple-vars'),
                     require('postcss-modules-values'),
                     require('postcss-color-function'),
+                    require('lost'),
                     require('postcss-flexbugs-fixes'),
                     require('postcss-automath'),
                     autoprefixer({

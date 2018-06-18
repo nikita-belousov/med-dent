@@ -1,48 +1,14 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
-import { fromEvent } from 'rxjs'
-import { mapTo, filter, startWith } from 'rxjs/operators'
 import style from './About.css'
+import { AppearOnScrollReach } from '../../AppearOnScrollReach'
 import { Container, Paragraph } from '../../__basic__'
 
 
 export class About extends Component {
-  state = { scrollReached: false }
-
-  componentDidMount() {
-    const reachedBreakpoint = window.innerHeight * 0.4
-
-    this.scrollStream = fromEvent(window, 'scroll')
-      .pipe(
-        mapTo(this.getWrapperTop()),
-        filter(val => val <= reachedBreakpoint)
-      ).subscribe(() => this.onReached())
-  }
-
-  componentWillUnmount() {
-    this.scrollStream.unsubscribe()
-  }
-
-  getWrapperTop() {
-    return this.wrapperNode.getBoundingClientRect().top
-  }
-
-  onReached = () => {
-    this.setState({ scrollReached: true })
-    this.scrollStream.unsubscribe()
-  }
-
   render() {
-    const wrapperCls = classNames({
-      [style.wrapper]: true,
-      [style.wrapperReached]: this.state.scrollReached
-    })
-
     return (
-      <div
-        className={wrapperCls}
-        ref={node => this.wrapperNode = node}
-      >
+      <div className={style.wrapper}>
         <div className={style.bg}>
           <Container>
             <div className={style.inner}>
@@ -77,7 +43,13 @@ export class About extends Component {
                   </div>
                 </div>
               </div>
-              <div className={style.picture}></div>
+              <AppearOnScrollReach
+                coefficient={0.3}
+                offset={{ x: 150 }}
+                duration={1000}
+              >
+                <div className={style.picture} />
+              </AppearOnScrollReach>
             </div>
           </Container>
         </div>

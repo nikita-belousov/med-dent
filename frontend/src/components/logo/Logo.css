@@ -11,11 +11,19 @@
 .sign {
   svg {
     width: 90px;
-    transition: transform .3s ease-out-cubic;
+    transition: transform .2s ease-out-cubic;
+
+    path:nth-child(4) {
+      transition: fill .2s ease-out-cubic;
+    }
   }
 
   &:hover svg {
     transform: scale(1.05);
+
+    path:nth-child(4) {
+      fill: #53cffc !important;
+    }
   }
 }
 

@@ -1,16 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NarrowPage } from '../index'
-import { Article } from '../../__article__'
+import { Article, ArticleCaption } from '../../__article__'
 
 
-const mapStateToProps = state => ({ title: state.articlePage.title })
+const mapStateToProps = ({ articlePage }) => ({
+  title: articlePage.title,
+  createdAt: articlePage.createdAt,
+  views: articlePage.views
+})
 
 
-let ArticlePage = ({ api, slug, title, fetchData }) =>
+let ArticlePage = ({ slug, title, createdAt, views, fetchData, parentLink }) =>
   <NarrowPage
+    parentLink={parentLink}
     squeeze={true}
     heading={title}
+    caption={<ArticleCaption createdAt={createdAt} views={views} />}
   >
     <Article
       fetchData={fetchData}

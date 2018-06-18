@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { fetchReviewsSlides } from '../../actions'
 import style from './ChangingReviews.css'
+import { AppearOnScrollReach } from '../AppearOnScrollReach'
 import { Link, Paragraph } from '../__basic__'
 import { StaticRating }  from '../StaticRating'
 import { ClosesOnExternalClick }  from '../ClosesOnExternalClick'
@@ -12,7 +13,7 @@ import { ClosesOnExternalClick }  from '../ClosesOnExternalClick'
 
 const mapStateToProps = state => ({ reviews: state.changingReviews.reviews })
 
-const mapDispatchToProps = ({ fetchReviewsSlides })
+const mapDispatchToProps = { fetchReviewsSlides }
 
 
 let ChangingReviews = class extends Component {
@@ -30,7 +31,7 @@ let ChangingReviews = class extends Component {
   static defaultProps = {
     quantity: 8,
     interval: 10000,
-    maxChars: 150
+    maxChars: 220
   }
 
   componentWillMount() {
@@ -132,4 +133,5 @@ let ChangingReviews = class extends Component {
 }
 
 ChangingReviews = connect(mapStateToProps, mapDispatchToProps)(ChangingReviews)
+
 export { ChangingReviews }

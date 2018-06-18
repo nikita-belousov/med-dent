@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+}
+
+.views {
+  margin-left: 25px;
+}
+
+.eyeIcon {
+  padding-right: 6px;
+}

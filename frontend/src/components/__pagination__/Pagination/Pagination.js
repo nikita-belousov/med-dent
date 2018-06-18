@@ -32,6 +32,13 @@ let Pagination = class extends Component {
     dispatch(fetchData(pageToShow))
   }
 
+  componentWillUpdate(nextProps) {
+    const { dispatch, fetchData, pageToShow } = this.props
+    if (pageToShow !== nextProps.pageToShow) {
+      dispatch(fetchData(pageToShow))
+    }
+  }
+
   render() {
     const {
       count,

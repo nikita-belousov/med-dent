@@ -1,0 +1,16 @@
+.lightbox {
+  outline: 0;
+
+  * {
+    outline: 0;
+  }
+}
+
+.thumbnail {
+  border: 0;
+  text-decoration: 0;
+
+  img {
+    width: 200px;
+  }
+}

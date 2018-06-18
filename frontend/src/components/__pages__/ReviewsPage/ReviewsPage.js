@@ -39,7 +39,7 @@ export class ReviewsPage extends Component {
     const { leaveFeedbackPopup } = this.state
 
     return (
-      <NarrowPage heading='Отзывы'>
+      <NarrowPage squeeze={true} heading='Отзывы'>
         <div className={style.giveFeedback}>
           <div className={style.feedbackLinkWrapper}>
             <Link

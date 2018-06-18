@@ -1,12 +1,11 @@
-@value border-radius-big from '../../../styles/libs/effects.css';
-@value light-grey, grey, primary from '../../../styles/libs/colors.css';
+@value border-radius-big, overlay-level-2 from '../../../styles/libs/effects.css'; @value light-grey, grey, primary from '../../../styles/libs/colors.css';
 
 
 .shadowBg {
   position: absolute;
   width: 100%;
   height: 100vh;
-  z-index: 10000000;
+  z-index: overlay-level-2;
   background: rgba(0,0,0,.6);
   overflow-y: scroll;
 }

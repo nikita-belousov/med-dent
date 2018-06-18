@@ -1,0 +1,1 @@
+export { LightboxSlider } from './LightboxSlider'

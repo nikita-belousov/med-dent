@@ -1,41 +1,59 @@
 import React from 'react'
 import classNames from 'classnames'
 import upperFirst from 'lodash/upperFirst'
+
+import { HOME } from '../../../constants/linksStructure'
 import style from './NarrowPage.css'
 import { Container } from '../../__basic__'
+import { Breadcrumbs } from '../../Breadcrumbs'
 
+
+const Heading = ({ heading, parentLink, caption }) =>
+  <header>
+    <div className={style.breadcrumbs}>
+      <Breadcrumbs parentLink={parentLink} />
+    </div>
+    <div className={style.heading}>
+      {heading}
+    </div>
+    {caption &&
+      <div className={style.caption}>
+        {caption}
+      </div>}
+  </header>
 
 export const NarrowPage = ({
-  breadcrumps,
+  parentLink,
   heading,
   caption,
   children,
-  squeeze
+  squeeze,
+  renderFullWidthSection
 }) => {
-  const wrapperClass = classNames({
-    [style.wrapper]: true,
-    [style.wrapperSqueeze]: squeeze
+  const contentClass = classNames({
+    [style.content]: true,
+    [style.contentSqueeze]: squeeze
   })
 
   return (
     <Container>
-      <div className={wrapperClass}>
-        <Heading breadcrumps={breadcrumps} heading={heading} />
-        <div className={style.content}>
+      <div className={style.wrapper}>
+        <Heading
+          parentLink={parentLink}
+          heading={heading}
+          caption={caption}
+        />
+        <div className={contentClass}>
           {children}
         </div>
+
+        {renderFullWidthSection &&
+          <div className={style.fullWidthSection}>
+            {renderFullWidthSection()}
+          </div>}
       </div>
     </Container>
   )
 }
 
-const Heading = ({ breadcrumps, heading }) =>
-  <header className={style.heading}>
-    {(breadcrumps && breadcrumps.length > 0) &&
-      <div className={style.breadcrumps}>
-        {breadcrumps.join(' / ')}
-      </div>}
-    <div className={style.heading}>
-      {heading}
-    </div>
-  </header>
+NarrowPage.defaultProps = { parentLink: HOME }

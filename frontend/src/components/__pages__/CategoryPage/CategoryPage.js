@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 
+import { SERVICES } from '../../../constants/linksStructure'
 import { fetchCategoryPage } from '../../../actions'
 import style from './CategoryPage.css'
 import { NarrowPage } from '../index'
+import { Dentist } from '../../Dentist'
 import { PricelistTable } from '../../__pricelist__'
 import { PositionLabel } from '../../__basic__'
 
@@ -63,22 +66,31 @@ let CategoryPage = class extends Component {
       return null
     }
 
+    const dentistsClass = classNames({
+      [style.dentistsOnly]: dentists.length === 1,
+      [style.dentistsPair]: dentists.length === 2
+    })
+
     return (
-      <div>
-        <NarrowPage heading={title}>
-          <div className={style.columns}>
-            <div className={style.content}>
-              {this.props.renderContent()}
+      <NarrowPage
+        squeeze={true}
+        parentLink={SERVICES}
+        heading={title}
+      >
+        <div className={style.content}>
+          {this.props.renderContent()}
+        </div>
+        <div className={dentistsClass}>
+          {dentists.map((dentist, i) =>
+            <div key={i} className={style.dentist}>
+              <Dentist {...dentist} />
             </div>
-            <div className={style.aside}>
-              {dentists && dentists.map(this.renderDentist)}
-            </div>
-          </div>
-          <div className={style.pricelist}>
-            <PricelistTable data={[{ title, services }]} />
-          </div>
-        </NarrowPage>
-      </div>
+          )}
+        </div>
+        <div className={style.pricelist}>
+          <PricelistTable data={[{ title, services }]} />
+        </div>
+      </NarrowPage>
     )
   }
 }

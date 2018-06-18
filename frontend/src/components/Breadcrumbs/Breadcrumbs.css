@@ -1,0 +1,8 @@
+.wrapper {
+  display: flex;
+}
+
+.divider {
+  display: block;
+  padding: 0 10px;  
+}

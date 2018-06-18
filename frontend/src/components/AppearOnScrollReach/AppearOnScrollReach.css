@@ -1,0 +1,7 @@
+@value ease-out-cubic from '../../styles/libs/effects.css';
+
+
+.wrapper {
+  position: relative;
+  transition-timing-function: ease-out-cubic;
+}

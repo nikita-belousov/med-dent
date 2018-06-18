@@ -11,12 +11,9 @@
 
 .itemsGrid {
   composes: items;
-
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  lost-center: 100%;
 
   .item {
-    width: 30%;
+    lost-column: 1/3;
   }
 }

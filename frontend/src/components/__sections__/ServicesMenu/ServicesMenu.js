@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import capitalize from 'lodash/capitalize'
-import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { fetchServicesCategories } from '../../../actions'
 import style from './ServicesMenu.css'
-import { Button, Link, Container } from '../../__basic__'
+import { Button, Link, Container, NavLink } from '../../__basic__'
 import { Popup }  from '../../__overlay__'
 
 
@@ -19,6 +19,10 @@ let ServicesMenu = class extends Component {
     this.props.fetchServicesCategories()
   }
 
+  onLinkClick = () => {
+    this.forceUpdate()
+  }
+
   renderPopupButton = (text) => {
     return (
       <Button type='popup'>
@@ -30,6 +34,7 @@ let ServicesMenu = class extends Component {
   renderLink = ({ slug, title }, i) =>
     <li key={slug}>
       <NavLink
+        onClick={this.onLinkClick}
         to={`/${slug}`}
         activeClassName={style.categoryLinkActive}
         className={style.categoryLink}
@@ -63,4 +68,6 @@ let ServicesMenu = class extends Component {
 
 
 ServicesMenu = connect(mapStateToProps, mapDispatchToProps)(ServicesMenu)
+ServicesMenu = withRouter(ServicesMenu)
+
 export { ServicesMenu }

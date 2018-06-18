@@ -39,7 +39,7 @@ export class QuestionsPage extends Component {
     const { leaveQuestionPopup } = this.state
 
     return (
-      <NarrowPage heading='Ответы на вопросы'>
+      <NarrowPage squeeze={true} heading='Ответы на вопросы'>
         <div className={style.askQuestion}>
           <div className={style.questionLinkWrapper}>
             <Link

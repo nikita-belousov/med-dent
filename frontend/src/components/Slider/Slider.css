@@ -1,4 +1,4 @@
-@value primary from '../../styles/libs/colors.css';
+@value primary, grey from '../../styles/libs/colors.css';
 
 $timingFunction: cubic-bezier(0.215, 0.61, 0.355, 1);
 $fadeInOffset: 25px;
@@ -168,4 +168,13 @@ $controlSize: 40px;
   .ready.controlsInside & {
     right: 0;
   }
+}
+
+.caption {
+  position: absolute;
+  width: 100%;
+  margin-top: -15px;
+  text-align: center;
+  font-style: italic;
+  color: grey;
 }

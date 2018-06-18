@@ -3055,6 +3055,12 @@ formidable@^1.1.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.2.1.tgz#70fb7ca0290ee6ff961090415f4b3df3d2082659"
 
+formstone@^1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/formstone/-/formstone-1.4.7.tgz#526acccdeabee3125c47d0dcd15c1b9e525f358c"
+  dependencies:
+    jquery "^3.3.1"
+
 formsy-react-2@^0.20.4:
   version "0.20.4"
   resolved "https://registry.yarnpkg.com/formsy-react-2/-/formsy-react-2-0.20.4.tgz#9faad022195e0cbe34c8118cadcc73818654c76a"

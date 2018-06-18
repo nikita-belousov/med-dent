@@ -1,7 +1,7 @@
 @value secondary from '../../../styles/libs/colors.css';
 @value primary-gradient, primary from '../../../styles//libs/colors.css';
 @value alt-gradient from '../../../styles/libs/colors.css';
-@value shadow-primary, ease-out-cubic from '../../../styles/libs/effects.css';
+@value shadow-primary, ease-out-cubic, overlay-level-1 from '../../../styles/libs/effects.css';
 
 
 .wrapper  {
@@ -10,7 +10,7 @@
   margin-right: 40px;
   top: 0;
   right: 0;
-  z-index: 99999;
+  z-index: overlay-level-1;
   display: flex;
   justify-content: flex-end;
 }
@@ -18,6 +18,15 @@
 .wrapperMain, .wrapperCall {
   position: fixed;
   bottom: 0;
+}
+
+.wrapperMain {
+  transition: height .6s ease-out-cubic;
+}
+
+.wrapperMainCollapsed {
+  composes: wrapperMain;
+  height: 100px !important;
 }
 
 .wrapperCall {
@@ -29,10 +38,6 @@
   }
 }
 
-.floatingSectionCollapsed .navArrow {
-  transform: rotate(180deg);
-}
-
 .floatingSection {
   width: 260px;
   margin-bottom: 0;
@@ -41,16 +46,17 @@
   border-top-right-radius: 12px;
   box-shadow: shadow-primary;
   color: #fff;
-  transition: margin-bottom .6s ease-out-cubic,
-              transform .3s ease-out-cubic;
-}
+  transform: translateY(0);
 
-.floatingSectionCollapsed {
-  composes: floatingSection;
-  margin-bottom: -220px;
+  .wrapperMainCollapsed & {
+    &:hover {
+      transform: translateY(-10px);
+      transition: transform .3s ease-out-cubic;
+    }
 
-  &:hover {
-    transform: translateY(-10px);
+    .navArrow {
+      transform: rotate(180deg);
+    }
   }
 }
 

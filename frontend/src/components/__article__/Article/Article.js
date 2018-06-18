@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import utils from 'utils'
 import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
-
 import style from './Article.css'
 import { Paragraph } from '../../__basic__'
 import { YaShare } from '../../YaShare'
@@ -26,17 +24,6 @@ let Article = class extends Component {
 
     return (
       <div className={style.article}>
-        <div className={style.caption}>
-          <div className={style.date}>
-            {utils.formatDate(createdAt)}
-          </div>
-          <div className={style.views}>
-            <span className={style.eyeIcon}>
-              <FontAwesome name='eye' />
-            </span>
-            {views}
-          </div>
-        </div>
         <div className={style.text}>
           <Paragraph>
             {text}

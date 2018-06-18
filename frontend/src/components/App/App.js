@@ -33,10 +33,6 @@ let App = class extends Component {
 
   state = { pageNotFound: false }
 
-  componentWillMount() {
-    // setTimeout(() => this.props.onLoad(this.onPageNotFound))
-  }
-
   getChildContext() {
     return {
       onPageNotFound: this.onPageNotFound

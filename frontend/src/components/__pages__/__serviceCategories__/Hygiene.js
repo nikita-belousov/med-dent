@@ -1,8 +1,30 @@
 import React from 'react'
+import style from './ServiceCategory.css'
+import { LightboxSlider } from '../../LightboxSlider'
 import { CategoryPage } from '../index'
 import { Paragraph } from '../../__basic__'
 
+
 export const Hygiene = props => {
+  const sliderImages = [
+    {
+      src: require('../../../assets/images/gallery/hygiene/1.jpg'),
+      thumbnail: require('../../../assets/images/gallery/hygiene/thumbnails/1.jpg')
+    },
+    {
+      src: require('../../../assets/images/gallery/hygiene/2.jpg'),
+      thumbnail: require('../../../assets/images/gallery/hygiene/thumbnails/2.jpg')
+    },
+    {
+      src: require('../../../assets/images/gallery/hygiene/3.jpg'),
+      thumbnail: require('../../../assets/images/gallery/hygiene/thumbnails/3.jpg')
+    },
+    {
+      src: require('../../../assets/images/gallery/hygiene/4.jpg'),
+      thumbnail: require('../../../assets/images/gallery/hygiene/thumbnails/4.jpg')
+    }
+  ]
+
   const renderContent = () => (
     <div>
       <Paragraph>
@@ -13,6 +35,7 @@ export const Hygiene = props => {
         это неровные зубы. Неровные зубы и неправильный прикус могут стать
         причиной различных психологических проблем, всевозможных комплексов.
       </Paragraph>
+
       <Paragraph>
         "Кривые" зубы значительно труднее прочищаются. А недостаточно
         качественная гигиена полости рта является основной причиной
@@ -28,6 +51,16 @@ export const Hygiene = props => {
         мышц, частые головные боли. Патологическая стираемость затрудняет, а
         иногда делает невозможным протезирование.
       </Paragraph>
+
+      <div className={style.sliderWrapper}>
+        <LightboxSlider
+          images={sliderImages}
+          caption='Гигиена в нашей клинике'
+          slidesToShow={4}
+          autoplay={false}
+        />
+      </div>
+
       <Paragraph>
         Первый визит врачу-ортодонту целесообразно нанести в возрасте 5-6 лет,
         до начала смены молочных зубов на постоянные. Ведь нередко в том, что у
@@ -38,6 +71,7 @@ export const Hygiene = props => {
         усилие, посетив врача-ортодонта, то в дальнейшем удастся избежать
         серьезных проблем с прикусом и длительного ортодонтического лечения.
       </Paragraph>
+
       <Paragraph>
         Стоит показать своего малыша врачу-ортодонту и в том случае, если у
         ребенка в возрасте 5-6 лет между молочными зубами нет ни единой щелочки:
@@ -47,15 +81,12 @@ export const Hygiene = props => {
     </div>
   )
 
-  const renderAside = (doctor) => null
-
   return (
     <CategoryPage
       title='Гигиена'
       categoryId='5aa185942e70495974bff013'
       dentistsIds={['5aa2f67791ce0038c42499d1']}
       renderContent={renderContent}
-      renderAside={renderAside}
     />
   )
 }

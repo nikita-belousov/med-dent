@@ -6,7 +6,7 @@ import { Pagination } from '../../__pagination__'
 import { ArticlePreview } from '../../__article__'
 
 
-export const ArticlesRoutes = ({ path, title, fetchPage, fetchArticle }) =>
+export const ArticlesRoutes = ({ path, title, fetchPage, fetchArticle, parentLink }) =>
   <Fragment>
     <Route
       exact
@@ -20,6 +20,7 @@ export const ArticlesRoutes = ({ path, title, fetchPage, fetchArticle }) =>
         <ArticlePage
           fetchData={fetchArticle}
           slug={match.params.slug}
+          parentLink={parentLink}
         />
       }
     />
@@ -27,7 +28,7 @@ export const ArticlesRoutes = ({ path, title, fetchPage, fetchArticle }) =>
       exact
       path={`/${path}/pages/:num`}
       render={({ match }) =>
-        <NarrowPage heading={title}>
+        <NarrowPage squeeze={true} heading={title}>
           <Pagination
             fetchData={fetchPage}
             path={path}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 import { withRouter, Route, HashRouter, NavLink } from 'react-router-dom'
 
 import { APPOINTMENT_SHOW } from '../../../constants/actionTypes'
@@ -28,6 +29,7 @@ let FloatingSection = class extends Component {
   }
 
   componentDidMount() {
+    this.wrapperMainHeight = this.wrapperMain.offsetHeight
     this.initYOffset = window.pageYOffset
     window.addEventListener('scroll', this.handleScroll)
   }
@@ -92,6 +94,13 @@ let FloatingSection = class extends Component {
     callback(data)
   }
 
+  onWrapperMainRef = node => {
+    if (!this.wrapperMain) {
+      this.wrapperMain = node
+      this.forceUpdate()
+    }
+  }
+
   renderPopupForm() {
     return (
       <div className={style.wrapperCall}>
@@ -106,14 +115,20 @@ let FloatingSection = class extends Component {
   render() {
     const { appointmentModal, callbackForm } = this.state
 
+    const wrapperMainClass = classNames({
+      [style.wrapperMain]: !this.state.collapsed,
+      [style.wrapperMainCollapsed]: this.state.collapsed
+    })
+
     return (
       <div className={style.wrapper}>
         {callbackForm && this.renderPopupForm()}
-        <div className={style.wrapperMain}>
-          <div className={this.state.collapsed
-            ? style.floatingSectionCollapsed
-            : style.floatingSection}
-          >
+        <div
+          ref={this.onWrapperMainRef}
+          className={wrapperMainClass}
+          style={{ height: this.wrapperMainHeight || 'auto' }}
+        >
+          <div className={style.floatingSection}>
             <div className={style.container}>
               <div
                 className={style.navArrow}

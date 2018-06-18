@@ -13,7 +13,8 @@ export class Slider extends Component {
   static propTypes = {
     slidesToShow: PropTypes.number,
     autoplay: PropTypes.bool,
-    controlsInside: PropTypes.bool
+    controlsInside: PropTypes.bool,
+    caption: PropTypes.string
   }
 
   static defaultProps = {
@@ -60,6 +61,10 @@ export class Slider extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.initLightbox && this.state.ready) {
+      this.props.initLightbox()
+    }
+
     this.init()
   }
 
@@ -135,7 +140,9 @@ export class Slider extends Component {
 
     this.slideWidth = this.slideNode.offsetWidth
     this.slideMargin = (parentWidth - this.slideWidth * slidesToShow) / (slidesToShow - 1)
-    const offset = -1 * ((this.slideWidth * 7) + (this.slideMargin * 7))
+
+    const offset = -1 * ((this.slideWidth * this.originalSlidesCount)
+      + (this.slideMargin * this.originalSlidesCount))
 
     this._step = this.slideWidth + this.slideMargin
 
@@ -210,12 +217,14 @@ export class Slider extends Component {
     this.initialRender = false
     // this.scroll$.unsubscribe()
 
-    if (this.props.autoplay) this.initAutoplay()
+    const { autoplay, initLightbox } = this.props
+
+    if (autoplay) this.initAutoplay()
+    if (initLightbox) initLightbox()
   }
 
   isHovering = (x, y) => {
     const { top, bottom, left, right } = this.sliderNode.getBoundingClientRect()
-
     return ((x >= left && x <= right) && (y >= top && y <= bottom))
   }
 
@@ -310,7 +319,7 @@ export class Slider extends Component {
   }
 
   render() {
-    const { children, arrowsInside } = this.props
+    const { children, arrowsInside, caption } = this.props
     let fadeInSlides
 
     if (!children || children.length === 0) {
@@ -333,6 +342,7 @@ export class Slider extends Component {
     })
 
     let isGroupReady = false
+    const margin = this.slideMargin || 0
 
     return (
       <div className={style.container}>
@@ -366,7 +376,7 @@ export class Slider extends Component {
                       enterDone: style.slide
                     }}
                   >
-                    <Slide key={key} margin={this.slideMargin}>
+                    <Slide key={key} margin={margin}>
                       {slide}
                     </Slide>
                   </CSSTransition>
@@ -379,7 +389,7 @@ export class Slider extends Component {
 
                 for (let i = 0; i < quantity; i++) {
                   groupContent.push(
-                    <Slide key={key}  margin={this.slideMargin}>
+                    <Slide key={key}  margin={margin}>
                       {this.slides[i].slide}
                     </Slide>
                   )
@@ -403,7 +413,7 @@ export class Slider extends Component {
               }
 
               return (
-                <Slide key={key} margin={this.slideMargin}>
+                <Slide key={key} margin={margin}>
                   {slide}
                 </Slide>
               )
@@ -416,6 +426,11 @@ export class Slider extends Component {
             onNextRef={this.onNextRef}
           />
         </div>
+
+        {caption &&
+          <div className={style.caption}>
+            {caption}
+          </div>}
       </div>
     )
   }

@@ -4,11 +4,10 @@ import style from '../Link/Link.css'
 
 
 // TODO: использовать компонент Link внутри
-export const NavLink = ({ to, children }) => (
+export const NavLink = ({ to, children, activeClassName }) =>
   <RouteLink
     to={to}
-    activeClassName={style.active}
+    activeClassName={activeClassName || style.active}
   >
     {children}
   </RouteLink>
-)

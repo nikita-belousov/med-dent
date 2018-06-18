@@ -1,0 +1,1 @@
+export { ArticleCaption } from './ArticleCaption'

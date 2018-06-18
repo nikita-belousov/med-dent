@@ -1,5 +1,5 @@
 @value alt-gradient from '../../../styles/libs/colors.css';
-@value shadow-primary from '../../../styles/libs/effects.css';
+@value shadow-primary, overlay-level-1 from '../../../styles/libs/effects.css';
 
 
 .popup {
@@ -8,7 +8,7 @@
   width: 100%;
   color: #fff;
   position: relative;
-  z-index: 9999;
+  z-index: overlay-level-1;
   box-shadow: shadow-primary;
 }
 

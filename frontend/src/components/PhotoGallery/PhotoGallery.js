@@ -7,13 +7,13 @@ import Lightbox from 'react-images'
 const photosCount = 39
 
 const thumbnails = times(photosCount, n => ({
-  src: require('../../assets/images/gallery/thumbnails/' + `${n + 1}_tn.jpg`),
+  src: require('../../assets/images/gallery/about-us/thumbnails/' + `${n + 1}_tn.jpg`),
   width: 3,
   height: 2
 }))
 
 const photos = times(photosCount, n => ({
-  src: require('../../assets/images/gallery/' + `${n + 1}.jpg`)
+  src: require('../../assets/images/gallery/about-us/' + `${n + 1}.jpg`)
 }))
 
 
