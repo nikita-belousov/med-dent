@@ -11,6 +11,7 @@ import {
   APPOINTMENT_UNLOADED
 } from '../../../constants/actionTypes'
 
+import { loadAppointmentForm } from '../../../actions'
 import { Appointment as appointmentApi, Staff as staffApi } from '../../../agent'
 import style from './AppointmentModal.css'
 import { ClosesOnExternalClick }  from '../../ClosesOnExternalClick'
@@ -19,16 +20,9 @@ import { Modal }  from '../index'
 import { Button, TextInput, SelectInput, Paragraph } from '../../__basic__'
 
 
-const mapStateToProps = state => ({
-  ...state.appointment
-})
+const mapStateToProps = state => ({ ...state.appointment })
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: payload =>
-    dispatch({ type: APPOINTMENT_LOADED, payload }),
-  onUnload: () =>
-    dispatch({ type: APPOINTMENT_UNLOADED })
-})
+const mapDispatchToProps = { loadAppointmentForm }
 
 
 const LOADING_TIME = 2500
@@ -55,19 +49,16 @@ let AppointmentModal  = class extends Component {
   }
 
   componentWillMount() {
-    this.props.onLoad(staffApi.options())
-  }
-
-  componentWillUnmount() {
-    this.props.onUnload()
+    this.props.loadAppointmentForm()
   }
 
   onFormSubmit = data => {
     this.userName = data.name
 
     setTimeout(() =>
-      this.setState({ contentState: 'success' })
-    , LOADING_TIME)
+      this.setState({ contentState: 'success' }),
+      LOADING_TIME
+    )
 
     appointmentApi.post(data)
   }

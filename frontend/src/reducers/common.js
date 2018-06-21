@@ -1,5 +1,5 @@
 import { SERVICES_CATEGORIES_COLLECTION } from '../constants'
-import { PAGE_LOADING_START, DATA_RECEIVED, UPDATE_LOADER } from '../actions'
+import { PAGE_LOADING_START, DATA_RECEIVED, INIT_LOADER, UPDATE_LOADER } from '../actions'
 
 
 class Loader {
@@ -16,15 +16,17 @@ class Loader {
 const loader = new Loader()
 
 
-export default (state = { isLoading: true }, action) => {
+export default (state = { isLoading: false   }, action) => {
   switch (action.type) {
     case PAGE_LOADING_START:
-      loader.start(action.payload.requestsCount)
       return {
         ...state,
         isLoading: true,
         loadingCompletion: 0
       }
+    case INIT_LOADER:
+      loader.start(action.payload.requestsCount)
+      return state
     case UPDATE_LOADER: {
       loader.update()
       return {

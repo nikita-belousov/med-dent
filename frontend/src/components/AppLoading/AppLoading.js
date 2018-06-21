@@ -22,12 +22,12 @@ let AppLoading = ({ completion }) =>
       <div className={style.logo}>
         <InlineSVG src={logoSign} />
       </div>
-      {/* <div className={style.indicatorWrapper}>
+      <div className={style.indicatorWrapper}>
         <Indicator completion={completion} />
-      </div> */}
+      </div>
+      {/* <div className={style.circle}></div>
       <div className={style.circle}></div>
-      <div className={style.circle}></div>
-      <div className={style.circle}></div>
+      <div className={style.circle}></div> */}
     </div>
   </div>
 

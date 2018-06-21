@@ -18,12 +18,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
-let Layout = ({
-  children,
-  isAppointmentActive,
-  closeAppointmentModal,
-  location
-}) => {
+let Layout = ({ children, isAppointmentActive, closeAppointmentModal, location }) => {
   const onAppointmentClose = () => {
     closeAppointmentModal()
     window.location.replace(location.pathname)

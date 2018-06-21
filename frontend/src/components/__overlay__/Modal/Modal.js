@@ -14,7 +14,7 @@ export class Modal extends Component {
   componentWillUnmount() {
     document.body.style.overflow = 'auto'
   }
-
+  
   render() {
     const { heading, children, renderFooter, onClose } = this.props
 

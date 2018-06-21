@@ -3,6 +3,24 @@ import agent from './agent'
 
 
 //=====================================
+//  App
+//-------------------------------------
+
+export const INIT_APP = 'INIT_APP'
+export const MEDIA_QUERY_CHANGED = 'MEDIA_QUERY_CHANGED'
+
+export const initApp = mediaQueryRules => ({
+  type: INIT_APP,
+  payload: { mediaQueryRules }
+})
+
+export const mediaQueryChanged = mediaQueries => ({
+  type: MEDIA_QUERY_CHANGED,
+  payload: { mediaQueries }
+})
+
+
+//=====================================
 //  Appointment
 //-------------------------------------
 
@@ -225,6 +243,17 @@ export const fetchDentistsAsOptions = id => ({
 
 
 //=====================================
+//  Appointment
+//-------------------------------------
+
+export const LOAD_APPOINTMENT_FORM = 'LOAD_APPOINTMENT_FORM'
+
+export const loadAppointmentForm = () => ({
+  type: LOAD_APPOINTMENT_FORM
+})
+
+
+//=====================================
 //  Side effects
 //-------------------------------------
 
@@ -238,21 +267,18 @@ export const dataReceived = data => ({
   payload: { data }
 })
 
-export const pageLoadingStart = requestsCount => ({
-  type: PAGE_LOADING_START,
+export const pageLoadingStart = () => ({
+  type: PAGE_LOADING_START
+})
+
+export const initLoader = requestsCount => ({
+  type: INIT_LOADER,
   payload: { requestsCount }
 })
 
 export const updateLoader = () => ({
   type: UPDATE_LOADER
 })
-
-
-//=====================================
-//  Other
-//-------------------------------------
-
-
 
 
 export const pageReloadingActions = [
@@ -271,6 +297,11 @@ export const pageReloadingActions = [
   FETCH_DENTISTS_PAGE,
   FETCH_DENTIST_BY_ID,
   FETCH_QUESTIONS_PAGE
+]
+
+export const requestActions = [
+  ...pageReloadingActions,
+  FETCH_DENTISTS_AS_OPTIONS
 ]
 
 export const actions = {
