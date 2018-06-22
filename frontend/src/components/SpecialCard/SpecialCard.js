@@ -1,32 +1,47 @@
 import React, { Component } from 'react'
-import styles from './SpecialCard.css'
+import classNames from 'classnames'
+import style from './SpecialCard.css'
 import { Paragraph, Link } from '../__basic__'
 
 
 export class SpecialCard extends Component {
   render() {
-    const { shortDescription, slug, image, color, title } = this.props
+    const { shortDescription, slug, image, color, title, small } = this.props
     const imagePath = require('../../assets/images/' + image)
 
+    const cardClass = classNames({
+      [style.card]: !small,
+      [style.cardMobile]: small
+    })
+
+    const content = (
+      <div className={style.content}>
+        <div className={style.caption}>
+          {title}
+        </div>
+        <div className={style.description}>
+          <Paragraph>
+            {shortDescription}
+          </Paragraph>
+        </div>
+      </div>
+    )
+
     return (
-      <div className={styles.wrapper}>
+      <div className={cardClass}>
         <Link href={`/specials/${slug}`}>
           <div
-            className={styles.card}
+            className={style.background}
             style={{ backgroundImage: `url(${imagePath})` }}
           >
-            <div className={styles.inner}>
-              <div className={styles.caption}>
-                {title}
-              </div>
-              <div className={styles.description}>
-                <Paragraph>
-                  {shortDescription}
-                </Paragraph>
-              </div>
-            </div>
+            {!small && content}
           </div>
         </Link>
+
+        {small && 
+          <div className={style.caption}>
+            {title}
+          </div>}
       </div>
     )
   }

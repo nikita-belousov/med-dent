@@ -1,11 +1,12 @@
+import { fromEvent, interval } from 'rxjs'
+import { debounceTime, throttleTime, startWith, map, filter, withLatestFrom, take, tap } from 'rxjs/operators'
+
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import { CSSTransition } from 'react-transition-group'
 import classNames from 'classnames'
 import times from 'lodash/times'
-import { fromEvent, interval } from 'rxjs'
-import { throttleTime, startWith, map, filter, withLatestFrom, take, tap } from 'rxjs/operators'
 import style from './Slider.css'
 
 
@@ -40,6 +41,7 @@ export class Slider extends Component {
   constructor(props) {
     super(props)
 
+    this.unsubscribe = []
     this.slides = []
     this.originalSlidesCount = null
     this.totalSlidesCount = null
@@ -48,12 +50,6 @@ export class Slider extends Component {
     this.sliderNode = null
     this.slideNode = null
     this.initialRender = true
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    // if (this.state !== nextState) {
-    //   this.logState()
-    // }
   }
 
   componentDidMount() {
@@ -65,23 +61,29 @@ export class Slider extends Component {
       this.props.initLightbox()
     }
 
-    this.init()
+    const updateSlides = prevProps.updateSlidesIn !== this.props.updateSlidesIn
+    this.init(updateSlides)
   }
 
   componentWillUnmount() {
     clearInterval(this.autoplayInterval)
-
-    if (this.autoplay$) {
-      this.autoplay$.unsubscribe()
-    }
+    this.unsubscribe.forEach(obs => obs.unsubscribe())
   }
 
-  init() {
+  init(updateSlides) {
     // this.initAppearance()
-    this.initSlides()
-    this.initMargins()
-    this.initControls()
 
+    if (!this.state.marginsReady && (this.slideNode && this.sliderNode)) {
+      this.initResize()
+    }
+
+    const childrenLength = React.Children.count(this.props.children)
+    if ((this.originalSlidesCount !== childrenLength) ||
+         updateSlides) {
+      this.initSlides()
+    }
+
+    this.initControls()
     this.tryReady()
   }
 
@@ -108,11 +110,6 @@ export class Slider extends Component {
   }
 
   initSlides() {
-    const childrenLength = React.Children.count(this.props.children)
-    if (this.originalSlidesCount === childrenLength) {
-      return
-    }
-
     const { children } = this.props
 
     this.originalSlidesCount = React.Children.count(children)
@@ -130,11 +127,7 @@ export class Slider extends Component {
     }))
   }
 
-  initMargins() {
-    if (!this.slideNode || !this.sliderNode || this.state.marginsReady) {
-      return
-    }
-
+  recalculateMargins = () => {
     const { slidesToShow } = this.props
     const parentWidth = this.sliderNode.parentElement.offsetWidth
 
@@ -158,12 +151,12 @@ export class Slider extends Component {
       return
     }
 
-    fromEvent(this.previousNode, 'click')
+    const previous$ = fromEvent(this.previousNode, 'click')
       .pipe(
         throttleTime(this.STEP_ANIMATION_TIME)
       ).subscribe(this.onPrevious)
 
-    fromEvent(this.nextNode, 'click')
+    const next$ = fromEvent(this.nextNode, 'click')
       .pipe(
         throttleTime(this.STEP_ANIMATION_TIME)
       ).subscribe(this.onNext)
@@ -172,6 +165,8 @@ export class Slider extends Component {
       ...prev,
       controlsReady: true
     }))
+
+    this.unsubscribe.push(previous$, next$)
   }
 
   initAutoplay() {
@@ -182,7 +177,7 @@ export class Slider extends Component {
         startWith({ clientX: 0, clientY: 0 })
       )
 
-    this.autoplay$ = interval(this.AUTOPLAY_INTERVAL)
+    const autoplay$ = interval(this.AUTOPLAY_INTERVAL)
       .pipe(
         withLatestFrom(mouseover$),
         map(values => ({
@@ -191,6 +186,18 @@ export class Slider extends Component {
         })),
         filter(val => !this.isHovering(val.x, val.y))
       ).subscribe(next)
+
+    this.unsubscribe.push(mouseover$, autoplay$)
+  }
+
+  initResize = () => {
+    this.recalculateMargins()
+
+    const resize$ = fromEvent(window, 'resize')
+      .pipe(debounceTime(200))
+      .subscribe(this.recalculateMargins)
+
+    this.unsubscribe.push(resize$)
   }
 
   tryReady() {

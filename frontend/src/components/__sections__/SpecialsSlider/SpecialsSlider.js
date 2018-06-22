@@ -11,8 +11,10 @@ import { SpecialCard } from '../../SpecialCard'
 import { NavArrow, Link, Container } from '../../__basic__'
 
 
-const mapStateToProps = state =>
-  ({ cards: state.specialsSlider.specialsCards })
+const mapStateToProps = state => ({
+  cards: state.specialsSlider.specialsCards,
+  mediaQueries: state.common.mediaQueries
+})
 
 const mapDispatchToProps = { fetchSpecialsSlides }
 
@@ -22,24 +24,9 @@ let SpecialsSlider = class extends Component {
     this.props.fetchSpecialsSlides()
   }
 
-  renderSlider(card) {
-    return (
-      <Slider
-        slidesToShow={4}
-        autoplay={true}
-        controlsInside={true}
-      >
-        {card.map(card => (
-          <div key={card.slug}>
-            <SpecialCard key={card.slug} {...card} />
-          </div>
-        ))}
-      </Slider>
-    )
-  }
-
   render() {
-    const { cards } = this.props
+    const { cards, mediaQueries } = this.props
+    const mobile = mediaQueries ? mediaQueries.small : false
 
     if (!cards || cards.length === 0) {
       return null
@@ -47,12 +34,23 @@ let SpecialsSlider = class extends Component {
 
     return (
       <div className={styles.wrapper}>
-        <Container>
+        <Container responsive={true}>
           <h2 className={styles.caption}>
             Специальные предложения
           </h2>
           <div className={styles.sliderWrapper}>
-            {this.renderSlider(cards)}
+            <Slider
+              updateSlidesIn={mobile}
+              slidesToShow={mobile ? 3 : 4}
+              autoplay={true}
+              controlsInside={true}
+            >
+              {cards.map(card => (
+                <div key={card.slug}>
+                  <SpecialCard small={mobile} {...card} />
+                </div>
+              ))}
+            </Slider>
           </div>
           <div className={styles.moreAbout}>
             <Link href="/specials">
@@ -67,4 +65,5 @@ let SpecialsSlider = class extends Component {
 
 
 SpecialsSlider = connect(mapStateToProps, mapDispatchToProps)(SpecialsSlider)
+
 export { SpecialsSlider }

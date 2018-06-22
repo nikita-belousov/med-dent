@@ -1,5 +1,7 @@
-.wrapper {
+.card {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 
   &:last-child .card {
     margin-right: 0;
@@ -12,7 +14,13 @@
   }
 }
 
-.card {
+.cardMobile {
+  composes: card;
+  width: 200px;
+  color: #000;
+}
+
+.background {
   width: 256px;
   height: 350px;
   border-radius: 10px;
@@ -22,9 +30,23 @@
   transition: background-size .2s ease-out;
   color: #fff;
   position: relative;
+
+  .cardMobile & {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+
+    &:hover {
+      background-size: 110% auto;
+    }
+
+    &::before {
+      border-radius: 50%;
+    }
+  }
 }
 
-.card::before {
+.background::before {
   content: '';
   display: block;
   position: absolute;
@@ -36,7 +58,7 @@
   transition: opacity .1s ease-in-out;
 }
 
-.card:hover {
+.background:hover {
   background-size: 105% auto;
 
   &::before {
@@ -44,23 +66,39 @@
   }
 }
 
-.inner {
+.contentWrapper {
+  /* margin-top: 20px; */
+}
+
+.content {
   padding: 20px;
   height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  .cardMobile & {
+    height: auto;
+    display: block;
+    padding: 0;
+  }
 }
 
 .caption {
   font-size: 16pt;
   font-weight: 600;
   line-height: 1.4;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+
+  .cardMobile & {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13pt;
+  }
 }
 
 .description p {
-  margin-bottom: 0;
+  margin: 0;
   line-height: 1.5;
 }
