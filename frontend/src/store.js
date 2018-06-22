@@ -13,8 +13,8 @@ const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
     return applyMiddleware(promiseMiddleware, epicMiddleware)
   } else {
-    return applyMiddleware(promiseMiddleware, epicMiddleware)
-    // return applyMiddleware(promiseMiddleware, epicMiddleware, createLogger())
+    // return applyMiddleware(promiseMiddleware, epicMiddleware)
+    return applyMiddleware(promiseMiddleware, epicMiddleware, createLogger())
   }
 }
 

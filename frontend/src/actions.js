@@ -21,6 +21,18 @@ export const mediaQueryChanged = mediaQueries => ({
 
 
 //=====================================
+//  Header
+//-------------------------------------
+
+export const INIT_HEADER_DATA = 'INIT_HEADER_DATA'
+
+export const initHeaderData = data => ({
+  type: INIT_HEADER_DATA,
+  payload: { ...data }
+})
+
+
+//=====================================
 //  Appointment
 //-------------------------------------
 

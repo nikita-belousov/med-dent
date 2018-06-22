@@ -9,6 +9,7 @@ import changingReviews from './changingReviews'
 import pricelist from './pricelist'
 import categoryPage from './categoryPage'
 import appointment from './appointment'
+import header from './header'
 
 export default combineReducers({
   common,
@@ -19,5 +20,6 @@ export default combineReducers({
   changingReviews,
   pricelist,
   categoryPage,
-  appointment
+  appointment,
+  header
 })

@@ -1,20 +1,12 @@
 import React, { Component } from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import FontAwesome from 'react-fontawesome'
 import style from './Modal.css'
+import { withOverlay } from '../../__hocs__'
 import { AppearAnimation } from '../../AppearAnimation'
 import { ClosesOnExternalClick }  from '../../ClosesOnExternalClick'
 
 
-export class Modal extends Component {
-  componentDidMount() {
-    document.body.style.overflow = 'hidden'
-  }
-
-  componentWillUnmount() {
-    document.body.style.overflow = 'auto'
-  }
-  
+let Modal = class extends Component {
   render() {
     const { heading, children, renderFooter, onClose } = this.props
 
@@ -56,3 +48,8 @@ export class Modal extends Component {
     )
   }
 }
+
+
+Modal = withOverlay(Modal)
+
+export { Modal }

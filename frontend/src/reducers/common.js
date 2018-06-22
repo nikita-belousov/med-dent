@@ -1,5 +1,5 @@
 import { SERVICES_CATEGORIES_COLLECTION } from '../constants'
-import { PAGE_LOADING_START, DATA_RECEIVED, INIT_LOADER, UPDATE_LOADER } from '../actions'
+import { MEDIA_QUERY_CHANGED, PAGE_LOADING_START, DATA_RECEIVED, INIT_LOADER, UPDATE_LOADER } from '../actions'
 
 
 class Loader {
@@ -16,12 +16,17 @@ class Loader {
 const loader = new Loader()
 
 
-export default (state = { isLoading: false   }, action) => {
+export default (state = { isLoading: false }, action) => {
   switch (action.type) {
+    case MEDIA_QUERY_CHANGED:
+      return {
+        ...state,
+        mediaQueries: action.payload.mediaQueries
+      }
     case PAGE_LOADING_START:
       return {
         ...state,
-        isLoading: true,
+        // isLoading: true,
         loadingCompletion: 0
       }
     case INIT_LOADER:
@@ -35,14 +40,6 @@ export default (state = { isLoading: false   }, action) => {
       }
     }
     case DATA_RECEIVED:
-      const servicesCategories = action.payload.data[SERVICES_CATEGORIES_COLLECTION]
-      if (servicesCategories) {
-        return {
-          ...state,
-          menuLinks: servicesCategories.docs,
-          isLoading: false
-        }
-      }
       return {
         ...state,
         isLoading: false

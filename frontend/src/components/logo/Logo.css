@@ -53,3 +53,25 @@
     }
   }
 }
+
+.inverted {
+  composes: logo;
+
+  .sign svg path {
+    transition: none;
+
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+      fill: transparent;
+    }
+
+    &:nth-child(4) {
+      fill: #fff;
+    }
+  }
+
+  .sign:hover svg path:nth-child(4) {
+    fill: #fff !important;
+  }
+}

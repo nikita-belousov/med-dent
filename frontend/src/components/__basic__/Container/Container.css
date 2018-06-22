@@ -5,3 +5,11 @@
   height: 100%;
   padding: 0 40px;
 }
+
+.responsive {
+  composes: container;
+
+  width: auto;
+  max-width: 1240px;
+  min-width: 520px;
+}

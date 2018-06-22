@@ -14,8 +14,7 @@ const mediaQuery = action$ =>
       combineLatest(...getMqlObservables(action.payload.mediaQueryRules))
         .pipe(
           map(getResults),
-          map(mediaQueryChanged),
-          tap(console.log)
+          map(mediaQueryChanged)
         )
     )
   )
@@ -48,6 +47,46 @@ function getMqlObservables(rules) {
 
   return observables
 }
+
+// function getMqlObservables(rules) {
+//   Object.keys(rules).reduce((acc, section) => {
+//     rules[section].forEach(rule => {
+//       const mediaQueryList = global.matchMedia(getMedia(rule))
+//
+//       const obs = fromEventPattern(
+//         handler => {
+//           handler(mediaQueryList)
+//           mediaQueryList.addListener(handler)
+//         },
+//         handler => mediaQueryList.removeListener(handler),
+//         mql => {
+//           const res = { mql, rule }
+//           if (section !== 'default') {
+//             res.section = section
+//           }
+//           return res
+//         }
+//       )
+//
+//       acc.push(obs)
+//     })
+//   }, [])
+//
+//   let observables = rules.map(rule => {
+//     const mediaQueryList = global.matchMedia(getMedia(rule))
+//
+//     return fromEventPattern(
+//       handler => {
+//         handler(mediaQueryList)
+//         mediaQueryList.addListener(handler)
+//       },
+//       handler => mediaQueryList.removeListener(handler),
+//       mql => ({ mql, rule })
+//     )
+//   })
+//
+//   return observables
+// }
 
 
 function getResults(updates) {

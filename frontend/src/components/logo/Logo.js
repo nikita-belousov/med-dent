@@ -2,26 +2,35 @@ import React from 'react'
 import classNames from 'classnames'
 import InlineSVG from 'svg-inline-react'
 
-import styles from './Logo.css'
+import style from './Logo.css'
 import logoSign from '../../assets/images/logo/logo-sign.svg'
 import logoTitle from '../../assets/images/logo/logo-title.svg'
 
 
-export const Logo = ({ minified }) => {
-  const cls = classNames({
-    'logo': !minified,
-    'minified': minified
+export const Logo = ({ minified, inverted, caption }) => {
+  const logoClass = classNames({
+    [style.logo]: !minified,
+    [style.minified]: minified,
+    [style.inverted]: inverted,
   })
 
   return (
-    <div className={styles[cls]}>
-      <div className={styles['sign']}>
+    <div className={logoClass}>
+      <div className={style.sign}>
         <InlineSVG src={logoSign} />
       </div>
-      {!minified &&
-        <div className={styles['title']}>
-          <InlineSVG src={logoTitle} />
-        </div>}
+
+      <div
+        style={{ visibility: caption ? 'visible' : 'hidden' }}
+        className={style.title}
+      >
+        <InlineSVG src={logoTitle} />
+      </div>
     </div>
   )
+}
+
+
+Logo.defaultProps = {
+  caption: true
 }

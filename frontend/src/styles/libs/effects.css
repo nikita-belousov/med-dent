@@ -3,6 +3,8 @@
 @value shadow-big: 0px 8px 60px 0px rgba(0,0,0,0.2);
 @value border-radius-small: 10px;
 @value border-radius-big: 16px;
+
 @value overlay-level-1: 100;
 @value overlay-level-2: 150;
 @value overlay-level-3: 200;
+@value overlay-level-4: 250;
