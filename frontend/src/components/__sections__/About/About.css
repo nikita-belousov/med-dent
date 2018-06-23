@@ -6,26 +6,45 @@
   padding-top: 80px;
 }
 
-.bg {
+.mobile {
+  composes: wrapper;
+}
+
+.background {
   background: light-grey-gradient;
 }
 
 .inner {
-  display: flex;
+  lost-center: 100%;
   height: 520px;
   overflow: hidden;
 }
 
-.aboutUs, .headDoctor {
-  width: 50%;
-}
-
-.aboutUs {
-  padding-top: 50px;
+.text {
+  lost-column: 1/2;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .mobile & {
+    lost-column: 1;
+  }
 }
+
+.pictureWrapper {
+  lost-column: 1/2;
+  height: 100%;
+}
+
+.picture {
+  height: 100%;
+  background-image: url(./../../../assets/images/smiling-girl.png);
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: bottom left;
+  position: relative;
+}
+
 
 .heading h2 {
   margin: 0;
@@ -34,10 +53,8 @@
 .textWrapper {
   flex-grow: 1;
   height: 100%;
-  padding-top: 40px;
   width: 400px;
   position: relative;
-  margin-bottom: -100px;
 
   &::before {
     content: '';
@@ -56,6 +73,7 @@
   height: 100%;
   padding: 9px;
   box-shadow: shadow-primary;
+  height: 100%;
   padding-left: 0;
 }
 
@@ -82,14 +100,4 @@
   	border-radius: 10px;
   	background-color: color(white a(40%));
   }
-}
-
-.picture {
-  height: 100%;
-  width: 600px;
-  background-image: url(./../../../assets/images/smiling-girl.png);
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  background-position: bottom left;
-  position: relative;
 }

@@ -15,7 +15,7 @@
 }
 
 .reviewBg {
-  width: 440px;
+  width: 100%;
   border-radius: border-radius-small;
   background: primary;
   padding: 1.2em 2.2em 1.2em 1.6em;

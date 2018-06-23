@@ -5,22 +5,34 @@
 
 .footer {
   padding-top: 50px;
-  display: block;
 }
 
 .info {
-  display: flex;
+  lost-center: 100%;
   margin-bottom: 55px;
 }
 
 .licenseWrapper {
+  lost-column: 1/2;
   position: relative;
   top: 2px;
   width: 350px;
+
+  .mobile & {
+    lost-column: 1;
+  }
 }
 
 .paymentWrapper {
-  margin-left: 60px;
+  lost-column: 1/2;
+  display: inline-flex;
+
+  .mobile & {
+    lost-column: 1;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
 }
 
 .links {
@@ -84,7 +96,7 @@
 }
 
 .discretion {
-  height: 90px;
+  margin: 20px 0 25px;
   display: flex;
   align-items: center;
   font-family: 'Oswald', sans-serif;
@@ -93,6 +105,7 @@
   font-size: 22pt;
 
   p {
+    line-height: 1.4;
     width: 100%;
     text-align: center;
     margin: 0;

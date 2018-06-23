@@ -1,23 +1,27 @@
+.wrapper {}
+
+.mobile {
+  width: 200px;
+}
+
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  .mobile & {
+    color: #000;
+  }
+
   &:last-child .card {
     margin-right: 0;
   }
 
-  > a {
+  a {
     border: 0;
     text-decoration: 0;
     font-weight: normal;
   }
-}
-
-.cardMobile {
-  composes: card;
-  width: 200px;
-  color: #000;
 }
 
 .background {
@@ -31,9 +35,9 @@
   color: #fff;
   position: relative;
 
-  .cardMobile & {
-    width: 150px;
-    height: 150px;
+  .mobile & {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
 
     &:hover {
@@ -66,10 +70,6 @@
   }
 }
 
-.contentWrapper {
-  /* margin-top: 20px; */
-}
-
 .content {
   padding: 20px;
   height: 100%;
@@ -78,7 +78,7 @@
   flex-direction: column;
   justify-content: flex-end;
 
-  .cardMobile & {
+  .mobile & {
     height: auto;
     display: block;
     padding: 0;
@@ -90,15 +90,10 @@
   font-weight: 600;
   line-height: 1.4;
   margin-bottom: 5px;
-
-  .cardMobile & {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 13pt;
-  }
 }
 
-.description p {
-  margin: 0;
-  line-height: 1.5;
+.mobileCaption {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13pt;
 }

@@ -26,7 +26,7 @@ export default (state = { isLoading: false }, action) => {
     case PAGE_LOADING_START:
       return {
         ...state,
-        // isLoading: true,
+        isLoading: true,
         loadingCompletion: 0
       }
     case INIT_LOADER:

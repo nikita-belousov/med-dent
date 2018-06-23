@@ -9,9 +9,9 @@ export class SpecialCard extends Component {
     const { shortDescription, slug, image, color, title, small } = this.props
     const imagePath = require('../../assets/images/' + image)
 
-    const cardClass = classNames({
-      [style.card]: !small,
-      [style.cardMobile]: small
+    const wrapperClass = classNames({
+      [style.wrapper]: true,
+      [style.mobile]: small
     })
 
     const content = (
@@ -28,19 +28,23 @@ export class SpecialCard extends Component {
     )
 
     return (
-      <div className={cardClass}>
-        <Link href={`/specials/${slug}`}>
-          <div
-            className={style.background}
-            style={{ backgroundImage: `url(${imagePath})` }}
-          >
-            {!small && content}
-          </div>
-        </Link>
+      <div className={wrapperClass}>
+        <div className={style.card}>
+          <Link href={`/specials/${slug}`}>
+            <div
+              className={style.background}
+              style={{ backgroundImage: `url(${imagePath})` }}
+            >
+              {!small && content}
+            </div>
+          </Link>
+        </div>
 
-        {small && 
-          <div className={style.caption}>
-            {title}
+        {small &&
+          <div className={style.mobileCaption}>
+            <Link href={`/specials/${slug}`}>
+              {title}
+            </Link>
           </div>}
       </div>
     )

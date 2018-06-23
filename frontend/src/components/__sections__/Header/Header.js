@@ -191,6 +191,7 @@ const Header = ({
                     onClick={this.onLinkClick}
                     to={`/${slug}`}
                     activeClassName={style.serviceLinkActive}
+                    className={style.categoryLink}
                   >
                     {capitalize(title)}
                   </NavLink>

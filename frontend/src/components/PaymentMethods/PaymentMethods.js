@@ -4,7 +4,7 @@ import style from './PaymentMethods.css'
 
 
 export const PaymentMethods = () =>
-  <div className={style.wrapper}>
+  <div>
     <div className={style.capture}>
       Принимаем к оплате
     </div>

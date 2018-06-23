@@ -6,10 +6,10 @@
   position: relative;
 }
 
-.newsEntity {
+.wrapper {
   display: flex;
   width: 360px;
-
+  
   .preview {
     width: 100px;
     position: relative;
@@ -22,9 +22,20 @@
   }
 }
 
+.mobile {
+
+  .content {
+    padding-left: 0;
+  }
+}
+
 .bottomLine {
   display: flex;
   margin-top: 8px;
+
+  .mobile {
+    display: block;
+  }
 }
 
 .data {

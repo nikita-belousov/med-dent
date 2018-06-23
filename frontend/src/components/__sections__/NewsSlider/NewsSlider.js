@@ -1,19 +1,53 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { formatDate } from 'utils'
 import FontAwesome from 'react-fontawesome'
 
 import { fetchNewsSlides } from '../../../actions'
-import styles from './NewsSlider.css'
+import style from './NewsSlider.css'
 import { Container, NavArrow, Paragraph, Link } from '../../__basic__'
 import { ArticleThumbnail } from '../../__article__'
 import { Slider } from '../../Slider'
 
 
-const mapStateToProps = state => ({ news: state.newsSlider.news })
+const mapStateToProps = state => ({
+  mediaQueries: state.common.mediaQueries,
+  news: state.newsSlider.news
+})
 
 const mapDispatchToProps = { fetchNewsSlides }
+
+
+const Slide = ({ mobile, title, slug, preview, thumbnail, content, createdAt }) => {
+  const wrappperClass = classNames({
+    [style.wrapper]: true,
+    [style.mobile]: mobile
+  })
+
+  return (
+    <div key={slug} className={wrappperClass}>
+      {!mobile &&
+        <div className={style.preview}>
+          <Link href={`/news/${slug}`}>
+            <ArticleThumbnail src={require('../../../assets/images/' + thumbnail)} />
+          </Link>
+        </div>}
+
+        <div className={style.content}>
+          <Link href={`/news/${slug}`}>
+          {title}
+        </Link>
+        <div className={style.bottomLine}>
+          <div className={style.data}>
+            {formatDate(createdAt)}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 
 let NewsSlider = class extends Component {
@@ -21,47 +55,32 @@ let NewsSlider = class extends Component {
     this.props.fetchNewsSlides()
   }
 
-  renderSlider(news) {
-    return (
-      <Slider autoplay={false} slidesToShow={3}>
-        {news.map(doc => (
-          <div key={doc.slug} className={styles.newsEntity}>
-            <div className={styles.preview}>
-              <Link href={`/news/${doc.slug}`}>
-                <ArticleThumbnail
-                  src={require('../../../assets/images/' + doc.thumbnail)}
-                />
-              </Link>
-            </div>
-            <div className={styles.content}>
-              <Link href={`/news/${doc.slug}`}>
-                {doc.title}
-              </Link>
-              <div className={styles.bottomLine}>
-                <div className={styles.data}>
-                  {formatDate(doc.createdAt)}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </Slider>
-    )
-  }
-
   render() {
-    const { news } = this.props
+    const { mediaQueries, news } = this.props
 
-    if (!news || news.length === 0) {
+    if (!mediaQueries || (!news || news.length === 0)) {
       return null
     }
 
+    const mobile = mediaQueries.small
+
     return (
-      <div className={styles.sectionWrapper}>
-        <Container>
+      <div className={style.sectionWrapper}>
+        <Container responsive={true}>
           <div>
             <h3>Новости</h3>
-            {this.renderSlider(news)}
+            <Slider
+              controlsInside={mobile}
+              autoplay={false}
+              slidesToShow={mobile ? 2 : 3}
+              updateSlidesIn={mobile}
+            >
+              {news.map((doc, i) =>
+                <div key={i}>
+                  <Slide mobile={mobile} {...doc} />
+                </div>
+              )}
+            </Slider>
           </div>
         </Container>
       </div>
@@ -71,4 +90,5 @@ let NewsSlider = class extends Component {
 
 
 NewsSlider = connect(mapStateToProps, mapDispatchToProps)(NewsSlider)
+
 export { NewsSlider }

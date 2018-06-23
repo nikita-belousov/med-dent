@@ -8,7 +8,7 @@
 }
 
 .headerBarWrapper {
-  margin-top: 60px;
+  padding-top: 60px;
 }
 
 .headerBar {
@@ -149,7 +149,6 @@
   }
 
   a {
-    position: relative;
     color: #fff;
     border-bottom-color: rgba(255,255,255, .4);
 
@@ -157,6 +156,11 @@
       border-bottom-color: white;
     }
   }
+}
+
+.serviceLinkActive {
+  position: relative;
+  z-index: 2;
 }
 
 .serviceLinkActive {

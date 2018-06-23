@@ -173,9 +173,7 @@ export class Slider extends Component {
     const next = () => this.updateSlider('next', 1)
 
     const mouseover$ = fromEvent(window.document, 'mouseover')
-      .pipe(
-        startWith({ clientX: 0, clientY: 0 })
-      )
+      .pipe(startWith({ clientX: 0, clientY: 0 }))
 
     const autoplay$ = interval(this.AUTOPLAY_INTERVAL)
       .pipe(
@@ -187,7 +185,7 @@ export class Slider extends Component {
         filter(val => !this.isHovering(val.x, val.y))
       ).subscribe(next)
 
-    this.unsubscribe.push(mouseover$, autoplay$)
+    this.unsubscribe.push(autoplay$)
   }
 
   initResize = () => {
