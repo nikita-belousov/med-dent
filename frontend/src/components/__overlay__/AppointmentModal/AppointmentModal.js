@@ -6,11 +6,6 @@ import validate from 'validate.js'
 import utils from 'utils'
 import _ from 'lodash'
 
-import {
-  APPOINTMENT_LOADED,
-  APPOINTMENT_UNLOADED
-} from '../../../constants/actionTypes'
-
 import { loadAppointmentForm } from '../../../actions'
 import { Appointment as appointmentApi, Staff as staffApi } from '../../../agent'
 import style from './AppointmentModal.css'
@@ -64,10 +59,12 @@ let AppointmentModal  = class extends Component {
   }
 
   toSelectOptions(data) {
-    return data.map(doc => ({
+    const options = data.map(doc => ({
       value: doc.optionValue,
       name: doc.optionName
     }))
+    options.unshift({ value: null, name: 'Не выбрано' })
+    return options
   }
 
   renderSuccess = () => {
@@ -86,7 +83,7 @@ let AppointmentModal  = class extends Component {
   }
 
   renderForm = () => {
-    const { staff, defaultDentist } = this.props
+    const { dentistsOptions, defaultDentist } = this.props
 
     return (
       <div className={style.form}>
@@ -132,7 +129,7 @@ let AppointmentModal  = class extends Component {
               <SelectInput
                 name='dentist'
                 defaultOption={defaultDentist || ''}
-                options={staff && this.toSelectOptions(staff)}
+                options={dentistsOptions && this.toSelectOptions(dentistsOptions)}
               />
             </div>
           </div>
@@ -159,7 +156,7 @@ let AppointmentModal  = class extends Component {
   }
 
   render() {
-    const { staff, onClose } = this.props
+    const { dentistsOptions, onClose } = this.props
     const { contentState } = this.state
 
     const constraints = {

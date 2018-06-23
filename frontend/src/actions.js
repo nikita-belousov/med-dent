@@ -245,7 +245,7 @@ export const fetchDentistById = id => ({
   }
 })
 
-export const fetchDentistsAsOptions = id => ({
+export const fetchDentistsAsOptions = () => ({
   type: FETCH_DENTISTS_AS_OPTIONS,
   payload: {
     dataType: dataTypes.DENTISTS_OPTIONS_COLLECTION,

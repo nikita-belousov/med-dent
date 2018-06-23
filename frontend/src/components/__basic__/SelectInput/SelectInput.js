@@ -78,7 +78,7 @@ export class SelectInput extends Component {
 
     if (!options && value) {
       currentName = defaultOption.name
-    } else if (value) {
+    } else if (value || value === null) {
       currentName = options
         .find(option => option.value === value)
         .name

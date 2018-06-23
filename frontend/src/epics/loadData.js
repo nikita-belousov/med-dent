@@ -85,5 +85,5 @@ const loadPage = action$ => {
 
 export default combineEpics(
   loadPage,
-  // loadAppointmentForm
+  loadAppointmentForm
 )
