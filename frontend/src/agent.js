@@ -1,6 +1,18 @@
 import superagentPromise from 'superagent-promise'
 import _superagent from 'superagent'
 
+import { apiRoot as _apiRoot } from './constants/urls'
+import { questions, questionsAll, questionsPage } from './constants/urls'
+import { reviews, reviewsAll, reviewsPage } from './constants/urls'
+import { newsArticle, newsPage } from './constants/urls'
+import { specialsPreviews, specialsPage, specialArticle } from './constants/urls'
+import { dentistsPage, dentistsOptions, dentistById } from './constants/urls'
+import { serviceCategories } from './constants/urls'
+import { servicesAll, servicesByCategory } from './constants/urls'
+import { appointmentRegister } from './constants/urls'
+import { countCost } from './constants/urls'
+import { callbackRequest } from './constants/urls'
+
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
@@ -8,9 +20,7 @@ const host = process.env.NODE_ENV === 'production'
   ? '139.59.152.152'
   : 'localhost:8080'
 
-const API_ROOT = `http://${host}/api`
-
-const getBody = res => res.body
+const apiRoot = _apiRoot(host)
 
 const token = null
 const tokenPlugin = req => {
@@ -19,101 +29,152 @@ const tokenPlugin = req => {
   }
 }
 
+const getBody = res => res.body
+
 const requests = {
   del: url =>
-    superagent.del(`${API_ROOT}${url}`).use(tokenPlugin).then(getBody),
+    superagent.del(`${apiRoot}${url}`).use(tokenPlugin).then(getBody),
   get: url =>
-    superagent.get(`${API_ROOT}${url}`).use(tokenPlugin).then(getBody),
+    superagent.get(`${apiRoot}${url}`).use(tokenPlugin).then(getBody),
   put: (url, body) =>
-    superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin).then(getBody),
+    superagent.put(`${apiRoot}${url}`, body).use(tokenPlugin).then(getBody),
   post: (url, body) =>
-    superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(getBody)
-}
-
-const pageQuery = (count, page = 0) => `_limit=${count}&_start=${(page - 1) * count}`
-
-export const Reviews = {
-  all: () =>
-    requests.get('/reviews'),
-  page: (itemsOnPage, page) =>
-    requests.get(`/reviews/?${pageQuery(itemsOnPage, page)}&isPublished=true&_sort=createdAt:desc`),
-  post: body =>
-    requests.post('/reviews', body)
-}
-
-export const Staff = {
-  all: () =>
-    requests.get('/staff'),
-  page: (itemsOnPage, page) =>
-    requests.get(`/staff/?${pageQuery(itemsOnPage, page)}`),
-  byId: id =>
-    requests.get(`/staff/${id}`),
-  options: () =>
-    requests.get('/staff/select_options')
-}
-
-export const Questions = {
-  all: () =>
-    requests.get('/questions'),
-  page: (itemsOnPage, page) =>
-    requests.get(`/questions/?${pageQuery(itemsOnPage, page)}&_sort=createdAt:desc`),
-  post: body =>
-    requests.post('/questions', body)
-}
-
-export const Specials = {
-  all: () =>
-    requests.get('/specials/?_sort=createdAt:desc'),
-  cards: () =>
-    requests.get('/specials/cards/?_sort=createdAt:desc'),
-  page: (itemsOnPage, page) =>
-    requests.get(`/specials/?${pageQuery(itemsOnPage, page)}&_sort=createdAt:desc`),
-  article: slug =>
-    requests.get(`/specials/${slug}`)
-}
-
-export const News = {
-  all: () =>
-    requests.get('/news/?_sort=createdAt:desc'),
-  page: (itemsOnPage, page) =>
-    requests.get(`/news/?${pageQuery(itemsOnPage, page)}&_sort=createdAt:desc`),
-  article: slug =>
-    requests.get(`/news/${slug}`)
+    superagent.post(`${apiRoot}${url}`, body).use(tokenPlugin).then(getBody)
 }
 
 
-export const ServiceCategories = {
-  all: () =>
-    requests.get('/service_categories')
+//=====================================
+//  APIs
+//-------------------------------------
+
+export const reviewsApi = {
+  all: () => {
+    const url = reviews()
+    return { api: () => requests.get(url), url }
+  },
+  page: (itemsOnPage, page) => {
+    const url = reviewsPage(itemsOnPage, page)
+    return { api: () => requests.get(url), url }
+  },
+  post: body => {
+    const url = reviews()
+    return { api: () => requests.post(url), url }
+  }
 }
 
-export const Services = {
-  all: () =>
-    requests.get('/services/?_sort=order'),
-  byCategory: id =>
-    requests.get(`/services/?category=${id}&_sort=order`)
+
+export const dentistsApi = {
+  page: (itemsOnPage, page) => {
+    const url = dentistsPage()
+    return { api: () => requests.get(url), url }
+  },
+  options: () => {
+    const url = dentistOptions()
+    return { api: () => requests.get(url), url }
+  },
+  byId: id => {
+    const url = dentistById(id)
+    return { api: () => requests.get(url), url }
+  }
 }
 
-export const Appointment = {
-  post: data =>
-    requests.post('/appointment', data)
+
+export const questionsApi = {
+  all: () => {
+    const url = questions()
+    return { api: () => requests.get(url), url }
+  },
+  page: (itemsOnPage, pageNum = 0) => {
+    const url = questionsPage(itemsOnPage, pageNum)
+    return { api: () => requests.get(url), url }
+  },
+  post: body => {
+    const url = questions()
+    return { api: () => requests.post(body), url }
+  }
 }
 
-export const countCost = data =>
-  requests.post('/count_cost', data)
 
-export const callback = data =>
-  requests.post('/callback', data)
+export const specialsApi = {
+  previews: () => {
+    const url = specialsPreviews()
+    return { api: () => requests.get(url), url }
+  },
+  page: (itemsOnPage, page) => {
+    const url = specialsPage(itemsOnPage, pageNum)
+    return { api: () => requests.get(url), url }
+  },
+  article: slug => {
+    const url = specialArticle(slug)
+    return { api: () => requests.get(url), url }
+  }
+}
+
+
+export const newsApi = {
+  page: (itemsOnPage, page) => {
+    const url = newsPage(itemsOnPage, page)
+    return { api: () => requests.get(url), url }
+  },
+  article: slug => {
+    const url = newsArticle(slug)
+    return { api: () => requests.get(url), url }
+  }
+}
+
+
+export const serviceCategoriesApi = {
+  all: () => {
+    const url = serviceCategories()
+    return { api: () => requests.get(url), url }
+  }
+}
+
+export const servicesApi = {
+  all: () => {
+    const url = servicesAll()
+    return { api: () => requets.get(url), url }
+  },
+  byCategory: categoryId => {
+    const url = servicesByCategory(categoryId)
+    return { api: () => requets.get(url), url }
+  }
+}
+
+
+export const appointmentApi = {
+  submit: data => {
+    const url = appointmentRegister()
+    return { api: () => requests.post(url, data) }
+  }
+}
+
+
+export const countCostApi = {
+  submit: data => {
+    const url = countCost()
+    return { api: () => requests.post(url, data) }
+  }
+}
+
+
+export const callbackApi = {
+  submit: data => {
+    const url = callbackRequest()
+    return { api: () => requests.post(url, data) }
+  }
+}
+
 
 export default {
-  Reviews,
-  Staff,
-  Questions,
-  News,
-  Specials,
-  ServiceCategories,
-  Services,
-  Appointment,
-  countCost,
-  callback
+  reviewsApi,
+  dentistsApi,
+  questionsApi,
+  newsApi,
+  specialsApi,
+  serviceCategoriesApi,
+  servicesApi,
+  appointmentApi,
+  countCostApi,
+  callbackApi
 }

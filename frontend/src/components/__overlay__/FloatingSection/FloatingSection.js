@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import { withRouter, Route, HashRouter, NavLink } from 'react-router-dom'
 
 import { APPOINTMENT_SHOW } from '../../../constants/actionTypes'
-import { callback } from '../../../agent'
 import style from './FloatingSection.css'
 import { Button, Link, Paragraph, TextInput } from '../../__basic__'
 import { CallbackPopup, AppointmentModal }  from '../index'
@@ -91,7 +90,7 @@ let FloatingSection = class extends Component {
   }
 
   onCallbackSubmit(data) {
-    callback(data)
+    // callback(data)
   }
 
   onWrapperMainRef = node => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import validate from 'validate.js'
 import FontAwesome from 'react-fontawesome'
 
-import { Reviews as api } from '../../../agent'
+// import { Reviews as api } from '../../../agent'
 import style from './LeaveFeedbackPopup.css'
 import { TextInput, Paragraph, Button, RatingInput } from '../../__basic__'
 import { Form } from '../../__containers__'
@@ -11,7 +11,7 @@ import { Popup }  from '../index'
 
 export class LeaveFeedbackPopup extends Component {
   onSubmit = data => {
-    api.post(data)
+    // api.post(data)
   }
 
   render() {

@@ -38,9 +38,11 @@ export const initHeaderData = data => ({
 
 export const APPOINTMENT_SUBMIT = 'SUBMIT_APPOINTMENT'
 
-export const submitAppointment = data => ({
+export const appointmentSubmit = data => ({
   type: SUBMIT_APPOINTMENT,
-  payload: { api: () => agent.Appointment.post(data) }
+  payload: {
+    api: () => agent.appointmentApi.submit().api(data)
+  }
 })
 
 
@@ -52,7 +54,9 @@ export const CALLBACK_REQUEST = 'CALLBACK_REQUEST'
 
 export const callbackRequest = data => ({
   type: CALLBACK_REQUEST,
-  payload: { api: () => agent.callback(data) }
+  payload: {
+    api: () => agent.callbackApi.submit().api(data)
+  }
 })
 
 
@@ -60,11 +64,13 @@ export const callbackRequest = data => ({
 //  Count price
 //-------------------------------------
 
-export const COUNT_PRICE = 'COUNT_PRICE'
+export const COUNT_COST = 'COUNT_COST'
 
 export const countPrice = data => ({
-  type: COUNT_PRICE,
-  payload: { api: () => agent.countPrice(data) }
+  type: COUNT_COST,
+  payload: {
+    api: () => agent.countCostApi.submit().api(data)
+  }
 })
 
 
@@ -77,43 +83,57 @@ export const FETCH_SERVICES = 'FETCH_SERVICES'
 export const FETCH_SERVICES_BY_CATEGORY = 'FETCH_SERVICES_BY_CATEGORY'
 export const FETCH_CATEGORY_PAGE = 'FETCH_CATEGORY_PAGE'
 
-export const fetchServicesCategories = () => ({
-  type: FETCH_SERVICES_CATEGORIES,
-  payload: {
-    dataType: dataTypes.SERVICES_CATEGORIES_COLLECTION,
-    api: () => agent.ServiceCategories.all()
+export const fetchServicesCategories = () => {
+  const { url, api } = agent.serviceCategoriesApi.all()
+  return {
+    type: FETCH_SERVICES_CATEGORIES,
+    payload: {
+      dataType: dataTypes.SERVICES_CATEGORIES_COLLECTION,
+      url,
+      api
+    }
   }
-})
+}
 
-export const fetchServices = () => ({
-  type: FETCH_SERVICES,
-  payload: {
-    dataType: dataTypes.SERVICES_COLLECTION,
-    api: () => agent.Services.all()
+export const fetchServices = () => {
+  const { url, api } = agent.servicesApi.all()
+  return {
+    type: FETCH_SERVICES,
+    payload: {
+      dataType: dataTypes.SERVICES_COLLECTION,
+      url,
+      api
+    }
   }
-})
+}
 
-export const fetchServicesByCategory = categoryId => ({
-  type: FETCH_SERVICES_BY_CATEGORY,
-  payload: {
-    dataType: dataTypes.SERVICES_BY_CATEGORY_COLLECTION,
-    api: () => agent.Services.byCategory(categoryId)
+export const fetchServicesByCategory = categoryId => {
+  const { url, api } = agent.servicesApi.byCategory()
+  return {
+    type: FETCH_SERVICES_BY_CATEGORY,
+    payload: {
+      dataType: dataTypes.SERVICES_BY_CATEGORY_COLLECTION,
+      url,
+      api
+    }
   }
-})
+}
 
-export const fetchCategoryPage = (categoryId, dentistsIds) => ({
-  type: FETCH_CATEGORY_PAGE,
-  payload: {
-    dataType: dataTypes.CATEGORY_PAGE_CONTENT,
-    api: () =>
-      Promise
-        .all([
-          agent.Services.byCategory(categoryId),
-          Promise.all(dentistsIds.map(agent.Staff.byId))
-        ])
-        .then(([ services, dentists ]) => ({ services, dentists }))
-  }
-})
+// export const fetchCategoryPage = (categoryId, dentistsIds) => {
+//   return {
+//     type: FETCH_CATEGORY_PAGE,
+//     payload: {
+//       dataType: dataTypes.CATEGORY_PAGE_CONTENT,
+//       api: () =>
+//         Promise
+//           .all([
+//             agent.Services.byCategory(categoryId),
+//             Promise.all(dentistsIds.map(agent.dentistsApi.byId))
+//           ])
+//           .then(([ services, dentists ]) => ({ services, dentists }))
+//     }
+//   }
+// }
 
 
 //=====================================
@@ -124,62 +144,86 @@ export const FETCH_SPECIALS_SLIDES = 'FETCH_SPECIALS_SLIDES'
 export const FETCH_SPECIALS_PAGE = 'FETCH_SPECIALS_PAGE'
 export const FETCH_SPECIAL_ARTICLE = 'FETCH_SPECIAL_ARTICLE'
 
-export const fetchSpecialsSlides = () => ({
-  type: FETCH_SPECIALS_SLIDES,
-  payload: {
-    dataType: dataTypes.SPECIALS_SLIDES_COLLECTION,
-    api: () => agent.Specials.cards()
+export const fetchSpecialsSlides = () => {
+  const { url, api } = agent.specialsApi.previews()
+  return {
+    type: FETCH_SPECIALS_SLIDES,
+    payload: {
+      dataType: dataTypes.SPECIALS_SLIDES_COLLECTION,
+      url,
+      api
+    }
   }
-})
+}
 
-export const fetchSpecialsPage = pageNum => ({
-  type: FETCH_SPECIALS_PAGE,
-  payload: {
-    dataType: dataTypes.SPECIALS_PREVIEWS_COLLECTION,
-    api: () => agent.Specials.page(ITEMS_ON_PAGE, pageNum)
+export const fetchSpecialsPage = pageNum => {
+  const { url, api } = agent.specialsApi.page(ITEMS_ON_PAGE, pageNum)
+  return {
+    type: FETCH_SPECIALS_PAGE,
+    payload: {
+      dataType: dataTypes.SPECIALS_PREVIEWS_COLLECTION,
+      url,
+      api
+    }
   }
-})
+}
 
-export const fetchSpecialArticle = slug => ({
-  type: FETCH_SPECIAL_ARTICLE,
-  payload: {
-    dataType: dataTypes.SPECIALS_ENTITY,
-    api: () => agent.Specials.article(slug)
+export const fetchSpecialArticle = slug => {
+  const { url, api } = agent.specialsApi.article(slug)
+  return {
+    type: FETCH_SPECIAL_ARTICLE,
+    payload: {
+      dataType: dataTypes.SPECIALS_ENTITY,
+      url,
+      api
+    }
   }
-})
+}
 
 
 //=====================================
-//  News
+//  specialsApi
 //-------------------------------------
 
 export const FETCH_NEWS_SLIDES = 'FETCH_NEWS_SLIDES'
 export const FETCH_NEWS_PAGE = 'FETCH_NEWS_PAGE'
 export const FETCH_NEWS_ARTICLE = 'FETCH_NEWS_ARTICLE'
 
-export const fetchNewsSlides = () => ({
-  type: FETCH_NEWS_SLIDES,
-  payload: {
-    dataType: dataTypes.NEWS_SLIDES_COLLECTION,
-    api: () => agent.News.page(NEWS_IN_SLIDER, 1)
+export const fetchNewsSlides = () => {
+  const { url, api } = agent.newsApi.page(NEWS_IN_SLIDER, 1)
+  return {
+    type: FETCH_NEWS_SLIDES,
+    payload: {
+      dataType: dataTypes.NEWS_SLIDES_COLLECTION,
+      url,
+      api
+    }
   }
-})
+}
 
-export const fetchNewsPage = pageNum => ({
-  type: FETCH_NEWS_PAGE,
-  payload: {
-    dataType: dataTypes.NEWS_PREVIEWS_COLLECTION,
-    api: () => agent.News.page(ITEMS_ON_PAGE, pageNum)
+export const fetchNewsPage = pageNum => {
+  const { url, api } = agent.newsApi.page(ITEMS_ON_PAGE, pageNum)
+  return {
+    type: FETCH_NEWS_PAGE,
+    payload: {
+      dataType: dataTypes.NEWS_PREVIEWS_COLLECTION,
+      url,
+      api
+    }
   }
-})
+}
 
-export const fetchNewsArticle = slug => ({
-  type: FETCH_NEWS_ARTICLE,
-  payload: {
-    dataType: dataTypes.NEWS_ENTITY,
-    api: () => agent.News.article(slug)
+export const fetchNewsArticle = slug => {
+  const { url, api } = agent.newsApi.article(slug)
+  return {
+    type: FETCH_NEWS_ARTICLE,
+    payload: {
+      dataType: dataTypes.NEWS_ENTITY,
+      url,
+      api
+    }
   }
-})
+}
 
 
 //=====================================
@@ -189,21 +233,29 @@ export const fetchNewsArticle = slug => ({
 export const FETCH_REVIEWS_SLIDES = 'FETCH_REVIEWS_SLIDES'
 export const FETCH_REVIEWS_PAGE = 'FETCH_REVIEWS_PAGE'
 
-export const fetchReviewsSlides = () => ({
-  type: FETCH_REVIEWS_SLIDES,
-  payload: {
-    dataType: dataTypes.REVIEWS_SLIDES_COLLECTION,
-    api: () => agent.Reviews.page(REVIEWS_SLIDES_TO_SHOW, 1)
+export const fetchReviewsSlides = () => {
+  const { url, api } = agent.reviewsApi.page(REVIEWS_SLIDES_TO_SHOW, 1)
+  return {
+    type: FETCH_REVIEWS_SLIDES,
+    payload: {
+      dataType: dataTypes.REVIEWS_SLIDES_COLLECTION,
+      url,
+      api
+    }
   }
-})
+}
 
-export const fetchReviewsPage = pageNum => ({
-  type: FETCH_REVIEWS_PAGE,
-  payload: {
-    dataType: dataTypes.REVIEWS_COLLECTION,
-    api: () => agent.Reviews.page(ITEMS_ON_PAGE, pageNum)
+export const fetchReviewsPage = pageNum => {
+  const { url, api } = agent.reviewsApi.page(ITEMS_ON_PAGE, 1)
+  return {
+    type: FETCH_REVIEWS_PAGE,
+    payload: {
+      dataType: dataTypes.REVIEWS_COLLECTION,
+      url,
+      api
+    }
   }
-})
+}
 
 
 //=====================================
@@ -212,46 +264,62 @@ export const fetchReviewsPage = pageNum => ({
 
 export const FETCH_QUESTIONS_PAGE = 'FETCH_QUESTIONS_PAGE'
 
-export const fetchQuestionsPage = pageNum => ({
-  type: FETCH_QUESTIONS_PAGE,
-  payload: {
-    dataType: dataTypes.QUESTIONS_COLLECTION,
-    api: () => agent.Questions.page(ITEMS_ON_PAGE, pageNum)
+export const fetchQuestionsPage = pageNum => {
+  const { url, api } = agent.questionsApi.page(ITEMS_ON_PAGE, pageNum)
+  return {
+    type: FETCH_QUESTIONS_PAGE,
+    payload: {
+      dataType: dataTypes.QUESTIONS_COLLECTION,
+      url,
+      api
+    }
   }
-})
+}
 
 
 //=====================================
-// Staff
+// Dentists
 //-------------------------------------
 
 export const FETCH_DENTISTS_PAGE = 'FETCH_DENTISTS_PAGE'
 export const FETCH_DENTIST_BY_ID = 'FETCH_DENTIST_BY_ID'
 export const FETCH_DENTISTS_AS_OPTIONS = 'FETCH_DENTISTS_AS_OPTIONS'
 
-export const fetchDentistsPage = pageNum => ({
-  type: FETCH_DENTISTS_PAGE,
-  payload: {
-    dataType: dataTypes.DENTISTS_PREVIEWS_COLLECTION,
-    api: () => agent.Staff.page(ITEMS_ON_PAGE, pageNum)
+export const fetchDentistsPage = pageNum => {
+  const { api, url } = agent.dentistsApi.page(ITEMS_ON_PAGE, pageNum)
+  return {
+    type: FETCH_DENTISTS_PAGE,
+    payload: {
+      dataType: dataTypes.DENTISTS_PREVIEWS_COLLECTION,
+      api,
+      url
+    }
   }
-})
+}
 
-export const fetchDentistById = id => ({
-  type: FETCH_DENTIST_BY_ID,
-  payload: {
-    dataType: dataTypes.DENTISTS_ENTITY,
-    api: () => agent.Staff.byId(id)
+export const fetchDentistById = id => {
+  const { api, url } = agent.dentistsApi.byId(id)
+  return {
+    type: FETCH_DENTIST_BY_ID,
+    payload: {
+      dataType: dataTypes.DENTISTS_ENTITY,
+      api,
+      url
+    }
   }
-})
+}
 
-export const fetchDentistsAsOptions = () => ({
-  type: FETCH_DENTISTS_AS_OPTIONS,
-  payload: {
-    dataType: dataTypes.DENTISTS_OPTIONS_COLLECTION,
-    api: () => agent.Staff.options()
+export const fetchDentistsAsOptions = () => {
+  const { api, url } = agent.dentistsApi.options()
+  return {
+    type: FETCH_DENTISTS_AS_OPTIONS,
+    payload: {
+      dataType: dataTypes.DENTISTS_OPTIONS_COLLECTION,
+      api,
+      url
+    }
   }
-})
+}
 
 
 //=====================================
@@ -319,7 +387,7 @@ export const requestActions = [
 export const actions = {
   APPOINTMENT_SUBMIT,
   CALLBACK_REQUEST,
-  COUNT_PRICE,
+  COUNT_COST,
   FETCH_SERVICES_CATEGORIES,
   FETCH_SERVICES_BY_CATEGORY,
   FETCH_SPECIALS_SLIDES,

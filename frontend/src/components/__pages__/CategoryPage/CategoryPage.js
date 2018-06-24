@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 
 import { SERVICES } from '../../../constants/linksStructure'
-import { fetchCategoryPage } from '../../../actions'
+// import { fetchCaegoryPage } from '../../../actions'
 import style from './CategoryPage.css'
 import { NarrowPage } from '../index'
 import { Dentist } from '../../Dentist'
@@ -14,7 +14,7 @@ import { PositionLabel } from '../../__basic__'
 
 const mapStateToProps = state => ({ ...state.categoryPage })
 
-const mapDispatchToProps = { fetchCategoryPage }
+const mapDispatchToProps = {}
 
 
 let CategoryPage = class extends Component {
@@ -29,7 +29,7 @@ let CategoryPage = class extends Component {
 
   componentWillMount() {
     const { categoryId, dentistsIds, fetchCategoryPage } = this.props
-    fetchCategoryPage(categoryId, dentistsIds)
+    // fetchCategoryPage(categoryId, dentistsIds)
   }
 
   renderDentist({ imageFolder, _id, name, positions }) {

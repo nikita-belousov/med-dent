@@ -7,7 +7,7 @@ import utils from 'utils'
 import _ from 'lodash'
 
 import { loadAppointmentForm } from '../../../actions'
-import { Appointment as appointmentApi, Staff as staffApi } from '../../../agent'
+// import { Appointment as appointmentApi, Staff as staffApi } from '../../../agent'
 import style from './AppointmentModal.css'
 import { ClosesOnExternalClick }  from '../../ClosesOnExternalClick'
 import { Form } from '../../__containers__'

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import validate from 'validate.js'
 import FontAwesome from 'react-fontawesome'
 
-import { Questions as api } from '../../../agent'
+// import { Questions as api } from '../../../agent'
 import style from './AskQuestionPopup.css'
 import { Form } from '../../__containers__'
 import { TextInput, Paragraph, Button, RatingInput } from '../../__basic__'
@@ -11,7 +11,7 @@ import { Popup } from '../index'
 
 export class AskQuestionPopup extends Component {
   onSubmit = data => {
-    api.post(data)
+    // api.post(data)
   }
 
   render() {
