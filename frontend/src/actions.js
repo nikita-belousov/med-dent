@@ -8,6 +8,8 @@ import agent from './agent'
 
 export const INIT_APP = 'INIT_APP'
 export const MEDIA_QUERY_CHANGED = 'MEDIA_QUERY_CHANGED'
+export const UPDATE_BREADCRUMBS = 'UPDATE_BREADCRUMBS'
+export const RESET_BREADCRUMBS = 'RESET_BREADCRUMBS'
 
 export const initApp = mediaQueryRules => ({
   type: INIT_APP,
@@ -17,6 +19,15 @@ export const initApp = mediaQueryRules => ({
 export const mediaQueryChanged = mediaQueries => ({
   type: MEDIA_QUERY_CHANGED,
   payload: { mediaQueries }
+})
+
+export const updateBreadcrumbs = parentLink => ({
+  type: UPDATE_BREADCRUMBS,
+  payload: { parentLink }
+})
+
+export const resetBreadcrumbs = () => ({
+  type: RESET_BREADCRUMBS
 })
 
 
@@ -36,7 +47,22 @@ export const initHeaderData = data => ({
 //  Appointment
 //-------------------------------------
 
+export const APPOINTMENT_LOAD = 'APPOINTMENT_LOAD'
+export const APPOINTMENT_OPEN = 'APPOINTMENT_OPEN'
+export const APPOINTMENT_CLOSE = 'APPOINTMENT_CLOSE'
 export const APPOINTMENT_SUBMIT = 'SUBMIT_APPOINTMENT'
+
+export const appointmentLoad = () => ({
+  type: APPOINTMENT_LOAD
+})
+
+export const appointmentOpen = () => ({
+  type: APPOINTMENT_OPEN
+})
+
+export const appointmentClose = () => ({
+  type: APPOINTMENT_CLOSE
+})
 
 export const appointmentSubmit = data => ({
   type: SUBMIT_APPOINTMENT,
@@ -108,7 +134,7 @@ export const fetchServices = () => {
 }
 
 export const fetchServicesByCategory = categoryId => {
-  const { url, api } = agent.servicesApi.byCategory()
+  const { url, api } = agent.servicesApi.byCategory(categoryId)
   return {
     type: FETCH_SERVICES_BY_CATEGORY,
     payload: {
@@ -142,7 +168,7 @@ export const fetchServicesByCategory = categoryId => {
 
 export const FETCH_SPECIALS_SLIDES = 'FETCH_SPECIALS_SLIDES'
 export const FETCH_SPECIALS_PAGE = 'FETCH_SPECIALS_PAGE'
-export const FETCH_SPECIAL_ARTICLE = 'FETCH_SPECIAL_ARTICLE'
+export const FETCH_SPECIALS_ARTICLE = 'FETCH_SPECIALS_ARTICLE'
 
 export const fetchSpecialsSlides = () => {
   const { url, api } = agent.specialsApi.previews()
@@ -168,10 +194,10 @@ export const fetchSpecialsPage = pageNum => {
   }
 }
 
-export const fetchSpecialArticle = slug => {
+export const fetchSpecialsArticle = slug => {
   const { url, api } = agent.specialsApi.article(slug)
   return {
-    type: FETCH_SPECIAL_ARTICLE,
+    type: FETCH_SPECIALS_ARTICLE,
     payload: {
       dataType: dataTypes.SPECIALS_ENTITY,
       url,
@@ -284,6 +310,7 @@ export const fetchQuestionsPage = pageNum => {
 export const FETCH_DENTISTS_PAGE = 'FETCH_DENTISTS_PAGE'
 export const FETCH_DENTIST_BY_ID = 'FETCH_DENTIST_BY_ID'
 export const FETCH_DENTISTS_AS_OPTIONS = 'FETCH_DENTISTS_AS_OPTIONS'
+export const FETCH_DENTIST_FOR_CATEGORY = 'FETCH_DENTIST_FOR_CATEGORY'
 
 export const fetchDentistsPage = pageNum => {
   const { api, url } = agent.dentistsApi.page(ITEMS_ON_PAGE, pageNum)
@@ -309,6 +336,18 @@ export const fetchDentistById = id => {
   }
 }
 
+export const fetchDentistForCategory = id => {
+  const { api, url } = agent.dentistsApi.byId(id)
+  return {
+    type: FETCH_DENTIST_FOR_CATEGORY,
+    payload: {
+      dataType: dataTypes.DENTISTS_FOR_CATEGORY_PAGE,
+      api,
+      url
+    }
+  }
+}
+
 export const fetchDentistsAsOptions = () => {
   const { api, url } = agent.dentistsApi.options()
   return {
@@ -320,17 +359,6 @@ export const fetchDentistsAsOptions = () => {
     }
   }
 }
-
-
-//=====================================
-//  Appointment
-//-------------------------------------
-
-export const LOAD_APPOINTMENT_FORM = 'LOAD_APPOINTMENT_FORM'
-
-export const loadAppointmentForm = () => ({
-  type: LOAD_APPOINTMENT_FORM
-})
 
 
 //=====================================
@@ -368,7 +396,7 @@ export const pageReloadingActions = [
   FETCH_CATEGORY_PAGE,
   FETCH_SPECIALS_SLIDES,
   FETCH_SPECIALS_PAGE,
-  FETCH_SPECIAL_ARTICLE,
+  FETCH_SPECIALS_ARTICLE,
   FETCH_NEWS_SLIDES,
   FETCH_NEWS_PAGE,
   FETCH_NEWS_ARTICLE,
@@ -376,6 +404,7 @@ export const pageReloadingActions = [
   FETCH_REVIEWS_PAGE,
   FETCH_DENTISTS_PAGE,
   FETCH_DENTIST_BY_ID,
+  FETCH_DENTIST_FOR_CATEGORY,
   FETCH_QUESTIONS_PAGE
 ]
 
@@ -385,14 +414,17 @@ export const requestActions = [
 ]
 
 export const actions = {
+  APPOINTMENT_LOAD,
   APPOINTMENT_SUBMIT,
+  APPOINTMENT_OPEN,
+  APPOINTMENT_CLOSE,
   CALLBACK_REQUEST,
   COUNT_COST,
   FETCH_SERVICES_CATEGORIES,
   FETCH_SERVICES_BY_CATEGORY,
   FETCH_SPECIALS_SLIDES,
   FETCH_SPECIALS_PAGE,
-  FETCH_SPECIAL_ARTICLE,
+  FETCH_SPECIALS_ARTICLE,
   FETCH_NEWS_SLIDES,
   FETCH_NEWS_PAGE,
   FETCH_NEWS_ARTICLE,
@@ -401,6 +433,7 @@ export const actions = {
   FETCH_QUESTIONS_PAGE,
   FETCH_DENTISTS_PAGE,
   FETCH_DENTIST_BY_ID,
+  FETCH_DENTIST_FOR_CATEGORY,
   FETCH_DENTISTS_AS_OPTIONS,
   PAGE_LOADING_START,
   DATA_RECEIVED

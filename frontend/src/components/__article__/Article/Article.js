@@ -18,9 +18,7 @@ let Article = class extends Component {
   render() {
     const { slug, createdAt, title, text, views } = this.props
 
-    if (!this.props.title) {
-      return null
-    }
+    if (!title) return null
 
     return (
       <div className={style.article}>

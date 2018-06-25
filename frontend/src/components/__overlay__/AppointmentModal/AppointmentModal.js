@@ -6,8 +6,7 @@ import validate from 'validate.js'
 import utils from 'utils'
 import _ from 'lodash'
 
-import { loadAppointmentForm } from '../../../actions'
-// import { Appointment as appointmentApi, Staff as staffApi } from '../../../agent'
+import { appointmentLoad, appointmentOpen, appointmentClose } from '../../../actions'
 import style from './AppointmentModal.css'
 import { ClosesOnExternalClick }  from '../../ClosesOnExternalClick'
 import { Form } from '../../__containers__'
@@ -17,7 +16,7 @@ import { Button, TextInput, SelectInput, Paragraph } from '../../__basic__'
 
 const mapStateToProps = state => ({ ...state.appointment })
 
-const mapDispatchToProps = { loadAppointmentForm }
+const mapDispatchToProps = { appointmentLoad, appointmentOpen, appointmentClose }
 
 
 const LOADING_TIME = 2500
@@ -33,18 +32,46 @@ let AppointmentModal  = class extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      contentState: 'form' // or 'success'
+    }
+
     this.contentStateToRender = {
       'form': this.renderForm,
       'success': this.renderSuccess
     }
+
+    this.LOCATION_HASH = '#appointment'
   }
 
-  state = {
-    contentState: 'form' // or 'success'
+  componentDidMount() {
+    if (this.props.location.hash === this.LOCATION_HASH) {
+      this.open()
+    }
   }
 
-  componentWillMount() {
-    this.props.loadAppointmentForm()
+  componentDidUpdate(prevProps) {
+    const prevHash = prevProps.location.hash
+    const { hash } = this.props.location
+
+    if (prevHash !== hash) {
+      if (hash === this.LOCATION_HASH) {
+        this.open()
+      } else if ((prevHash === this.LOCATION_HASH) && (hash !== this.LOCATION_HASH)) {
+        this.close()
+      }
+    }
+  }
+
+  open() {
+    this.props.appointmentLoad()
+    this.props.appointmentOpen()
+  }
+
+  close = () => {
+    const { location, history, appointmentClose } = this.props
+    history.push(location.pathname) // removes hash
+    appointmentClose()
   }
 
   onFormSubmit = data => {
@@ -156,8 +183,10 @@ let AppointmentModal  = class extends Component {
   }
 
   render() {
-    const { dentistsOptions, onClose } = this.props
+    const { isActive, dentistsOptions } = this.props
     const { contentState } = this.state
+
+    if (!isActive) return null
 
     const constraints = {
       name: {
@@ -173,10 +202,7 @@ let AppointmentModal  = class extends Component {
     }
 
     return (
-      <Modal
-        heading={'Запись на прием'}
-        onClose={onClose}
-      >
+      <Modal heading='Запись на прием' onClose={this.close}>
         <Form
           constraints={constraints}
           withLoading
@@ -199,4 +225,6 @@ let AppointmentModal  = class extends Component {
 
 
 AppointmentModal = connect(mapStateToProps, mapDispatchToProps )(AppointmentModal)
+AppointmentModal = withRouter(AppointmentModal)
+
 export { AppointmentModal }

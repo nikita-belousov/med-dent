@@ -1,5 +1,7 @@
+import linksStructure, { HOME } from '../constants/linksStructure'
 import { SERVICES_CATEGORIES_COLLECTION } from '../constants'
-import { MEDIA_QUERY_CHANGED, PAGE_LOADING_START, DATA_RECEIVED, INIT_LOADER, UPDATE_LOADER } from '../actions'
+import { UPDATE_BREADCRUMBS, RESET_BREADCRUMBS, MEDIA_QUERY_CHANGED } from '../actions'
+import { PAGE_LOADING_START, DATA_RECEIVED, INIT_LOADER, UPDATE_LOADER } from '../actions'
 
 
 class Loader {
@@ -16,8 +18,33 @@ class Loader {
 const loader = new Loader()
 
 
-export default (state = { isLoading: false }, action) => {
+const getLinkHierarchy = (linksStructure, parentLink) => {
+  let parent = parentLink
+  let res = []
+  while (parent) {
+    res.unshift(linksStructure[parent])
+    parent = linksStructure[parent].parent
+  }
+  return res
+}
+
+
+const defaultState = {
+  breadcrumbs: getLinkHierarchy(linksStructure, HOME)
+}
+
+export default (state = defaultState, action) => {
   switch (action.type) {
+    case UPDATE_BREADCRUMBS:
+      return {
+        ...state,
+        breadcrumbs: getLinkHierarchy(linksStructure, action.payload.parentLink)
+      }
+    case RESET_BREADCRUMBS:
+      return {
+        ...state,
+        breadcrumbs: getLinkHierarchy(linksStructure, HOME)
+      }
     case MEDIA_QUERY_CHANGED:
       return {
         ...state,

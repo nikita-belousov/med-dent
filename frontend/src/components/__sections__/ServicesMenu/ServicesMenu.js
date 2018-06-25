@@ -16,6 +16,7 @@ const mapDispatchToProps = { fetchServicesCategories }
 
 let ServicesMenu = class extends Component {
   componentWillMount() {
+    console.log(123123)
     this.props.fetchServicesCategories()
   }
 

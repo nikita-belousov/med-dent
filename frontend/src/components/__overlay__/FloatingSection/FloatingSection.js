@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { withRouter, Route, HashRouter, NavLink } from 'react-router-dom'
+import { HashRouter, NavLink } from 'react-router-dom'
 
 import { APPOINTMENT_SHOW } from '../../../constants/actionTypes'
 import style from './FloatingSection.css'
@@ -17,14 +17,7 @@ const mapDispatchToProps = dispatch => ({
 let FloatingSection = class extends Component {
   state = {
     collapsed: false,
-    callbackForm: false,
-    appointmentModal: false
-  }
-
-  componentWillMount() {
-    if (this.props.location.hash === '#appointment') {
-      this.props.showAppointmentModal()
-    }
+    callbackForm: false
   }
 
   componentDidMount() {
@@ -33,36 +26,14 @@ let FloatingSection = class extends Component {
     window.addEventListener('scroll', this.handleScroll)
   }
 
-  componentWillReceiveProps({ location }) {
-    if (this.props.location !== location) {
-      if (location.hash === '#appointment') {
-        this.props.showAppointmentModal()
-      }
-    }
-  }
-
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll)
   }
 
-  openAppointmentModal = () => {
-    this.setState(prev => ({
-      ...prev,
-      appointmentModal: true
-    }))
-  }
-
-  closeAppointmentModal = () => {
-    this.props.history.push(this.props.location.pathname)
-    this.setState(prev => ({
-      ...prev,
-     appointmentModal: false
-    }))
-  }
-
   handleScroll = () => {
-    if (window.pageYOffset !== this.initYOffset && !this.state.collapsed)
+    if (window.pageYOffset !== this.initYOffset && !this.state.collapsed) {
       this.toggleCollapsed()
+    }
   }
 
   toggleCollapsed = () => {
@@ -100,17 +71,6 @@ let FloatingSection = class extends Component {
     }
   }
 
-  renderPopupForm() {
-    return (
-      <div className={style.wrapperCall}>
-        <CallbackPopup
-          onClose={this.onCallbackClose}
-          onSubmit={this.onCallbackSubmit}
-        />
-      </div>
-    )
-  }
-
   render() {
     const { appointmentModal, callbackForm } = this.state
 
@@ -121,7 +81,13 @@ let FloatingSection = class extends Component {
 
     return (
       <div className={style.wrapper}>
-        {callbackForm && this.renderPopupForm()}
+        {callbackForm &&
+          <div className={style.wrapperCall}>
+            <CallbackPopup
+              onClose={this.onCallbackClose}
+              onSubmit={this.onCallbackSubmit}
+            />
+          </div>}
         <div
           ref={this.onWrapperMainRef}
           className={wrapperMainClass}
@@ -182,6 +148,5 @@ let FloatingSection = class extends Component {
 
 
 FloatingSection = connect(() => ({}), mapDispatchToProps)(FloatingSection)
-FloatingSection = withRouter(FloatingSection)
 
 export { FloatingSection }

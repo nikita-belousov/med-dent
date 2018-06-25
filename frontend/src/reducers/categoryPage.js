@@ -1,16 +1,19 @@
 import { DATA_RECEIVED } from '../actions'
-import { CATEGORY_PAGE_CONTENT } from '../constants'
+import { DENTISTS_FOR_CATEGORY_PAGE, SERVICES_BY_CATEGORY_COLLECTION } from '../constants'
 
 export default (state = {}, action) => {
   switch (action.type) {
     case DATA_RECEIVED:
-      const content = action.payload.data[CATEGORY_PAGE_CONTENT]
-      if (content && content.dentists && content.services) {
+      const services = action.payload.data[SERVICES_BY_CATEGORY_COLLECTION]
+      const dentists = action.payload.data[DENTISTS_FOR_CATEGORY_PAGE]
+
+      if (dentists && services) {
         return {
           ...state,
-          services: content.services.docs,
-          dentists: content.dentists
-            .reduce((res, { doc }) => [ ...res, doc ], []),
+          services: services.docs,
+          dentists: [].concat(dentists)
+                      .slice(0, 2)
+                      .reduce((res, { doc }) => [ ...res, doc ], [])
         }
       }
       return state

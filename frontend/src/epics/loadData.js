@@ -3,11 +3,11 @@ import { from } from 'rxjs/observable/from'
 import { empty } from 'rxjs/observable/empty'
 import { of } from 'rxjs/observable/of'
 import { fromPromise } from 'rxjs/observable/fromPromise'
-import { concat as _concat, delayWhen, filter, skipWhile, defaultIfEmpty, multicast, refCount, first, count, publish, share, shareReplay, mergeAll, take, takeUntil, reduce, map, mapTo, throttleTime, switchMap, mergeMap, tap, startWith, auditTime, delay, pairwise } from 'rxjs/operators'
+import { scan, concat as _concat, delayWhen, filter, skipWhile, defaultIfEmpty, multicast, refCount, first, count, publish, share, shareReplay, mergeAll, take, takeUntil, reduce, map, mapTo, throttleTime, switchMap, mergeMap, tap, startWith, auditTime, delay, pairwise } from 'rxjs/operators'
 import { combineEpics, ofType } from 'redux-observable'
 
 import { FETCH_THROTTLE } from '../constants'
-import { PAGE_LOADED, LOAD_APPOINTMENT_FORM } from '../actions'
+import { PAGE_LOADED, APPOINTMENT_LOAD } from '../actions'
 import { dataReceived, pageLoadingStart, pageReloadingActions, requestActions, initLoader, updateLoader, fetchDentistsAsOptions } from '../actions'
 
 
@@ -20,26 +20,29 @@ const cacheData = (url, data) => {
 
 const loadAppointmentForm = action$ =>
   action$.pipe(
-    ofType(LOAD_APPOINTMENT_FORM),
+    ofType(APPOINTMENT_LOAD),
     map(fetchDentistsAsOptions)
   )
 
 
 const loadPage = action$ => {
-  const request$ = action$.pipe(ofType(...requestActions))
+  const request$ = action$.pipe(
+    ofType(...requestActions),
+    share()
+  )
 
   return request$.pipe(
     throttleTime(FETCH_THROTTLE),
     switchMap(action => {
-      const requestGroup$ = request$.pipe(
-        takeUntil(timer(FETCH_THROTTLE)),
-        startWith(action),
-        share()
-      )
+      const requestGroup$ = request$
+        .pipe(
+          takeUntil(timer(FETCH_THROTTLE)),
+          share(),
+          startWith(action)
+        )
 
       const filterByCached = cached => action$ => action$.pipe(
         filter(({ payload }) => {
-          if (!payload.url) return true
           const storage = window.localStorage
           return cached === !!storage.getItem(payload.url)
         })
@@ -49,11 +52,10 @@ const loadPage = action$ => {
         .pipe(filterByCached(true), share())
 
       const uncached$ = requestGroup$
-        .pipe(filterByCached(false), share())
+        .pipe(filterByCached(false)) // почему-то startLoading неправильно работает с share()
 
       const startLoading$ = uncached$.pipe(
         ofType(...pageReloadingActions),
-        skipWhile(({ type }) => !pageReloadingActions.includes(type)),
         take(1),
         mapTo(pageLoadingStart())
       )
@@ -95,7 +97,7 @@ const loadPage = action$ => {
       const packData = data$ => data$.pipe(
         reduce((acc, { dataType, ...data }) => ({
           ...acc,
-          [dataType]: data
+          [dataType]: acc[dataType] ? [ data ].concat(acc[dataType]) : data
         }), {}),
         map(dataReceived)
       )
@@ -104,7 +106,6 @@ const loadPage = action$ => {
         _concat(
           responseReplay$.pipe(
             take(1),
-            tap(console.log),
             mergeMap(val => val ? delay(3000) : empty())
           )
         )
@@ -114,9 +115,9 @@ const loadPage = action$ => {
       const loading$ = responseReplay$.pipe(mapTo(updateLoader()))
       const data$ = merge(cachedReplay$, responseReplay$)
         .pipe(packData)
-        // .pipe(delay)
 
       return concat(init$, loading$, data$)
+        // .pipe(tap(console.log))
     })
   )
 }

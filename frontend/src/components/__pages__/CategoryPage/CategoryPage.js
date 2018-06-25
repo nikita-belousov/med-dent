@@ -4,17 +4,18 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 
 import { SERVICES } from '../../../constants/linksStructure'
-// import { fetchCaegoryPage } from '../../../actions'
+import { fetchDentistForCategory, fetchServicesByCategory } from '../../../actions'
 import style from './CategoryPage.css'
 import { NarrowPage } from '../index'
-import { Dentist } from '../../Dentist'
+import { Breadcrumbs } from '../../__containers__'
 import { PricelistTable } from '../../__pricelist__'
 import { PositionLabel } from '../../__basic__'
+import { Dentist } from '../../Dentist'
 
 
 const mapStateToProps = state => ({ ...state.categoryPage })
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = { fetchDentistForCategory, fetchServicesByCategory }
 
 
 let CategoryPage = class extends Component {
@@ -28,12 +29,13 @@ let CategoryPage = class extends Component {
   }
 
   componentWillMount() {
-    const { categoryId, dentistsIds, fetchCategoryPage } = this.props
-    // fetchCategoryPage(categoryId, dentistsIds)
+    const { categoryId, dentistsIds, fetchDentistForCategory, fetchServicesByCategory } = this.props
+    fetchServicesByCategory(categoryId)
+    dentistsIds.forEach(id => fetchDentistForCategory(id))
   }
 
   renderDentist({ imageFolder, _id, name, positions }) {
-    let fullSrc
+    let fullSrca
     if (imageFolder) {
       fullSrc = require(`../../../assets/images/staff/${imageFolder}/full.png`)
     }
@@ -62,7 +64,8 @@ let CategoryPage = class extends Component {
   render() {
     const { title, dentists, services } = this.props
 
-    if (!dentists || !services) {
+    if ((!dentists || dentists.length === 0) ||
+        (!services || services.length === 0)) {
       return null
     }
 
@@ -72,25 +75,23 @@ let CategoryPage = class extends Component {
     })
 
     return (
-      <NarrowPage
-        squeeze={true}
-        parentLink={SERVICES}
-        heading={title}
-      >
-        <div className={style.content}>
-          {this.props.renderContent()}
-        </div>
-        <div className={dentistsClass}>
-          {dentists.map((dentist, i) =>
-            <div key={i} className={style.dentist}>
-              <Dentist {...dentist} />
-            </div>
-          )}
-        </div>
-        <div className={style.pricelist}>
-          <PricelistTable data={[{ title, services }]} />
-        </div>
-      </NarrowPage>
+      <Breadcrumbs parentLink={SERVICES}>
+        <NarrowPage squeeze={true} heading={title}>
+          <div className={style.content}>
+            {this.props.renderContent()}
+          </div>
+          <div className={dentistsClass}>
+            {dentists.map((dentist, i) =>
+              <div key={i} className={style.dentist}>
+                <Dentist {...dentist} />
+              </div>
+            )}
+          </div>
+          <div className={style.pricelist}>
+            <PricelistTable data={[{ title, services }]} />
+          </div>
+        </NarrowPage>
+      </Breadcrumbs>
     )
   }
 }

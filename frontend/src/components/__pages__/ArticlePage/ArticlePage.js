@@ -11,12 +11,12 @@ const mapStateToProps = ({ articlePage }) => ({
 })
 
 
-let ArticlePage = ({ slug, title, createdAt, views, fetchData, parentLink }) =>
+let ArticlePage = ({ slug, title, createdAt, views, fetchData }) =>
   <NarrowPage
-    parentLink={parentLink}
     squeeze={true}
     heading={title}
-    caption={<ArticleCaption createdAt={createdAt} views={views} />}
+    caption={createdAt &&
+      <ArticleCaption createdAt={createdAt} views={views} />}
   >
     <Article
       fetchData={fetchData}

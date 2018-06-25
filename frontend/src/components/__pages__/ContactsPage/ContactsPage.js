@@ -7,17 +7,13 @@ import { NarrowPage } from '../index'
 import { YaMap } from '../../YaMap'
 
 
-export class ContactsPage extends Component {
-  render() {
-    return (
-      <NarrowPage heading='Контакты' >
-        <YaMap>
-          <Sidebar />
-        </YaMap>
-      </NarrowPage>
-    )
-  }
-}
+export const ContactsPage = () =>
+  <NarrowPage heading='Контакты'>
+    <YaMap>
+      <Sidebar />
+    </YaMap>
+  </NarrowPage>
+
 
 const Sidebar = () =>
   <div className={style.sidebarWrapper}>
@@ -50,6 +46,7 @@ const Sidebar = () =>
       </div>
     </div>
   </div>
+
 
 const ContactField = ({ icon, title, children }) =>
   <div className={style.field}>

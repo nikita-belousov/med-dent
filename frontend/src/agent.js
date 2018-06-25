@@ -69,7 +69,7 @@ export const dentistsApi = {
     return { api: () => requests.get(url), url }
   },
   options: () => {
-    const url = dentistOptions()
+    const url = dentistsOptions()
     return { api: () => requests.get(url), url }
   },
   byId: id => {
@@ -100,7 +100,7 @@ export const specialsApi = {
     const url = specialsPreviews()
     return { api: () => requests.get(url), url }
   },
-  page: (itemsOnPage, page) => {
+  page: (itemsOnPage, pageNum) => {
     const url = specialsPage(itemsOnPage, pageNum)
     return { api: () => requests.get(url), url }
   },
@@ -112,8 +112,8 @@ export const specialsApi = {
 
 
 export const newsApi = {
-  page: (itemsOnPage, page) => {
-    const url = newsPage(itemsOnPage, page)
+  page: (itemsOnPage, pageNum) => {
+    const url = newsPage(itemsOnPage, pageNum)
     return { api: () => requests.get(url), url }
   },
   article: slug => {
@@ -133,11 +133,11 @@ export const serviceCategoriesApi = {
 export const servicesApi = {
   all: () => {
     const url = servicesAll()
-    return { api: () => requets.get(url), url }
+    return { api: () => requests.get(url), url }
   },
   byCategory: categoryId => {
     const url = servicesByCategory(categoryId)
-    return { api: () => requets.get(url), url }
+    return { api: () => requests.get(url), url }
   }
 }
 

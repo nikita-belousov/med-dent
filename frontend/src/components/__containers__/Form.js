@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import _ from 'lodash'
+import filter from 'lodash/filter'
 import PropTypes from 'prop-types'
 import { validate as validateJS } from 'validate.js'
 import { recursiveReactMap } from 'utils'
-import { TextInput, SelectInput, CheckboxInput, RatingInput, Button } from '../../__basic__'
+import { TextInput, SelectInput, CheckboxInput, RatingInput, Button } from '../__basic__'
 
 
 const INPUT_TYPES = [TextInput, CheckboxInput, SelectInput, RatingInput]
@@ -156,7 +156,7 @@ export class Form extends Component {
     if (this.state.errors.includes(name)) {
       this.setState(prev => ({
         ...prev,
-        errors: _.filter(prev.errors, n => n !== name)
+        errors: filter(prev.errors, n => n !== name)
       }))
     }
   }

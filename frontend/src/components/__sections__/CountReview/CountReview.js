@@ -17,6 +17,8 @@ const mapStateToProps = state => ({ mediaQueries: state.common.mediaQueries })
 
 
 let CountReview = class extends Component {
+  static defaultProps = { reviewsToShow: 10 }
+
   state = { callbackForm: false }
 
   onCountFormSubmit = data => {

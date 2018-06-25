@@ -1,12 +1,13 @@
-import { APPOINTMENT_SHOW, APPOINTMENT_CLOSE, SET_DEFAULT_DENTIST } from '../constants/actionTypes'
-import { DATA_RECEIVED } from '../actions'
+import { SET_DEFAULT_DENTIST } from '../constants/actionTypes'
+import { DATA_RECEIVED, APPOINTMENT_OPEN, APPOINTMENT_CLOSE } from '../actions'
 import { DENTISTS_OPTIONS_COLLECTION } from '../constants'
+
 
 const defaultState = { isActive: false }
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case APPOINTMENT_SHOW:
+    case APPOINTMENT_OPEN:
       return {
         ...state,
         isActive: true

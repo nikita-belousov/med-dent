@@ -15,6 +15,10 @@
 
 .breadcrumbs {
   margin-bottom: 10px;
+
+  .divider {
+    margin: 0 10px;
+  }
 }
 
 .content {
