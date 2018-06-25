@@ -7,7 +7,10 @@ import style from './NarrowPage.css'
 import { Container, Link } from '../../__basic__'
 
 
-const mapStateToProps = state => ({ breadcrumbs: state.common.breadcrumbs })
+const mapStateToProps = state => ({
+  breadcrumbs: state.common.breadcrumbs,
+  mediaQueries: state.common.mediaQueries
+})
 
 const mapDispatchToProps = { resetBreadcrumbs }
 
@@ -20,20 +23,21 @@ let NarrowPage = class extends Component {
   render() {
     const {
       breadcrumbs,
+      mediaQueries,
       heading,
       caption,
       children,
       squeeze,
-      renderFullWidthSection
+      renderFullWidth
     } = this.props
 
     const contentClass = classNames({
       [style.content]: true,
-      [style.contentSqueeze]: squeeze
+      [style.contentSqueeze]: squeeze && !(mediaQueries.small || mediaQueries.medium)
     })
 
     return (
-      <Container>
+      <Container responsive={true}>
         <div className={style.wrapper}>
           <header>
             <div className={style.breadcrumbs}>
@@ -61,9 +65,9 @@ let NarrowPage = class extends Component {
             {children}
           </div>
 
-          {renderFullWidthSection &&
-            <div className={style.fullWidthSection}>
-              {renderFullWidthSection()}
+          {renderFullWidth &&
+            <div className={style.fullWidth}>
+              {renderFullWidth()}
             </div>}
         </div>
       </Container>

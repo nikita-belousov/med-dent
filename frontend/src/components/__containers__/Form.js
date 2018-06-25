@@ -71,7 +71,7 @@ export class Form extends Component {
   }
 
   getBtnState = () => {
-    switch(this.state.formState) {
+    switch (this.state.formState) {
       case null:
         return 'disabled'
         break

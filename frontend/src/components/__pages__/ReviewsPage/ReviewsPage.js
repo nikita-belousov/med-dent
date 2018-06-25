@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+
+import { reviewSubmit } from '../../../actions'
 import style from './ReviewsPage.css'
 import { Link } from '../../__basic__'
 import { NarrowPage } from '../index'
 import { LeaveFeedbackPopup }  from '../../__overlay__'
 
 
-export class ReviewsPage extends Component {
+const mapDispatchToProps = { reviewSubmit }
+
+
+let ReviewsPage = class extends Component {
   state = { leaveFeedbackPopup: false }
 
   handleLeaveFeedbackClick = (e) => {
@@ -25,14 +31,8 @@ export class ReviewsPage extends Component {
     }))
   }
 
-  renderPopup() {
-    return (
-      <div className={style.feedbackPopup}>
-        <LeaveFeedbackPopup
-          onClose={this.onPopupClose}
-        />
-      </div>
-    )
+  onFormSubmit = data => {
+    this.props.reviewSubmit(data)
   }
 
   render() {
@@ -50,7 +50,13 @@ export class ReviewsPage extends Component {
               Оставить отзыв
             </Link>
           </div>
-          {leaveFeedbackPopup && this.renderPopup()}
+          {leaveFeedbackPopup &&
+            <div className={style.feedbackPopup}>
+              <LeaveFeedbackPopup
+                onFormSubmit={this.onFormSubmit}
+                onClose={this.onPopupClose}
+              />
+            </div>}
         </div>
         <div className={style.reviews}>
           {this.props.children}
@@ -59,3 +65,8 @@ export class ReviewsPage extends Component {
     )
   }
 }
+
+
+ReviewsPage = connect(() => ({}), mapDispatchToProps)(ReviewsPage)
+
+export { ReviewsPage }

@@ -45,11 +45,10 @@ export class Button extends Component {
         style={{ width: this.props.width }}
         {...restProps}
       >
-        {state === 'Loading'
+        {state === 'loading'
           ? this.renderLoader()
-            : state === 'Finished'
-              ? successText
-              : this.props.children}
+            : state === 'finished'
+              ? successText : this.props.children}
       </button>
     )
   }

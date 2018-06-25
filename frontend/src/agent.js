@@ -56,9 +56,9 @@ export const reviewsApi = {
     const url = reviewsPage(itemsOnPage, page)
     return { api: () => requests.get(url), url }
   },
-  post: body => {
+  submit: () => {
     const url = reviews()
-    return { api: () => requests.post(url), url }
+    return { api: data => requests.post(url, data), url }
   }
 }
 
@@ -88,9 +88,9 @@ export const questionsApi = {
     const url = questionsPage(itemsOnPage, pageNum)
     return { api: () => requests.get(url), url }
   },
-  post: body => {
+  submit: () => {
     const url = questions()
-    return { api: () => requests.post(body), url }
+    return { api: data => requests.post(url, data), url }
   }
 }
 
@@ -143,25 +143,25 @@ export const servicesApi = {
 
 
 export const appointmentApi = {
-  submit: data => {
+  submit: () => {
     const url = appointmentRegister()
-    return { api: () => requests.post(url, data) }
+    return { api: data => requests.post(url, data) }
   }
 }
 
 
 export const countCostApi = {
-  submit: data => {
+  submit: () => {
     const url = countCost()
-    return { api: () => requests.post(url, data) }
+    return { api: data => requests.post(url, data) }
   }
 }
 
 
 export const callbackApi = {
-  submit: data => {
+  submit: () => {
     const url = callbackRequest()
-    return { api: () => requests.post(url, data) }
+    return { api: data => requests.post(url, data) }
   }
 }
 

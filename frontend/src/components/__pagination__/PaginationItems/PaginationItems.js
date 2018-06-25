@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import classNames from 'classnames'
 import style from './PaginationItems.css'
 
 
-export const PaginationItems = ({ docs, itemComponent, path, gridView }) => {
+const mapStateToProps = state => ({ mediaQueries: state.common.mediaQueries })
+
+
+let PaginationItems = ({ mediaQueries, docs, itemComponent, path, gridView }) => {
   const className = classNames({
     [style.items]: !gridView,
-    [style.itemsGrid]: gridView
+    [style.itemsGrid]: gridView,
+    [style.medium]: mediaQueries.medium,
+    [style.small]: mediaQueries.small
   })
 
   return (
@@ -22,3 +28,8 @@ export const PaginationItems = ({ docs, itemComponent, path, gridView }) => {
     </div>
   )
 }
+
+
+PaginationItems = connect(mapStateToProps)(PaginationItems)
+
+export { PaginationItems }

@@ -6,7 +6,7 @@ import validate from 'validate.js'
 import utils from 'utils'
 import _ from 'lodash'
 
-import { appointmentLoad, appointmentOpen, appointmentClose } from '../../../actions'
+import { appointmentLoad, appointmentOpen, appointmentClose, appointmentSubmit } from '../../../actions'
 import style from './AppointmentModal.css'
 import { ClosesOnExternalClick }  from '../../ClosesOnExternalClick'
 import { Form } from '../../__containers__'
@@ -16,7 +16,7 @@ import { Button, TextInput, SelectInput, Paragraph } from '../../__basic__'
 
 const mapStateToProps = state => ({ ...state.appointment })
 
-const mapDispatchToProps = { appointmentLoad, appointmentOpen, appointmentClose }
+const mapDispatchToProps = { appointmentLoad, appointmentOpen, appointmentClose, appointmentSubmit }
 
 
 const LOADING_TIME = 2500
@@ -24,11 +24,6 @@ const SUCCESS_TEXT = `Спасибо, %username%! Через несколько 
   свяжется администратор клиники для уточнения деталей приема.`
 
 let AppointmentModal  = class extends Component {
-  static propTypes = {
-    onClose: PropTypes.func.isRequired,
-    staff: PropTypes.array
-  }
-
   constructor(props) {
     super(props)
 
@@ -82,7 +77,7 @@ let AppointmentModal  = class extends Component {
       LOADING_TIME
     )
 
-    appointmentApi.post(data)
+    this.props.appointmentSubmit(data)
   }
 
   toSelectOptions(data) {

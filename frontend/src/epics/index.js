@@ -1,9 +1,14 @@
 import { combineEpics } from 'redux-observable'
-import loadData from './loadData'
-import mediaQuery from './mediaQuery'
+
+import submitData from './submitData'
+import getData from './getData'
+import loadAppointmentForm from './loadAppointmentForm'
+import mediaQueries from './mediaQueries'
 
 
 export default combineEpics(
-  loadData,
-  mediaQuery
+  submitData,
+  getData,
+  loadAppointmentForm,
+  mediaQueries
 )

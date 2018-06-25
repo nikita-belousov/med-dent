@@ -22,11 +22,11 @@ ReactDOM.render(
 store.dispatch(initApp([
   {
     id: 'medium',
-    maxWidth: 1480
+    maxWidth: 1140,
   },
   {
     id: 'small',
-    maxWidth: 1140
+    maxWidth: 720
   }
 ]))
 

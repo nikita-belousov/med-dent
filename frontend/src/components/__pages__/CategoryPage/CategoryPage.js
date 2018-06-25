@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { connect } from 'react-redux'
 
 import { SERVICES } from '../../../constants/linksStructure'
 import { fetchDentistForCategory, fetchServicesByCategory } from '../../../actions'
@@ -13,7 +13,10 @@ import { PositionLabel } from '../../__basic__'
 import { Dentist } from '../../Dentist'
 
 
-const mapStateToProps = state => ({ ...state.categoryPage })
+const mapStateToProps = state => ({
+  ...state.categoryPage,
+  mediaQueries: state.common.mediaQueries
+})
 
 const mapDispatchToProps = { fetchDentistForCategory, fetchServicesByCategory }
 
@@ -62,7 +65,7 @@ let CategoryPage = class extends Component {
   }
 
   render() {
-    const { title, dentists, services } = this.props
+    const { mediaQueries, title, services, dentists, renderContent } = this.props
 
     if ((!dentists || dentists.length === 0) ||
         (!services || services.length === 0)) {
@@ -77,18 +80,20 @@ let CategoryPage = class extends Component {
     return (
       <Breadcrumbs parentLink={SERVICES}>
         <NarrowPage squeeze={true} heading={title}>
-          <div className={style.content}>
-            {this.props.renderContent()}
-          </div>
-          <div className={dentistsClass}>
-            {dentists.map((dentist, i) =>
-              <div key={i} className={style.dentist}>
-                <Dentist {...dentist} />
-              </div>
-            )}
-          </div>
-          <div className={style.pricelist}>
-            <PricelistTable data={[{ title, services }]} />
+          <div className={mediaQueries.small && style.small}>
+            <div className={style.content}>
+              {renderContent()}
+            </div>
+            <div className={dentistsClass}>
+              {dentists.map((dentist, i) =>
+                <div key={i} className={style.dentist}>
+                  <Dentist {...dentist} />
+                </div>
+              )}
+            </div>
+            <div className={style.pricelist}>
+              <PricelistTable data={[{ title, services }]} />
+            </div>
           </div>
         </NarrowPage>
       </Breadcrumbs>

@@ -1,5 +1,5 @@
 @value primary, secondary, alt-reversed, yellow, grey, dark-grey, primary-gradient from '../../../styles/libs/colors.css';
-@value border-radius-small, overlay-level-1, overlay-level-3 from '../../../styles/libs/effects.css';
+@value border-radius-small, overlay-level-2, overlay-level-3 from '../../../styles/libs/effects.css';
 @value attachedHeight: 50px;
 
 
@@ -21,7 +21,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: overlay-level-1;
+  z-index: overlay-level-2;
   display: block;
   box-shadow: 0px 5px 50px 0px rgba(0,0,0,0.25);
   background: #fff;

@@ -78,6 +78,10 @@
   flex-direction: column;
   justify-content: flex-end;
 
+  p {
+    margin: 0;
+  }
+
   .mobile & {
     height: auto;
     display: block;

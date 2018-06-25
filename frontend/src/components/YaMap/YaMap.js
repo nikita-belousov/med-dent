@@ -5,12 +5,20 @@ import style from './YaMap.css'
 
 export class YaMap extends Component {
   componentDidMount() {
+    const { small } = this.props
+    this.initMap(small)
+  }
+
+  initMap(small = false) {
+    const smallCoords = [55.43685, 37.7504]
+    const mediumCoords = [55.439, 37.756]
+
     const ymaps = global.ymaps
     ymaps.ready(init)
 
     function init() {
       const map = new ymaps.Map('ya-map', {
-        center: [55.439, 37.756],
+        center: small ? smallCoords : mediumCoords,
         zoom: 16,
         controls: []
       })

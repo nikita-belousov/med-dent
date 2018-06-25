@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import validate from 'validate.js'
 import FontAwesome from 'react-fontawesome'
 
-// import { Reviews as api } from '../../../agent'
+import { feedbackSubmit } from '../../../actions'
 import style from './LeaveFeedbackPopup.css'
 import { TextInput, Paragraph, Button, RatingInput } from '../../__basic__'
 import { Form } from '../../__containers__'
@@ -10,10 +10,6 @@ import { Popup }  from '../index'
 
 
 export class LeaveFeedbackPopup extends Component {
-  onSubmit = data => {
-    // api.post(data)
-  }
-
   render() {
     const constraints = {
       author: {
@@ -33,7 +29,7 @@ export class LeaveFeedbackPopup extends Component {
           <Form
             withLoading
             loadingTime={2500}
-            onSubmit={this.onSubmit}
+            onSubmit={this.props.onFormSubmit}
             constraints={constraints}
           >
             <div className={style.nameInput}>

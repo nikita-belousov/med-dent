@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
+import { connect } from 'react-redux'
 import FontAwesome from '@fortawesome/react-fontawesome'
 
 import style from './ContactsPage.css'
@@ -7,45 +9,56 @@ import { NarrowPage } from '../index'
 import { YaMap } from '../../YaMap'
 
 
-export const ContactsPage = () =>
+const mapStateToProps = state => ({ mediaQueries: state.common.mediaQueries })
+
+
+let ContactsPage = ({ mediaQueries }) =>
   <NarrowPage heading='Контакты'>
-    <YaMap>
-      <Sidebar />
+    <YaMap small={mediaQueries.small}>
+      <Sidebar small={mediaQueries.small} />
     </YaMap>
   </NarrowPage>
 
 
-const Sidebar = () =>
-  <div className={style.sidebarWrapper}>
-    <div className={style.sidebar}>
-      <div className={style.view}></div>
-      <div className={style.contacts}>
-        <ContactField title='Телефон' icon={['fas', 'phone']}>
-          <Link href="tel:+07-916-019-38-22" type='alt'>
-            8 916 019-38-22
-          </Link>
-          <br/>
-          <Link href="tel:+07-495-135-37-50" type='alt'>
-            8 495 135-37-50
-          </Link>
-        </ContactField>
+const Sidebar = ({ small }) => {
+  const className = classNames({
+    [style.sidebarWrapper]: true,
+    [style.small]: small
+  })
 
-        <ContactField title='Адрес' icon={['fas', 'map-marker-alt']}>
-          г. Домодедово, улица Кирова, дом 7, корпус 1
-        </ContactField>
+  return (
+    <div className={className}>
+      <div className={style.sidebar}>
+        {!small && <div className={style.view} />}
+        <div className={style.contacts}>
+          <ContactField title='Телефон' icon={['fas', 'phone']}>
+            <Link href="tel:+07-916-019-38-22" type='alt'>
+              8 916 019-38-22
+            </Link>
+            <br/>
+            <Link href="tel:+07-495-135-37-50" type='alt'>
+              8 495 135-37-50
+            </Link>
+          </ContactField>
 
-        <ContactField title='Часы работы' icon={['fas', 'clock']}>
-          Пн — Вс с 9.00 до 20.00
-        </ContactField>
+          <ContactField title='Адрес' icon={['fas', 'map-marker-alt']}>
+            г. Домодедово, улица Кирова, дом 7, корпус 1
+          </ContactField>
 
-        <ContactField title='E-mail' icon={['fas', 'at']}>
-          <Link type='alt' href="mailto:med-dent.dom@mail.ru">
-            med-dent.dom@mail.ru
-          </Link>
-        </ContactField>
+          <ContactField title='Часы работы' icon={['fas', 'clock']}>
+            Пн — Вс с 9.00 до 20.00
+          </ContactField>
+
+          <ContactField title='E-mail' icon={['fas', 'at']}>
+            <Link type='alt' href="mailto:med-dent.dom@mail.ru">
+              med-dent.dom@mail.ru
+            </Link>
+          </ContactField>
+        </div>
       </div>
     </div>
-  </div>
+  )
+}
 
 
 const ContactField = ({ icon, title, children }) =>
@@ -57,3 +70,9 @@ const ContactField = ({ icon, title, children }) =>
       {children}
     </div>
   </div>
+
+
+
+ContactsPage = connect(mapStateToProps)(ContactsPage)
+
+export { ContactsPage }

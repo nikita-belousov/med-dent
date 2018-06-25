@@ -8,7 +8,8 @@ import { combineEpics, ofType } from 'redux-observable'
 
 import { FETCH_THROTTLE } from '../constants'
 import { PAGE_LOADED, APPOINTMENT_LOAD } from '../actions'
-import { dataReceived, pageLoadingStart, pageReloadingActions, requestActions, initLoader, updateLoader, fetchDentistsAsOptions } from '../actions'
+import { pageLoadingStart, pageReloadingActions, getDataActions } from '../actions'
+import { dataReceived, initLoader, updateLoader, fetchDentistsAsOptions } from '../actions'
 
 
 const cacheData = (url, data) => {
@@ -18,18 +19,8 @@ const cacheData = (url, data) => {
 }
 
 
-const loadAppointmentForm = action$ =>
-  action$.pipe(
-    ofType(APPOINTMENT_LOAD),
-    map(fetchDentistsAsOptions)
-  )
-
-
-const loadPage = action$ => {
-  const request$ = action$.pipe(
-    ofType(...requestActions),
-    share()
-  )
+const getData = action$ => {
+  const request$ = action$.pipe(ofType(...getDataActions), share())
 
   return request$.pipe(
     throttleTime(FETCH_THROTTLE),
@@ -102,25 +93,15 @@ const loadPage = action$ => {
         map(dataReceived)
       )
 
-      const delay = data$ => data$.pipe(
-        _concat(
-          responseReplay$.pipe(
-            take(1),
-            mergeMap(val => val ? delay(3000) : empty())
-          )
-        )
-      )
-
       const init$ = merge(startLoading$, requestsCount$)
       const loading$ = responseReplay$.pipe(mapTo(updateLoader()))
       const data$ = merge(cachedReplay$, responseReplay$)
         .pipe(packData)
 
       return concat(init$, loading$, data$)
-        // .pipe(tap(console.log))
     })
   )
 }
 
 
-export default combineEpics(loadPage, loadAppointmentForm)
+export default getData

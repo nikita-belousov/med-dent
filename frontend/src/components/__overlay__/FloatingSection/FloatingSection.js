@@ -3,15 +3,13 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { HashRouter, NavLink } from 'react-router-dom'
 
-import { APPOINTMENT_SHOW } from '../../../constants/actionTypes'
+import { callbackSubmit } from '../../../actions'
 import style from './FloatingSection.css'
 import { Button, Link, Paragraph, TextInput } from '../../__basic__'
 import { CallbackPopup, AppointmentModal }  from '../index'
 
 
-const mapDispatchToProps = dispatch => ({
-  showAppointmentModal: () => dispatch({ type: APPOINTMENT_SHOW })
-})
+const mapDispatchToProps = { callbackSubmit }
 
 
 let FloatingSection = class extends Component {
@@ -60,8 +58,8 @@ let FloatingSection = class extends Component {
     }))
   }
 
-  onCallbackSubmit(data) {
-    // callback(data)
+  onCallbackSubmit = data => {
+    this.props.callbackSubmit(data)
   }
 
   onWrapperMainRef = node => {

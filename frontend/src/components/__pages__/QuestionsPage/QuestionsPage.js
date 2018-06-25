@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+
+import { questionSubmit } from '../../../actions'
 import style from './QuestionsPage.css'
 import { Link } from '../../__basic__'
 import { NarrowPage } from '../../__pages__'
 import { AskQuestionPopup }  from '../../__overlay__'
 
 
-export class QuestionsPage extends Component {
+const mapDispatchToProps = { questionSubmit }
+
+
+let QuestionsPage = class extends Component {
   state = { leaveQuestionPopup: false }
 
   handleAskQuestionClick = (e) => {
@@ -25,16 +31,10 @@ export class QuestionsPage extends Component {
     }))
   }
 
-  renderPopup() {
-    return (
-      <div className={style.questionPopup}>
-        <AskQuestionPopup
-          onClose={this.onPopupClose}
-        />
-      </div>
-    )
+  onFormSubmit = data => {
+    this.props.questionSubmit(data)
   }
-
+  
   render() {
     const { leaveQuestionPopup } = this.state
 
@@ -50,7 +50,13 @@ export class QuestionsPage extends Component {
               Задать вопрос
             </Link>
           </div>
-          {leaveQuestionPopup && this.renderPopup()}
+          {leaveQuestionPopup &&
+            <div className={style.questionPopup}>
+              <AskQuestionPopup
+                onFormSubmit={this.onFormSubmit}
+                onClose={this.onPopupClose}
+              />
+            </div>}
         </div>
         <div className={style.questions}>
           {this.props.children}
@@ -59,3 +65,8 @@ export class QuestionsPage extends Component {
     )
   }
 }
+
+
+QuestionsPage = connect(() => ({}), mapDispatchToProps)(QuestionsPage)
+
+export { QuestionsPage }

@@ -18,11 +18,6 @@ import '../../styles/global.css'
 import '../../styles/myfonts.css'
 
 
-const mapDispatchToProps = dispatch => ({
-  onLoad: onPageNotFound =>
-    dispatch({ type: APP_LOADED, onPageNotFound })
-})
-
 const mapStateToProps = state => ({ ...state.common })
 
 
@@ -44,17 +39,20 @@ let App = class extends Component {
   }
 
   render() {
+    const { isLoading, mediaQueries } = this.props
+
+    if (!mediaQueries) return null
+
     const className = classNames({
-      [style.isLoading]: this.props.isLoading,
-      [style.ready]: !this.props.isLoading
+      [style.isLoading]: isLoading,
+      [style.ready]: !isLoading
     })
 
     return (
       <div className={className}>
         <BrowserRouter>
           <Fragment>
-            {this.props.isLoading && <AppLoading />}
-
+            {isLoading && <AppLoading />}
             <Layout>
               {this.state.pageNotFound ? <pages.NotFoundPage /> : <Routes />}
             </Layout>
@@ -150,5 +148,5 @@ const Routes = () =>
   </Switch>
 
 
-App = connect(mapStateToProps, mapDispatchToProps)(App)
+App = connect(mapStateToProps)(App)
 export { App }

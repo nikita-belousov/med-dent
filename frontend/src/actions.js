@@ -65,7 +65,7 @@ export const appointmentClose = () => ({
 })
 
 export const appointmentSubmit = data => ({
-  type: SUBMIT_APPOINTMENT,
+  type: APPOINTMENT_SUBMIT,
   payload: {
     api: () => agent.appointmentApi.submit().api(data)
   }
@@ -76,10 +76,10 @@ export const appointmentSubmit = data => ({
 //  Callback
 //-------------------------------------
 
-export const CALLBACK_REQUEST = 'CALLBACK_REQUEST'
+export const CALLBACK_SUBMIT = 'CALLBACK_SUBMIT'
 
-export const callbackRequest = data => ({
-  type: CALLBACK_REQUEST,
+export const callbackSubmit = data => ({
+  type: CALLBACK_SUBMIT,
   payload: {
     api: () => agent.callbackApi.submit().api(data)
   }
@@ -90,10 +90,10 @@ export const callbackRequest = data => ({
 //  Count price
 //-------------------------------------
 
-export const COUNT_COST = 'COUNT_COST'
+export const COUNT_COST_SUBMIT = 'COUNT_COST_SUBMIT'
 
 export const countPrice = data => ({
-  type: COUNT_COST,
+  type: COUNT_COST_SUBMIT,
   payload: {
     api: () => agent.countCostApi.submit().api(data)
   }
@@ -144,22 +144,6 @@ export const fetchServicesByCategory = categoryId => {
     }
   }
 }
-
-// export const fetchCategoryPage = (categoryId, dentistsIds) => {
-//   return {
-//     type: FETCH_CATEGORY_PAGE,
-//     payload: {
-//       dataType: dataTypes.CATEGORY_PAGE_CONTENT,
-//       api: () =>
-//         Promise
-//           .all([
-//             agent.Services.byCategory(categoryId),
-//             Promise.all(dentistsIds.map(agent.dentistsApi.byId))
-//           ])
-//           .then(([ services, dentists ]) => ({ services, dentists }))
-//     }
-//   }
-// }
 
 
 //=====================================
@@ -258,6 +242,7 @@ export const fetchNewsArticle = slug => {
 
 export const FETCH_REVIEWS_SLIDES = 'FETCH_REVIEWS_SLIDES'
 export const FETCH_REVIEWS_PAGE = 'FETCH_REVIEWS_PAGE'
+export const REVIEW_SUBMIT = 'REVIEW_SUBMIT'
 
 export const fetchReviewsSlides = () => {
   const { url, api } = agent.reviewsApi.page(REVIEWS_SLIDES_TO_SHOW, 1)
@@ -283,12 +268,20 @@ export const fetchReviewsPage = pageNum => {
   }
 }
 
+export const reviewSubmit = data => ({
+  type: REVIEW_SUBMIT,
+  payload: {
+    api: () => agent.reviewsApi.submit().api(data)
+  }
+})
+
 
 //=====================================
 //  Questions
 //-------------------------------------
 
 export const FETCH_QUESTIONS_PAGE = 'FETCH_QUESTIONS_PAGE'
+export const QUESTION_SUBMIT = 'QUESTION_SUBMIT'
 
 export const fetchQuestionsPage = pageNum => {
   const { url, api } = agent.questionsApi.page(ITEMS_ON_PAGE, pageNum)
@@ -301,6 +294,13 @@ export const fetchQuestionsPage = pageNum => {
     }
   }
 }
+
+export const questionSubmit = data => ({
+  type: QUESTION_SUBMIT,
+  payload: {
+    api: () => agent.questionsApi.submit().api(data)
+  }
+})
 
 
 //=====================================
@@ -389,6 +389,14 @@ export const updateLoader = () => ({
 })
 
 
+export const submitDataActions = [
+  APPOINTMENT_SUBMIT,
+  CALLBACK_SUBMIT,
+  COUNT_COST_SUBMIT,
+  REVIEW_SUBMIT,
+  QUESTION_SUBMIT
+]
+
 export const pageReloadingActions = [
   FETCH_SERVICES_CATEGORIES,
   FETCH_SERVICES,
@@ -408,33 +416,17 @@ export const pageReloadingActions = [
   FETCH_QUESTIONS_PAGE
 ]
 
-export const requestActions = [
+export const getDataActions = [
   ...pageReloadingActions,
   FETCH_DENTISTS_AS_OPTIONS
 ]
 
 export const actions = {
+  ...submitDataActions,
+  ...getDataActions,
   APPOINTMENT_LOAD,
-  APPOINTMENT_SUBMIT,
   APPOINTMENT_OPEN,
   APPOINTMENT_CLOSE,
-  CALLBACK_REQUEST,
-  COUNT_COST,
-  FETCH_SERVICES_CATEGORIES,
-  FETCH_SERVICES_BY_CATEGORY,
-  FETCH_SPECIALS_SLIDES,
-  FETCH_SPECIALS_PAGE,
-  FETCH_SPECIALS_ARTICLE,
-  FETCH_NEWS_SLIDES,
-  FETCH_NEWS_PAGE,
-  FETCH_NEWS_ARTICLE,
-  FETCH_NEWS_SLIDES,
-  FETCH_REVIEWS_PAGE,
-  FETCH_QUESTIONS_PAGE,
-  FETCH_DENTISTS_PAGE,
-  FETCH_DENTIST_BY_ID,
-  FETCH_DENTIST_FOR_CATEGORY,
-  FETCH_DENTISTS_AS_OPTIONS,
   PAGE_LOADING_START,
   DATA_RECEIVED
 }

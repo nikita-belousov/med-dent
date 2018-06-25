@@ -26,12 +26,10 @@
 }
 
 .contentSqueeze {
-  composes: content;
-
-  width: 850px;
+  width: 70%;
   margin: auto;
 }
 
-.fullWidthSection {
+.fullWidth {
   margin-top: 100px;
 }

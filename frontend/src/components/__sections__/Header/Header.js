@@ -30,7 +30,7 @@ let HeaderContainer = class extends Component {
 
     this.state = {
       attached: false,
-      mobile: false,
+      dropdown: false,
       mobileMenuActive: false,
       logoNode: null,
       navigationNode: null
@@ -122,14 +122,14 @@ let HeaderContainer = class extends Component {
 
     if (!navLinks || !servicesLinks) return null
 
-    const mobile = mediaQueries.small
+    const dropdown = mediaQueries.medium
 
     return (
       <Header
-        mobile={mobile}
+        dropdown={dropdown}
         mobileMenuActive={mobileMenuActive}
         onMobileMenuClick={this.onMobileMenuClick}
-        attached={attached && !mobile}
+        attached={attached && !dropdown}
         navLinks={navLinks}
         socialLinks={socialLinks}
         servicesLinks={servicesLinks}
@@ -149,7 +149,7 @@ const Header = ({
   socialLinks,
   servicesLinks,
   warning,
-  mobile,
+  dropdown,
   mobileMenuActive,
   onMobileMenuClick,
   onContentRef,
@@ -157,7 +157,7 @@ const Header = ({
   onNavigationRef
 }) =>
   <header className={style.headerWrapper}>
-    {(mobile && mobileMenuActive) &&
+    {(dropdown && mobileMenuActive) &&
       <MobileMenu
         onClose={onMobileMenuClick}
         navLinks={navLinks}
@@ -172,7 +172,7 @@ const Header = ({
         socialLinks={socialLinks}
         warning={warning}
         attached={attached}
-        mobile={mobile}
+        dropdown={dropdown}
         onMobileMenuClick={onMobileMenuClick}
         mobileMenuActive={mobileMenuActive}
         onLogoRef={onLogoRef}
@@ -180,7 +180,7 @@ const Header = ({
       />
     </div>
 
-    {(!mobile && !attached) &&
+    {(!dropdown && !attached) &&
       <div className={style.servicesWrapper}>
         <div className={style.servicesMenu}>
           <Container>
@@ -241,7 +241,7 @@ let MobileMenu = ({ onClose, navLinks, socialLinks, servicesLinks }) =>
         </ul>
 
         <div className={style.mobileSocialsWrapper}>
-          <SocialLinks mobile={true} links={socialLinks} />
+          <SocialLinks dropdown={true} links={socialLinks} />
         </div>
       </Container>
     </div>
@@ -255,7 +255,7 @@ const HeaderBar = ({
   socialLinks,
   warning,
   attached,
-  mobile,
+  dropdown,
   mobileMenuActive,
   onMobileMenuClick,
   onContentRef,
@@ -263,13 +263,13 @@ const HeaderBar = ({
   onNavigationRef
 }) => {
   const headerBarClass = classNames({
-    [style.headerBar]: !attached || mobile,
-    [style.headerBarAttached]: attached && !mobile
+    [style.headerBar]: !attached || dropdown,
+    [style.headerBarAttached]: attached && !dropdown
   })
 
   const navClass = classNames({
-    [style.headerBarNav]: !mobile,
-    [style.headerBarNavMobile]: mobile
+    [style.headerBarNav]: !dropdown,
+    [style.headerBarNavMobile]: dropdown
   })
 
   return (
@@ -280,7 +280,7 @@ const HeaderBar = ({
       <header className={headerBarClass}>
         <Container responsive={true}>
           <div className={navClass}>
-            {mobile &&
+            {dropdown &&
               <div
                 className={style.mobileMenuButtonOpen}
                 onClick={onMobileMenuClick}
@@ -298,7 +298,7 @@ const HeaderBar = ({
               </NavLink>
             </div>
 
-            {!mobile &&
+            {!dropdown &&
               <ul className={style.navigation}>
                 {navLinks.map(({ title, path }) =>
                   <li key={title}>
@@ -307,7 +307,7 @@ const HeaderBar = ({
                 )}
               </ul>}
 
-            {(!mobile && attached) &&
+            {(!dropdown && attached) &&
               <div className={style.socialWrapper}>
                 <SocialLinks links={socialLinks} />
               </div>}
@@ -322,10 +322,10 @@ const HeaderBar = ({
 }
 
 
-const SocialLinks = ({ links, mobile }) => {
+const SocialLinks = ({ links, dropdown }) => {
   const className = classNames({
-    [style.social]: !mobile,
-    [style.socialMobile]: mobile
+    [style.social]: !dropdown,
+    [style.socialMobile]: dropdown
   })
 
   return (
