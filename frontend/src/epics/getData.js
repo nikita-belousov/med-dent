@@ -6,7 +6,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise'
 import { scan, concat as _concat, delayWhen, filter, skipWhile, defaultIfEmpty, multicast, refCount, first, count, publish, share, shareReplay, mergeAll, take, takeUntil, reduce, map, mapTo, throttleTime, switchMap, mergeMap, tap, startWith, auditTime, delay, pairwise } from 'rxjs/operators'
 import { combineEpics, ofType } from 'redux-observable'
 
-import { FETCH_THROTTLE } from '../constants'
+import { FETCH_THROTTLE, CACHE_LIFETIME } from '../constants'
 import { PAGE_LOADED, APPOINTMENT_LOAD } from '../actions'
 import { pageLoadingStart, pageReloadingActions, getDataActions } from '../actions'
 import { dataReceived, initLoader, updateLoader, fetchDentistsAsOptions } from '../actions'
@@ -14,7 +14,8 @@ import { dataReceived, initLoader, updateLoader, fetchDentistsAsOptions } from '
 
 const cacheData = (url, data) => {
   const storage = window.localStorage
-  const serialized = JSON.stringify(data)
+  const expires = Date.now() + CACHE_LIFETIME * 60000
+  const serialized = JSON.stringify({ data, expires })
   storage.setItem(url, serialized)
 }
 
@@ -34,8 +35,10 @@ const getData = action$ => {
 
       const filterByCached = cached => action$ => action$.pipe(
         filter(({ payload }) => {
-          const storage = window.localStorage
-          return cached === !!storage.getItem(payload.url)
+          let item = window.localStorage.getItem(payload.url)
+          item = JSON.parse(item)
+          if (!item || (Date.now() > item.expires)) return cached === false
+          return cached === true
         })
       )
 
@@ -65,8 +68,7 @@ const getData = action$ => {
       const cachedData$ = cached$.pipe(
         map(({ payload }) => {
           const { url, dataType } = payload
-          let data = window.localStorage.getItem(url)
-          data = JSON.parse(data)
+          const { data } = JSON.parse(window.localStorage.getItem(url))
           return { ...data, dataType }
         })
       )

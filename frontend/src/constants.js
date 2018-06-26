@@ -1,4 +1,6 @@
 export const FETCH_THROTTLE = 200
+export const CACHE_LIFETIME = 5 // minutes
+
 
 //=====================================
 //  Quantities
