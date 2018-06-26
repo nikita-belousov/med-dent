@@ -116,6 +116,10 @@ let HeaderContainer = class extends Component {
     this.mobileMenuClick$.next(1)
   }
 
+  onLinkClick = () => {
+    this.forceUpdate()
+  }
+
   render() {
     const { mediaQueries, navLinks, socialLinks, servicesLinks, warning } = this.props
     const { attached, mobileMenuActive, ready } = this.state
@@ -137,6 +141,7 @@ let HeaderContainer = class extends Component {
         // onContentRef={this.onContentRef}
         onLogoRef={this.onLogoRef}
         onNavigationRef={this.onNavigationRef}
+        onLinkClick={this.onLinkClick}
       />
     )
   }
@@ -154,7 +159,8 @@ const Header = ({
   onMobileMenuClick,
   onContentRef,
   onLogoRef,
-  onNavigationRef
+  onNavigationRef,
+  onLinkClick
 }) =>
   <header className={style.headerWrapper}>
     {(dropdown && mobileMenuActive) &&
@@ -177,6 +183,7 @@ const Header = ({
         mobileMenuActive={mobileMenuActive}
         onLogoRef={onLogoRef}
         onNavigationRef={onNavigationRef}
+        onLinkClick={onLinkClick}
       />
     </div>
 
@@ -186,7 +193,7 @@ const Header = ({
           <Container>
             <ul className={style.servicesLinks}>
               {servicesLinks.map(({ slug, title }) =>
-                <li key={slug}>
+                <li key={slug} onClick={onLinkClick}>
                   <NavLink
                     onClick={this.onLinkClick}
                     to={`/${slug}`}
@@ -260,7 +267,8 @@ const HeaderBar = ({
   onMobileMenuClick,
   onContentRef,
   onLogoRef,
-  onNavigationRef
+  onNavigationRef,
+  onLinkClick
 }) => {
   const headerBarClass = classNames({
     [style.headerBar]: !attached || dropdown,
@@ -301,8 +309,10 @@ const HeaderBar = ({
             {!dropdown &&
               <ul className={style.navigation}>
                 {navLinks.map(({ title, path }) =>
-                  <li key={title}>
-                    <NavLink to={path}>{title}</NavLink>
+                  <li key={title} onClick={onLinkClick}>
+                    <NavLink to={path}>
+                      {title}
+                    </NavLink>
                   </li>
                 )}
               </ul>}
