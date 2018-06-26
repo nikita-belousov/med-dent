@@ -26,9 +26,8 @@ let SpecialsSlider = class extends Component {
 
   render() {
     const { cards, mediaQueries } = this.props
-    const mobile = mediaQueries ? mediaQueries.small : false
 
-    if (!cards || cards.length === 0) {
+    if (!mediaQueries || (!cards || cards.length === 0)) {
       return null
     }
 
@@ -40,14 +39,14 @@ let SpecialsSlider = class extends Component {
           </h2>
           <div className={styles.sliderWrapper}>
             <Slider
-              updateSlidesIn={mobile}
-              slidesToShow={mobile ? 3 : 4}
+              updateSlidesIn={mediaQueries.medium}
+              slidesToShow={mediaQueries.medium ? 3 : 4}
               autoplay={true}
               controlsInside={true}
             >
               {cards.map(card => (
                 <div key={card.slug}>
-                  <SpecialCard small={mobile} {...card} />
+                  <SpecialCard small={mediaQueries.medium} {...card} />
                 </div>
               ))}
             </Slider>

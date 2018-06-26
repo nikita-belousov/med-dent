@@ -62,22 +62,20 @@ let NewsSlider = class extends Component {
       return null
     }
 
-    const mobile = mediaQueries.small
-
     return (
       <div className={style.sectionWrapper}>
         <Container responsive={true}>
           <div>
             <h3>Новости</h3>
             <Slider
-              controlsInside={mobile}
+              controlsInside={mediaQueries.medium}
               autoplay={false}
-              slidesToShow={mobile ? 2 : 3}
-              updateSlidesIn={mobile}
+              slidesToShow={mediaQueries.medium ? 2 : 3}
+              updateSlidesIn={mediaQueries.medium}
             >
               {news.map((doc, i) =>
                 <div key={i}>
-                  <Slide mobile={mobile} {...doc} />
+                  <Slide mobile={mediaQueries.medium} {...doc} />
                 </div>
               )}
             </Slider>

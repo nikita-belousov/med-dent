@@ -1,5 +1,5 @@
 import { paginationDataTypes } from '../constants'
-import { DATA_RECEIVED } from '../actions'
+import { RESET_PAGINATION, DATA_RECEIVED } from '../actions'
 
 
 export default (state = {}, action) => {
@@ -16,6 +16,12 @@ export default (state = {}, action) => {
         }
       }
       return state
+    case RESET_PAGINATION:
+      return {
+        ...state,
+        docs: [],
+        count: 0
+      }
     default:
       return state
   }

@@ -37,10 +37,10 @@ const getAll = (Model, options) => (req, res, next) => {
         .sort(sort)
         .populate(populate)
         .exec(),
-      count ? Model.count() : null
+      count ? Model.count(query || {}) : null
     ])
     .then(result => {
-      const [docs, count] = result
+      const [ docs, count ] = result
       const response = generateResponse
         ? generateResponse(req, res, docs)
         : { docs }

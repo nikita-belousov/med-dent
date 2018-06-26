@@ -73,6 +73,17 @@ export const appointmentSubmit = data => ({
 
 
 //=====================================
+//  Pagination
+//-------------------------------------
+
+export const RESET_PAGINATION = 'RESET_PAGINATION'
+
+export const resetPagination = () => ({
+  type: RESET_PAGINATION
+})
+
+
+//=====================================
 //  Callback
 //-------------------------------------
 
@@ -256,17 +267,14 @@ export const fetchReviewsSlides = () => {
   }
 }
 
-export const fetchReviewsPage = pageNum => {
-  const { url, api } = agent.reviewsApi.page(ITEMS_ON_PAGE, 1)
-  return {
-    type: FETCH_REVIEWS_PAGE,
-    payload: {
-      dataType: dataTypes.REVIEWS_COLLECTION,
-      url,
-      api
-    }
+export const fetchReviewsPage = pageNum => ({
+  type: FETCH_REVIEWS_PAGE,
+  payload: {
+    dataType: dataTypes.REVIEWS_COLLECTION,
+    url: agent.reviewsApi.page(ITEMS_ON_PAGE, pageNum).url,
+    api: agent.reviewsApi.page(ITEMS_ON_PAGE, pageNum).api
   }
-}
+})
 
 export const reviewSubmit = data => ({
   type: REVIEW_SUBMIT,
@@ -283,17 +291,14 @@ export const reviewSubmit = data => ({
 export const FETCH_QUESTIONS_PAGE = 'FETCH_QUESTIONS_PAGE'
 export const QUESTION_SUBMIT = 'QUESTION_SUBMIT'
 
-export const fetchQuestionsPage = pageNum => {
-  const { url, api } = agent.questionsApi.page(ITEMS_ON_PAGE, pageNum)
-  return {
-    type: FETCH_QUESTIONS_PAGE,
-    payload: {
-      dataType: dataTypes.QUESTIONS_COLLECTION,
-      url,
-      api
-    }
+export const fetchQuestionsPage = pageNum => ({
+  type: FETCH_QUESTIONS_PAGE,
+  payload: {
+    dataType: dataTypes.QUESTIONS_COLLECTION,
+    url: agent.questionsApi.page(ITEMS_ON_PAGE, pageNum).url,
+    api: agent.questionsApi.page(ITEMS_ON_PAGE, pageNum).api
   }
-}
+})
 
 export const questionSubmit = data => ({
   type: QUESTION_SUBMIT,
@@ -428,5 +433,6 @@ export const actions = {
   APPOINTMENT_OPEN,
   APPOINTMENT_CLOSE,
   PAGE_LOADING_START,
-  DATA_RECEIVED
+  DATA_RECEIVED,
+  RESET_PAGINATION
 }

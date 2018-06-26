@@ -1,67 +1,70 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import validate from 'validate.js'
 import FontAwesome from 'react-fontawesome'
 
-// import { Questions as api } from '../../../agent'
+import { questionSubmit } from '../../../actions'
 import style from './AskQuestionPopup.css'
 import { Form } from '../../__containers__'
 import { TextInput, Paragraph, Button, RatingInput } from '../../__basic__'
 import { Popup } from '../index'
 
 
-export class AskQuestionPopup extends Component {
-  onSubmit = data => {
-    // api.post(data)
+const mapDispatchToProps = { questionSubmit }
+
+
+let AskQuestionPopup = ({ onClose, questionSubmit }) => {
+  const constraints = {
+    author: {
+      presence: { allowEmpty: false }
+    },
+    question: {
+      presence: { allowEmpty: false }
+    }
   }
 
-  render() {
-    const constraints = {
-      author: {
-        presence: { allowEmpty: false }
-      },
-      question: {
-        presence: { allowEmpty: false }
-      }
-    }
-
-    return (
-      <div className={style.wrapper}>
-        <Popup {...this.props}>
-          <Form
-            withLoading
-            loadingTime={2500}
-            onSubmit={this.onSubmit}
-            constraints={constraints}
-          >
-            <div className={style.nameInput}>
-              <TextInput
-                alt
-                label='Имя'
-                name='author'
-              />
-            </div>
+  return (
+    <div className={style.wrapper}>
+      <Popup onClose={onClose}>
+        <Form
+          withLoading
+          loadingTime={2500}
+          onSubmit={questionSubmit}
+          constraints={constraints}
+        >
+          <div className={style.nameInput}>
             <TextInput
               alt
-              type='textarea'
-              rows={4}
-              label='Вопрос'
-              name='question'
+              label='Имя'
+              name='author'
             />
-            <div className={style.hint}>
-              <Paragraph type='small' >
-                Ответ на ваш вопрос будет опубликован в течение суток.
-              </Paragraph>
-            </div>
-            <Button
-              formSubmit
-              type='popup'
-              successText='Спасибо!'
-            >
-              Отправить
-            </Button>
-          </Form>
-        </Popup>
-      </div>
-    )
-  }
+          </div>
+          <TextInput
+            alt
+            type='textarea'
+            rows={4}
+            label='Вопрос'
+            name='question'
+          />
+          <div className={style.hint}>
+            <Paragraph type='small' >
+              Ответ на ваш вопрос будет опубликован в течение суток.
+            </Paragraph>
+          </div>
+          <Button
+            formSubmit
+            type='popup'
+            successText='Спасибо!'
+          >
+            Отправить
+          </Button>
+        </Form>
+      </Popup>
+    </div>
+  )
 }
+
+
+AskQuestionPopup = connect(() => ({}), mapDispatchToProps)(AskQuestionPopup)
+
+export { AskQuestionPopup }

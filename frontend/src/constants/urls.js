@@ -7,32 +7,32 @@ export const apiRoot = host => `http://${host}/api`
 export const QUESTIONS_ROOT = '/questions'
 export const questions = () => QUESTIONS_ROOT
 export const questionsPage = (itemsOnPage, pageNum) =>
-  `${QUESTIONS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}`
+  `${QUESTIONS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}&_sort=createdAt:desc`
 
 
 export const REVIEWS_ROOT = '/reviews'
 export const reviews = () => REVIEWS_ROOT
 export const reviewsPage = (itemsOnPage, pageNum) =>
-  `${REVIEWS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}`
+  `${REVIEWS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}&_sort=createdAt:desc`
 
 
 export const SPECIALS_ROOT = '/specials'
 export const specialsPreviews = () => `${SPECIALS_ROOT}/cards/?_sort=createdAt:desc`
 export const specialsPage = (itemsOnPage, pageNum) =>
-  `${SPECIALS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}`
+  `${SPECIALS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}&_sort=createdAt:desc`
 export const specialArticle = slug => `${SPECIALS_ROOT}/${slug}`
 
 
 export const DENTISTS_ROOT = '/staff'
 export const dentistsOptions = () => `${DENTISTS_ROOT}/select_options`
 export const dentistsPage = (itemsOnPage, pageNum) =>
-  `${DENTISTS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}`
+  `${DENTISTS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}&_sort=createdAt:desc`
 export const dentistById = id => `${DENTISTS_ROOT}/${id}`
 
 
 export const NEWS_ROOT = '/news'
 export const newsPage = (itemsOnPage, pageNum) =>
-  `${NEWS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}`
+  `${NEWS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}&_sort=createdAt:desc`
 export const newsArticle = slug => `${NEWS_ROOT}/${slug}`
 
 

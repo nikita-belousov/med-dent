@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import times from 'lodash/times'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { PaginationPage } from '../index'
+
 import { ITEMS_ON_PAGE } from '../../../constants'
+import { resetPagination } from '../../../actions'
+import { PaginationPage } from '../index'
+
 
 const mapStateToProps = state => ({ ...state.paginatedPage })
 
@@ -35,8 +38,12 @@ let Pagination = class extends Component {
   componentWillUpdate(nextProps) {
     const { dispatch, fetchData, pageToShow } = this.props
     if (pageToShow !== nextProps.pageToShow) {
-      dispatch(fetchData(pageToShow))
+      dispatch(fetchData(nextProps.pageToShow))
     }
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(resetPagination())
   }
 
   render() {
@@ -51,9 +58,7 @@ let Pagination = class extends Component {
       gridView
     } = this.props
 
-    if (!count || !docs) {
-      return null
-    }
+    if (!count || !docs) return null
 
     const totalPages = Math.ceil(count / itemsOnPage)
 
