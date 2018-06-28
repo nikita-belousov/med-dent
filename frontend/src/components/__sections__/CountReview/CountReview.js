@@ -70,7 +70,7 @@ let CountReview = class extends Component {
 
     const { callbackForm } = this.state
     const reviewsToShow = this.props.reviewsToShow || 10
-    const mobile = mediaQueries.small
+    const mobile = mediaQueries.medium
 
     const constraints = {
       problem: {
