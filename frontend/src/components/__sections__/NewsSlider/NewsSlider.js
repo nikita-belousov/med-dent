@@ -68,14 +68,18 @@ let NewsSlider = class extends Component {
           <div>
             <h3>Новости</h3>
             <Slider
-              controlsInside={mediaQueries.medium}
-              autoplay={false}
-              slidesToShow={mediaQueries.medium ? 2 : 3}
-              updateSlidesIn={mediaQueries.medium}
+              spaceAround={mediaQueries.small}
+              controlsInside={true}
+              controlsOnWindowEdge={true}
+              slidesToShow={(mediaQueries.xsmall || mediaQueries.small) ? 1 : mediaQueries.medium ? 2 : 3}
+              updateSlidesIn={mediaQueries}
             >
               {news.map((doc, i) =>
-                <div key={i}>
-                  <Slide mobile={mediaQueries.medium} {...doc} />
+                <div className={style.slideWrapper} key={i}>
+                  <Slide
+                    mobile={mediaQueries.xsmall || (mediaQueries.medium && !mediaQueries.small)}
+                    {...doc}
+                  />
                 </div>
               )}
             </Slider>

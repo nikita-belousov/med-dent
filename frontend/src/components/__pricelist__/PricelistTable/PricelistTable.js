@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
 import uuid from 'small-uuid'
 import capitalize from 'lodash/capitalize'
 import style from './PricelistTable.css'
@@ -14,12 +15,11 @@ export class PricelistTable extends Component {
       <div
         key={id}
         className={style.category}
-        ref={interactive &&
-          (node => onCategoryRef(id, node))}
+        ref={interactive && (node => onCategoryRef(id, node))}
       >
-        <div className={style.categoryTitle}>
+        <h3 className={style.categoryTitle}>
           {capitalize(title)}
-        </div>
+        </h3>
         <div className={style.services}>
           {!isEmpty
             ? services.map(this.renderService)
@@ -59,7 +59,7 @@ export class PricelistTable extends Component {
           <div className={style.byTitle}>
             <TextInput
               alt
-              appearance='round-transparent'
+              appearance='roundTransparent'
               name='title'
               value={filterData.title}
               onChange={onFilterChange}
@@ -69,7 +69,7 @@ export class PricelistTable extends Component {
           <div className={style.bySocial}>
             <CheckboxInput
               name='social'
-              label='только с социальной скидкой'
+              label='Социальная скидка'
               checked={filterData.social}
               onChange={onFilterChange}
             />
@@ -80,20 +80,23 @@ export class PricelistTable extends Component {
   }
 
   render() {
-    const {
-      data,
-      onScrollableRef,
-      interactive
-    } = this.props
+    const { data, onScrollableRef, interactive, medium } = this.props
+
+    const wrapperClass = classNames({
+      [style.wrapper]: true,
+      [style.medium]: medium
+    })
 
     return (
-      <div className={interactive ? style.pricesInteractive : style.prices}>
-        {interactive && this.renderTopBar()}
-        <div
-          className={style.inner}
-          ref={interactive && onScrollableRef}
-        >
-          {data.map(this.renderCategory)}
+      <div className={wrapperClass}>
+        <div className={interactive ? style.pricesInteractive : style.prices}>
+          {interactive && this.renderTopBar()}
+          <div
+            className={style.inner}
+            ref={interactive && onScrollableRef}
+          >
+            {data.map(this.renderCategory)}
+          </div>
         </div>
       </div>
     )

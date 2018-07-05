@@ -1,11 +1,21 @@
-@value border-radius-big, overlay-level-3 from '../../../styles/libs/effects.css'; @value light-grey, grey, primary from '../../../styles/libs/colors.css';
+@value border-radius-big, overlay-level-3 from '../../../styles/libs/effects.css';
+@value light-grey, grey, primary from '../../../styles/libs/colors.css';
 
 
-.shadowBg {
-  position: absolute;
+.wrapper {
+  position: fixed;
+  top: 0;
+  z-index: overlay-level-3;
   width: 100%;
   height: 100vh;
-  z-index: overlay-level-3;
+  overflow: hidden;
+}
+
+.shadowBg {
+  box-sizing: content-box;
+  width: 100%;
+  padding-right: 28px;
+  height: 100%;
   background: rgba(0,0,0,.6);
   overflow-y: scroll;
 }
@@ -14,7 +24,8 @@
   margin: 80px auto;
   background: #fff;
   border-radius: border-radius-big;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
 }
 
 .inner {

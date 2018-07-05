@@ -1,3 +1,58 @@
+@value primary from '../../styles/libs/colors.css';
+@value family from '../../styles/libs/typography.css';
+
+
+* {
+  box-sizing: border-box;
+  min-height: 0;
+  min-width: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-size: 1.6em;
+  font-family: family;
+  line-height: 1.6;
+  position: relative;
+}
+
+p {
+  line-height: 1.8;
+  margin-top: 0;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.4;
+  font-family: 'fira-sans', Helvetica, sans-serif;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 3.8rem;
+  margin-bottom: 4rem;
+
+  .small & {
+    font-size: 21pt;
+  }
+}
+
+h3 {
+  font-size: 2.8rem;
+  margin-bottom: 3.2rem;
+}
+
+h4 {
+  font-size: 14pt;
+  margin-bottom: .4em;
+}
+
 .isLoading {
   overflow-y: hidden;
   height: 100vh;

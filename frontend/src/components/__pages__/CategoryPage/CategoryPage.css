@@ -4,12 +4,6 @@
 .dentists {
   lost-center: 100%;
   margin: 80px 0 60px;
-
-  .small & {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 .dentistsOnly {
@@ -18,26 +12,47 @@
   justify-content: center;
 
   .dentist {
-    lost-column: 1/2;
+    lost-column: 1/2 2;
+    min-width: 320px;
+
+    :global(.small) & {
+      width: 80%;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    :global(.xsmall) & {
+      width: 100%;
+    }
   }
 }
 
 .dentistsPair {
   composes: dentists;
 
+  :global(.small) & {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .dentist {
     lost-column: 1/2 2 7%;
-  }
-}
 
-.small .dentist {
-  lost-column: 1 1;
-  width: 80%;
-  margin-bottom: 65px;
-  min-width: 250px;
+    :global(.small) & {
+      lost-column: 1/1;
+      width: 80%;
+      max-width: 400px;
+      margin-bottom: 65px;
 
-  &:last-child {
-    margin-bottom: 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    :global(.xsmall) & {
+      width: 100%;
+    }
   }
 }
 

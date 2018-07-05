@@ -6,28 +6,29 @@
   font-size: 42px;
   font-weight: bold;
   line-height: 1.4;
+  margin-bottom: 6.5rem;
 }
 
 .caption {
-  padding-top: 14px;
-  margin-bottom: -45px;
+  position: relative;
+  top: -55px;
 }
 
 .breadcrumbs {
-  margin-bottom: 10px;
+  margin-bottom: .8rem;
 
   .divider {
-    margin: 0 10px;
+    margin: 0 1rem;
   }
-}
-
-.content {
-  padding-top: 65px;
 }
 
 .contentSqueeze {
   width: 70%;
   margin: auto;
+
+  :global(.medium) & {
+    width: 85%;
+  }
 }
 
 .fullWidth {

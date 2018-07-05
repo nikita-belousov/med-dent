@@ -22,6 +22,10 @@ const ReviewSchema = new mongoose.Schema({
     type: Number,
     min: 1,
     max: 5
+  },
+  dentist: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Dentist'
   }
 }, { timestamps: true })
 

@@ -15,7 +15,7 @@ const mapStateToProps = state => ({ mediaQueries: state.common.mediaQueries })
 let About = class extends Component {
   constructor(props) {
     super(props)
-    this.unsubscribe = []
+    this.unsub = []
     this.AUTO_SCROLL_SPEED = 50
   }
 
@@ -65,22 +65,27 @@ let About = class extends Component {
     const start$ = merge(canScroll$, mouseleave$)
     const pause$ = merge(reachedEnd$, mouseenter$)
 
-    pause$.subscribe(() => animate$.next('pause'))
-    start$.subscribe(() => animate$.next('start'))
+    const pause = pause$.subscribe(() => animate$.next('pause'))
+    const start = start$.subscribe(() => animate$.next('start'))
 
-    animate$.subscribe(animateScroll)
+    const animate = animate$.subscribe(animateScroll)
     animate$.next('start')
+
+    this.unsub.push(pause, start, animate)
+  }
+
+  componentWillUnmount() {
+    this.unsub.forEach(obs => obs.unsubscribe())
   }
 
   render() {
     const { mediaQueries } = this.props
     if (!mediaQueries) return null
 
-    const medium = mediaQueries.medium
-
     const wrapperClass = classNames({
-      [style.wrapper]: !medium,
-      [style.medium]: medium
+      [style.wrapper]: true,
+      [style.medium]: mediaQueries.medium,
+      [style.small]: mediaQueries.small
     })
 
     return (
@@ -120,7 +125,7 @@ let About = class extends Component {
                 </div>
               </div>
 
-              {!medium &&
+              {!mediaQueries.medium &&
                 <div className={style.pictureWrapper}>
                   <AppearOnScrollReach
                     coefficient={0.3}

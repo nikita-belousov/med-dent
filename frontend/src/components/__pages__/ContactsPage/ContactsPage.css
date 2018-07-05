@@ -17,11 +17,13 @@ $iconSize: 32px;
     width: 100%;
     justify-content: center;
     align-items: flex-end;
-    padding-bottom: 80px;
+    padding: 20px;
   }
 }
 
 .sidebar {
+  position: relative;
+  top: -32px;
   width: 400px;
   background: primary-gradient;
   border-radius: border-radius-small;
@@ -54,6 +56,11 @@ $iconSize: 32px;
 
   .contacts {
     padding: 32px;
+    position: relative;
+
+    .small & {
+      padding: 24px 16px;
+    }
   }
 
   .field {
@@ -72,7 +79,7 @@ $iconSize: 32px;
     align-items: center;
     justify-content: center;
     font-size: ($iconSize / 2);
-    padding-right: ($iconSize / 2);
+    padding-right: ($iconSize / 2.5);
   }
 
   .fieldContent {

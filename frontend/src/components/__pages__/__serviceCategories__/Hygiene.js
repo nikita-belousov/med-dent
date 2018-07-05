@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './ServiceCategory.css'
-import { LightboxSlider } from '../../LightboxSlider'
+// import { LightboxSlider } from '../../LightboxSlider'
 import { CategoryPage } from '../index'
 import { Paragraph } from '../../__basic__'
 
@@ -52,14 +52,14 @@ export const Hygiene = props => {
         иногда делает невозможным протезирование.
       </Paragraph>
 
-      <div className={style.sliderWrapper}>
+      {/* <div className={style.sliderWrapper}>
         <LightboxSlider
           images={sliderImages}
           caption='Гигиена в нашей клинике'
           slidesToShow={4}
           autoplay={false}
         />
-      </div>
+      </div> */}
 
       <Paragraph>
         Первый визит врачу-ортодонту целесообразно нанести в возрасте 5-6 лет,

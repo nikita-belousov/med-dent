@@ -19,7 +19,6 @@
 
 .labelAlt {
   composes: label;
-
   color: #fff;
 }
 
@@ -49,7 +48,7 @@
 
 .textArea {
   composes: textInput;
-  
+
   resize: none;
   line-height: 1.6;
 }

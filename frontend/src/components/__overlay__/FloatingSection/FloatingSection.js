@@ -5,7 +5,7 @@ import { HashRouter, NavLink } from 'react-router-dom'
 
 import { callbackSubmit } from '../../../actions'
 import style from './FloatingSection.css'
-import { Button, Link, Paragraph, TextInput } from '../../__basic__'
+import { Button, Link, Paragraph, TextInput, Container } from '../../__basic__'
 import { CallbackPopup, AppointmentModal }  from '../index'
 
 
@@ -14,7 +14,7 @@ const mapDispatchToProps = { callbackSubmit }
 
 let FloatingSection = class extends Component {
   state = {
-    collapsed: false,
+    collapsed: this.props.collapsed || false,
     callbackForm: false
   }
 
@@ -78,68 +78,70 @@ let FloatingSection = class extends Component {
     })
 
     return (
-      <div className={style.wrapper}>
-        {callbackForm &&
-          <div className={style.wrapperCall}>
-            <CallbackPopup
-              onClose={this.onCallbackClose}
-              onSubmit={this.onCallbackSubmit}
-            />
-          </div>}
-        <div
-          ref={this.onWrapperMainRef}
-          className={wrapperMainClass}
-          style={{ height: this.wrapperMainHeight || 'auto' }}
-        >
-          <div className={style.floatingSection}>
-            <div className={style.container}>
-              <div
-                className={style.navArrow}
-                onClick={this.toggleCollapsed}
+      <Container responsive={true}>
+        <div className={style.wrapper}>
+          {callbackForm &&
+            <div className={style.wrapperCall}>
+              <CallbackPopup
+                onClose={this.onCallbackClose}
+                onSubmit={this.onCallbackSubmit}
               />
-              <div className={style.btnWrapper}>
-                <HashRouter hashType='noslash'>
-                  <NavLink to='appointment'>
-                    <Button type='primary'>
-                      Записаться на прием
-                    </Button>
-                  </NavLink>
-                </HashRouter>
-              </div>
-            </div>
-            <div className={style.middleSection}>
+            </div>}
+          <div
+            ref={this.onWrapperMainRef}
+            className={wrapperMainClass}
+            style={{ height: this.wrapperMainHeight || 'auto' }}
+          >
+            <div className={style.floatingSection}>
               <div className={style.container}>
-                <div className={style.address}>
-                  <i className={style.addressIcon} />
-                  <Paragraph type='small'>
-                    Домодедово, ул. Кирова, <br/> д. 7, корп. 1
-                  </Paragraph>
-                </div>
-                <div className={style.schedule}>
-                  <i className={style.scheduleIcon} />
-                  <Paragraph type='small'>
-                    Пн — Вс с 9.00 до 20.00
-                  </Paragraph>
+                <div
+                  className={style.navArrow}
+                  onClick={this.toggleCollapsed}
+                />
+                <div className={style.btnWrapper}>
+                  <HashRouter hashType='noslash'>
+                    <NavLink to='appointment'>
+                      <Button type='primary'>
+                        Записаться на прием
+                      </Button>
+                    </NavLink>
+                  </HashRouter>
                 </div>
               </div>
-            </div>
-            <div className={style.container}>
-              <div className={style.calling}>
-                <div className={style.phoneNumber}>
-                  8 (495) 135-37-50
+              <div className={style.middleSection}>
+                <div className={style.container}>
+                  <div className={style.address}>
+                    <i className={style.addressIcon} />
+                    <Paragraph type='small'>
+                      Домодедово, ул. Кирова, <br/> д. 7, корп. 1
+                    </Paragraph>
+                  </div>
+                  <div className={style.schedule}>
+                    <i className={style.scheduleIcon} />
+                    <Paragraph type='small'>
+                      Пн — Вс с 9.00 до 20.00
+                    </Paragraph>
+                  </div>
                 </div>
-                <Link
-                  type={'alt-dashed'}
-                  isActive={this.state.callbackForm}
-                  onClick={this.handleCallbackCLick}
-                >
-                  Перезвонить мне
-                </Link>
+              </div>
+              <div className={style.container}>
+                <div className={style.calling}>
+                  <div className={style.phoneNumber}>
+                    8 (495) 135-37-50
+                  </div>
+                  <Link
+                    type={'alt-dashed'}
+                    isActive={this.state.callbackForm}
+                    onClick={this.handleCallbackCLick}
+                  >
+                    Перезвонить мне
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     )
   }
 }

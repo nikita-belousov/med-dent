@@ -40,7 +40,8 @@ let SpecialsSlider = class extends Component {
           <div className={styles.sliderWrapper}>
             <Slider
               updateSlidesIn={mediaQueries.medium}
-              slidesToShow={mediaQueries.medium ? 3 : 4}
+              spaceAround={mediaQueries.medium}
+              slidesToShow={mediaQueries.xsmall ? 1 : mediaQueries.small ? 2 : mediaQueries.medium ? 3 : 4}
               autoplay={true}
               controlsInside={true}
             >

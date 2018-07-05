@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 import { initApp } from './actions'
@@ -13,7 +14,9 @@ import { NAVIGATION_LINKS, SOCIAL_LINKS, WARNING_TEXT } from './constants/config
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 )
@@ -27,6 +30,10 @@ store.dispatch(initApp([
   {
     id: 'small',
     maxWidth: 720
+  },
+  {
+    id: 'xsmall',
+    maxWidth: 480
   }
 ]))
 

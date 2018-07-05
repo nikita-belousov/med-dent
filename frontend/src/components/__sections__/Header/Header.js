@@ -30,7 +30,6 @@ let HeaderContainer = class extends Component {
 
     this.state = {
       attached: false,
-      dropdown: false,
       mobileMenuActive: false,
       logoNode: null,
       navigationNode: null
@@ -45,7 +44,6 @@ let HeaderContainer = class extends Component {
 
   componentDidMount() {
     this.props.fetchServicesCategories()
-
     this.initAttach()
     this.initMobileMenu()
   }
@@ -120,28 +118,31 @@ let HeaderContainer = class extends Component {
     this.forceUpdate()
   }
 
+  onMobileLinkClick = () => {
+    this.setState(prev => ({ ...prev, mobileMenuActive: false }))
+  }
+
   render() {
     const { mediaQueries, navLinks, socialLinks, servicesLinks, warning } = this.props
     const { attached, mobileMenuActive, ready } = this.state
 
     if (!navLinks || !servicesLinks) return null
 
-    const dropdown = mediaQueries.medium
-
     return (
       <Header
-        dropdown={dropdown}
+        medium={mediaQueries.medium}
+        small={mediaQueries.small}
         mobileMenuActive={mobileMenuActive}
         onMobileMenuClick={this.onMobileMenuClick}
-        attached={attached && !dropdown}
+        attached={attached && !mediaQueries.medium}
         navLinks={navLinks}
         socialLinks={socialLinks}
         servicesLinks={servicesLinks}
         warning={warning}
-        // onContentRef={this.onContentRef}
         onLogoRef={this.onLogoRef}
         onNavigationRef={this.onNavigationRef}
         onLinkClick={this.onLinkClick}
+        onMobileLinkClick={this.onMobileLinkClick}
       />
     )
   }
@@ -154,64 +155,74 @@ const Header = ({
   socialLinks,
   servicesLinks,
   warning,
-  dropdown,
+  medium,
+  small,
   mobileMenuActive,
   onMobileMenuClick,
   onContentRef,
   onLogoRef,
   onNavigationRef,
-  onLinkClick
-}) =>
-  <header className={style.headerWrapper}>
-    {(dropdown && mobileMenuActive) &&
-      <MobileMenu
-        onClose={onMobileMenuClick}
-        navLinks={navLinks}
-        socialLinks={socialLinks}
-        servicesLinks={servicesLinks}
-      />}
+  onLinkClick,
+  onMobileLinkClick
+}) => {
+  const wrapperClass = classNames({
+    [style.medium]: medium,
+    [style.small]: small
+  })
 
-    <div className={style.headerBarWrapper}>
-      <HeaderBar
-        onRef={onContentRef}
-        navLinks={navLinks}
-        socialLinks={socialLinks}
-        warning={warning}
-        attached={attached}
-        dropdown={dropdown}
-        onMobileMenuClick={onMobileMenuClick}
-        mobileMenuActive={mobileMenuActive}
-        onLogoRef={onLogoRef}
-        onNavigationRef={onNavigationRef}
-        onLinkClick={onLinkClick}
-      />
-    </div>
+  return (
+    <header className={wrapperClass}>
+      {(medium && mobileMenuActive) &&
+        <MobileMenu
+          onClose={onMobileMenuClick}
+          onLinkClick={onMobileLinkClick}
+          navLinks={navLinks}
+          socialLinks={socialLinks}
+          servicesLinks={servicesLinks}
+        />}
 
-    {(!dropdown && !attached) &&
-      <div className={style.servicesWrapper}>
-        <div className={style.servicesMenu}>
-          <Container>
-            <ul className={style.servicesLinks}>
-              {servicesLinks.map(({ slug, title }) =>
-                <li key={slug} onClick={onLinkClick}>
-                  <NavLink
-                    onClick={this.onLinkClick}
-                    to={`/${slug}`}
-                    activeClassName={style.serviceLinkActive}
-                    className={style.categoryLink}
-                  >
-                    {capitalize(title)}
-                  </NavLink>
-                </li>
-              )}
-            </ul>
-          </Container>
-        </div>
-      </div>}
-  </header>
+      <div className={style.headerBarWrapper}>
+        <HeaderBar
+          onRef={onContentRef}
+          navLinks={navLinks}
+          socialLinks={socialLinks}
+          warning={warning}
+          attached={attached}
+          medium={medium}
+          onMobileMenuClick={onMobileMenuClick}
+          mobileMenuActive={mobileMenuActive}
+          onLogoRef={onLogoRef}
+          onNavigationRef={onNavigationRef}
+          onLinkClick={onLinkClick}
+        />
+      </div>
 
+      {(!medium && !attached) &&
+        <div className={style.servicesWrapper}>
+          <div className={style.servicesMenu}>
+            <Container>
+              <ul className={style.servicesLinks}>
+                {servicesLinks.map(({ slug, title }) =>
+                  <li key={slug} onClick={onLinkClick}>
+                    <NavLink
+                      onClick={this.onLinkClick}
+                      to={`/${slug}`}
+                      activeClassName={style.serviceLinkActive}
+                      className={style.categoryLink}
+                    >
+                      {capitalize(title)}
+                    </NavLink>
+                  </li>
+                )}
+              </ul>
+            </Container>
+          </div>
+        </div>}
+    </header>
+  )
+}
 
-let MobileMenu = ({ onClose, navLinks, socialLinks, servicesLinks }) =>
+let MobileMenu = ({ onClose, navLinks, socialLinks, servicesLinks, onLinkClick }) =>
   <div className={style.mobileMenu}>
     <div className={style.mobileMenuInner}>
       <Container responsive={true}>
@@ -229,7 +240,11 @@ let MobileMenu = ({ onClose, navLinks, socialLinks, servicesLinks }) =>
 
         <ul className={style.mobileNav}>
           {navLinks.map(({ title, path }, i) =>
-            <li key={i} className={style.mobileNavLink}>
+            <li
+              key={i}
+              className={style.mobileNavLink}
+              onClick={onLinkClick}
+            >
               <NavLink to={path}>
                 {capitalize(title)}
               </NavLink>
@@ -239,8 +254,12 @@ let MobileMenu = ({ onClose, navLinks, socialLinks, servicesLinks }) =>
 
         <ul className={style.mobileServices}>
           {servicesLinks.map(({ title, slug }, i) =>
-            <li key={i} className={style.mobileServiceLink}>
-              <NavLink to={slug}>
+            <li
+              key={i}
+              className={style.mobileServiceLink}
+              onClick={onLinkClick}
+            >
+              <NavLink to={`/${slug}`}>
                 {capitalize(title)}
               </NavLink>
             </li>
@@ -248,7 +267,7 @@ let MobileMenu = ({ onClose, navLinks, socialLinks, servicesLinks }) =>
         </ul>
 
         <div className={style.mobileSocialsWrapper}>
-          <SocialLinks dropdown={true} links={socialLinks} />
+          <SocialLinks medium={true} links={socialLinks} />
         </div>
       </Container>
     </div>
@@ -262,7 +281,7 @@ const HeaderBar = ({
   socialLinks,
   warning,
   attached,
-  dropdown,
+  medium,
   mobileMenuActive,
   onMobileMenuClick,
   onContentRef,
@@ -271,13 +290,13 @@ const HeaderBar = ({
   onLinkClick
 }) => {
   const headerBarClass = classNames({
-    [style.headerBar]: !attached || dropdown,
-    [style.headerBarAttached]: attached && !dropdown
+    [style.headerBar]: !attached || medium,
+    [style.headerBarAttached]: attached && !medium
   })
 
   const navClass = classNames({
-    [style.headerBarNav]: !dropdown,
-    [style.headerBarNavMobile]: dropdown
+    [style.headerBarNav]: !medium,
+    [style.headerBarNavMobile]: medium
   })
 
   return (
@@ -288,7 +307,7 @@ const HeaderBar = ({
       <header className={headerBarClass}>
         <Container responsive={true}>
           <div className={navClass}>
-            {dropdown &&
+            {medium &&
               <div
                 className={style.mobileMenuButtonOpen}
                 onClick={onMobileMenuClick}
@@ -296,7 +315,11 @@ const HeaderBar = ({
                 <FontAwesome name='bars' />
               </div>}
 
-            <div ref={onLogoRef} className={style.logo}>
+            <div
+              ref={onLogoRef}
+              className={style.logo}
+              onClick={onLinkClick}
+            >
               <NavLink to="/">
                 <Logo
                   minified={attached}
@@ -306,7 +329,7 @@ const HeaderBar = ({
               </NavLink>
             </div>
 
-            {!dropdown &&
+            {!medium &&
               <ul className={style.navigation}>
                 {navLinks.map(({ title, path }) =>
                   <li key={title} onClick={onLinkClick}>
@@ -317,7 +340,7 @@ const HeaderBar = ({
                 )}
               </ul>}
 
-            {(!dropdown && attached) &&
+            {(!medium && attached) &&
               <div className={style.socialWrapper}>
                 <SocialLinks links={socialLinks} />
               </div>}
@@ -332,10 +355,10 @@ const HeaderBar = ({
 }
 
 
-const SocialLinks = ({ links, dropdown }) => {
+const SocialLinks = ({ links, medium }) => {
   const className = classNames({
-    [style.social]: !dropdown,
-    [style.socialMobile]: dropdown
+    [style.social]: !medium,
+    [style.socialMobile]: medium
   })
 
   return (

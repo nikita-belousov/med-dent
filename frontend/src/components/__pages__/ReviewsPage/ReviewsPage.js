@@ -9,6 +9,8 @@ import { NarrowPage } from '../index'
 import { LeaveFeedbackPopup }  from '../../__overlay__'
 
 
+const mapStateToProps = state => ({ mediaQueries: state.common.mediaQueries })
+
 const mapDispatchToProps = { reviewSubmit }
 
 
@@ -36,10 +38,11 @@ let ReviewsPage = class extends Component {
   }
 
   render() {
+    const { mediaQueries } = this.props
     const { leaveFeedbackPopup } = this.state
 
     return (
-      <NarrowPage squeeze={true} heading='Отзывы'>
+      <NarrowPage squeeze={!mediaQueries.small} heading='Отзывы'>
         <div className={style.giveFeedback}>
           <div className={style.feedbackLinkWrapper}>
             <Link
@@ -67,6 +70,6 @@ let ReviewsPage = class extends Component {
 }
 
 
-ReviewsPage = connect(() => ({}), mapDispatchToProps)(ReviewsPage)
+ReviewsPage = connect(mapStateToProps, mapDispatchToProps)(ReviewsPage)
 
 export { ReviewsPage }

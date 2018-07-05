@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 import common from './common'
+import header from './header'
 import paginatedPage from './paginatedPage'
 import articlePage from './articlePage'
 import specialsSlider from './specialsSlider'
@@ -9,10 +10,11 @@ import changingReviews from './changingReviews'
 import pricelist from './pricelist'
 import categoryPage from './categoryPage'
 import appointment from './appointment'
-import header from './header'
+import dentistPage from './dentistPage'
 
 export default combineReducers({
   common,
+  header,
   paginatedPage,
   articlePage,
   specialsSlider,
@@ -21,5 +23,5 @@ export default combineReducers({
   pricelist,
   categoryPage,
   appointment,
-  header
+  dentistPage
 })

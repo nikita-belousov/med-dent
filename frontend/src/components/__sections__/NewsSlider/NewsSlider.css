@@ -2,14 +2,14 @@
 
 
 .sectionWrapper {
-  padding: 40px 0;
+  padding-top: 80px;
   position: relative;
 }
 
 .wrapper {
   display: flex;
   width: 360px;
-  
+
   .preview {
     width: 100px;
     position: relative;
@@ -22,20 +22,9 @@
   }
 }
 
-.mobile {
-
-  .content {
-    padding-left: 0;
-  }
-}
-
 .bottomLine {
   display: flex;
   margin-top: 8px;
-
-  .mobile {
-    display: block;
-  }
 }
 
 .data {
@@ -43,17 +32,4 @@
 
   margin-top: -5px;
   margin-right: 20px;
-}
-
-.nextArrowWrapper, .prevArrowWrapper {
-  position: absolute;
-  top: 25px;
-}
-
-.nextArrowWrapper {
-  right: -40px;
-}
-
-.prevArrowWrapper {
-  left: -40px;
 }

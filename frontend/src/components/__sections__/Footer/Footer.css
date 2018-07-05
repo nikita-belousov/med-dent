@@ -4,12 +4,11 @@
 
 
 .footer {
-  padding-top: 50px;
+  padding: 80px 0 90px;
 }
 
 .info {
   lost-center: 100%;
-  margin-bottom: 55px;
 }
 
 .licenseWrapper {
@@ -81,10 +80,9 @@
 .copyright {
   display: flex;
   align-items: center;
-  height: copyright-height;
   background: linear-gradient(to bottom, #c6c6c6, #9e9e9e);
   border-radius: border-radius-big;
-  margin-top: 20px;
+  margin-top: 60px;
   font-size: 11pt;
   padding: 0 40px;
   color: white;
@@ -102,10 +100,14 @@
   font-family: 'Oswald', sans-serif;
   color: grey;
   text-align: center;
-  font-size: 22pt;
+  font-size: 2.5rem;
+
+  .mobile & {
+    font-size: 2rem;
+  }
 
   p {
-    line-height: 1.4;
+    line-height: 1.6;
     width: 100%;
     text-align: center;
     margin: 0;

@@ -27,7 +27,7 @@ export const DENTISTS_ROOT = '/staff'
 export const dentistsOptions = () => `${DENTISTS_ROOT}/select_options`
 export const dentistsPage = (itemsOnPage, pageNum) =>
   `${DENTISTS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}&_sort=createdAt:desc`
-export const dentistById = id => `${DENTISTS_ROOT}/${id}`
+export const dentistBySlug = slug => `${DENTISTS_ROOT}/${slug}`
 
 
 export const NEWS_ROOT = '/news'

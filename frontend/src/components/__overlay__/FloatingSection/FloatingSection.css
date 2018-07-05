@@ -5,14 +5,17 @@
 
 
 .wrapper  {
-  position: absolute;
-  height: 100vh;
-  margin-right: 40px;
+  position: relative;
+  height: 0;
   top: 0;
   right: 0;
   z-index: overlay-level-2;
   display: flex;
   justify-content: flex-end;
+
+  :global(.small) & {
+    justify-content: center;
+  }
 }
 
 .wrapperMain, .wrapperCall {
@@ -22,6 +25,7 @@
 
 .wrapperMain {
   transition: height .6s ease-out-cubic;
+  /* z-index: overlay */
 }
 
 .wrapperMainCollapsed {
@@ -30,11 +34,16 @@
 }
 
 .wrapperCall {
+  z-index: calc(overlay-level-2 + 1);
 
   > * {
     position: relative;
     bottom: 20px;
     right: 280px;
+
+    :global(.small) & {
+      right: 0;
+    }
   }
 }
 

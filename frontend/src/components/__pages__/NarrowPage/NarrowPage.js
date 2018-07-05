@@ -33,7 +33,7 @@ let NarrowPage = class extends Component {
 
     const contentClass = classNames({
       [style.content]: true,
-      [style.contentSqueeze]: squeeze && !(mediaQueries.small || mediaQueries.medium)
+      [style.contentSqueeze]: squeeze
     })
 
     return (
@@ -52,9 +52,9 @@ let NarrowPage = class extends Component {
                 </Fragment>
               )}
             </div>
-            <div className={style.heading}>
+            <h2 className={style.heading}>
               {heading}
-            </div>
+            </h2>
             {caption &&
               <div className={style.caption}>
                 {caption}

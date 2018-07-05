@@ -12,10 +12,10 @@ export const NAVIGATION_LINKS = [
     title: 'О нас',
     path: '/about-us'
   },
-  // {
-  //   title: 'Прайслист',
-  //   path: '/pricelist'
-  // },
+  {
+    title: 'Прайслист',
+    path: '/pricelist'
+  },
   {
     title: 'Акции',
     path: '/specials'

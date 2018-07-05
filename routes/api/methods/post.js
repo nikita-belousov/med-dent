@@ -44,6 +44,7 @@ const post = (Model, options) => (req, res, next) => {
 
         Promise.resolve(beforeSave ? beforeSave(values, doc) : null)
           .then(result => {
+            console.log(result)
             const resDoc = result || doc
 
             resDoc

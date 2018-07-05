@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { withRouter, Route, Link, Switch } from 'react-router-dom'
 
 import { LOADING_TIME } from '../../constants/config'
 import { APP_LOADED, APP_UNLOADED } from '../../constants/actionTypes'
@@ -41,8 +41,6 @@ let App = class extends Component {
   render() {
     const { isLoading, mediaQueries } = this.props
 
-    if (!mediaQueries) return null
-
     const className = classNames({
       [style.isLoading]: isLoading,
       [style.ready]: !isLoading
@@ -50,14 +48,12 @@ let App = class extends Component {
 
     return (
       <div className={className}>
-        <BrowserRouter>
-          <Fragment>
-            {isLoading && <AppLoading />}
-            <Layout>
-              {this.state.pageNotFound ? <pages.NotFoundPage /> : <Routes />}
-            </Layout>
-          </Fragment>
-        </BrowserRouter>
+        <Fragment>
+          {isLoading && <AppLoading />}
+          <Layout>
+            {this.state.pageNotFound ? <pages.NotFoundPage /> : <Routes />}
+          </Layout>
+        </Fragment>
       </div>
     )
   }
@@ -110,6 +106,12 @@ const Routes = () =>
 
     <Route
       exact
+      path='/dentists/:slug'
+      component={pages.DentistPage}
+    />
+
+    <Route
+      exact
       path='/implantaciya'
       component={pages.Implantology}
     />
@@ -149,4 +151,6 @@ const Routes = () =>
 
 
 App = connect(mapStateToProps)(App)
+App = withRouter(App)
+
 export { App }

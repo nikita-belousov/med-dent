@@ -8,7 +8,10 @@ import { NarrowPage } from '../../__pages__'
 import { AskQuestionPopup }  from '../../__overlay__'
 
 
-export class QuestionsPage extends Component {
+const mapStateToProps = state => ({ mediaQueries: state.common.mediaQueries })
+
+
+let QuestionsPage = class extends Component {
   state = { leaveQuestionPopup: false }
 
   handleAskQuestionClick = (e) => {
@@ -28,10 +31,11 @@ export class QuestionsPage extends Component {
   }
 
   render() {
+    const { mediaQueries } = this.props
     const { leaveQuestionPopup } = this.state
 
     return (
-      <NarrowPage squeeze={true} heading='Ответы на вопросы'>
+      <NarrowPage squeeze={!mediaQueries.small} heading='Ответы на вопросы'>
         <div className={style.askQuestion}>
           <div className={style.questionLinkWrapper}>
             <Link
@@ -54,3 +58,8 @@ export class QuestionsPage extends Component {
     )
   }
 }
+
+
+QuestionsPage = connect(mapStateToProps)(QuestionsPage)
+
+export { QuestionsPage }

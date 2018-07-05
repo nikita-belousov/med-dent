@@ -4,6 +4,10 @@
   margin: auto;
   height: 100%;
   padding: 0 40px;
+
+  :global(.small) & {
+    padding: 0 15px;
+  }
 }
 
 .responsive {
@@ -11,5 +15,5 @@
 
   width: auto;
   max-width: 1240px;
-  min-width: 640px;
+  min-width: 320px;
 }

@@ -14,7 +14,8 @@ export const ArticlePreview = ({
   createdAt,
   text,
   truncate,
-  slug
+  slug,
+  mediaQueries
 }) => {
   const thumb = thumbnail
     ? require('../../../assets/images/' + thumbnail)
@@ -48,6 +49,4 @@ export const ArticlePreview = ({
   )
 }
 
-ArticlePreview.defaultProps = {
-  truncate: 250
-}
+ArticlePreview.defaultProps = { truncate: 250 }

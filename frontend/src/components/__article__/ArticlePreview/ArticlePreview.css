@@ -2,12 +2,16 @@
   display: flex;
 
   .side {
-    width: 100px;
+    min-width: 100px;
+    margin-right: 2rem;
+
+    :global(.small) & {
+      display: none;
+    }
   }
 
   .content {
-    margin-left: 20px;
-    width: 580px;
+    max-width: 580px;
   }
 }
 

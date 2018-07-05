@@ -22,7 +22,9 @@ let PaginationItems = ({ mediaQueries, docs, itemComponent, path, gridView }) =>
           key={doc._id}
           className={style.item}
         >
-          {React.createElement(itemComponent, { ...doc, path })}
+          <div className={style.itemInner}>
+            {React.createElement(itemComponent, { ...doc, path })}
+          </div>
         </div>
       )}
     </div>

@@ -2,11 +2,16 @@
 
 
 .wrapper {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .nameInput {
   width: small-input-width;
+
+  :global(.xsmall) & {
+    width: 100%;
+  }
 }
 
 .ratingInput {

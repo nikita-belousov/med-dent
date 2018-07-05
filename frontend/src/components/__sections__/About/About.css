@@ -6,10 +6,6 @@
   padding-top: 80px;
 }
 
-.medium {
-  composes: wrapper;
-}
-
 .background {
   background: light-grey-gradient;
 }
@@ -23,6 +19,7 @@
 .text {
   lost-column: 1/2;
   display: flex;
+  padding-top: 40px;
   height: 100%;
   flex-direction: column;
   align-items: center;
@@ -34,12 +31,16 @@
 
 .heading {
   text-align: center;
+
+  .small & {
+    padding-bottom: 10px;
+  }
 }
 
 .textWrapper {
   flex-shrink: 2;
   height: 100%;
-  width: 400px;
+  max-width: 400px;
   position: relative;
 
   &::before {
@@ -78,10 +79,12 @@
     width: 10px;
     background-color: transparent;
   }
+
   &::-webkit-scrollbar-track {
   	border-radius: 10px;
     background-color: transparent;
   }
+
   &::-webkit-scrollbar-thumb {
   	border-radius: 10px;
   	background-color: color(white a(40%));

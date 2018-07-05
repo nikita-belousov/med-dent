@@ -1,5 +1,7 @@
 import React, { Fragment }  from 'react'
+import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
+
 import { ITEMS_ON_PAGE } from '../../../constants'
 import { Breadcrumbs } from '../../__containers__'
 import { ArticlePage, NarrowPage } from '../../__pages__'
@@ -7,7 +9,10 @@ import { Pagination } from '../../__pagination__'
 import { ArticlePreview } from '../../__article__'
 
 
-export const ArticlesRoutes = ({ path, title, fetchPage, fetchArticle, category }) =>
+const mapStateToProps = state => ({ mediaQueries: state.common.mediaQueries })
+
+
+let ArticlesRoutes = ({ mediaQueries, path, title, fetchPage, fetchArticle, category }) =>
   <Fragment>
     <Route
       exact
@@ -30,7 +35,7 @@ export const ArticlesRoutes = ({ path, title, fetchPage, fetchArticle, category 
       exact
       path={`/${path}/pages/:num`}
       render={({ match }) =>
-        <NarrowPage squeeze={true} heading={title}>
+        <NarrowPage squeeze={!mediaQueries.medium} heading={title}>
           <Pagination
             fetchData={fetchPage}
             path={path}
@@ -42,3 +47,8 @@ export const ArticlesRoutes = ({ path, title, fetchPage, fetchArticle, category 
         </NarrowPage>}
     />
   </Fragment>
+
+
+ArticlesRoutes = connect(mapStateToProps)(ArticlesRoutes)
+
+export { ArticlesRoutes }

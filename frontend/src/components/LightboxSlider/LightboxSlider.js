@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import style from './LightboxSlider.css'
 import { Slider } from '../Slider'
 
-require('!style-loader!css-loader?modules=false!formstone/dist/css/themes/light/lightbox.css')
-require('!style-loader!css-loader?modules=false!formstone/dist/css/lightbox.css')
+// require('!style-loader!css-loader?modules=false!formstone/dist/css/themes/light/lightbox.css')
+// require('!style-loader!css-loader?modules=false!formstone/dist/css/lightbox.css')
 require('formstone/dist/js/lightbox.js')
 
 
@@ -38,12 +38,12 @@ export class LightboxSlider extends Component {
   }
 
   initLightbox() {
-    $('a.lightboxGallery').lightbox({
-      customClass: style.lightbox,
-      // thumbnails: true,
-      // infinite: true,
-      fixed: true
-    })
+    // $('a.lightboxGallery').lightbox({
+    //   customClass: style.lightbox,
+    //   // thumbnails: true,
+    //   // infinite: true,
+    //   fixed: true
+    // })
   }
 
   render() {

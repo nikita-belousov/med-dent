@@ -1,11 +1,26 @@
 .columns {
-  display: flex;
+  lost-center: 100%;
 
   .side {
-    width: 360px;
+    lost-column: 4/12;
+
+    .medium & {
+      display: none;
+    }
   }
 
   .main {
-    width: 100%;
+    lost-column: 8/12;
+
+    .medium & {
+      lost-column: 1;
+    }
+  }
+
+  .tableWrapper {
+    .medium & {
+      max-width: 788px;
+      margin: auto;
+    }
   }
 }

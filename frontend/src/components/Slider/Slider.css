@@ -13,9 +13,6 @@ $controlSize: 40px;
 }
 
 .wrapper {
-  width: 100%;
-  overflow: hidden;
-  padding: 25px 0;
 
   &.ready {
     opacity: 1 !important;
@@ -26,10 +23,18 @@ $controlSize: 40px;
   }
 }
 
+.scene {
+  overflow: hidden;
+  padding-top: 25px;
+  margin-top: -25px;
+  padding-bottom: 25px;
+  margin-bottom: -25px;
+}
+
 .slides {
+  position: relative;
   width: 9999%;
   display: flex;
-  position: relative;
 }
 
 .slide {
@@ -43,6 +48,10 @@ $controlSize: 40px;
   composes: slide;
   transform: translateY($fadeInOffset);
   opacity: 0;
+}
+
+.sceneSlide {
+  opacity: 1;
 }
 
 .targetGroup {
@@ -73,17 +82,15 @@ $controlSize: 40px;
 }
 
 .previous, .next {
-  border: 0;
-  outline: 0;
-  background: 0;
   position: absolute;
   top: 50%;
-  cursor: pointer;
-  display: block;
   width: 50px;
   height: 50px;
   margin-top: -25px;
-  padding: 0;
+  border: 0;
+  outline: 0;
+  background: 0;
+  cursor: pointer;
 
   &:hover .arrow {
     color: primary;
@@ -110,6 +117,39 @@ $controlSize: 40px;
   }
 }
 
+.previous {
+  transform: rotate(180deg);
+
+  .controlsInside & {
+    left: calc(((100vw - 100%) / 2 + $controlSize) * -1);
+
+    .previousArrow > span {
+      position: relative;
+      left: -3px;
+    }
+  }
+
+  .ready.controlsInside & {
+    left: calc(((100vw - 100%) / 2) * -1);
+  }
+}
+
+.next {
+
+  .controlsInside & {
+    right: calc(((100vw - 100%) / 2 + $controlSize) * -1);
+
+    .nextArrow > span {
+      position: relative;
+      left: -3px;
+    }
+  }
+
+  .ready.controlsInside & {
+    right: calc(((100vw - 100%) / 2) * -1);
+  }
+}
+
 .arrow {
   display: block;
   position: absolute;
@@ -133,48 +173,4 @@ $controlSize: 40px;
 
 .controlsInside .previous:hover, .next:hover {
   background: rgba(255,255,255,.45);
-}
-
-.previous {
-  left: -65px;
-  transform: rotate(180deg);
-
-  .controlsInside & {
-    left: -$controlSize;
-
-    .previousArrow > span {
-      position: relative;
-      left: 3px;
-    }
-  }
-
-  .ready.controlsInside & {
-    left: 0;
-  }
-}
-
-.next {
-  right: -65px;
-
-  .controlsInside & {
-    right: -$controlSize;
-
-    .nextArrow > span {
-      position: relative;
-      left: 3px;
-    }
-  }
-
-  .ready.controlsInside & {
-    right: 0;
-  }
-}
-
-.caption {
-  position: absolute;
-  width: 100%;
-  margin-top: -15px;
-  text-align: center;
-  font-style: italic;
-  color: grey;
 }

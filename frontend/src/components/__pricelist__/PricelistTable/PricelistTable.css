@@ -5,15 +5,20 @@
 .filter {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
-  .bySocial {
-    position: relative;
-    top: 8px;
+  :global(.small) & {
+    display: block;
   }
 
   .byTitle {
-    width: 300px;
+    width: 50%;
+    max-width: 300px;
     position: relative;
+
+    :global(.small) & {
+      width: 100%;
+    }
 
     .placeholder {
       position: absolute;
@@ -21,17 +26,49 @@
       left: 19px;
     }
   }
+
+  .bySocial {
+
+    :global(.small) & {
+      margin-top: 15px;
+    }
+  }
 }
 
 .prices {
   width: 100%;
   margin: auto;
+  padding: 40px;
   border-radius: border-radius-small;
   color: #fff;
   background: #4fadbf;
 
+  :global(.small) & {
+    padding: 20px;
+  }
+
   .inner {
-    padding: 26px 40px;
+    margin-top: 26px;
+    margin-right: -25px;
+    padding-right: 15px;
+
+    :global(.small) & {
+    margin-right: 0;
+    padding-right: 0;
+    }
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: color(white a(40%));
+    }
   }
 }
 
@@ -39,29 +76,24 @@
   composes: prices;
   height: 800px;
 
+  .medium & {
+    height: auto;
+  }
+
   .inner {
     overflow-y: scroll;
     height: calc(100% - 100px); /* вычитаем высоту .top-bar'а */
     padding-bottom: 80px;
-  }
 
-  .topBar {
-    padding: 26px 40px;
+    .medium & {
+      overflow-y: visible;
+    }
   }
-}
-
-.sectionHeading {
-  font-size: 26pt;
-  font-weight: 600;
-  text-align: center;
 }
 
 .categoryTitle {
-  font-size: 26pt;
   text-align: center;
-  font-weight: bold;
   padding-top: 40px;
-  padding-bottom: 20px;
 }
 
 .category:first-child .categoryTitle {
@@ -79,6 +111,10 @@
 
   .title {
     max-width: 500px;
+  }
+
+  .price {
+    min-width: auto;
   }
 
   .line {

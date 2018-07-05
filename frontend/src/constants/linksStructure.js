@@ -16,7 +16,7 @@ export default {
     parent: HOME
   },
   [DENTISTS]: {
-    title: 'Врачи',
+    title: 'Наши врачи',
     pageTitle: 'Наши врачи',
     path: '/staff',
     parent: HOME

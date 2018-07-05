@@ -1,11 +1,10 @@
 @value primary, primary-gradient from '../../styles/libs/colors.css';
 @value overlay-level-4 from '../../styles/libs/effects.css';
 @value loader-size: 140px;
-@value animation-speed: 2s;
 
 
 .wrapper {
-  z-index: overlay-level-4;
+  /* z-index: overlay-level-4; */
   top: 0;
   height: 100%;
   width: 100%;
@@ -29,54 +28,18 @@
 
 .logo {
   z-index: -1;
-  margin-top: loader-size * (3 / 35);
-}
-
-.circle {
-  border-radius: 50%;
-  background: color(#2ac4ff a(20%));
-
-  animation-name: circleAnimation;
-  animation-duration: animation-speed;
-  animation-iteration-count: infinite;
-  animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-
-  &:nth-child(2) {
-    animation-delay: animation-speed / 2;
-  }
-
-  &:nth-child(3) {
-    animation-delay: animation-speed * 2;
-  }
+  /* margin-top: loader-size * (3 / 35); */
 }
 
 .completionWrapper {
   margin-top: 10px;
-  width: loader-size;
+  /* width: loader-size; */
 }
 
 .completion {
   width: 0;
   height: 7px;
-  background: primary;
+  /* background: primary; */
   border-radius: 100px;
   transition: width .2s ease-out;
-}
-
-
-@keyframes circleAnimation {
-  0% {
-    width: 0;
-    height: 0;
-  }
-
-  50% {
-    width: loader-size * (5 / 4);
-    height: loader-size * (5 / 4);
-  }
-
-  100% {
-    width: 0;
-    height: 0;
-  }
 }

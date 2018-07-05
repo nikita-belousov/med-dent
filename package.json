@@ -25,6 +25,7 @@
     "express-jwt": "^3.3.0",
     "express-remove-route": "^1.0.0",
     "express-session": "1.13.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "htmlparser2": "^3.9.2",
     "jsonwebtoken": "^7.1.9",
     "lodash": "^4.17.5",

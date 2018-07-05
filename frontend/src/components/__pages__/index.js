@@ -8,6 +8,7 @@ export { ContactsPage } from './ContactsPage'
 export { QuestionsPage } from './QuestionsPage'
 export { ReviewsPage } from './ReviewsPage'
 export { CategoryPage } from './CategoryPage'
+export { DentistPage } from './DentistPage'
 
 export {
   ChildStomatology,

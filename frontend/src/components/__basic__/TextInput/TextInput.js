@@ -58,13 +58,7 @@ export class TextInput extends Component {
     if (this.state.error)
       className += ' ' + style.withError
 
-    return (
-      React.createElement(elem, {
-        type,
-        className,
-        ...restProps
-      })
-    )
+    return React.createElement(elem, { type, className, ...restProps })
   }
 
   render() {

@@ -38,16 +38,13 @@ let CategoryPage = class extends Component {
   }
 
   renderDentist({ imageFolder, _id, name, positions }) {
-    let fullSrca
+    let fullSrc
     if (imageFolder) {
       fullSrc = require(`../../../assets/images/staff/${imageFolder}/full.png`)
     }
 
     return (
-      <div
-        key={_id}
-        className={style.doctor}
-      >
+      <div key={_id} className={style.doctor}>
         <div
           className={style.photo}
           style={{ backgroundImage: `url(${fullSrc})` }}
@@ -79,7 +76,7 @@ let CategoryPage = class extends Component {
 
     return (
       <Breadcrumbs parentLink={SERVICES}>
-        <NarrowPage squeeze={true} heading={title}>
+        <NarrowPage squeeze={!mediaQueries.medium} heading={title}>
           <div className={mediaQueries.small && style.small}>
             <div className={style.content}>
               {renderContent()}

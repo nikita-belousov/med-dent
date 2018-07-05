@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
 import merge from 'lodash/merge'
 import lowerCase from 'lodash/lowerCase'
 import utils from 'utils'
@@ -10,7 +11,10 @@ import style from './PricelistContainer.css'
 import { PricelistSidebar, PricelistTable } from '../index'
 
 
-const mapStateToProps = state => ({ ...state.pricelist })
+const mapStateToProps = state => ({
+  mediaQueries: state.common.mediaQueries,
+  ...state.pricelist
+})
 
 
 let PricelistContainer = class extends Component {
@@ -36,32 +40,30 @@ let PricelistContainer = class extends Component {
     this.props.dispatch(fetchServices())
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps, prevState) {
     const { services } = this.props
-    const nextServices = nextProps.services
+    const { scrollable, categories } = this.state
 
-    if (!services || services.length === 0) {
-      if (!nextServices || nextServices.length === 0) {
-        return null
-      }
+    if (services &&
+        this.isInitialRender &&
+        scrollable &&
+        categories.length === services.length) {
+      this.initScrolling()
+    }
 
-      this.data = this.prettify(nextServices)
-
+    if ((!prevProps.services || prevProps.services.length === 0) &&
+        (this.props.services && this.props.services.length > 0)) {
       this.setState(prev => ({
         ...prev,
-        navbarActive: this.data[0].id
+        navbarActive: services[0].id
       }))
     }
   }
 
-  componentDidUpdate(nextProps, nextState) {
-    const { scrollable, categories } = this.state
-
-    if (this.data &&
-        this.isInitialRender &&
-        scrollable &&
-        categories.length === this.data.length) {
-      this.initScrolling()
+  componentWillUnmount() {
+    const { scrollable } = this.state
+    if (scrollable) {
+      scrollable.removeEventListener('scroll', this.onPriceScroll)
     }
   }
 
@@ -93,34 +95,6 @@ let PricelistContainer = class extends Component {
         this.setNavbarActive(current.id + 1)
       }
     })
-  }
-
-  componentWillUnmount() {
-    const { scrollable } = this.state
-    if (scrollable) {
-      scrollable.removeEventListener('scroll', this.onPriceScroll)
-    }
-
-    this.props.onUnload()
-  }
-
-  prettify(data) {
-    return data
-      .reduce((res, serv) => {
-        if (serv.category) {
-          const { title, order } = serv.category
-          const exists = res.find(e => e.title === title)
-
-          if (exists) {
-            exists.services.push(serv)
-          } else {
-            res.push({ id: order, title, services: [serv] })
-          }
-        }
-
-        return res
-      }, [])
-      .sort((a, b) => a.id > b.id)
   }
 
   setCategoriesTops() {
@@ -173,7 +147,6 @@ let PricelistContainer = class extends Component {
 
   handleNavbarLinkClick = (e, id) => {
     e.preventDefault()
-
     this.setCategoriesTops()
     this.setNavbarActive(id)
     this.scrollTo(id)
@@ -215,8 +188,7 @@ let PricelistContainer = class extends Component {
       res.concat({
         ...category,
         services: applyChain(category.services, filterChain)
-      })
-    , [])
+      }), [])
   }
 
   initCategory = (id, node) => {
@@ -244,22 +216,21 @@ let PricelistContainer = class extends Component {
   }
 
   render() {
-    let { services } = this.props
+    const { services, sidebarLinks, mediaQueries } = this.props
+    const { navbarActive, filter } = this.state
     const { title, social } = this.state.filter
 
-    if (!services || services.length === 0) {
+    if (!mediaQueries || (!services || services.length === 0)) {
       return null
     }
 
-    const { navbarActive, filter } = this.state
-
-    const sidebarLinks = this.data
-      .reduce((res, { title, id }) => [ ...res, { title, id } ], [])
-
-    const data = this.applyFilters(this.data)
+    const wrapperClass = classNames({
+      [style.wrapper]: true,
+      [style.medium]: mediaQueries.medium
+    })
 
     return (
-      <div>
+      <div className={wrapperClass}>
         <div className={style.columns}>
           <div className={style.side}>
             <PricelistSidebar
@@ -269,14 +240,17 @@ let PricelistContainer = class extends Component {
             />
           </div>
           <div className={style.main}>
-            <PricelistTable
-              interactive
-              data={data}
-              onScrollableRef={this.initScrollable}
-              onCategoryRef={this.initCategory}
-              onFilterChange={this.handleFilterChange}
-              filterData={filter}
-            />
+            <div className={style.tableWrapper}>
+              <PricelistTable
+                interactive
+                medium={mediaQueries.medium}
+                data={this.applyFilters(services)}
+                onScrollableRef={this.initScrollable}
+                onCategoryRef={this.initCategory}
+                onFilterChange={this.handleFilterChange}
+                filterData={filter}
+              />
+            </div>
           </div>
         </div>
       </div>

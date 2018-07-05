@@ -31,7 +31,7 @@
 
 .inner {
   lost-center: 100%;
-  padding: 80px 0;
+  padding: 60px 0 80px;
   height: 100%;
   position: relative;
   z-index: 3;
@@ -39,11 +39,13 @@
 
 .mobile {
   composes: inner;
+  padding: 45px 0;
 }
 
 .heading {
   color: #fff;
   margin-top: 0;
+  text-align: center;
 }
 
 .countPrice {
@@ -70,12 +72,15 @@
 }
 
 .countFormInner {
-  padding: 35px 25px;
-  padding-top: 20px;
+  padding: 20px 25px 35px;
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
+
+  .mobile & {
+    padding-bottom: 20px;
+  }
 }
 
 .inputGroup {
@@ -92,6 +97,10 @@
   display: flex;
   justify-content: center;
   position: relative;
+
+  .mobile & {
+    margin-top: 20px;
+  }
 }
 
 .popupWrapper {

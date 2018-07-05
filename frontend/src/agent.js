@@ -6,7 +6,7 @@ import { questions, questionsAll, questionsPage } from './constants/urls'
 import { reviews, reviewsAll, reviewsPage } from './constants/urls'
 import { newsArticle, newsPage } from './constants/urls'
 import { specialsPreviews, specialsPage, specialArticle } from './constants/urls'
-import { dentistsPage, dentistsOptions, dentistById } from './constants/urls'
+import { dentistsPage, dentistsOptions, dentistBySlug } from './constants/urls'
 import { serviceCategories } from './constants/urls'
 import { servicesAll, servicesByCategory } from './constants/urls'
 import { appointmentRegister } from './constants/urls'
@@ -72,8 +72,8 @@ export const dentistsApi = {
     const url = dentistsOptions()
     return { api: () => requests.get(url), url }
   },
-  byId: id => {
-    const url = dentistById(id)
+  bySlug: slug => {
+    const url = dentistBySlug(slug)
     return { api: () => requests.get(url), url }
   }
 }

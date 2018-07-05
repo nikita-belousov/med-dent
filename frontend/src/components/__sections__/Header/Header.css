@@ -9,6 +9,10 @@
 
 .headerBarWrapper {
   padding-top: 60px;
+
+  :global(.small) & {
+    padding-top: 40px;
+  }
 }
 
 .headerBar {
@@ -57,14 +61,17 @@
 }
 
 .logo {
-  padding-left: 20px;
   position: relative;
   flex-shrink: 0;
+  margin-left: 20px;
+
+  :global(.medium) & {
+    margin-left: 0;
+  }
 
   .headerBarAttached & {
     top: 14px;
     width: 50px;
-    padding-left: 0;
   }
 
   a {
@@ -191,6 +198,10 @@
   margin-top: 2px;
   left: 32px;
 
+  .small & {
+    font-size: 20pt;
+  }
+
   &:hover {
     color: primary;
   }
@@ -207,7 +218,12 @@
 
   color: #fff;
   position: absolute;
+  margin-top: 5px;
   margin-left: 3px;
+
+  .small & {
+    font-size: 24pt;
+  }
 
   &:hover {
     color: #fff;
@@ -251,11 +267,12 @@
 
 .mobileLogo {
   position: relative;
-  top: 3px;
-  left: 9px;
+  top: 6px;
 }
 
 .mobileSocialsWrapper {
+  display: flex;
+  justify-content: center;
   margin-top: 60px;
 }
 

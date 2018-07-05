@@ -8,7 +8,7 @@ export class PricelistSidebar extends Component {
     const { links, active, onLinkClick, } = this.props
 
     return (
-      <div className={style.navBar}>
+      <div className={style.navbar}>
         <ul>
           {links.map(({ title, id }) => {
             const isActive = active === id
@@ -25,7 +25,7 @@ export class PricelistSidebar extends Component {
                 <a href="#" onClick={e => onLinkClick(e, id)}>
                   {capitalize(title)}
                 </a>
-                <div className={style.arrowTable} />
+                <div className={style.arrowTale} />
               </li>
             )
           })}

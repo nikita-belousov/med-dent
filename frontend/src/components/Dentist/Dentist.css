@@ -16,11 +16,11 @@ $photoSize: 160px;
 
   &:hover .photo {
     transform: scale(1.05);
-    box-shadow: shadow-primary;
   }
 }
 
 .photo {
+  box-shadow: shadow-primary;
   position: relative;
   z-index: 10;
   width: $photoSize;
@@ -46,7 +46,7 @@ $photoSize: 160px;
   color: #fff;
   border-radius: 10px;
   text-align: center;
-  height: $photoSize + 15px;
+  min-height: $photoSize + 15px;
 }
 
 .name {

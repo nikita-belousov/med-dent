@@ -1,5 +1,5 @@
 .form {
-  
+
   .inputGroup {
     padding-bottom: 52px;
 
@@ -15,15 +15,25 @@
     &:last-child {
       margin-bottom: 0;
     }
+
+    :global(.small) & {
+      flex-direction: column;
+    }
   }
 
   .label {
-    padding-right: 20px;
+    padding-right: 2rem;
     text-align: right;
     width: 160px;
     font-size: 11pt;
     line-height: 1.4;
     position: relative;
+
+    :global(.small) & {
+      text-align: left;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
 
     .labelCaption {
       font-style: italic;
@@ -37,6 +47,10 @@
 
   .tinyWrapper {
     width: 230px;
+
+    :global(.xsmall) & {
+      width: 100%;
+    }
   }
 }
 

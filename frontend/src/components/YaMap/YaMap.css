@@ -2,11 +2,10 @@ $mapHeight: 680px;
 
 
 .wrapper {
-  /* width: 100vw; */
-  position: relative;
-  /* left: calc((100vw - 100%) / -2); */
   position: relative;
   height: $mapHeight;
+  width: 100vw;
+  left: calc((100vw - 100%) / -2);
 }
 
 .map {

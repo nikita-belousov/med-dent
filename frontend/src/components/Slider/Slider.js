@@ -15,13 +15,15 @@ export class Slider extends Component {
     slidesToShow: PropTypes.number,
     autoplay: PropTypes.bool,
     controlsInside: PropTypes.bool,
-    caption: PropTypes.string
+    caption: PropTypes.string,
+    spaceAround: PropTypes.bool
   }
 
   static defaultProps = {
     slidesToShow: 1,
     autoplay: true,
-    controlsInside: false
+    controlsInside: false,
+    spaceAround: false
   }
 
   OPERATIONS = ['previous', 'next']
@@ -128,14 +130,21 @@ export class Slider extends Component {
   }
 
   recalculateMargins = () => {
-    const { slidesToShow } = this.props
-    const parentWidth = this.sliderNode.parentElement.offsetWidth
+    const { slidesToShow, spaceAround } = this.props
+    const containerWidth = this.sliderNode.parentElement.offsetWidth
 
     this.slideWidth = this.slideNode.offsetWidth
-    this.slideMargin = (parentWidth - this.slideWidth * slidesToShow) / (slidesToShow - 1)
+    let offset
 
-    const offset = -1 * ((this.slideWidth * this.originalSlidesCount)
-      + (this.slideMargin * this.originalSlidesCount))
+    if (!spaceAround && slidesToShow > 1) {
+      this.slideMargin = (containerWidth - this.slideWidth * slidesToShow) / (slidesToShow - 1)
+      offset = -1 * ((this.slideWidth * this.originalSlidesCount)
+        + (this.slideMargin * this.originalSlidesCount))
+    } else if (spaceAround || slidesToShow === 1) {
+      this.slideMargin = (containerWidth - this.slideWidth * slidesToShow) / (slidesToShow * 2)
+      offset = -1 * ((this.slideWidth * this.originalSlidesCount)
+        + (this.slideMargin * this.originalSlidesCount * 2))
+    }
 
     this._step = this.slideWidth + this.slideMargin
 
@@ -319,12 +328,8 @@ export class Slider extends Component {
     this.nextNode = node
   }
 
-  logState() {
-    console.log(JSON.stringify(this.state, null, 2))
-  }
-
   render() {
-    const { children, arrowsInside, caption } = this.props
+    const { children, arrowsInside, caption, spaceAround } = this.props
     let fadeInSlides
 
     if (!children || children.length === 0) {
@@ -355,74 +360,93 @@ export class Slider extends Component {
           className={wrapperClass}
           ref={node => this.sliderNode = node}
         >
-          <div
-            className={style.slides}
-            style={{ left: `${offset}px` }}
-          >
-            {this.slides.map(({ slide, key }, i) => {
-              let element, groupedSlides
+          <div className={style.scene}>
+            <div
+              className={style.slides}
+              style={{ left: `${offset}px` }}
+            >
+              {this.slides.map(({ slide, key }, i) => {
+                let element, groupedSlides
 
-              if (groupedSlides && groupedSlides.includes(i)) {
-                return null
-              }
+                if (groupedSlides && groupedSlides.includes(i)) {
+                  return null
+                }
 
-              if (fadeInSlides && (fadeInSlides.includes(i))) {
-                const animationDelay =
-                  (i - this.originalSlidesCount + 1) * this.FADE_IN_DELAY
+                if (fadeInSlides && (fadeInSlides.includes(i))) {
+                  const animationDelay =
+                    (i - this.originalSlidesCount + 1) * this.FADE_IN_DELAY
 
-                return (
-                  <CSSTransition
-                    key={i}
-                    in={true}
-                    timeout={animationDelay}
-                    appear={true}
-                    classNames={{
-                      appear: style.slideFadeIn,
-                      enterDone: style.slide
-                    }}
-                  >
-                    <Slide key={key} margin={margin}>
-                      {slide}
-                    </Slide>
-                  </CSSTransition>
-                )
-              } else if (animation && !isGroupReady) {
-                const { type, quantity } = animation
-                let groupContent = []
+                  return (
+                    <CSSTransition
+                      key={i}
+                      in={true}
+                      timeout={animationDelay}
+                      appear={true}
+                      classNames={{
+                        appear: style.slideFadeIn,
+                        enterDone: style.slide
+                      }}
+                    >
+                      <Slide
+                        key={key}
+                        margin={margin}
+                        spaceAround={spaceAround}
+                      >
+                        {slide}
+                      </Slide>
+                    </CSSTransition>
+                  )
+                } else if (animation && !isGroupReady) {
+                  const { type, quantity } = animation
+                  let groupContent = []
 
-                groupedSlides = times(quantity)
+                  groupedSlides = times(quantity)
 
-                for (let i = 0; i < quantity; i++) {
-                  groupContent.push(
-                    <Slide key={key}  margin={margin}>
-                      {this.slides[i].slide}
-                    </Slide>
+                  for (let i = 0; i < quantity; i++) {
+                    groupContent.push(
+                      <Slide
+                        key={key}
+                        margin={margin}
+                        spaceAround={spaceAround}
+                      >
+                        {this.slides[i].slide}
+                      </Slide>
+                    )
+                  }
+
+                  isGroupReady = true
+                  const groupSize = groupedSlides.length
+
+                  let groupWidth
+                  if (spaceAround) {
+                    groupWidth = groupSize * (this.slideWidth + this.slideMargin * 2)
+                  } else {
+                    groupWidth = groupSize * (this.slideWidth + this.slideMargin)
+                  }
+
+                  return (
+                    <TargetGroup
+                      key={i}
+                      remove={type === 'remove'}
+                      add={type === 'add'}
+                      width={groupWidth}
+                    >
+                      {groupContent}
+                    </TargetGroup>
                   )
                 }
 
-                isGroupReady = true
-                const groupSize = groupedSlides.length
-
-                const groupWidth = groupSize * (this.slideWidth + this.slideMargin)
-
                 return (
-                  <TargetGroup
-                    key={i}
-                    remove={type === 'remove'}
-                    add={type === 'add'}
-                    width={groupWidth}
+                  <Slide
+                    key={key}
+                    margin={margin}
+                    spaceAround={spaceAround}
                   >
-                    {groupContent}
-                  </TargetGroup>
+                    {slide}
+                  </Slide>
                 )
-              }
-
-              return (
-                <Slide key={key} margin={margin}>
-                  {slide}
-                </Slide>
-              )
-            })}
+              })}
+            </div>
           </div>
 
           <Controls
@@ -462,9 +486,13 @@ class TargetGroup extends Component {
   }
 }
 
-const Slide = ({ children, margin }) => {
+const Slide = ({ children, spaceAround, margin }) => {
+  const style = spaceAround
+    ? { marginLeft: margin, marginRight: margin }
+    : { marginRight: margin }
+
   return (
-    <div style={{ marginRight: `${margin}px`, }}>
+    <div style={style}>
       {children}
     </div>
   )
@@ -481,11 +509,14 @@ const Controls = ({ inside, onNextRef, onPreviousRef }) => {
     [style.inside]: inside
   })
 
+  const scrollbarOffset = (window.innerWidth - document.documentElement.clientWidth) / 2
+
   return (
     <Fragment>
       <button
         className={previousClass}
         ref={onPreviousRef}
+        style={{ marginLeft: `${scrollbarOffset}px` }}
       >
         <span className={style.previousArrow}>
           <FontAwesome name="arrow-right" />
@@ -494,6 +525,7 @@ const Controls = ({ inside, onNextRef, onPreviousRef }) => {
       <button
         className={nextClass}
         ref={onNextRef}
+        style={{ marginRight: `${scrollbarOffset}px` }}
       >
         <span className={style.nextArrow}>
           <FontAwesome name="arrow-right" />

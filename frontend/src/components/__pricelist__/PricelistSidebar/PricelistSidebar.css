@@ -3,6 +3,7 @@
 
 
 .navbar {
+  max-width: 300px;
   background: linear-gradient(to bottom, #fbdf8d, #f8c25a);
   padding: 26px;
   border-radius: border-radius-small;
@@ -23,7 +24,6 @@
 }
 
 .navbarLink {
-
   a {
     position: relative;
     display: block;
@@ -47,7 +47,7 @@
     border-bottom-left-radius: border-radius-small;
   }
 
-  .arrow-tale {
+  .arrowTale {
     position: absolute;
     top: 0;
     bottom: 0;

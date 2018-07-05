@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import FontAwesome from 'react-fontawesome'
 
+import { countCost } from '../../../actions'
 import style from './CountReview.css'
-import { countCost as api } from '../../../agent'
 import { AppearOnScrollReach } from '../../AppearOnScrollReach'
 import { Form } from '../../__containers__'
 import { Container, TextInput, Button } from '../../__basic__'
@@ -14,6 +14,8 @@ import { ChangingReviews }  from '../../ChangingReviews'
 
 
 const mapStateToProps = state => ({ mediaQueries: state.common.mediaQueries })
+
+const mapDispatchToProps = { countCost }
 
 
 let CountReview = class extends Component {
@@ -50,7 +52,10 @@ let CountReview = class extends Component {
   }
 
   onCallbackSubmit = data => {
-    CountCost({ ...data, problem: this.problemValue })
+    this.props.countCost({
+      ...data,
+      problem: this.problemValue
+    })
   }
 
   renderPopupForm() {
@@ -89,7 +94,7 @@ let CountReview = class extends Component {
           <div className={innerClass}>
             <div className={style.countPrice}>
               <h3 className={style.heading}>
-                Узнать стоимость лечения
+                Рассчитайте стоимость лечения
               </h3>
               <AppearOnScrollReach
                 coefficient={0.7}
@@ -144,6 +149,6 @@ let CountReview = class extends Component {
 }
 
 
-CountReview = connect(mapStateToProps)(CountReview)
+CountReview = connect(mapStateToProps, mapDispatchToProps)(CountReview)
 
 export { CountReview }

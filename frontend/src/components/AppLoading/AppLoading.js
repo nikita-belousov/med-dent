@@ -9,16 +9,18 @@ const mapStateToProps = ({ common }) => ({ completion: common.loadingCompletion 
 
 
 let AppLoading = ({ completion }) =>
-  <div className={style.wrapper}>
-    <div className={style.loader}>
-      <div className={style.logo}>
-        <InlineSVG src={logoSign} />
-      </div>
-      <div className={style.completionWrapper}>
-        <div
-          className={style.completion}
-          style={{ width: `${completion * 100}%` }}
-        />
+  <div>
+    <div className={style.wrapper}>
+      <div className={style.loader}>
+        <div className={style.logo}>
+          <InlineSVG src={logoSign} />
+        </div>
+        <div className={style.completionWrapper}>
+          <div
+            className={style.completion}
+            style={{ width: completion ? `${completion * 100}%` : 0 }}
+          />
+        </div>
       </div>
     </div>
   </div>

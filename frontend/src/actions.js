@@ -50,7 +50,8 @@ export const initHeaderData = data => ({
 export const APPOINTMENT_LOAD = 'APPOINTMENT_LOAD'
 export const APPOINTMENT_OPEN = 'APPOINTMENT_OPEN'
 export const APPOINTMENT_CLOSE = 'APPOINTMENT_CLOSE'
-export const APPOINTMENT_SUBMIT = 'SUBMIT_APPOINTMENT'
+export const APPOINTMENT_SUBMIT = 'APPOINTMENT_SUBMIT'
+export const SET_DEFAULT_DENTIST = 'SET_DEFAULT_DENTIST'
 
 export const appointmentLoad = () => ({
   type: APPOINTMENT_LOAD
@@ -68,6 +69,14 @@ export const appointmentSubmit = data => ({
   type: APPOINTMENT_SUBMIT,
   payload: {
     api: () => agent.appointmentApi.submit().api(data)
+  }
+})
+
+export const setDefaultDentist = (value, name) => ({
+  type: SET_DEFAULT_DENTIST,
+  payload: {
+    value,
+    name
   }
 })
 
@@ -103,7 +112,7 @@ export const callbackSubmit = data => ({
 
 export const COUNT_COST_SUBMIT = 'COUNT_COST_SUBMIT'
 
-export const countPrice = data => ({
+export const countCost = data => ({
   type: COUNT_COST_SUBMIT,
   payload: {
     api: () => agent.countCostApi.submit().api(data)
@@ -313,7 +322,7 @@ export const questionSubmit = data => ({
 //-------------------------------------
 
 export const FETCH_DENTISTS_PAGE = 'FETCH_DENTISTS_PAGE'
-export const FETCH_DENTIST_BY_ID = 'FETCH_DENTIST_BY_ID'
+export const FETCH_DENTIST_PAGE = 'FETCH_DENTIST_PAGE'
 export const FETCH_DENTISTS_AS_OPTIONS = 'FETCH_DENTISTS_AS_OPTIONS'
 export const FETCH_DENTIST_FOR_CATEGORY = 'FETCH_DENTIST_FOR_CATEGORY'
 
@@ -329,20 +338,20 @@ export const fetchDentistsPage = pageNum => {
   }
 }
 
-export const fetchDentistById = id => {
-  const { api, url } = agent.dentistsApi.byId(id)
+export const fetchDentistPage = slug => {
+  const { api, url } = agent.dentistsApi.bySlug(slug)
   return {
-    type: FETCH_DENTIST_BY_ID,
+    type: FETCH_DENTIST_PAGE,
     payload: {
-      dataType: dataTypes.DENTISTS_ENTITY,
+      dataType: dataTypes.DENTIST_PAGE,
       api,
       url
     }
   }
 }
 
-export const fetchDentistForCategory = id => {
-  const { api, url } = agent.dentistsApi.byId(id)
+export const fetchDentistForCategory = slug => {
+  const { api, url } = agent.dentistsApi.bySlug(slug)
   return {
     type: FETCH_DENTIST_FOR_CATEGORY,
     payload: {
@@ -416,7 +425,7 @@ export const pageReloadingActions = [
   FETCH_REVIEWS_SLIDES,
   FETCH_REVIEWS_PAGE,
   FETCH_DENTISTS_PAGE,
-  FETCH_DENTIST_BY_ID,
+  FETCH_DENTIST_PAGE,
   FETCH_DENTIST_FOR_CATEGORY,
   FETCH_QUESTIONS_PAGE
 ]
