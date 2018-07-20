@@ -6,7 +6,9 @@
 }
 
 .caption {
-  text-align: center;
+  :global(.medium) & {
+    text-align: center;
+  }
 }
 
 .sliderWrapper {

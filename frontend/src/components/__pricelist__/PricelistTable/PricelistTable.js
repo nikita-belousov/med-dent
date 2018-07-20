@@ -68,6 +68,7 @@ export class PricelistTable extends Component {
           </div>
           <div className={style.bySocial}>
             <CheckboxInput
+              inverted
               name='social'
               label='Социальная скидка'
               checked={filterData.social}

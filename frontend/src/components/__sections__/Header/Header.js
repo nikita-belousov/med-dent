@@ -3,6 +3,7 @@ import { map, startWith, filter, tap } from 'rxjs/operators'
 
 import capitalize from 'lodash/capitalize'
 import React, { Component, Fragment } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
 import classNames from 'classnames'
@@ -377,5 +378,6 @@ const SocialLinks = ({ links, medium }) => {
 
 
 HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderContainer)
+HeaderContainer = withRouter(HeaderContainer)
 
 export { HeaderContainer }

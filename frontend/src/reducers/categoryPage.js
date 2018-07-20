@@ -5,15 +5,17 @@ export default (state = {}, action) => {
   switch (action.type) {
     case DATA_RECEIVED:
       const services = action.payload.data[SERVICES_BY_CATEGORY_COLLECTION]
-      const dentists = action.payload.data[DENTISTS_FOR_CATEGORY_PAGE]
+      let dentists = action.payload.data[DENTISTS_FOR_CATEGORY_PAGE]
+      dentists = dentists && [].concat(dentists)
 
-      if (dentists && services) {
+      if (services) {
         return {
           ...state,
           services: services.docs,
-          dentists: [].concat(dentists)
-                      .slice(0, 2)
-                      .reduce((res, { doc }) => [ ...res, doc ], [])
+          dentists: (dentists && dentists.length > 0) &&
+                      dentists
+                        .slice(0, 2)
+                        .reduce((res, { doc }) => [ ...res, doc ], [])
         }
       }
       return state

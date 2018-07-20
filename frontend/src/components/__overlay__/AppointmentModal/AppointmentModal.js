@@ -11,7 +11,7 @@ import style from './AppointmentModal.css'
 import { ClosesOnExternalClick }  from '../../ClosesOnExternalClick'
 import { Form } from '../../__containers__'
 import { Modal }  from '../index'
-import { Button, TextInput, SelectInput, Paragraph } from '../../__basic__'
+import { NavLink, CheckboxInput, Button, TextInput, SelectInput, Paragraph } from '../../__basic__'
 
 
 const mapStateToProps = state => ({ ...state.appointment })
@@ -170,6 +170,23 @@ let AppointmentModal  = class extends Component {
             />
           </div>
         </div>
+        <div className={style.policyCheckbox}>
+          <CheckboxInput
+            name='policy'
+            renderLabel={() =>
+              <span>
+                Согласие на
+                  {' '}
+                  <NavLink
+                    inactive
+                    target='_blank'
+                    to={require('../../../assets/docs/policy.pdf')}
+                  >
+                    обработку персональных данных
+                  </NavLink>
+              </span>}
+          />
+        </div>
         <p className={style.note}>
           * — обязательно для заполнения
         </p>
@@ -185,14 +202,20 @@ let AppointmentModal  = class extends Component {
 
     const constraints = {
       name: {
-        presence: { allowEmpty: false },
+        presence: { allowEmpty: false }
       },
       phone: {
         presence: { allowEmpty: false, },
         format: /\+7 \(9\d{2}\) \d{3} \d{2} \d{2}/
       },
       problem: {
-        presence: { allowEmpty: false },
+        presence: { allowEmpty: false }
+      },
+      policy: {
+        equality: {
+          attribute: 'name',
+          comparator: val => val
+        }
       }
     }
 

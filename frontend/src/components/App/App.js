@@ -9,7 +9,7 @@ import { LOADING_TIME } from '../../constants/config'
 import { APP_LOADED, APP_UNLOADED } from '../../constants/actionTypes'
 import agent from '../../agent'
 import style from './App.css'
-import { Layout, AppLoading } from '../index'
+import { Maintenance, Layout, AppLoading } from '../index'
 import * as routes from '../__routes__'
 import * as pages from '../__pages__'
 
@@ -39,7 +39,7 @@ let App = class extends Component {
   }
 
   render() {
-    const { isLoading, mediaQueries } = this.props
+    const { maintenance, isLoading, mediaQueries } = this.props
 
     const className = classNames({
       [style.isLoading]: isLoading,
@@ -48,12 +48,14 @@ let App = class extends Component {
 
     return (
       <div className={className}>
-        <Fragment>
-          {isLoading && <AppLoading />}
-          <Layout>
-            {this.state.pageNotFound ? <pages.NotFoundPage /> : <Routes />}
-          </Layout>
-        </Fragment>
+        {maintenance && <Maintenance />}
+        {!maintenance &&
+          <Fragment>
+            {isLoading && <AppLoading />}
+            <Layout>
+              {this.state.pageNotFound ? <pages.NotFoundPage /> : <Routes />}
+            </Layout>
+          </Fragment>}
       </div>
     )
   }
@@ -97,11 +99,11 @@ const Routes = () =>
 
     <Route
       path='/news'
-      render={routes.NewsRoutes}
+      component={routes.NewsRoutes}
     />
     <Route
       path='/specials'
-      render={routes.SpecialsRoutes}
+      component={routes.SpecialsRoutes}
     />
 
     <Route
@@ -144,6 +146,12 @@ const Routes = () =>
       exact
       path='/detskaya-stomatologiya'
       component={pages.ChildStomatology}
+    />
+
+    <Route
+      exact
+      path='/policy'
+      component={pages.Policy}
     />
 
     <Route component={pages.NotFoundPage} />

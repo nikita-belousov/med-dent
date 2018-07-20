@@ -24,7 +24,7 @@ const mapDispatchToProps = { fetchDentistForCategory, fetchServicesByCategory }
 let CategoryPage = class extends Component {
   static propTypes = {
     categoryId: PropTypes.string.isRequired,
-    dentistsIds: PropTypes.array.isRequired,
+    dentistsList: PropTypes.array,
     dentists: PropTypes.array,
     services: PropTypes.array,
     renderContent: PropTypes.func,
@@ -32,9 +32,11 @@ let CategoryPage = class extends Component {
   }
 
   componentWillMount() {
-    const { categoryId, dentistsIds, fetchDentistForCategory, fetchServicesByCategory } = this.props
+    const { categoryId, dentistsList, fetchDentistForCategory, fetchServicesByCategory } = this.props
     fetchServicesByCategory(categoryId)
-    dentistsIds.forEach(id => fetchDentistForCategory(id))
+    if (dentistsList && dentistsList.length > 0) {
+      dentistsList.forEach(slug => fetchDentistForCategory(slug))
+    }
   }
 
   renderDentist({ imageFolder, _id, name, positions }) {
@@ -64,15 +66,17 @@ let CategoryPage = class extends Component {
   render() {
     const { mediaQueries, title, services, dentists, renderContent } = this.props
 
-    if ((!dentists || dentists.length === 0) ||
-        (!services || services.length === 0)) {
+    if (!services || services.length === 0) {
       return null
     }
 
-    const dentistsClass = classNames({
-      [style.dentistsOnly]: dentists.length === 1,
-      [style.dentistsPair]: dentists.length === 2
-    })
+    let dentistsClass
+    if (dentists && dentists.length > 0) {
+      dentistsClass = classNames({
+        [style.dentistsOnly]: dentists.length === 1,
+        [style.dentistsPair]: dentists.length === 2
+      })
+    }
 
     return (
       <Breadcrumbs parentLink={SERVICES}>
@@ -82,11 +86,11 @@ let CategoryPage = class extends Component {
               {renderContent()}
             </div>
             <div className={dentistsClass}>
-              {dentists.map((dentist, i) =>
-                <div key={i} className={style.dentist}>
-                  <Dentist {...dentist} />
-                </div>
-              )}
+              {(dentists && dentists.length > 0) &&
+                dentists.map((dentist, i) =>
+                  <div key={i} className={style.dentist}>
+                    <Dentist {...dentist} />
+                  </div>)}
             </div>
             <div className={style.pricelist}>
               <PricelistTable data={[{ title, services }]} />

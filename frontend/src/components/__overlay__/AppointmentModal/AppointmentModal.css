@@ -67,3 +67,10 @@
 .successText > * {
     margin: 0;
 }
+
+.policyCheckbox {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}

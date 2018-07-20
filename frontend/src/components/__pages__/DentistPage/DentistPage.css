@@ -1,3 +1,6 @@
+@value primary from '../../../styles/libs/colors.css';
+
+
 .columns {
   lost-center: 100%;
 }
@@ -26,12 +29,24 @@
   }
 }
 
+.experience {
+  margin-top: 1rem;
+
+  .icon {
+    position: relative;
+    top: 1px;
+    margin-right: .6rem;
+    color: primary;
+  }
+}
+
 .photo {
   height: 390px;
   background-size: auto 100%;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  top: -8rem;
 
   &::after {
     content: '';

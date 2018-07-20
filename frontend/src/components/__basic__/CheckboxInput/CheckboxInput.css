@@ -1,4 +1,4 @@
-@value alt-gradient from '../../../styles/libs/colors.css';
+@value primary, alt-gradient from '../../../styles/libs/colors.css';
 
 
 .wrapper {
@@ -7,6 +7,14 @@
 
 .label {
   cursor: pointer;
+
+  &:hover .unchecked {
+    border-color: color(#2ac4ff tint(25%));
+
+    .inverted & {
+      border-color: #fff;
+    }
+  }
 }
 
 .native {
@@ -26,12 +34,20 @@
   margin-right: 5px;
 
   &.checked {
-    background: alt-gradient;
+    background: primary;
+
+    .inverted & {
+      background: alt-gradient;
+    }
   }
 
   &.unchecked {
     background: transparent;
-    border: 2px solid #fff;
+    border: 2px solid primary;
+
+    .inverted & {
+      border-color: #fff;
+    }
   }
 
   .checkmark {
@@ -41,5 +57,6 @@
     font-size: 11px;
     line-height: 16px;
     text-align: center;
+    color: #fff;
   }
 }

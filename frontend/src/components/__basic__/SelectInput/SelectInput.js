@@ -76,8 +76,6 @@ export class SelectInput extends Component {
 
     let currentName
 
-    console.log(options)
-
     if (!options && value) {
       currentName = defaultOption.name
     } else if (value || value === null) {

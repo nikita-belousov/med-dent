@@ -60,7 +60,7 @@ export const Therapy = props => {
     <CategoryPage
       title='Терапия'
       categoryId='5aa011230c8d66733cd7524c'
-      dentistsIds={['5aa2f63091ce0038c42499cf', '5aa2f69c91ce0038c42499d2']}
+      dentistsList={['kovalev', 'hachatryan']}
       renderContent={renderContent}
       renderAside={renderAside}
     />

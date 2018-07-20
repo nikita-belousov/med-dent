@@ -4,7 +4,7 @@
 
 
 .wrapper {
-  /* z-index: overlay-level-4; */
+  z-index: overlay-level-4;
   top: 0;
   height: 100%;
   width: 100%;
@@ -28,18 +28,18 @@
 
 .logo {
   z-index: -1;
-  /* margin-top: loader-size * (3 / 35); */
+  margin-top: loader-size * (3 / 35);
 }
 
 .completionWrapper {
   margin-top: 10px;
-  /* width: loader-size; */
+  width: loader-size;
 }
 
 .completion {
   width: 0;
   height: 7px;
-  /* background: primary; */
+  background: primary;
   border-radius: 100px;
   transition: width .2s ease-out;
 }

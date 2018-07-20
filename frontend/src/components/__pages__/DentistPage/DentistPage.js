@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import FontAwesome from '@fortawesome/react-fontawesome'
 import { connect } from 'react-redux'
 import { DENTISTS } from '../../../constants/linksStructure'
 
@@ -65,6 +66,12 @@ const PageCaption = ({ positions, experience }) =>
   <Fragment>
     <div className={style.positions}>
       {positions.map((pos, i) => <PositionLabel key={i}>{pos}</PositionLabel>)}
+    </div>
+    <div className={style.experience}>
+      <span className={style.icon}>
+        <FontAwesome icon={['far', 'clock']} />
+      </span>
+      {`стаж ${experience}`}
     </div>
   </Fragment>
 

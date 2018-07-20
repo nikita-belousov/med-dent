@@ -44,7 +44,7 @@ export const Orthopedics = props => {
     <CategoryPage
       title='Ортопедия'
       categoryId='5aa011170c8d66733cd7524a'
-      dentistsIds={['5aa2f6e491ce0038c42499d4']}
+      dentistsList={['yurov', 'miroshnikov']}
       renderContent={renderContent}
       renderAside={renderAside}
     />

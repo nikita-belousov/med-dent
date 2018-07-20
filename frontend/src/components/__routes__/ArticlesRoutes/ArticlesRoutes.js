@@ -1,6 +1,6 @@
 import React, { Fragment }  from 'react'
 import { connect } from 'react-redux'
-import { Route, Redirect } from 'react-router-dom'
+import { withRouter, Route, Redirect } from 'react-router-dom'
 
 import { ITEMS_ON_PAGE } from '../../../constants'
 import { Breadcrumbs } from '../../__containers__'
@@ -28,8 +28,7 @@ let ArticlesRoutes = ({ mediaQueries, path, title, fetchPage, fetchArticle, cate
             fetchData={fetchArticle}
             slug={match.params.slug}
           />
-        </Breadcrumbs>
-      }
+        </Breadcrumbs>}
     />
     <Route
       exact
@@ -50,5 +49,6 @@ let ArticlesRoutes = ({ mediaQueries, path, title, fetchPage, fetchArticle, cate
 
 
 ArticlesRoutes = connect(mapStateToProps)(ArticlesRoutes)
+ArticlesRoutes = withRouter(ArticlesRoutes)
 
 export { ArticlesRoutes }

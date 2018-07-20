@@ -52,15 +52,6 @@ export const Hygiene = props => {
         иногда делает невозможным протезирование.
       </Paragraph>
 
-      {/* <div className={style.sliderWrapper}>
-        <LightboxSlider
-          images={sliderImages}
-          caption='Гигиена в нашей клинике'
-          slidesToShow={4}
-          autoplay={false}
-        />
-      </div> */}
-
       <Paragraph>
         Первый визит врачу-ортодонту целесообразно нанести в возрасте 5-6 лет,
         до начала смены молочных зубов на постоянные. Ведь нередко в том, что у
@@ -85,7 +76,7 @@ export const Hygiene = props => {
     <CategoryPage
       title='Гигиена'
       categoryId='5aa185942e70495974bff013'
-      dentistsIds={['5aa2f67791ce0038c42499d1']}
+      dentistsList={['shashkova']}
       renderContent={renderContent}
     />
   )

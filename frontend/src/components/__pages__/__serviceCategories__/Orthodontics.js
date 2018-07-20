@@ -52,7 +52,6 @@ export const Orthodontics = props => {
   return (
     <CategoryPage
       title='Ортодонтия'
-      dentistsIds={['5aa2f6b991ce0038c42499d3']}
       categoryId='5aa185d82e70495974bff014'
       renderContent={renderContent}
       renderAside={renderAside}

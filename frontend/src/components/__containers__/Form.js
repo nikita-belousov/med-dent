@@ -6,7 +6,7 @@ import { recursiveReactMap } from 'utils'
 import { TextInput, SelectInput, CheckboxInput, RatingInput, Button } from '../__basic__'
 
 
-const INPUT_TYPES = [TextInput, CheckboxInput, SelectInput, RatingInput]
+const INPUT_TYPES = [TextInput, SelectInput, RatingInput, CheckboxInput]
 
 export class Form extends Component {
   static propTypes = {
@@ -139,13 +139,13 @@ export class Form extends Component {
   }
 
   updateInputData = (e) => {
-    const { name, value } = e.target
+    const { name, value, type, checked } = e.target
 
     this.setState(prev => ({
       ...prev,
       inputData: {
         ...prev.inputData,
-        [name]: value
+        [name]: type === 'checkbox' ? checked : value
       }
     }), this.validate)
   }
@@ -163,6 +163,14 @@ export class Form extends Component {
 
   renderChildren() {
     return recursiveReactMap(this.props.children, child => {
+      if (child.type === CheckboxInput) {
+        const inputProps = {
+          onChange: this.updateInputData,
+          checked: this.state.inputData[child.props.name]
+        }
+        return React.cloneElement(child, inputProps)
+      }
+
       if (INPUT_TYPES.includes(child.type)) {
         const inputProps = {
           onChange: this.updateInputData,

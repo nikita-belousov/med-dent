@@ -1,14 +1,11 @@
 import React from 'react'
+import classNames from 'classnames'
 import style from './CheckboxInput.css'
 import capitalize from 'lodash/capitalize'
 import FontAwesome from 'react-fontawesome'
 
 
 export const CheckboxInput = props => {
-  const renderLabel = (text) => {
-    return <span>{capitalize(text) || ''}</span>
-  }
-
   const renderApparent = (checked) => {
     const stateStyle = checked ? 'checked' : 'unchecked'
 
@@ -22,10 +19,15 @@ export const CheckboxInput = props => {
     )
   }
 
-  const { name, label, checked, onChange } = props
+  const { inverted, name, renderLabel, label, checked, onChange } = props
+
+  const wrapperClass = classNames({
+    [style.wrapper]: true,
+    [style.inverted]: inverted
+  })
 
   return (
-    <div className={style.wrapper}>
+    <div className={wrapperClass}>
       <label className={style.label}>
         <input
           className={style.native}
@@ -35,7 +37,9 @@ export const CheckboxInput = props => {
           onChange={onChange || null}
         />
         {renderApparent(checked)}
-        {renderLabel(label)}
+        {renderLabel
+          ? renderLabel()
+          : <span>{capitalize(label) || ''}</span>}
       </label>
     </div>
   )

@@ -9,6 +9,7 @@ export { QuestionsPage } from './QuestionsPage'
 export { ReviewsPage } from './ReviewsPage'
 export { CategoryPage } from './CategoryPage'
 export { DentistPage } from './DentistPage'
+export { Policy } from './Policy'
 
 export {
   ChildStomatology,

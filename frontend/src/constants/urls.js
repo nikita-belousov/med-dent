@@ -13,7 +13,7 @@ export const questionsPage = (itemsOnPage, pageNum) =>
 export const REVIEWS_ROOT = '/reviews'
 export const reviews = () => REVIEWS_ROOT
 export const reviewsPage = (itemsOnPage, pageNum) =>
-  `${REVIEWS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}&_sort=createdAt:desc`
+  `${REVIEWS_ROOT}/?_limit=${itemsOnPage}&_start=${(pageNum - 1) * itemsOnPage}&_sort=createdAt:desc&isPublished=true`
 
 
 export const SPECIALS_ROOT = '/specials'
