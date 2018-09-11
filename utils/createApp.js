@@ -10,7 +10,9 @@ const passport = require('passport')
 const errorhandler = require('errorhandler')
 const mongoose = require('mongoose')
 
+
 const env = process.env.NODE_ENV ? process.env.NODE_ENV.trim() : 'development'
+const isProduction = env === 'production'
 
 const createApp = () => {
   const app = express()
@@ -23,16 +25,14 @@ const createApp = () => {
   app.use(require('method-override')())
   app.use(express.static(__dirname + '/public'))
 
+  app.use(require('../routes'))
+
   app.use(session({
     secret: 'conduit',
     cookie: { maxAge: 60000 },
     resave: false,
     saveUninitialized: false
   }))
-
-  if (env !== 'production') {
-    app.use(errorhandler())
-  }
 
   const DB_DATA = JSON.parse(fs.readFileSync('./config/db.json', 'utf-8'))
   const { host, port, name, user, password } = DB_DATA[env]
@@ -41,5 +41,6 @@ const createApp = () => {
 
   return app
 }
+
 
 module.exports = createApp

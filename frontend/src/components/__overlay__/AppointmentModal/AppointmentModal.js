@@ -14,7 +14,7 @@ import { Modal }  from '../index'
 import { NavLink, CheckboxInput, Button, TextInput, SelectInput, Paragraph } from '../../__basic__'
 
 
-const mapStateToProps = state => ({ ...state.appointment })
+const mapStateToProps = state => ({ ...state.appointment, personalData: state.common.personalData })
 
 const mapDispatchToProps = { appointmentLoad, appointmentOpen, appointmentClose, appointmentSubmit }
 
@@ -195,10 +195,10 @@ let AppointmentModal  = class extends Component {
   }
 
   render() {
-    const { isActive, dentistsOptions } = this.props
+    const { isActive, dentistsOptions, personalData } = this.props
     const { contentState } = this.state
 
-    if (!isActive) return null
+    if (!isActive || !personalData) return null
 
     const constraints = {
       name: {

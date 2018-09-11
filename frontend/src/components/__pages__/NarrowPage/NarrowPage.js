@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
 import classNames from 'classnames'
 import upperFirst from 'lodash/upperFirst'
+
 import { resetBreadcrumbs } from '../../../actions'
 import style from './NarrowPage.css'
 import { Container, Link } from '../../__basic__'
@@ -38,6 +40,9 @@ let NarrowPage = class extends Component {
 
     return (
       <Container responsive={true}>
+        <Helmet>
+          <title>{heading}</title>
+        </Helmet>
         <div className={style.wrapper}>
           <header>
             <div className={style.breadcrumbs}>

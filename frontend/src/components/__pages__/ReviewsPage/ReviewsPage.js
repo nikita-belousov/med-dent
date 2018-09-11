@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet'
 
 import { reviewSubmit } from '../../../actions'
 import style from './ReviewsPage.css'
@@ -9,7 +10,10 @@ import { NarrowPage } from '../index'
 import { LeaveFeedbackPopup }  from '../../__overlay__'
 
 
-const mapStateToProps = state => ({ mediaQueries: state.common.mediaQueries })
+const mapStateToProps = state => ({
+  personalData: state.common.personalData,
+  mediaQueries: state.common.mediaQueries
+})
 
 const mapDispatchToProps = { reviewSubmit }
 
@@ -38,15 +42,14 @@ let ReviewsPage = class extends Component {
   }
 
   render() {
-    const { mediaQueries } = this.props
+    const { mediaQueries, personalData } = this.props
     const { leaveFeedbackPopup } = this.state
 
     return (
       <NarrowPage squeeze={!mediaQueries.small} heading='Отзывы'>
         <div className={style.giveFeedback}>
           <div className={style.feedbackLinkWrapper}>
-            <Link
-              type='dashed'
+            <Link type='dashed'
               onClick={this.handleLeaveFeedbackClick}
               isActive={leaveFeedbackPopup}
             >

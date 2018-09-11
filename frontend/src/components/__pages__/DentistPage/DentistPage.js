@@ -31,7 +31,12 @@ let DentistPage = class extends Component {
     const { name, positions, about, experience, imageFolder } = this.props
     if (!name || !positions || !about || !experience || !imageFolder ) return null
 
-    const photo = require(`../../../assets/images/staff/${imageFolder}/full.png`)
+    let photo
+    try {
+      photo = require(`../../../assets/images/staff/${imageFolder}/full.png`)
+    } catch (e) {
+      photo = null
+    }
 
     return (
       <Breadcrumbs parentLink={DENTISTS}>
@@ -51,7 +56,7 @@ let DentistPage = class extends Component {
             <div className={style.right}>
               <div
                 className={style.photo}
-                style={{ backgroundImage: `url(${photo})` }}
+                style={photo && { backgroundImage: `url(${photo})` }}
               />
             </div>
           </div>

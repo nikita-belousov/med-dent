@@ -126,6 +126,12 @@
   }
 }
 
+.buttonPrimaryDisabled {
+  composes: buttonPrimary;
+  opacity: .5;
+  cursor: default;
+}
+
 
 /* ---- popup ---- */
 

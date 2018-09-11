@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { withRouter, Route, Link, Switch } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 import { LOADING_TIME } from '../../constants/config'
 import { APP_LOADED, APP_UNLOADED } from '../../constants/actionTypes'
@@ -48,6 +49,10 @@ let App = class extends Component {
 
     return (
       <div className={className}>
+        <Helmet
+          titleTemplate='Мед-Дент - %s'
+          defaultTitle='Стоматология Мед-Дент'
+        />
         {maintenance && <Maintenance />}
         {!maintenance &&
           <Fragment>

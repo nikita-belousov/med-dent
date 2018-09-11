@@ -27,7 +27,6 @@ a, link, .link {
 
 .linkAlt {
   composes: link;
-
   color: #fff;
   border-bottom: 1px solid rgba(255,255,255, .4);
 
@@ -39,12 +38,10 @@ a, link, .link {
 
 .dashedLink {
   composes: link;
-
   border-bottom-style: dashed;
 }
 
 .dashedLinkAlt {
   composes: linkAlt;
-
   border-bottom-style: dashed;
 }

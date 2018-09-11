@@ -348,7 +348,7 @@ const HeaderBar = ({
           </div>
         </Container>
 
-        {(attached && warning.length > 0)
+        {attached && warning
           && <WarningBanner text={warning} />}
       </header>
     </Fragment>

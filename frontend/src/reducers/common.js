@@ -31,7 +31,8 @@ const getLinkHierarchy = (linksStructure, parentLink) => {
 
 const defaultState = {
   breadcrumbs: getLinkHierarchy(linksStructure, HOME),
-  maintenance: true
+  maintenance: false,
+  personalData: true
 }
 
 export default (state = defaultState, action) => {

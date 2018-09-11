@@ -9,6 +9,8 @@ import { Button, Link, Paragraph, TextInput, Container } from '../../__basic__'
 import { CallbackPopup, AppointmentModal }  from '../index'
 
 
+const mapStateToProps = state => ({ personalData: state.common.personalData  })
+
 const mapDispatchToProps = { callbackSubmit }
 
 
@@ -71,6 +73,7 @@ let FloatingSection = class extends Component {
 
   render() {
     const { appointmentModal, callbackForm } = this.state
+    const { personalData } = this.props
 
     const wrapperMainClass = classNames({
       [style.wrapperMain]: !this.state.collapsed,
@@ -100,8 +103,11 @@ let FloatingSection = class extends Component {
                 />
                 <div className={style.btnWrapper}>
                   <HashRouter hashType='noslash'>
-                    <NavLink to='appointment'>
-                      <Button type='primary'>
+                    <NavLink to={personalData ? 'appointment' : ''}>
+                      <Button
+                        type='primary'
+                        getState={!personalData && (() => 'disabled')}
+                      >
                         Записаться на прием
                       </Button>
                     </NavLink>
@@ -127,7 +133,9 @@ let FloatingSection = class extends Component {
               <div className={style.container}>
                 <div className={style.calling}>
                   <div className={style.phoneNumber}>
-                    8 (495) 135-37-50
+                    8 (496) 797-83-06
+                    <br/>
+                    8 (916) 019-38-22
                   </div>
                   <Link
                     type={'alt-dashed'}
@@ -147,6 +155,6 @@ let FloatingSection = class extends Component {
 }
 
 
-FloatingSection = connect(() => ({}), mapDispatchToProps)(FloatingSection)
+FloatingSection = connect(mapStateToProps, mapDispatchToProps)(FloatingSection)
 
 export { FloatingSection }

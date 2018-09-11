@@ -1,8 +1,4 @@
-// must be empty string if no warning
-export const WARNING_TEXT =
-  `Уважаемые посетители, этот сайт работает в тестовом режиме.
-   Некоторые материалы пока отсутствуют. Наш старый сайт:
-   <a href="http://meddent.su" target="_blank">meddent.su</a>.`
+export const WARNING_TEXT = ''
 
 export const ITEMS_ON_PAGE = 10
 export const LOADING_TIME = 3000
