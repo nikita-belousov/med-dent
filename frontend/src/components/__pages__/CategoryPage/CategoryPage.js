@@ -81,7 +81,7 @@ let CategoryPage = class extends Component {
     return (
       <Breadcrumbs parentLink={SERVICES}>
         <NarrowPage squeeze={!mediaQueries.medium} heading={title}>
-          <div className={mediaQueries.small && style.small}>
+          <div className={mediaQueries.small ? style.small : undefined}>
             <div className={style.content}>
               {renderContent()}
             </div>

@@ -28,7 +28,7 @@ export class YaMap extends Component {
       const placemark = new ymaps.Placemark([55.4388, 37.7504], {},
         {
           iconLayout: 'default#image',
-          iconImageHref: require('../../assets/images/favicon.png'),
+          iconImageHref: require('../../assets/images/logo-transparent.png'),
           iconImageSize: [32, 32],
         }
       )

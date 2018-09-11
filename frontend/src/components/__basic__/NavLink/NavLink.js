@@ -3,7 +3,16 @@ import { matchPath, withRouter, NavLink as RouteLink } from 'react-router-dom'
 import style from '../Link/Link.css'
 
 
-let NavLink = ({ onClick, inactive, to, exact, history, children, activeClassName, ...restProps }) => {
+let NavLink = ({
+  onClick,
+  inactive,
+  to,
+  exact,
+  history,
+  children,
+  activeClassName,
+  ...restProps
+}) => {
   const restoreScroll = () => {
     window.document.documentElement.scrollTop = 0
   }
@@ -19,7 +28,6 @@ let NavLink = ({ onClick, inactive, to, exact, history, children, activeClassNam
         : () => matchPath(history.location.pathname, { path: to, exact })}
       to={to}
       activeClassName={activeClassName || style.active}
-      {...restProps}
     >
       {children}
     </RouteLink>

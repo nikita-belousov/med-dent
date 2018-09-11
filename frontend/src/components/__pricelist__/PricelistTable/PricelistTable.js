@@ -7,13 +7,13 @@ import { Paragraph, TextInput, CheckboxInput } from '../../__basic__'
 
 
 export class PricelistTable extends Component {
-  renderCategory = ({ id, title, services }) => {
+  renderCategory = ({ id, title, services }, i) => {
     const { interactive, onCategoryRef } = this.props
     const isEmpty = services.length === 0
 
     return (
       <div
-        key={id}
+        key={i}
         className={style.category}
         ref={interactive && (node => onCategoryRef(id, node))}
       >
@@ -33,10 +33,10 @@ export class PricelistTable extends Component {
     )
   }
 
-  renderService = ({ title, price }) => {
+  renderService = ({ title, price }, i) => {
     return (
       <div
-        key={uuid.create()}
+        key={i}
         className={style.service}
       >
         <div className={style.title}>
