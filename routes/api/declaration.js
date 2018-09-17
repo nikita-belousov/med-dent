@@ -10,12 +10,14 @@ const notificationEmail = JSON.parse(
   fs.readFileSync('./config/notificationEmail.json', 'utf-8')
 )[process.env.NODE_ENV || 'development']
 
+
 const questions = createApi(
   mongoose.model('Question'),
   [
     {
       method: 'post',
       beforeSave: values => {
+        console.log('...posted')
         notification.send({
           template: 'templates/questionPosted',
           message: { to: notificationEmail },
