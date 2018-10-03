@@ -279,20 +279,29 @@ const appointment = createApi(
     method: 'post',
     createDoc: false,
     send: (req, res, next) => {
-      mongoose
-        .model('Dentist')
-        .findOne({ id: req.body.dentist })
-        .then(dentist => {
-          notification.send({
-            template: 'templates/appointment',
-            message: { to: notificationEmail },
-            locals: {
-              ...req.body,
-              dentist: dentist.name,
-              internationalPhone: formatPhoneInternational(req.body.phone)
-            }
-          })
+      const { phone, dentist } = req.body
+
+      const send = locals => {
+        notification.send({
+          template: 'templates/appointment',
+          message: { to: notificationEmail },
+          locals: {
+            ...locals,
+            internationalPhone: formatPhoneInternational(phone)
+          }
         })
+      }
+
+      if (dentist) {
+        mongoose
+          .model('Dentist')
+          .findOne({ id: dentist })
+          .then(dent => {
+            send({ ...req.body, dentist: dent.name })
+          })
+      } else {
+        send(req.body)
+      }
     }
   }
 )

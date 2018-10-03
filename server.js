@@ -12,6 +12,7 @@ require('./models/Question')
 require('./models/User')
 require('./models/Role')
 require('./models/Appointment')
+
 const app = require('./utils/createApp')()
 
 app.use(require('./routes'))
@@ -25,7 +26,7 @@ if (isProduction) {
 }
 
 const server = app.listen(
-  isProduction ? 80 : (process.env.PORT || 8080),
+  isProduction ? 8080 : (process.env.PORT || 8080),
   () => console.log(`Listening on port ${server.address().port}`)
 )
 

@@ -259,7 +259,7 @@ module.exports = {
   plugins: [
     new FaviconsWebpackPlugin({
       logo: path.resolve(__dirname, '..', 'favicon.png'),
-      prefix: 'favicon-[hash]/',
+      prefix: 'static/favicons/',
       inject: true,
 
       icons: {
