@@ -26,7 +26,7 @@ if (isProduction) {
 }
 
 const server = app.listen(
-  isProduction ? 8080 : (process.env.PORT || 8080),
+  isProduction ? 80 : (process.env.PORT || 8080),
   () => console.log(`Listening on port ${server.address().port}`)
 )
 
