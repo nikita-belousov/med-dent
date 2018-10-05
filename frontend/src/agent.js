@@ -17,7 +17,7 @@ import { callbackRequest } from './constants/urls'
 const superagent = superagentPromise(_superagent, global.Promise);
 
 export const host = process.env.NODE_ENV === 'production'
-  ? '159.65.196.245'
+  ? '142.93.34.215'
   : 'localhost:8080'
 
 const apiRoot = _apiRoot(host)
