@@ -78,6 +78,7 @@ let AppointmentModal  = class extends Component {
     )
 
     this.props.appointmentSubmit(data)
+    global.yaCounter50894339.reachGoal('APPOINTMENT')
   }
 
   toSelectOptions(data) {

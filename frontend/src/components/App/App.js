@@ -10,7 +10,7 @@ import { LOADING_TIME } from '../../constants/config'
 import { APP_LOADED, APP_UNLOADED } from '../../constants/actionTypes'
 import agent from '../../agent'
 import style from './App.css'
-import { Maintenance, Layout, AppLoading } from '../index'
+import { Maintenance, Layout, AppLoading, YaMetrika } from '../index'
 import * as routes from '../__routes__'
 import * as pages from '../__pages__'
 
@@ -49,6 +49,7 @@ let App = class extends Component {
 
     return (
       <div className={className}>
+        <YaMetrika />
         <Helmet
           titleTemplate='Мед-Дент - %s'
           defaultTitle='Стоматология Мед-Дент'

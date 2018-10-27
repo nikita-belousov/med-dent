@@ -10,6 +10,11 @@ import { Popup }  from '../index'
 
 
 export class LeaveFeedbackPopup extends Component {
+  handleSubmit = (e) => {
+    this.props.onFormSubmit(e)
+    global.yaCounter50894339.reachGoal('REVIEW')
+  }
+
   render() {
     const constraints = {
       author: {
@@ -30,7 +35,7 @@ export class LeaveFeedbackPopup extends Component {
             <Form
               withLoading
               loadingTime={2500}
-              onSubmit={this.props.onFormSubmit}
+              onSubmit={this.handleSubmit}
               constraints={constraints}
             >
               <div className={style.nameInput}>

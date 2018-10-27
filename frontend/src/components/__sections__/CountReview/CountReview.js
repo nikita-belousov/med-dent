@@ -56,6 +56,8 @@ let CountReview = class extends Component {
       ...data,
       problem: this.problemValue
     })
+
+    global.yaCounter50894339.reachGoal('COUNT_PRICE')
   }
 
   renderPopupForm() {

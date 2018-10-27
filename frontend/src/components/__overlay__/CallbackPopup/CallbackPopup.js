@@ -10,6 +10,11 @@ import { Popup }  from '../index'
 
 
 export class CallbackPopup extends Component {
+  handleSubmit = () => {
+    this.props.onSubmit()
+    global.yaCounter50894339.reachGoal('CALLBACK')
+  }
+
   render() {
     const constraints = {
       name: {
@@ -26,7 +31,7 @@ export class CallbackPopup extends Component {
         <Form
           withLoading
           submitOnEnter
-          onSubmit={this.props.onSubmit}
+          onSubmit={this.handleSubmit}
           loadingTime={2500}
           constraints={constraints}
         >

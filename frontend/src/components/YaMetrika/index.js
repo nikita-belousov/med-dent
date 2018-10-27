@@ -1,0 +1,1 @@
+export { YaMetrika } from './YaMetrika'

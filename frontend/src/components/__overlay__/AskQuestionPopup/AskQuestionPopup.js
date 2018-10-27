@@ -23,6 +23,11 @@ let AskQuestionPopup = ({ onClose, questionSubmit }) => {
     }
   }
 
+  const handleSubmit = (e) => {
+    questionSubmit(e)
+    global.yaCounter50894339.reachGoal('QUESTION')
+  }
+
   return (
     <Container responsive={true}>
       <div className={style.wrapper}>
@@ -30,7 +35,7 @@ let AskQuestionPopup = ({ onClose, questionSubmit }) => {
           <Form
             withLoading
             loadingTime={2500}
-            onSubmit={questionSubmit}
+            onSubmit={handleSubmit}
             constraints={constraints}
           >
             <div className={style.nameInput}>
